@@ -1,0 +1,78 @@
+<!-- Sign Up Modal -->
+<div class="modal fade signup" id="signup" tabindex="-1" role="dialog" aria-labelledby="sign-up" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered login-pop-form" role="document">
+    <div class="modal-content" id="sign-up">
+      <span class="mod-close" data-bs-dismiss="modal" aria-hidden="true"><i class="ti-close"></i></span>
+      <div class="modal-body">
+        <h4 class="modal-header-title">Đăng Ký</h4>
+        <div class="login-form">
+          <form>
+
+            <div class="row" *ngIf="!submitted">
+
+              <div class="col-lg-6 col-md-6">
+                <div class="form-group">
+                  <div class="input-with-icon">
+                    <input type="text" class="form-control" placeholder="Tên đăng nhập" name="username" id="username"
+                      [(ngModel)]="customers.username">
+                    <i class="ti-user"></i>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-6 col-md-6">
+                <div class="form-group">
+                  <div class="input-with-icon">
+                    <input type="email" class="form-control" placeholder="Email" name="email" id="email"
+                      [(ngModel)]="customers.email">
+                    <i class="ti-email"></i>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-6 col-md-6">
+                <div class="form-group">
+                  <div class="input-with-icon">
+                    <input type="password" class="form-control" placeholder="Mật khẩu" name="password" id="password"
+                      [(ngModel)]="customers.password">
+                    <i class="ti-unlock"></i>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-6 col-md-6">
+                <div class="form-group">
+                  <div class="input-with-icon">
+                    <input type="password" class="form-control" placeholder="Nhập lại mật khẩu" name="confirmPassword"
+                      id="confirmPassword">
+                    <i class="lni-phone-handset"></i>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="form-group">
+              <button (click)="saveCustomers()" type="submit"
+                class="btn btn-md full-width btn-theme-light-2 rounded">Đăng Ký</button>
+            </div>
+
+          </form>
+        </div>
+        <div class="modal-divider"><span>Hoặc đăng nhập bằng</span></div>
+        <div class="social-login mb-3">
+          <ul>
+            <li><a href="#" class="btn connect-fb"><i class="ti-facebook"></i>Facebook</a></li>
+            <li><a href="#" class="btn connect-google"><i class="ti-google"></i>Google+</a></li>
+          </ul>
+        </div>
+        <div class="text-center">
+          <i class="ti-user mr-1"></i>
+          Bạn đã có tài khoản? <a href="JavaScript:Void(0);" data-bs-dismiss="modal" data-bs-toggle="modal"
+            data-bs-target="#login" style="color: #1266e3">Đăng Nhập</a> Ngay
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Modal -->

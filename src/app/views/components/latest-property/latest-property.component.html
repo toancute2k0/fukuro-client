@@ -1,0 +1,85 @@
+<!-- ============================ Latest Property For Sale Start ================================== -->
+<section class="pt-0">
+  <div class="container">
+
+    <div class="row justify-content-center">
+      <div class="col-lg-7 col-md-10 text-center">
+        <div class="sec-heading center mb-4">
+          <h2>Recent Property For Rent</h2>
+          <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium
+            voluptatum deleniti atque corrupti quos dolores</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-12 col-md-12">
+        <div class="property-slide">
+
+          <!-- Single Property -->
+          <owl-carousel-o [options]="customOptions">
+            <ng-template carouselSlide *ngFor="let imgs of imagesList">
+              <div class="single-items">
+                <div class="property-listing shadow-none property-2 border" style="width: 360px;">
+
+                  <div class="listing-img-wrapper">
+                    <div class="list-img-slide">
+                      <div class="click">
+                        <div>
+                          <a href="single-property-1.html"><img src="{{imgs}}" class="img-fluid mx-auto" alt="" /></a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="listing-detail-wrapper">
+                    <div class="listing-short-detail-wrap">
+                      <div class="listing-short-detail">
+                        <span class="property-type">For Rent</span>
+                        <h4 class="listing-name verified"><a href="single-property-1.html" class="prt-link-detail">Blue
+                            Reef
+                            Properties</a></h4>
+                      </div>
+                      <div class="listing-short-detail-flex">
+                        <h6 class="listing-card-info-price">$8,400</h6>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="price-features-wrapper">
+                    <div class="list-fx-features">
+                      <div class="listing-card-info-icon">
+                        <div class="inc-fleat-icon"><img src="assets/img/bed.svg"
+                            style="width: 13px !important; height: 13px !important" alt="" /></div>3 Beds
+                      </div>
+                      <div class="listing-card-info-icon">
+                        <div class="inc-fleat-icon"><img src="assets/img/bathtub.svg"
+                            style="width: 13px !important; height: 13px !important" alt="" /></div>1 Bath
+                      </div>
+                      <div class="listing-card-info-icon">
+                        <div class="inc-fleat-icon"><img src="assets/img/move.svg"
+                            style="width: 13px !important; height: 13px !important" alt="" /></div>800 sqft
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="listing-detail-footer">
+                    <div class="footer-first">
+                      <div class="foot-location"><img src="assets/img/pin.svg"
+                          style="width: 18px !important; height: 18px !important" />210 Zirak Road,
+                        Canada</div>
+                    </div>
+                    <div class="footer-flex">
+                      <a href="property-detail.html" class="prt-view">View</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+          </owl-carousel-o>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ============================ Latest Property For Sale End ================================== -->

@@ -1,0 +1,243 @@
+<!-- ============================ Page Title Start================================== -->
+<div class="page-title">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 col-md-12">
+
+        <h2 class="ipt-title">Đăng Tin</h2>
+        <span class="ipn-subtitle">Danh sách tất cả các đại lý phổ biến của chúng tôi</span>
+
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ============================ Page Title End ================================== -->
+
+<!-- ============================ Submit Property Start ================================== -->
+<section class="gray-simple">
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 col-md-12">
+
+        <div class="alert alert-success" role="alert">
+          <p>Vui lòng
+            <a href="JavaScript:Void(0);" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#login"
+              style="color: #1266e3">Đăng Nhập</a>
+            để có thể đăng bài. Nếu bạn chưa có tài khoản vui lòng
+            <a href="JavaScript:Void(0);" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#signup"
+              style="color: #1266e3">Đăng Kí</a>
+            tại đậy
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Submit Form -->
+      <div class="col-lg-12 col-md-12">
+
+        <div class="submit-page">
+
+          <!-- Basic Information -->
+          <div class="form-submit">
+            <h3>Thông Tin Cơ Bản</h3>
+            <div class="submit-section">
+              <div class="row">
+
+                <div class="form-group col-md-12">
+                  <label>Tiêu đề bài viết<span class="tip-topdata" data-tip="Property Title"><i
+                        class="ti-help"></i></span></label>
+                  <input type="text" class="form-control">
+                </div>
+
+                <div class="form-group col-md-6">
+                  <label>Tình trạng</label>
+                  <select id="status" class="form-control">
+                    <option value="">&nbsp;</option>
+                    <option value="1">For Rent</option>
+                    <option value="2">For Sale</option>
+                  </select>
+                </div>
+
+                <div class="form-group col-md-6">
+                  <label>Loại thuộc tính</label>
+                  <select id="ptypes" class="form-control">
+                    <option value="">&nbsp;</option>
+                    <option value="1">Houses</option>
+                    <option value="2">Apartment</option>
+                    <option value="3">Villas</option>
+                    <option value="4">Commercial</option>
+                    <option value="5">Offices</option>
+                    <option value="6">Garage</option>
+                  </select>
+                </div>
+
+                <div class="form-group col-md-6">
+                  <label>Giá cho thuê/tháng</label>
+                  <input type="text" class="form-control" placeholder="VNĐ">
+                </div>
+
+                <div class="form-group col-md-6">
+                  <label>Số lượng phòng</label>
+                  <select id="bedrooms" class="form-control">
+                    <option value="">&nbsp;</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                  </select>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- Gallery -->
+          <div class="form-submit">
+            <h3>Hình ảnh liên quan</h3>
+            <div class="submit-section">
+              <div class="row">
+
+                <div class="form-group col-md-12">
+                  <label>Bộ sưu tập ảnh tải lên</label>
+                  <form action="/upload-target" class="dropzone dz-clickable primary-dropzone">
+                    <div class="dz-default dz-message">
+                      <i class="ti-gallery"></i>
+                      <span>Kéo và thả hình ảnh</span>
+                    </div>
+                  </form>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- Location -->
+          <div class="form-submit">
+            <h3>Địa chỉ</h3>
+            <div class="submit-section">
+              <div class="row">
+
+                <div class="form-group col-md-6">
+                  <label>Số nhà, tên đường</label>
+                  <input type="text" class="form-control" placeholder="Số nhà, tên đườn">
+                </div>
+
+                <div class="form-group col-md-6">
+                  <label>Phường xã, thị trấn</label>
+                  <input type="text" class="form-control" placeholder="Phường xã, thị trấn">
+                </div>
+
+                <div class="form-group col-md-6">
+                  <label>Thôgn tin pháp lí</label>
+                  <input type="text" class="form-control" placeholder="Quận, huyện">
+                </div>
+
+                <div class="form-group col-md-6">
+                  <label>Chọn Tỉnh, Thành phố</label>
+                  <input type="text" class="form-control" placeholder="Tỉnh, thành phố">
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- Location -->
+          <div class="form-submit">
+            <h3>Thông tin chính</h3>
+            <div class="submit-section">
+              <div class="row">
+
+                <div class="form-group col-md-6">
+                  <label>Diện tích sử dụng</label>
+                  <input type="text" class="form-control" placeholder="vd: 10m&#178;">
+                </div>
+
+                <div class="form-group col-md-6">
+                  <label>Số phòng ngủ</label>
+                  <input type="text" class="form-control" placeholder="0">
+                </div>
+
+                <div class="form-group col-md-6">
+                  <label>Thôgn tin pháp lí</label>
+                  <input type="text" class="form-control">
+                </div>
+
+                <div class="form-group col-md-6">
+                  <label>Số nhà vệ sinh</label>
+                  <input type="text" class="form-control" placeholder="0">
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- Detailed Information -->
+          <div class="form-submit">
+            <h3>Mô tả chi tiết</h3>
+            <div class="submit-section">
+              <div class="row">
+
+                <div class="form-group col-md-12">
+                  <label>Mô tả</label>
+                  <textarea class="form-control h-120"></textarea>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- Contact Information -->
+          <div class="form-submit">
+            <h3>Thông tin liên hệ</h3>
+            <div class="submit-section">
+              <div class="row">
+
+                <div class="form-group col-md-6">
+                  <label>Tên liên hệ</label>
+                  <input type="text" class="form-control">
+                </div>
+
+                <div class="form-group col-md-6">
+                  <label>Email</label>
+                  <input type="text" class="form-control">
+                </div>
+
+                <div class="form-group col-md-6">
+                  <label>Số điện thoại</label>
+                  <input type="text" class="form-control">
+                </div>
+
+                <div class="form-group col-md-6">
+                  <label>Zalo</label>
+                  <input type="text" class="form-control">
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group col-lg-12 col-md-12">
+            <label>Thoả thuận *</label>
+            <ul class="no-ul-list">
+              <li>
+                <input id="aj-1" class="checkbox-custom" name="aj-1" type="checkbox">
+                <label for="aj-1" class="checkbox-custom-label">Tôi đồng ý để trang web này lưu trữ thông tin đã gửi của
+                  tôi để họ có thể trả lời yêu cầu của tôi.</label>
+              </li>
+            </ul>
+          </div>
+
+          <div class="form-group col-lg-12 col-md-12">
+            <button class="btn btn-theme-light-2 rounded" type="submit">Gửi & Xem trước</button>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</section>
+<!-- ============================ Submit Property End ================================== -->
