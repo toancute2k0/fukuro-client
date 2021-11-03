@@ -1,27 +1,28 @@
 <!-- Log In Modal -->
-<div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="registermodal" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered login-pop-form" role="document">
-    <div class="modal-content" id="registermodal">
-      <span class="mod-close" data-bs-dismiss="modal" aria-hidden="true"><i class="ti-close"></i></span>
+<div class="login">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
       <div class="modal-body">
-        <h4 class="modal-header-title">Đăng Kí</h4>
+        <h4 class="modal-header-title">Đăng Nhập</h4>
         <div class="login-form">
           <form>
 
             <div class="form-group">
               <label>Tên đăng nhập</label>
               <div class="input-with-icon">
-                <input type="text" class="form-control" placeholder="Tên đăng nhập">
+                <input type="text" class="form-control" placeholder="Tên đăng nhập" aria-describedby="userHid">
                 <i class="ti-user"></i>
               </div>
+              <small class="text-muted small-popup" id="userHid">Tên đăng nhập không được bỏ trống!</small>
             </div>
 
             <div class="form-group">
               <label>Mật Khẩu</label>
               <div class="input-with-icon">
-                <input type="password" class="form-control" placeholder="*******">
+                <input type="password" class="form-control" placeholder="*******" aria-describedby="passHid">
                 <i class="ti-unlock"></i>
               </div>
+              <small class="text-muted small-popup" id="passHid">Tên đăng nhập không được bỏ trống!</small>
             </div>
 
             <div class="form-group">
@@ -43,8 +44,7 @@
         </div>
         <div class="text-center">
           <i class="ti-user mr-1"></i>
-          Bạn đã có tài khoản? <a href="JavaScript:Void(0);" data-bs-dismiss="modal" data-bs-toggle="modal"
-            data-bs-target="#signup" style="color: #1266e3">Đăng Kí</a> Ngay
+          Bạn đã có tài khoản? <a routerLink="/dang-ky" style="color: #1266e3">Đăng Kí</a> Ngay
         </div>
       </div>
     </div>

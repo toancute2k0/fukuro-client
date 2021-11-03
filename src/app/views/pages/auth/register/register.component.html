@@ -1,12 +1,10 @@
-<!-- Sign Up Modal -->
-<div class="modal fade signup" id="signup" tabindex="-1" role="dialog" aria-labelledby="sign-up" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered login-pop-form" role="document">
-    <div class="modal-content" id="sign-up">
-      <span class="mod-close" data-bs-dismiss="modal" aria-hidden="true"><i class="ti-close"></i></span>
+<div class="signup">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
       <div class="modal-body">
         <h4 class="modal-header-title">Đăng Ký</h4>
         <div class="login-form">
-          <form>
+          <form #signInForm="ngForm" (ngSubmit)="saveCustomers()">
 
             <div class="row" *ngIf="!submitted">
 
@@ -14,9 +12,10 @@
                 <div class="form-group">
                   <div class="input-with-icon">
                     <input type="text" class="form-control" placeholder="Tên đăng nhập" name="username" id="username"
-                      [(ngModel)]="customers.username">
+                      [(ngModel)]="customers.username" required>
                     <i class="ti-user"></i>
                   </div>
+                  <small class="text-muted small-popup" id="userHid">Tên đăng nhập không được bỏ trống!</small>
                 </div>
               </div>
 
@@ -24,9 +23,10 @@
                 <div class="form-group">
                   <div class="input-with-icon">
                     <input type="email" class="form-control" placeholder="Email" name="email" id="email"
-                      [(ngModel)]="customers.email">
+                      [(ngModel)]="customers.email" required>
                     <i class="ti-email"></i>
                   </div>
+                  <small class="text-muted small-popup" id="userHid">Tên đăng nhập không được bỏ trống!</small>
                 </div>
               </div>
 
@@ -34,9 +34,10 @@
                 <div class="form-group">
                   <div class="input-with-icon">
                     <input type="password" class="form-control" placeholder="Mật khẩu" name="password" id="password"
-                      [(ngModel)]="customers.password">
+                      [(ngModel)]="customers.password" required>
                     <i class="ti-unlock"></i>
                   </div>
+                  <small class="text-muted small-popup" id="userHid">Tên đăng nhập không được bỏ trống!</small>
                 </div>
               </div>
 
@@ -44,19 +45,20 @@
                 <div class="form-group">
                   <div class="input-with-icon">
                     <input type="password" class="form-control" placeholder="Nhập lại mật khẩu" name="confirmPassword"
-                      id="confirmPassword">
-                    <i class="lni-phone-handset"></i>
+                      id="confirmPassword" required>
+                    <i class="ti-unlock"></i>
                   </div>
+                  <small class="text-muted small-popup" id="userHid">Tên đăng nhập không được bỏ trống!</small>
                 </div>
               </div>
 
             </div>
 
             <div class="form-group">
-              <button (click)="saveCustomers()" type="submit"
-                class="btn btn-md full-width btn-theme-light-2 rounded">Đăng Ký</button>
+              <button type="submit" class="btn btn-md full-width btn-theme-light-2 rounded">Đăng Ký</button>
             </div>
-
+            <!-- <pre>{{ signInForm.value | json }}</pre>
+                  <pre>{{ customers | json }}</pre> -->
           </form>
         </div>
         <div class="modal-divider"><span>Hoặc đăng nhập bằng</span></div>
@@ -68,11 +70,9 @@
         </div>
         <div class="text-center">
           <i class="ti-user mr-1"></i>
-          Bạn đã có tài khoản? <a href="JavaScript:Void(0);" data-bs-dismiss="modal" data-bs-toggle="modal"
-            data-bs-target="#login" style="color: #1266e3">Đăng Nhập</a> Ngay
+          Bạn đã có tài khoản? <a routerLink="/dang-nhap" style="color: #1266e3">Đăng Nhập</a> Ngay
         </div>
       </div>
     </div>
   </div>
 </div>
-<!-- End Modal -->

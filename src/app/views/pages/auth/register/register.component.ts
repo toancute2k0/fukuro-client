@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Customers } from 'src/app/models/customers.model';
 import { CustomersService } from 'src/app/services/customers.service';
 
@@ -16,7 +17,10 @@ export class RegisterComponent implements OnInit {
   };
   submitted = false;
 
-  constructor(private customersService: CustomersService) {}
+  constructor(
+    private customersService: CustomersService,
+    private _router: Router
+  ) {}
 
   ngOnInit(): void {}
 
@@ -31,6 +35,7 @@ export class RegisterComponent implements OnInit {
       (response) => {
         console.log(response);
         this.submitted = true;
+        this._router.navigate(['/trang-chu']);
       },
       (error) => {
         console.log(error);

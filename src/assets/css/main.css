@@ -9026,16 +9026,20 @@ ul.list-gallery-inline li a {
 /*------------------------------------------------------------
 	PopUp Modal
 -------------------------------------------------------------*/
-.modal {
+/* .modal {
   z-index: 99999;
-}
+} */
 .modal-body {
   padding: 2.5em 3em;
 }
+.small-popup {
+  font-size: 14px;
+  color: red !important;
+}
 h4.modal-header-title {
-  font-size: 4em;
+  font-size: 3em;
   text-align: center;
-  margin: 1rem 0 1em 0;
+  margin: 0.5rem 0 0.5em 0;
   font-weight: 800;
 }
 .btn.pop-login {
@@ -9063,6 +9067,7 @@ h4.modal-header-title {
   background: #fff;
   padding: 0 20px;
 }
+
 .social-login ul {
   margin: 0;
   width: 100%;
@@ -9083,7 +9088,7 @@ h4.modal-header-title {
 .social-login ul li a.btn {
   width: 100%;
   border-radius: 5px;
-  padding: 20px 0;
+  padding: 15px 0;
   color: #ffffff;
   background: #f4f5f7;
 }
@@ -9094,7 +9099,7 @@ h4.modal-header-title {
   background: #3b5998;
 }
 .social-login ul li a.btn.connect-google {
-  background: #ec4514;
+  background: red;
 }
 .social-login ul li a.btn.connect-linkedin {
   background: #0073b0;
@@ -9104,7 +9109,6 @@ h4.modal-header-title {
 }
 .signup .modal-dialog {
   max-width: 880px;
-  z-index: +999999;
 }
 .signup .form-group {
   margin-bottom: 1.5rem;
@@ -9197,9 +9201,10 @@ span.mod-close {
 }
 .simple-form .form-control,
 .modal-dialog-centered .form-control {
-  background: #f6f8fd;
+  background: #fff;
   box-shadow: none;
-  border: 1px solid #edf0f9;
+  border: 1px solid #ccc;
+  font-size: 14px;
 }
 /*--------------- Agency --------------*/
 .agency {

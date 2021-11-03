@@ -30,7 +30,8 @@
               Viết<span class="submenu-indicator"></span></a>
           </li>
 
-          <li><a href="JavaScript:Void(0);" data-bs-toggle="modal" data-bs-target="#signup">Đăng Ký</a></li>
+          <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a routerLink="dang-ky">Đăng
+              Ký</a></li>
 
         </ul>
 
@@ -41,8 +42,8 @@
                 class="mr-2" />Đăng Bài</a>
           </li>
           <li class="add-listing">
-            <a href="JavaScript:Void(0);" data-bs-toggle="modal" data-bs-target="#login"><img
-                src="assets/img/user-light.svg" width="12" alt="" class="mr-2" />Đăng Nhập</a>
+            <a routerLink="dang-nhap"><img src="assets/img/user-light.svg" width="12" alt="" class="mr-2" />Đăng
+              Nhập</a>
           </li>
         </ul>
       </div>

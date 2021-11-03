@@ -1,0 +1,13 @@
+.modal-content {
+  border: 1px solid #fff;
+  box-shadow: 0 2px 7px 0 rgb(0 0 0 / 10%);
+}
+
+.input-with-icon input {
+  height: 50px !important;
+  margin: 5px 0px;
+}
+
+.social-login ul li a {
+  height: 60px !important;
+}

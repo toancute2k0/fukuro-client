@@ -36,15 +36,12 @@
               "node_modules/ngx-owl-carousel-o/lib/styles/prebuilt-themes/owl.carousel.min.css",
               "node_modules/ngx-owl-carousel-o/lib/styles/prebuilt-themes/owl.theme.default.min.css",
               "src/assets/css/main.css",
-              "src/assets/css/colors.css",
               "src/styles.css"
             ],
             "scripts": [
-              "src/assets/js/jquery.min.js",
+              "node_modules/jquery/dist/jquery.js",
               "src/assets/js/popper.min.js",
               "src/assets/js/bootstrap.min.js",
-              "src/assets/js/rangeslider.js",
-              "src/assets/js/select2.min.js",
               "src/assets/js/jquery.magnific-popup.min.js",
               "src/assets/js/lightbox.js",
               "src/assets/js/imagesloaded.js",

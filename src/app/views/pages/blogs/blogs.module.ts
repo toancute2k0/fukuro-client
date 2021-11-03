@@ -6,9 +6,10 @@ import { BlogsComponent } from './blogs.component';
 import { BlogDetailComponent } from './blog-detail/blog-detail.component';
 import { BlogListComponent } from './blog-list/blog-list.component';
 import { ComponentsModule } from '../../components/components.module';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [BlogsComponent, BlogDetailComponent, BlogListComponent],
-  imports: [CommonModule, BlogsRoutingModule, ComponentsModule],
+  imports: [CommonModule, BlogsRoutingModule, ComponentsModule, FormsModule],
 })
 export class BlogsModule {}

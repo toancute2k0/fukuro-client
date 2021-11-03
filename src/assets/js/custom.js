@@ -178,113 +178,6 @@ $(function () {
     }
   });
 
-
-
-  // Select Bedrooms
-  $('#bedrooms').select2({
-    placeholder: "0",
-    allowClear: true
-  });
-
-
-
-  // Select Property Types
-  $('#real-home').select2({
-    placeholder: "Loại bất động sản",
-    allowClear: true
-  });
-
-  // Select Property Types
-  $('#price-home').select2({
-    placeholder: "Giá thành",
-    allowClear: true
-  });
-
-  // Select Property Types
-  $('#status').select2({
-    placeholder: "Show All",
-    allowClear: true
-  });
-
-  // specialisms
-  $('#shorty').select2({
-    placeholder: "Show All",
-    allowClear: true
-  });
-
-  // Select Min price
-  $('#minprice').select2({
-    placeholder: "No Min",
-    allowClear: true
-  });
-
-  // Select built
-  $('#built').select2({
-    placeholder: "Year Built",
-    allowClear: true
-  });
-
-  // Select Max Price
-  $('#maxprice').select2({
-    placeholder: "No Max",
-    allowClear: true
-  });
-
-  // Select Country
-  $('#country').select2({
-    placeholder: "Country",
-    allowClear: true
-  });
-
-  // Select Town
-  $('#town').select2({
-    placeholder: "City/Town",
-    allowClear: true
-  });
-
-  // Select Town
-  $('#location').select2({
-    placeholder: "Toàn quốc",
-    allowClear: true
-  });
-
-  // Select Cities
-  $('#cities').select2({
-    placeholder: "All Cities",
-    allowClear: true
-  });
-
-  // Select Status
-  $('#status').select2({
-    placeholder: "Chọn Tình trạng",
-    allowClear: true
-  });
-
-  $('#ptypes').select2({
-    placeholder: "Hiện tất cả",
-    allowClear: true
-  });
-
-  // Select Rooms
-  $('#rooms').select2({
-    placeholder: "Choose Rooms",
-    allowClear: true
-  });
-
-  // Select Garage
-  $('#garage').select2({
-    placeholder: "Choose Rooms",
-    allowClear: true
-  });
-
-  // Select Rooms
-  $('#bage').select2({
-    placeholder: "Select An Option",
-    allowClear: true
-  });
-
-
-
   // MagnificPopup
   $('body').magnificPopup({
     type: 'image',
@@ -302,23 +195,6 @@ $(function () {
   });
 
 
-  // Search Radio
-  function searchTypeButtons() {
-    $('.property-search-type label.active input[type="radio"]').prop('checked', true);
-    var buttonWidth = $('.property-search-type label.active').width();
-    var arrowDist = $('.property-search-type label.active').position();
-    $('.property-search-type-arrow').css('left', arrowDist + (buttonWidth / 2));
-    $('.property-search-type label').on('change', function () {
-      $('.property-search-type input[type="radio"]').parent('label').removeClass('active');
-      $('.property-search-type input[type="radio"]:checked').parent('label').addClass('active');
-      var buttonWidth = $('.property-search-type label.active').width();
-      var arrowDist = $('.property-search-type label.active').position().left;
-      $('.property-search-type-arrow').css({
-        'left': arrowDist + (buttonWidth / 1.7),
-        'transition': 'left 0.4s cubic-bezier(.95,-.41,.19,1.44)'
-      });
-    });
-  }
   if ($(".hero-banner").length) {
     searchTypeButtons();
     $(window).on('load resize', function () {
@@ -327,3 +203,4 @@ $(function () {
   }
 
 });
+
