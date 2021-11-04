@@ -4,51 +4,75 @@
       <div class="modal-body">
         <h4 class="modal-header-title">Đăng Ký</h4>
         <div class="login-form">
-          <form #signInForm="ngForm" (ngSubmit)="saveCustomers()">
+          <form [formGroup]="register" (ngSubmit)="onSubmit()">
 
-            <div class="row" *ngIf="!submitted">
+            <div class="row">
 
               <div class="col-lg-6 col-md-6">
                 <div class="form-group">
                   <div class="input-with-icon">
-                    <input type="text" class="form-control" placeholder="Tên đăng nhập" name="username" id="username"
-                      [(ngModel)]="customers.username" required>
+                    <input type="text" class="form-control" placeholder="Tên đăng nhập" formControlName="username">
                     <i class="ti-user"></i>
                   </div>
-                  <small class="text-muted small-popup" id="userHid">Tên đăng nhập không được bỏ trống!</small>
+                  <div *ngIf="submitted && f.username.errors">
+                    <small *ngIf="f.username.errors.required" class="text-muted small-popup">Tên đăng nhập không được bỏ
+                      trống!</small>
+                    <small *ngIf="f.username.errors.minlength" class="text-muted small-popup">Tên đăng nhập phải ít nhất
+                      6 kí tự!</small>
+                  </div>
                 </div>
               </div>
 
               <div class="col-lg-6 col-md-6">
                 <div class="form-group">
                   <div class="input-with-icon">
-                    <input type="email" class="form-control" placeholder="Email" name="email" id="email"
-                      [(ngModel)]="customers.email" required>
+                    <input type="email" class="form-control" placeholder="Email" formControlName="email">
                     <i class="ti-email"></i>
                   </div>
-                  <small class="text-muted small-popup" id="userHid">Tên đăng nhập không được bỏ trống!</small>
+                  <div *ngIf="submitted && f.email.errors">
+                    <small *ngIf="f.email.errors.required" class="text-muted small-popup">Email không được bỏ
+                      trống!</small>
+                    <small *ngIf="f.email.errors.email" class="text-muted small-popup">Email không hợp lệ!</small>
+                  </div>
                 </div>
               </div>
 
               <div class="col-lg-6 col-md-6">
                 <div class="form-group">
                   <div class="input-with-icon">
-                    <input type="password" class="form-control" placeholder="Mật khẩu" name="password" id="password"
-                      [(ngModel)]="customers.password" required>
+                    <input type="password" class="form-control" placeholder="Mật khẩu" formControlName="password">
                     <i class="ti-unlock"></i>
                   </div>
-                  <small class="text-muted small-popup" id="userHid">Tên đăng nhập không được bỏ trống!</small>
+                  <div *ngIf="submitted && f.password.errors">
+                    <small *ngIf="f.password.errors.required" class="text-muted small-popup">Password không được bỏ
+                      trống!</small>
+                    <small *ngIf="f.password.errors.minlength" class="text-muted small-popup">Password phải ít nhất 6 kí
+                      tự! <br></small>
+                    <small *ngIf="f.password.errors.pattern" class="text-muted small-popup">Mật khẩu không được chứa
+                      khoảng trắng!</small>
+                  </div>
                 </div>
               </div>
 
               <div class="col-lg-6 col-md-6">
                 <div class="form-group">
                   <div class="input-with-icon">
-                    <input type="password" class="form-control" placeholder="Nhập lại mật khẩu" name="confirmPassword"
-                      id="confirmPassword" required>
+                    <input type="password" class="form-control" placeholder="Mật khẩu"
+                      formControlName="confirmPassword">
                     <i class="ti-unlock"></i>
                   </div>
-                  <small class="text-muted small-popup" id="userHid">Tên đăng nhập không được bỏ trống!</small>
+                  <div *ngIf="submitted && f.confirmPassword.errors">
+                    <small *ngIf="f.confirmPassword.errors.required" class="text-muted small-popup">
+                      Confirm Password không được bỏ trống!
+                    </small>
+                    <small *ngIf="f.confirmPassword.errors.minlength" class="text-muted small-popup">Password phải ít
+                      nhất 6 kí
+                      tự! <br></small>
+                    <small *ngIf="f.confirmPassword.errors.mustMatch" class="text-muted small-popup">Mật khẩu không
+                      trùng khớp!</small>
+                    <small *ngIf="f.confirmPassword.errors.pattern" class="text-muted small-popup">Mật khẩu không được
+                      chứa khoảng trắng!</small>
+                  </div>
                 </div>
               </div>
 

@@ -16,7 +16,7 @@ export class CustomersService {
     return this.http.get<Customers[]>(API_URL);
   }
 
-  get(id: any): Observable<Customers> {
+  get(id: number): Observable<Customers> {
     return this.http.get(`${API_URL}/${id}`);
   }
 
@@ -24,11 +24,11 @@ export class CustomersService {
     return this.http.post(API_URL, data);
   }
 
-  update(id: any, data: any): Observable<any> {
+  update(id: number, data: any): Observable<any> {
     return this.http.put(`${API_URL}/${id}`, data);
   }
 
-  delete(id: any): Observable<any> {
+  delete(id: number): Observable<any> {
     return this.http.delete(`${API_URL}/${id}`);
   }
 

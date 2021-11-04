@@ -8,6 +8,7 @@ import { Router, NavigationStart, Event, NavigationEnd } from '@angular/router';
 export class AppComponent {
   timeout: any;
   routerChanged = true;
+  title: any = 'toaster-not';
   constructor(private router: Router) {
     router.events.subscribe((event: Event) => {
       if (event instanceof NavigationStart) {
@@ -20,7 +21,7 @@ export class AppComponent {
         this.timeout = setTimeout(() => {
           clearTimeout(this.timeout);
           this.routerChanged = false;
-        }, 1000);
+        }, 800);
       }
     });
   }

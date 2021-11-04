@@ -1,5 +1,5 @@
 export class Customers {
-  id?: any;
+  id?: number;
   username?: string;
   password?: string;
   email?: string;
