@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Customers } from '../models/customers.model';
+import { environment as env } from '../../environments/environment';
 
-const baseUrl = 'http://localhost:8000/api/customers';
+const API_URL = `${env.apiURL}/customers`;
 
 @Injectable({
   providedIn: 'root',
@@ -12,30 +13,30 @@ export class CustomersService {
   constructor(private http: HttpClient) {}
 
   getAll(): Observable<Customers[]> {
-    return this.http.get<Customers[]>(baseUrl);
+    return this.http.get<Customers[]>(API_URL);
   }
 
   get(id: any): Observable<Customers> {
-    return this.http.get(`${baseUrl}/${id}`);
+    return this.http.get(`${API_URL}/${id}`);
   }
 
   create(data: any): Observable<any> {
-    return this.http.post(baseUrl, data);
+    return this.http.post(API_URL, data);
   }
 
   update(id: any, data: any): Observable<any> {
-    return this.http.put(`${baseUrl}/${id}`, data);
+    return this.http.put(`${API_URL}/${id}`, data);
   }
 
   delete(id: any): Observable<any> {
-    return this.http.delete(`${baseUrl}/${id}`);
+    return this.http.delete(`${API_URL}/${id}`);
   }
 
   deleteAll(): Observable<any> {
-    return this.http.delete(baseUrl);
+    return this.http.delete(API_URL);
   }
 
   findByTitle(title: any): Observable<Customers[]> {
-    return this.http.get<Customers[]>(`${baseUrl}?title=${title}`);
+    return this.http.get<Customers[]>(`${API_URL}?title=${title}`);
   }
 }

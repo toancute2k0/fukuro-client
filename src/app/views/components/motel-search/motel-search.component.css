@@ -1,11 +1,15 @@
 .input-with-icon .ti-angle-down {
-    position: absolute;
-    top: 35%;
-    right: 15px;
-    transform: translateX(95%);
-    font-size: 18px;
-    color: #a2a9bf;
-    font-style: normal;
-    cursor: normal;
-    pointer-events: none;
+  position: absolute;
+  top: 35%;
+  right: 15px;
+  transform: translateX(95%);
+  font-size: 18px;
+  color: #a2a9bf;
+  font-style: normal;
+  cursor: normal;
+  pointer-events: none;
+}
+
+.my-class1 {
+  display: hidden;
 }

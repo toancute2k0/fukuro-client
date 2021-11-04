@@ -1,11 +1,36 @@
-<!-- ============================ Search List Motel Start================================== -->
-<app-banner></app-banner>
-<!-- ============================ Search List Motel End ================================== -->
+<!-- ============================ Hero Banner  Start================================== -->
+
+<div *ngIf="isMobile">
+  <div class="image-cover hero-banner" style="background:url(assets/img/banner-1.jpg) no-repeat;" data-overlay="4">
+    <div class=" container">
+      <!-- Search Start -->
+      <app-motel-search></app-motel-search>
+      <!-- Search End -->
+    </div>
+  </div>
+</div>
+<div *ngIf="!isMobile">
+  <div class="page-title">
+    <div class=" container">
+      <div class="row">
+        <div class="col-lg-12 col-md-12">
+
+          <!-- Search Start -->
+          <app-motel-search></app-motel-search>
+          <!-- Search End -->
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================ Hero Banner End ================================== -->
+
 
 <!-- ============================ All Property ================================== -->
 <section class="bg-light">
   <div class="container">
-
     <div class="row justify-content-center">
       <div class="col-lg-12 col-md-12">
         <div class="item-shorting-box">

@@ -195,12 +195,12 @@ $(function () {
   });
 
 
-  if ($(".hero-banner").length) {
-    searchTypeButtons();
-    $(window).on('load resize', function () {
-      searchTypeButtons();
-    });
-  }
+  // if ($(".hero-banner").length) {
+  //   searchTypeButtons();
+  //   $(window).on('load resize', function () {
+  //     searchTypeButtons();
+  //   });
+  // }
 
 });
 

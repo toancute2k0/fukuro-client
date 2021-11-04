@@ -1,0 +1,9 @@
+@media (max-width: 991px) {
+  .hero-banner {
+    min-height: 420px !important;
+  }
+
+  .bg-light {
+    padding-top: 0px !important;
+  }
+}

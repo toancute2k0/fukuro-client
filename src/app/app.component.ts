@@ -6,11 +6,10 @@ import { Router, NavigationStart, Event, NavigationEnd } from '@angular/router';
   templateUrl: './app.component.html',
 })
 export class AppComponent {
-  timeout : any;
+  timeout: any;
   routerChanged = true;
   constructor(private router: Router) {
     router.events.subscribe((event: Event) => {
-
       if (event instanceof NavigationStart) {
         // Show loading indicator
         this.routerChanged = true;

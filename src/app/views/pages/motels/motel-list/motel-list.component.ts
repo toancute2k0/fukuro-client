@@ -16,7 +16,10 @@ export class MotelListComponent implements OnInit {
     'assets/img/room/p-7.jpg',
   ];
 
+  public isMobile = false;
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    window.onresize = () => (this.isMobile = window.innerWidth <= 768);
+  }
 }
