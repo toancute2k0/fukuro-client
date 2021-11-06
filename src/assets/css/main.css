@@ -9790,7 +9790,7 @@ a.bl-continue:before {
 }
 .single-post-pagination .post-pagination-center-grid a {
   font-size: 2.5rem;
-  color: #fd5332;
+  color: #08184b;
 }
 .single-post-pagination .prev-post a {
   display: block;
@@ -10042,7 +10042,7 @@ h3.pa-name {
   bottom: 0px;
   cursor: pointer;
   border-radius: 4px;
-  background: #fd5332;
+  background: #08184b;
   color: #ffffff;
   border: 0;
   font-size: 14px;

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Blogs } from 'src/app/models/blogs.model';
+import { BlogsService } from 'src/app/services/blogs.service';
 
 @Component({
   selector: 'app-blog-list',
@@ -6,10 +8,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./blog-list.component.css'],
 })
 export class BlogListComponent implements OnInit {
-  public isMobile = false;
-  constructor() {}
-
+  blogs?: Blogs[];
+  constructor(private blogSer: BlogsService) {}
   ngOnInit(): void {
-    window.onresize = () => (this.isMobile = window.innerWidth <= 768);
+    this.getBlogs();
+  }
+
+  getBlogs(): void {
+    this.blogSer.getAll().subscribe(
+      (data) => {
+        this.blogs = data;
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
   }
 }

@@ -1,0 +1,9 @@
+.post-featured-img img {
+  width: 100%;
+}
+
+.blog-details img {
+  overflow: hidden;
+  clear: both !important;
+  width: 100%;
+}
