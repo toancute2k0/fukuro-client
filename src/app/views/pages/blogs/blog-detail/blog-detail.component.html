@@ -4,8 +4,8 @@
     <div class="row">
       <div class="col-lg-12 col-md-12">
 
-        <h2 class="ipt-title">{{currentBlogs.name}}</h2>
-        <span class="ipn-subtitle"></span>
+        <h2 class="ipt-title">{{blog_details?.name}}</h2>
+        <span class="ipn-subtitle">{{blog_details?.created_at | date: 'shortDate'}}</span>
 
       </div>
     </div>
@@ -29,7 +29,7 @@
               <div class="post-details">
 
                 <div class="post-featured-img">
-                  <img class="img-fluid" src="assets/img/blog/{{currentBlogs.image}}">
+                  <img class="img-fluid" src="assets/img/blog/{{blog_details?.image}}">
                 </div>
 
                 <div class="post-top-meta">
@@ -38,9 +38,9 @@
                     <li><a href="#"><span class="icons"><i class="ti-comment-alt"></i></span>0 nhận xét</a></li>
                   </ul>
                 </div>
-                <h2 class="post-title">{{currentBlogs.name}}</h2>
+                <h2 class="post-title">{{blog_details?.name}}</h2>
                 <div class="description">
-                  <div [innerHTML]="currentBlogs.description" style="clear:both;"></div>
+                  <div [innerHTML]="blog_details?.description" style="clear:both;"></div>
                 </div>
                 <div class="post-bottom-meta">
                   <div class="post-tags">

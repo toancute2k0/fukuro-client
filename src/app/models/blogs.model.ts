@@ -8,3 +8,8 @@ export class Blogs {
   category_id?: string;
   created_at?: string;
 }
+
+export interface BlogLimit {
+  count: number;
+  blog: Blogs[];
+}

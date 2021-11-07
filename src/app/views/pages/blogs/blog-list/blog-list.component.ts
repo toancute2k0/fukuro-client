@@ -9,6 +9,7 @@ import { BlogsService } from 'src/app/services/blogs.service';
 })
 export class BlogListComponent implements OnInit {
   blogs?: Blogs[];
+  products: Blogs[] = [];
   constructor(private blogSer: BlogsService) {}
   ngOnInit(): void {
     this.getBlogs();

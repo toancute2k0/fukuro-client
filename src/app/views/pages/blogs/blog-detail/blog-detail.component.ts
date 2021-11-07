@@ -1,4 +1,3 @@
-import { query } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BlogCategories } from 'src/app/models/blog-categories.model';
@@ -12,18 +11,10 @@ import { BlogsService } from 'src/app/services/blogs.service';
   styleUrls: ['./blog-detail.component.css'],
 })
 export class BlogDetailComponent implements OnInit {
-  currentBlogs: Blogs = {
-    name: '',
-    slug: '',
-    image: '',
-    summary: '',
-    description: '',
-    category_id: '',
-    created_at: '',
-  };
-
   cat?: BlogCategories[];
   blogs?: Blogs[];
+  blog_details?: Blogs | undefined;
+  newArray = [];
 
   constructor(
     private blogSer: BlogsService,
@@ -31,19 +22,15 @@ export class BlogDetailComponent implements OnInit {
     private catBlogs: BlogCategoriesService
   ) {}
   ngOnInit(): void {
-    // this.route.paramMap.subscribe((query) => {
-    //   let id = query.get('id');
-    //   this.blogSer.get(id).subscribe((res) => {
-    //     this.currentBlogs = res;
-    //     console.log(this.currentBlogs.image);
-    //   });
-    // });
+    const slug = this.route.snapshot.paramMap.get('slug');
+
+    if (slug) {
+      this.getById(slug);
+    }
     this.getBlogs();
     this.catBlogs.getAllCat().subscribe((res) => {
       this.cat = res;
     });
-    this.getById(this.route.snapshot.params.id);
-    console.log(this.route.snapshot.params.id);
   }
 
   getBlogs(): void {
@@ -57,14 +44,9 @@ export class BlogDetailComponent implements OnInit {
     );
   }
 
-  getById(id: string): void {
-    this.blogSer.get(id).subscribe(
-      (data) => {
-        this.currentBlogs = data;
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+  getById(slug: string): void {
+    this.blogSer.getById(slug).subscribe({
+      next: (data) => ((this.blog_details = data), console.log(data?.slug)),
+    });
   }
 }
