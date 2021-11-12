@@ -5,9 +5,8 @@
     <div class="row justify-content-center">
       <div class="col-lg-7 col-md-10 text-center">
         <div class="sec-heading center">
-          <h2>Featured Property For Sale</h2>
-          <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium
-            voluptatum deleniti atque corrupti quos dolores</p>
+          <h2>Nhà trọ nổi bật</h2>
+          <p>Fukuro nơi mang lại cho bạn sự yên tâm, chất lượng, giá cả hợp lí, dịch vụ tốt.</p>
         </div>
       </div>
     </div>
@@ -15,12 +14,12 @@
     <div class="row list-layout">
 
       <!-- Single Property Start -->
-      <div class="col-lg-6 col-md-12">
+      <div class="col-lg-6 col-md-12" *ngFor="let imgs of imagesList">
         <div class="property-listing property-1">
 
           <div class="listing-img-wrapper">
             <a href="single-property-2.html">
-              <img src="https://via.placeholder.com/1200x800" class="img-fluid mx-auto" alt="" />
+              <img src="{{imgs.image}}" class="img-fluid mx-auto" alt="" />
             </a>
           </div>
 
@@ -29,486 +28,42 @@
             <div class="listing-detail-wrapper-box">
               <div class="listing-detail-wrapper">
                 <div class="listing-short-detail">
-                  <h4 class="listing-name"><a href="single-property-2.html">Resort Valley
-                      Ocs</a></h4>
+                  <h4 class="listing-name"><a href="single-property-2.html">{{imgs.name}}</a></h4>
                   <div class="fr-can-rating">
                     <i class="fas fa-star filled"></i>
                     <i class="fas fa-star filled"></i>
                     <i class="fas fa-star filled"></i>
                     <i class="fas fa-star filled"></i>
                     <i class="fas fa-star"></i>
-                    <span class="reviews_text">(42 Reviews)</span>
+                    <span class="reviews_text">(0 nhận xét)</span>
                   </div>
-                  <span class="prt-types sale">For Sale</span>
-                </div>
-                <div class="list-price">
-                  <h6 class="listing-card-info-price">$7,000</h6>
+                  <span class="prt-types sale">{{imgs.rent}}</span>
                 </div>
               </div>
             </div>
-
-            <div class="price-features-wrapper">
+            <div class="list-price">
+              <h6 class="listing-card-info-price">{{imgs.price}} VNĐ</h6>
+            </div>
+            <!-- <div class="price-features-wrapper">
               <div class="list-fx-features">
                 <div class="listing-card-info-icon">
-                  <div class="inc-fleat-icon"><img src="assets/img/bed.svg" width="13" alt="" /></div>3 Beds
+                  <div class="inc-fleat-icon"><img src="assets/img/bed.svg" width="13" alt="" /></div>1 phòng
                 </div>
                 <div class="listing-card-info-icon">
-                  <div class="inc-fleat-icon"><img src="assets/img/bathtub.svg" width="13" alt="" /></div>1 Bath
+                  <div class="inc-fleat-icon"><img src="assets/img/bathtub.svg" width="13" alt="" /></div>1 tolet
                 </div>
                 <div class="listing-card-info-icon">
-                  <div class="inc-fleat-icon"><img src="assets/img/move.svg" width="13" alt="" /></div>800 sqft
+                  <div class="inc-fleat-icon"><img src="assets/img/move.svg" width="13" alt="" /></div>25 m &#178;
                 </div>
               </div>
-            </div>
+            </div> -->
 
             <div class="listing-footer-wrapper">
               <div class="listing-locate">
-                <span class="listing-location"><i class="ti-location-pin"></i>Quice Market,
-                  Canada</span>
+                <span class="listing-location"><i class="ti-location-pin"></i>{{imgs.address}}</span>
               </div>
               <div class="listing-detail-btn">
-                <a href="single-property-2.html" class="more-btn">View</a>
-              </div>
-            </div>
-
-          </div>
-
-        </div>
-      </div>
-      <!-- Single Property End -->
-
-      <!-- Single Property Start -->
-      <div class="col-lg-6 col-md-12">
-        <div class="property-listing property-1">
-
-          <div class="listing-img-wrapper">
-            <a href="single-property-2.html">
-              <img src="https://via.placeholder.com/1200x800" class="img-fluid mx-auto" alt="" />
-            </a>
-          </div>
-
-          <div class="listing-content">
-
-            <div class="listing-detail-wrapper-box">
-              <div class="listing-detail-wrapper">
-                <div class="listing-short-detail">
-                  <h4 class="listing-name"><a href="single-property-2.html">Adobe Property
-                      Advisors</a></h4>
-                  <div class="fr-can-rating">
-                    <i class="fas fa-star filled"></i>
-                    <i class="fas fa-star filled"></i>
-                    <i class="fas fa-star filled"></i>
-                    <i class="fas fa-star filled"></i>
-                    <i class="fas fa-star"></i>
-                    <span class="reviews_text">(42 Reviews)</span>
-                  </div>
-                  <span class="prt-types rent">For Rent</span>
-                </div>
-                <div class="list-price">
-                  <h6 class="listing-card-info-price">$6,800</h6>
-                </div>
-              </div>
-            </div>
-
-            <div class="price-features-wrapper">
-              <div class="list-fx-features">
-                <div class="listing-card-info-icon">
-                  <div class="inc-fleat-icon"><img src="assets/img/bed.svg" width="13" alt="" /></div>3 Beds
-                </div>
-                <div class="listing-card-info-icon">
-                  <div class="inc-fleat-icon"><img src="assets/img/bathtub.svg" width="13" alt="" /></div>1 Bath
-                </div>
-                <div class="listing-card-info-icon">
-                  <div class="inc-fleat-icon"><img src="assets/img/move.svg" width="13" alt="" /></div>800 sqft
-                </div>
-              </div>
-            </div>
-
-            <div class="listing-footer-wrapper">
-              <div class="listing-locate">
-                <span class="listing-location"><i class="ti-location-pin"></i>Quice Market,
-                  Canada</span>
-              </div>
-              <div class="listing-detail-btn">
-                <a href="single-property-2.html" class="more-btn">View</a>
-              </div>
-            </div>
-
-          </div>
-
-        </div>
-      </div>
-      <!-- Single Property End -->
-
-      <!-- Single Property Start -->
-      <div class="col-lg-6 col-md-12">
-        <div class="property-listing property-1">
-
-          <div class="listing-img-wrapper">
-            <a href="single-property-2.html">
-              <img src="https://via.placeholder.com/1200x800" class="img-fluid mx-auto" alt="" />
-            </a>
-          </div>
-
-          <div class="listing-content">
-
-            <div class="listing-detail-wrapper-box">
-              <div class="listing-detail-wrapper">
-                <div class="listing-short-detail">
-                  <h4 class="listing-name"><a href="single-property-2.html">Bluebell Real
-                      Estate</a></h4>
-                  <div class="fr-can-rating">
-                    <i class="fas fa-star filled"></i>
-                    <i class="fas fa-star filled"></i>
-                    <i class="fas fa-star filled"></i>
-                    <i class="fas fa-star filled"></i>
-                    <i class="fas fa-star"></i>
-                    <span class="reviews_text">(42 Reviews)</span>
-                  </div>
-                  <span class="prt-types rent">For Rent</span>
-                </div>
-                <div class="list-price">
-                  <h6 class="listing-card-info-price">$7,000</h6>
-                </div>
-              </div>
-            </div>
-
-            <div class="price-features-wrapper">
-              <div class="list-fx-features">
-                <div class="listing-card-info-icon">
-                  <div class="inc-fleat-icon"><img src="assets/img/bed.svg" width="13" alt="" /></div>3 Beds
-                </div>
-                <div class="listing-card-info-icon">
-                  <div class="inc-fleat-icon"><img src="assets/img/bathtub.svg" width="13" alt="" /></div>1 Bath
-                </div>
-                <div class="listing-card-info-icon">
-                  <div class="inc-fleat-icon"><img src="assets/img/move.svg" width="13" alt="" /></div>800 sqft
-                </div>
-              </div>
-            </div>
-
-            <div class="listing-footer-wrapper">
-              <div class="listing-locate">
-                <span class="listing-location"><i class="ti-location-pin"></i>Quice Market,
-                  Canada</span>
-              </div>
-              <div class="listing-detail-btn">
-                <a href="single-property-2.html" class="more-btn">View</a>
-              </div>
-            </div>
-
-          </div>
-
-        </div>
-      </div>
-      <!-- Single Property End -->
-
-      <!-- Single Property Start -->
-      <div class="col-lg-6 col-md-12">
-        <div class="property-listing property-1">
-
-          <div class="listing-img-wrapper">
-            <a href="single-property-2.html">
-              <img src="https://via.placeholder.com/1200x800" class="img-fluid mx-auto" alt="" />
-            </a>
-          </div>
-
-          <div class="listing-content">
-
-            <div class="listing-detail-wrapper-box">
-              <div class="listing-detail-wrapper">
-                <div class="listing-short-detail">
-                  <h4 class="listing-name"><a href="single-property-2.html">Agile Real Estate
-                      Group</a></h4>
-                  <div class="fr-can-rating">
-                    <i class="fas fa-star filled"></i>
-                    <i class="fas fa-star filled"></i>
-                    <i class="fas fa-star filled"></i>
-                    <i class="fas fa-star filled"></i>
-                    <i class="fas fa-star"></i>
-                    <span class="reviews_text">(42 Reviews)</span>
-                  </div>
-                  <span class="prt-types sale">For Sale</span>
-                </div>
-                <div class="list-price">
-                  <h6 class="listing-card-info-price">$8,100</h6>
-                </div>
-              </div>
-            </div>
-
-            <div class="price-features-wrapper">
-              <div class="list-fx-features">
-                <div class="listing-card-info-icon">
-                  <div class="inc-fleat-icon"><img src="assets/img/bed.svg" width="13" alt="" /></div>3 Beds
-                </div>
-                <div class="listing-card-info-icon">
-                  <div class="inc-fleat-icon"><img src="assets/img/bathtub.svg" width="13" alt="" /></div>1 Bath
-                </div>
-                <div class="listing-card-info-icon">
-                  <div class="inc-fleat-icon"><img src="assets/img/move.svg" width="13" alt="" /></div>800 sqft
-                </div>
-              </div>
-            </div>
-
-            <div class="listing-footer-wrapper">
-              <div class="listing-locate">
-                <span class="listing-location"><i class="ti-location-pin"></i>Quice Market,
-                  Canada</span>
-              </div>
-              <div class="listing-detail-btn">
-                <a href="single-property-2.html" class="more-btn">View</a>
-              </div>
-            </div>
-
-          </div>
-
-        </div>
-      </div>
-      <!-- Single Property End -->
-
-      <!-- Single Property Start -->
-      <div class="col-lg-6 col-md-12">
-        <div class="property-listing property-1">
-
-          <div class="listing-img-wrapper">
-            <a href="single-property-2.html">
-              <img src="https://via.placeholder.com/1200x800" class="img-fluid mx-auto" alt="" />
-            </a>
-          </div>
-
-          <div class="listing-content">
-
-            <div class="listing-detail-wrapper-box">
-              <div class="listing-detail-wrapper">
-                <div class="listing-short-detail">
-                  <h4 class="listing-name"><a href="single-property-2.html">Nestled Real
-                      Estate</a></h4>
-                  <div class="fr-can-rating">
-                    <i class="fas fa-star filled"></i>
-                    <i class="fas fa-star filled"></i>
-                    <i class="fas fa-star filled"></i>
-                    <i class="fas fa-star filled"></i>
-                    <i class="fas fa-star"></i>
-                    <span class="reviews_text">(42 Reviews)</span>
-                  </div>
-                  <span class="prt-types sale">For Sale</span>
-                </div>
-                <div class="list-price">
-                  <h6 class="listing-card-info-price">$5,700</h6>
-                </div>
-              </div>
-            </div>
-
-            <div class="price-features-wrapper">
-              <div class="list-fx-features">
-                <div class="listing-card-info-icon">
-                  <div class="inc-fleat-icon"><img src="assets/img/bed.svg" width="13" alt="" /></div>3 Beds
-                </div>
-                <div class="listing-card-info-icon">
-                  <div class="inc-fleat-icon"><img src="assets/img/bathtub.svg" width="13" alt="" /></div>1 Bath
-                </div>
-                <div class="listing-card-info-icon">
-                  <div class="inc-fleat-icon"><img src="assets/img/move.svg" width="13" alt="" /></div>800 sqft
-                </div>
-              </div>
-            </div>
-
-            <div class="listing-footer-wrapper">
-              <div class="listing-locate">
-                <span class="listing-location"><i class="ti-location-pin"></i>Quice Market,
-                  Canada</span>
-              </div>
-              <div class="listing-detail-btn">
-                <a href="single-property-2.html" class="more-btn">View</a>
-              </div>
-            </div>
-
-          </div>
-
-        </div>
-      </div>
-      <!-- Single Property End -->
-
-      <!-- Single Property Start -->
-      <div class="col-lg-6 col-md-12">
-        <div class="property-listing property-1">
-
-          <div class="listing-img-wrapper">
-            <a href="single-property-2.html">
-              <img src="https://via.placeholder.com/1200x800" class="img-fluid mx-auto" alt="" />
-            </a>
-          </div>
-
-          <div class="listing-content">
-
-            <div class="listing-detail-wrapper-box">
-              <div class="listing-detail-wrapper">
-                <div class="listing-short-detail">
-                  <h4 class="listing-name"><a href="single-property-2.html">Flow Group Real
-                      Estate</a></h4>
-                  <div class="fr-can-rating">
-                    <i class="fas fa-star filled"></i>
-                    <i class="fas fa-star filled"></i>
-                    <i class="fas fa-star filled"></i>
-                    <i class="fas fa-star filled"></i>
-                    <i class="fas fa-star"></i>
-                    <span class="reviews_text">(42 Reviews)</span>
-                  </div>
-                  <span class="prt-types rent">For Rent</span>
-                </div>
-                <div class="list-price">
-                  <h6 class="listing-card-info-price">$5,900</h6>
-                </div>
-              </div>
-            </div>
-
-            <div class="price-features-wrapper">
-              <div class="list-fx-features">
-                <div class="listing-card-info-icon">
-                  <div class="inc-fleat-icon"><img src="assets/img/bed.svg" width="13" alt="" /></div>3 Beds
-                </div>
-                <div class="listing-card-info-icon">
-                  <div class="inc-fleat-icon"><img src="assets/img/bathtub.svg" width="13" alt="" /></div>1 Bath
-                </div>
-                <div class="listing-card-info-icon">
-                  <div class="inc-fleat-icon"><img src="assets/img/move.svg" width="13" alt="" /></div>800 sqft
-                </div>
-              </div>
-            </div>
-
-            <div class="listing-footer-wrapper">
-              <div class="listing-locate">
-                <span class="listing-location"><i class="ti-location-pin"></i>Quice Market,
-                  Canada</span>
-              </div>
-              <div class="listing-detail-btn">
-                <a href="single-property-2.html" class="more-btn">View</a>
-              </div>
-            </div>
-
-          </div>
-
-        </div>
-      </div>
-      <!-- Single Property End -->
-
-      <!-- Single Property Start -->
-      <div class="col-lg-6 col-md-12">
-        <div class="property-listing property-1">
-
-          <div class="listing-img-wrapper">
-            <a href="single-property-2.html">
-              <img src="https://via.placeholder.com/1200x800" class="img-fluid mx-auto" alt="" />
-            </a>
-          </div>
-
-          <div class="listing-content">
-
-            <div class="listing-detail-wrapper-box">
-              <div class="listing-detail-wrapper">
-                <div class="listing-short-detail">
-                  <h4 class="listing-name"><a href="single-property-2.html">Strive Partners
-                      Realty</a></h4>
-                  <div class="fr-can-rating">
-                    <i class="fas fa-star filled"></i>
-                    <i class="fas fa-star filled"></i>
-                    <i class="fas fa-star filled"></i>
-                    <i class="fas fa-star filled"></i>
-                    <i class="fas fa-star"></i>
-                    <span class="reviews_text">(42 Reviews)</span>
-                  </div>
-                  <span class="prt-types sale">For Sale</span>
-                </div>
-                <div class="list-price">
-                  <h6 class="listing-card-info-price">$6,200</h6>
-                </div>
-              </div>
-            </div>
-
-            <div class="price-features-wrapper">
-              <div class="list-fx-features">
-                <div class="listing-card-info-icon">
-                  <div class="inc-fleat-icon"><img src="assets/img/bed.svg" width="13" alt="" /></div>3 Beds
-                </div>
-                <div class="listing-card-info-icon">
-                  <div class="inc-fleat-icon"><img src="assets/img/bathtub.svg" width="13" alt="" /></div>1 Bath
-                </div>
-                <div class="listing-card-info-icon">
-                  <div class="inc-fleat-icon"><img src="assets/img/move.svg" width="13" alt="" /></div>800 sqft
-                </div>
-              </div>
-            </div>
-
-            <div class="listing-footer-wrapper">
-              <div class="listing-locate">
-                <span class="listing-location"><i class="ti-location-pin"></i>Quice Market,
-                  Canada</span>
-              </div>
-              <div class="listing-detail-btn">
-                <a href="single-property-2.html" class="more-btn">View</a>
-              </div>
-            </div>
-
-          </div>
-
-        </div>
-      </div>
-      <!-- Single Property End -->
-
-      <!-- Single Property Start -->
-      <div class="col-lg-6 col-md-12">
-        <div class="property-listing property-1">
-
-          <div class="listing-img-wrapper">
-            <a href="single-property-2.html">
-              <img src="https://via.placeholder.com/1200x800" class="img-fluid mx-auto" alt="" />
-            </a>
-          </div>
-
-          <div class="listing-content">
-
-            <div class="listing-detail-wrapper-box">
-              <div class="listing-detail-wrapper">
-                <div class="listing-short-detail">
-                  <h4 class="listing-name"><a href="single-property-2.html">Black Oak
-                      Realty</a></h4>
-                  <div class="fr-can-rating">
-                    <i class="fas fa-star filled"></i>
-                    <i class="fas fa-star filled"></i>
-                    <i class="fas fa-star filled"></i>
-                    <i class="fas fa-star filled"></i>
-                    <i class="fas fa-star"></i>
-                    <span class="reviews_text">(42 Reviews)</span>
-                  </div>
-                  <span class="prt-types rent">For Rent</span>
-                </div>
-                <div class="list-price">
-                  <h6 class="listing-card-info-price">$8,400</h6>
-                </div>
-              </div>
-            </div>
-
-            <div class="price-features-wrapper">
-              <div class="list-fx-features">
-                <div class="listing-card-info-icon">
-                  <div class="inc-fleat-icon"><img src="assets/img/bed.svg" width="13" alt="" /></div>3 Beds
-                </div>
-                <div class="listing-card-info-icon">
-                  <div class="inc-fleat-icon"><img src="assets/img/bathtub.svg" width="13" alt="" /></div>1 Bath
-                </div>
-                <div class="listing-card-info-icon">
-                  <div class="inc-fleat-icon"><img src="assets/img/move.svg" width="13" alt="" /></div>800 sqft
-                </div>
-              </div>
-            </div>
-
-            <div class="listing-footer-wrapper">
-              <div class="listing-locate">
-                <span class="listing-location"><i class="ti-location-pin"></i>Quice Market,
-                  Canada</span>
-              </div>
-              <div class="listing-detail-btn">
-                <a href="single-property-2.html" class="more-btn">View</a>
+                <a href="single-property-2.html" class="more-btn">Xem</a>
               </div>
             </div>
 
@@ -523,8 +78,7 @@
     <!-- Pagination -->
     <div class="row">
       <div class="col-lg-12 col-md-12 col-sm-12 text-center">
-        <a href="listings-list-with-sidebar.html" class="btn btn-theme-light rounded">Browse More
-          Properties</a>
+        <a href="listings-list-with-sidebar.html" class="btn btn-theme-light rounded">Xem thêm</a>
       </div>
     </div>
 

@@ -5,9 +5,8 @@
     <div class="row justify-content-center">
       <div class="col-lg-7 col-md-10 text-center">
         <div class="sec-heading center mb-4">
-          <h2>Recent Property For Rent</h2>
-          <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium
-            voluptatum deleniti atque corrupti quos dolores</p>
+          <h2>Nhà trọ cho thuê gần đây</h2>
+          <p>Fukuro nơi mang lại cho bạn sự yên tâm, chất lượng, giá cả hợp lí, dịch vụ tốt.</p>
         </div>
       </div>
     </div>
@@ -26,7 +25,7 @@
                     <div class="list-img-slide">
                       <div class="click">
                         <div>
-                          <a href="single-property-1.html"><img src="{{imgs}}" class="img-fluid mx-auto" alt="" /></a>
+                          <a href="#"><img src="{{imgs.image}}" class="img-fluid mx-auto" alt="" /></a>
                         </div>
                       </div>
                     </div>
@@ -35,30 +34,30 @@
                   <div class="listing-detail-wrapper">
                     <div class="listing-short-detail-wrap">
                       <div class="listing-short-detail">
-                        <span class="property-type">For Rent</span>
-                        <h4 class="listing-name verified"><a href="single-property-1.html" class="prt-link-detail">Blue
-                            Reef
-                            Properties</a></h4>
-                      </div>
-                      <div class="listing-short-detail-flex">
-                        <h6 class="listing-card-info-price">$8,400</h6>
+                        <span class="property-type">{{imgs.rent}}</span>
+                        <h4 class="listing-name verified"><a href="single-property-1.html"
+                            class="prt-link-detail">{{imgs.name}}</a></h4>
                       </div>
                     </div>
+                  </div>
+
+                  <div class="listing-detail-wrapper" style="padding: 0 24px;">
+                    <h6 class="listing-card-info-price">{{imgs.price}} VNĐ</h6>
                   </div>
 
                   <div class="price-features-wrapper">
                     <div class="list-fx-features">
                       <div class="listing-card-info-icon">
                         <div class="inc-fleat-icon"><img src="assets/img/bed.svg"
-                            style="width: 13px !important; height: 13px !important" alt="" /></div>3 Beds
+                            style="width: 13px !important; height: 13px !important" alt="" /></div>1 phòng
                       </div>
                       <div class="listing-card-info-icon">
                         <div class="inc-fleat-icon"><img src="assets/img/bathtub.svg"
-                            style="width: 13px !important; height: 13px !important" alt="" /></div>1 Bath
+                            style="width: 13px !important; height: 13px !important" alt="" /></div>1 tolet
                       </div>
                       <div class="listing-card-info-icon">
                         <div class="inc-fleat-icon"><img src="assets/img/move.svg"
-                            style="width: 13px !important; height: 13px !important" alt="" /></div>800 sqft
+                            style="width: 13px !important; height: 13px !important" alt="" /></div>25 m &#178;
                       </div>
                     </div>
                   </div>
@@ -66,11 +65,10 @@
                   <div class="listing-detail-footer">
                     <div class="footer-first">
                       <div class="foot-location"><img src="assets/img/pin.svg"
-                          style="width: 18px !important; height: 18px !important" />210 Zirak Road,
-                        Canada</div>
+                          style="width: 18px !important; height: 18px !important" />{{imgs.address}}</div>
                     </div>
                     <div class="footer-flex">
-                      <a href="property-detail.html" class="prt-view">View</a>
+                      <a href="property-detail.html" class="prt-view">Xem</a>
                     </div>
                   </div>
                 </div>

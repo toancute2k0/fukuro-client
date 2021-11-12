@@ -7,9 +7,15 @@ import { BlogDetailComponent } from './blog-detail/blog-detail.component';
 import { BlogListComponent } from './blog-list/blog-list.component';
 import { ComponentsModule } from '../../components/components.module';
 import { FormsModule } from '@angular/forms';
+import { BlogCategoryComponent } from './blog-category/blog-category.component';
 
 @NgModule({
-  declarations: [BlogsComponent, BlogDetailComponent, BlogListComponent],
+  declarations: [
+    BlogsComponent,
+    BlogDetailComponent,
+    BlogListComponent,
+    BlogCategoryComponent,
+  ],
   imports: [CommonModule, BlogsRoutingModule, ComponentsModule, FormsModule],
 })
 export class BlogsModule {}

@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { BlogCategories } from '../models/blog-categories.model';
 
-const API_URL = 'http://localhost/ASM_PHP31/public/api/blog_categories';
+const API_URL = 'http://toan2000.ml/api/blog_categories';
 
 @Injectable({
   providedIn: 'root',
