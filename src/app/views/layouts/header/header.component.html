@@ -41,16 +41,24 @@
         </ul>
 
         <ul class="nav-menu nav-menu-social align-to-right">
-
-          <li>
-            <a routerLink="dang-bai" class="text-success"><img src="assets/img/submit.svg" width="20" alt=""
-                class="mr-2" />Đăng Bài</a>
+          <li *ngIf="!auth.isLoggedIn">
+            <a routerLink="dang-ky" class="text-success"><img src="assets/img/submit.svg" width="20" alt=""
+                class="mr-2" />Đăng Kí</a>
           </li>
-          <li class="add-listing">
+          <li class="add-listing" routerLinkActive="active" *ngIf="!auth.isLoggedIn">
             <a routerLink="dang-nhap"><img src="assets/img/user-light.svg" width="12" alt="" class="mr-2" />Đăng
               Nhập</a>
           </li>
+          <li *ngIf="auth.isLoggedIn">
+            <a routerLink="dang-bai" class="text-success"><img src="assets/img/submit.svg" width="20" alt=""
+                class="mr-2" />Đăng
+              Bài</a>
+          </li>
+          <li *ngIf="auth.isLoggedIn" routerLinkActive="active">
+            <a (click)="auth.logout()">Đăng xuất</a>
+          </li>
         </ul>
+
       </div>
     </nav>
   </div>

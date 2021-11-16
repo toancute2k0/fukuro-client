@@ -16,13 +16,18 @@ export class CustomersService {
     return this.http.get<Customers[]>(API_URL);
   }
 
-  get(id: number): Observable<Customers> {
+  get(id: string): Observable<Customers> {
     return this.http.get(`${API_URL}/${id}`);
   }
 
   create(data: any): Observable<any> {
     return this.http.post(API_URL, data);
   }
+
+  login(data: any): Observable<any> {
+    return this.http.post(`${API_URL}/login`, data);
+  }
+
 
   update(id: number, data: any): Observable<any> {
     return this.http.put(`${API_URL}/${id}`, data);
@@ -39,4 +44,13 @@ export class CustomersService {
   findByTitle(title: any): Observable<Customers[]> {
     return this.http.get<Customers[]>(`${API_URL}?title=${title}`);
   }
+
+  authorization() {
+    return {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`
+      }
+    };
+  }
+
 }

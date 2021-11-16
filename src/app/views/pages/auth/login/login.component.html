@@ -5,24 +5,39 @@
       <div class="modal-body">
         <h4 class="modal-header-title">Đăng Nhập</h4>
         <div class="login-form">
-          <form>
+          <form [formGroup]="login" (ngSubmit)="onSubmit()">
 
             <div class="form-group">
               <label>Tên đăng nhập</label>
               <div class="input-with-icon">
-                <input type="text" class="form-control" placeholder="Tên đăng nhập" aria-describedby="userHid">
+                <input type="text" class="form-control" placeholder="Tên đăng nhập" formControlName="username">
                 <i class="ti-user"></i>
               </div>
-              <small class="text-muted small-popup" id="userHid">Tên đăng nhập không được bỏ trống!</small>
+              <div *ngIf="submitted && f.username.errors">
+                <small *ngIf="f.username.errors.required" class="text-muted small-popup">Tên đăng nhập không được bỏ
+                  trống!</small>
+                <small *ngIf="f.username.errors.minlength" class="text-muted small-popup">Tên đăng nhập phải ít nhất
+                  6 kí tự!</small>
+              </div>
             </div>
 
             <div class="form-group">
               <label>Mật Khẩu</label>
               <div class="input-with-icon">
-                <input type="password" class="form-control" placeholder="*******" aria-describedby="passHid">
+                <input type="password" class="form-control" placeholder="Mật khẩu" formControlName="password">
                 <i class="ti-unlock"></i>
               </div>
-              <small class="text-muted small-popup" id="passHid">Tên đăng nhập không được bỏ trống!</small>
+              <div *ngIf="submitted && f.password.errors">
+                <small *ngIf="f.password.errors.required" class="text-muted small-popup">Password không được bỏ
+                  trống!</small>
+                <small *ngIf="f.password.errors.minlength" class="text-muted small-popup">Password phải ít nhất 6 kí
+                  tự! <br></small>
+                <small *ngIf="f.password.errors.pattern" class="text-muted small-popup">Mật khẩu không được chứa
+                  khoảng trắng!</small>
+              </div>
+              <!-- <div *ngIf="error">
+                <small class="text-muted small-popup">{{error}}</small>
+              </div> -->
             </div>
 
             <div class="form-group">

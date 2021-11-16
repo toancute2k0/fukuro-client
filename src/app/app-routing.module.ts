@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './guards/auth.guard';
 import { LoginComponent } from './views/pages/auth/login/login.component';
 import { RegisterComponent } from './views/pages/auth/register/register.component';
 import { BlogCategoryComponent } from './views/pages/blogs/blog-category/blog-category.component';
@@ -10,7 +11,7 @@ import { RentalNewsComponent } from './views/pages/rental-news/rental-news.compo
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'dang-bai', component: RentalNewsComponent },
+  { path: 'dang-bai', component: RentalNewsComponent, canActivate: [AuthGuard]},
   { path: 'lien-he', component: ContactComponent },
   { path: 'trang-chu', redirectTo: '', pathMatch: 'full' },
   {
