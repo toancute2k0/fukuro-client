@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Customers } from 'src/app/models/customers.model';
 import { CustomersService } from 'src/app/services/customers.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -37,7 +38,8 @@ export class LoginComponent implements OnInit {
     private customSer: CustomersService,
     private route: ActivatedRoute,
     private _router: Router,
-    private toastrService: ToastrService
+    private toastrService: ToastrService,
+    private auth: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -59,12 +61,17 @@ export class LoginComponent implements OnInit {
     // add custom_ser
     this.customSer.login(this.login.value).subscribe(
       (res) => {
-        localStorage.setItem("token", res.token);
-        localStorage.setItem("currentUser", JSON.stringify(res.data.id));
+        localStorage.setItem('token', res.token);
+        const time_to_login = Date.now() + res.expires_in; // one week
+        localStorage.setItem('timer', time_to_login);
+
+        // localStorage.setItem("token", res.token);
+        // localStorage.setItem("currentUser", JSON.stringify(res.data.id));
 
         // console.log(localStorage.getItem('currentUser'));
         // console.log(this.userData);
 
+        this.auth.loggedIn();
         this._router.navigate([this.returnUrl]);
         this.toastrService.success('Đăng nhập thành công!');
       },
