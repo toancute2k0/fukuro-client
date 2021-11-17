@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Customers } from '../models/customers.model';
 import { environment as env } from '../../environments/environment';
+import { map } from 'rxjs/operators';
 
 const API_URL = `${env.apiURL}/customers`;
 
@@ -24,10 +25,27 @@ export class CustomersService {
     return this.http.post(API_URL, data);
   }
 
-  login(data: any): Observable<any> {
-    return this.http.post(`${API_URL}/login`, data);
-  }
+  // login(data: any): Observable<any> {
+  //   return this.http.post(`${API_URL}/login`, data);
+  // }
 
+  login(username: string, password: string) {
+    return this.http
+      .post<any>(`${API_URL}/login`, {
+        username: username,
+        password: password,
+      })
+      .pipe(
+        map((user) => {
+          // login successful if there's a jwt token in the response
+          if (user && user.token) {
+            // store user details and jwt token in local storage to keep user logged in between page refreshes
+            localStorage.setItem('currentUser', JSON.stringify(user.data.id));
+          }
+          return user;
+        })
+      );
+  }
 
   update(id: number, data: any): Observable<any> {
     return this.http.put(`${API_URL}/${id}`, data);
@@ -48,9 +66,8 @@ export class CustomersService {
   authorization() {
     return {
       headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`
-      }
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
     };
   }
-
 }

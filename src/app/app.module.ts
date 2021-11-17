@@ -17,6 +17,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { AuthGuard } from './guards/auth.guard';
+import { NoAuthGuard } from './guards/noauth.guard';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,7 @@ import { AuthGuard } from './guards/auth.guard';
     HttpClientModule,
     ReactiveFormsModule,
   ],
-  providers: [AuthGuard],
+  providers: [AuthGuard, NoAuthGuard],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

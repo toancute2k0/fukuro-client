@@ -30,6 +30,9 @@ export class AppComponent {
   ngOnInit() {
     const timer = localStorage.getItem('timer');
     const dateNow = Date.now();
+    if(timer) {
+      this.auth.loggedIn();
+    }
     if (timer && dateNow > Number(timer)) {
       this.auth.logout();
       this.toastrService.success('Phiên đăng nhập đã hết hạn!');

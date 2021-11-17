@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './guards/auth.guard';
+import { NoAuthGuard } from './guards/noauth.guard';
 import { LoginComponent } from './views/pages/auth/login/login.component';
 import { RegisterComponent } from './views/pages/auth/register/register.component';
 import { BlogCategoryComponent } from './views/pages/blogs/blog-category/blog-category.component';
@@ -29,7 +30,9 @@ const routes: Routes = [
       import('./views/pages/motels/motels.module').then((m) => m.MotelsModule),
   },
   { path: 'dang-ky', component: RegisterComponent },
-  { path: 'dang-nhap', component: LoginComponent },
+  { path: 'dang-nhap', component: LoginComponent, canActivate: [NoAuthGuard] },
+  { path: 'my-account',
+    loadChildren: () => import('./views/pages/my-account/my-account.module').then(m => m.MyAccountModule), canActivate: [AuthGuard] },
   { path: '**', component: NotFoundComponent },
 ];
 

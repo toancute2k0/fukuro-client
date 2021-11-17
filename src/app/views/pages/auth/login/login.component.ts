@@ -5,33 +5,31 @@ import { ToastrService } from 'ngx-toastr';
 import { Customers } from 'src/app/models/customers.model';
 import { CustomersService } from 'src/app/services/customers.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-
   submitted = false;
-  returnUrl: string | undefined;
+  returnUrl: any;
   error = '';
-  login = this.fb.group(
-    {
-      username: [
-        '',
-        Validators.compose([Validators.required, Validators.minLength(6)]),
-      ],
-      password: [
-        '',
-        Validators.compose([
-          Validators.required,
-          Validators.minLength(6),
-          Validators.pattern(/^\S*$/),
-        ]),
-      ],
-    }
-  );
+  login = this.fb.group({
+    username: [
+      '',
+      Validators.compose([Validators.required, Validators.minLength(6)]),
+    ],
+    password: [
+      '',
+      Validators.compose([
+        Validators.required,
+        Validators.minLength(6),
+        Validators.pattern(/^\S*$/),
+      ]),
+    ],
+  });
 
   constructor(
     private fb: FormBuilder,
@@ -59,27 +57,44 @@ export class LoginComponent implements OnInit {
     }
     // console.log(this.login.value);
     // add custom_ser
-    this.customSer.login(this.login.value).subscribe(
-      (res) => {
-        localStorage.setItem('token', res.token);
-        const time_to_login = Date.now() + res.expires_in; // one week
-        localStorage.setItem('timer', time_to_login);
+    // this.customSer.login(this.login.value).subscribe(
+    //   (res) => {
+    //     localStorage.setItem('token', res.token);
+    //     const time_to_login = Date.now() + 604800000; // one week
+    //     localStorage.setItem('timer', JSON.stringify(time_to_login));
 
-        // localStorage.setItem("token", res.token);
-        // localStorage.setItem("currentUser", JSON.stringify(res.data.id));
+    //     localStorage.setItem('currentUser', JSON.stringify(res.data));
 
-        // console.log(localStorage.getItem('currentUser'));
-        // console.log(this.userData);
+    //     this.auth.loggedIn();
+    //     this._router.navigateByUrl(this.returnUrl);
+    //     // window.location.reload();
+    //     this.toastrService.success('Đăng nhập thành công!');
+    //   },
+    //   (error) => {
+    //     this.error = error.error.message;
+    //     this.toastrService.error(this.error);
+    //   }
+    // );
 
-        this.auth.loggedIn();
-        this._router.navigate([this.returnUrl]);
-        this.toastrService.success('Đăng nhập thành công!');
-      },
-      (error) => {
-        this.error = error.error.message;
-        this.toastrService.error(this.error);
-      }
-    );
+    this.customSer
+      .login(this.f.username.value, this.f.password.value)
+      .pipe(first())
+      .subscribe(
+        (data) => {
+          localStorage.setItem('token', data.token);
+          const time_to_login = Date.now() + 604800000; // one week
+          localStorage.setItem('timer', JSON.stringify(time_to_login));
+
+          this.auth.loggedIn();
+
+          this._router.navigateByUrl(this.returnUrl);
+          // window.location.reload();
+          this.toastrService.success('Đăng nhập thành công!');
+        },
+        (error) => {
+          this.error = error.error.message;
+          this.toastrService.error(this.error);
+        }
+      );
   }
-
 }

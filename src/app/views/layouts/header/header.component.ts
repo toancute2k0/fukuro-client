@@ -12,11 +12,18 @@ import { CustomersService } from 'src/app/services/customers.service';
 })
 export class HeaderComponent implements OnInit {
   cat?: BlogCategories[];
-  user?: any;
-  constructor(private catBlogs: BlogCategoriesService, public auth: AuthService, private customSer: CustomersService) {}
+  currentUser?: any;
+  constructor(
+    private catBlogs: BlogCategoriesService,
+    public auth: AuthService,
+    private customSer: CustomersService
+  ) {
+    // this.currentUser = JSON.parse(localStorage.getItem('currentUser')!);
+    // console.log(this.currentUser);
+  }
 
   ngOnInit(): void {
-    const id = localStorage.getItem("currentUser");
+    const id = localStorage.getItem('currentUser');
 
     if (id) {
       this.getById(id);
@@ -28,8 +35,8 @@ export class HeaderComponent implements OnInit {
 
   getById(id: string): void {
     this.customSer.get(id).subscribe((res) => {
-      this.user = res;
-      console.log(res)
+      this.currentUser = res;
+      console.log(res);
     });
   }
 }

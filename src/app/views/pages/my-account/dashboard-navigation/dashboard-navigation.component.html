@@ -1,0 +1,52 @@
+<div class="d-user-avater">
+  <img src="https://via.placeholder.com/40x40" class="img-fluid avater" alt="">
+  <h4>Trần Quốc Toản</h4>
+  <span>admin@gmail.com</span>
+</div>
+
+<div class="d-navigation">
+  <ul>
+    <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+      <a routerLink="/my-account">
+        <i class="ti-dashboard"></i>
+        Dashboard
+      </a>
+    </li>
+    <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+      <a routerLink="/my-account/my-profile">
+        <i class="ti-user"></i>
+        Thông tin tài khoản
+      </a>
+    </li>
+    <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+      <a routerLink="/my-account/renal-manage">
+        <i class="ti-home"></i>
+        Quản lí tin cho thuê
+      </a>
+    </li>
+    <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+      <a routerLink="/my-account/notification">
+        <i class="ti-bell"></i>
+        Thông báo
+      </a>
+    </li>
+    <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+      <a routerLink="/my-account/bookmark">
+        <i class="ti-bookmark"></i>
+        Tin đã lưu
+      </a>
+    </li>
+    <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+      <a routerLink="/my-account/change-password">
+        <i class="ti-key"></i>
+        Đổi mật khẩu
+      </a>
+    </li>
+    <li>
+      <a (click)="auth.logout()">
+        <i class="ti-power-off"></i>
+        Đăng xuất
+      </a>
+    </li>
+  </ul>
+</div>

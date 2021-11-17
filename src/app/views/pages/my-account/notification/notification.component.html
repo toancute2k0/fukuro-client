@@ -1,0 +1,107 @@
+<!-- ============================ User Dashboard ================================== -->
+<section class="bg-light">
+  <div class="container-fluid">
+
+    <div class="row">
+      <div class="col-lg-12 col-md-12">
+        <div class="filter_search_opt">
+          <a href="javascript:void(0);" (click)="openFilterSearch()">Dashboard Menu<i class="ml-2 ti-menu"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+
+      <div class="col-lg-3 col-md-12">
+
+        <div class="simple-sidebar sm-sidebar" id="filter_search">
+
+          <div class="search-sidebar_header">
+            <h4 class="ssh_heading">Đóng</h4>
+            <button (click)="openFilterSearch()" class="w3-bar-item w3-button w3-large"><i
+                class="ti-close"></i></button>
+          </div>
+
+          <div class="sidebar-widgets">
+            <div class="dashboard-navbar">
+
+              <app-dashboard-navigation></app-dashboard-navigation>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="col-lg-9 col-md-12">
+
+        <div class="row">
+          <div class="col-lg-12 col-md-12 col-sm-12">
+            <h4>Loại thành viên: <span class="pc-title theme-cl">Thành viên tiết kiệm</span></h4>
+          </div>
+        </div>
+
+        <div class="row">
+
+          <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="dashboard-stat widget-1">
+              <div class="dashboard-stat-content">
+                <h4>607</h4> <span>Listings Included</span>
+              </div>
+              <div class="dashboard-stat-icon"><i class="ti-location-pin"></i></div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="dashboard-stat widget-2">
+              <div class="dashboard-stat-content">
+                <h4>102</h4> <span>Listings Remaining</span>
+              </div>
+              <div class="dashboard-stat-icon"><i class="ti-pie-chart"></i></div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="dashboard-stat widget-3">
+              <div class="dashboard-stat-content">
+                <h4>70</h4> <span>Featured Included</span>
+              </div>
+              <div class="dashboard-stat-icon"><i class="ti-user"></i></div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="dashboard-stat widget-4">
+              <div class="dashboard-stat-content">
+                <h4>30</h4> <span>Featured Remaining</span>
+              </div>
+              <div class="dashboard-stat-icon"><i class="ti-location-pin"></i></div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="dashboard-stat widget-5">
+              <div class="dashboard-stat-content">
+                <h4>Unlimited</h4> <span>Images / per listing</span>
+              </div>
+              <div class="dashboard-stat-icon"><i class="ti-pie-chart"></i></div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="dashboard-stat widget-6">
+              <div class="dashboard-stat-content">
+                <h4>2021-02-26</h4> <span>Ends On</span>
+              </div>
+              <div class="dashboard-stat-icon"><i class="ti-user"></i></div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</section>
+<!-- ============================ User Dashboard End ================================== -->

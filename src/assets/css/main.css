@@ -6931,7 +6931,7 @@ span.tag_t {
 .property-listing.property-2 .listing-name .prt-link-detail {
   position: relative;
 }
-.property-listing.property-2 .listing-name .prt-link-detail:before {
+/* .property-listing.property-2 .listing-name .prt-link-detail:before {
   content: "";
   position: absolute;
   width: 18px;
@@ -6942,7 +6942,7 @@ span.tag_t {
   background-image: url(../img/veryfy.svg);
   background-size: contain;
   object-fit: cover;
-}
+} */
 
 /*--------------- New Update ------------------*/
 .prt_saveed_12lk .toggler {
