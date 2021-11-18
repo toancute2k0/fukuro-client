@@ -36,72 +36,103 @@
         <div class="dashboard-wraper">
 
           <!-- Basic Information -->
-          <div class="form-submit">
-            <h4>Thông tin tài khoản</h4>
-            <div class="submit-section">
-              <div class="row">
+          <form [formGroup]="updateCus" (ngSubmit)="onSubmit()">
+            <div class="form-submit">
+              <h4>Thông tin tài khoản</h4>
+              <div class="submit-section">
+                <div class="row">
 
-                <div class="form-group col-md-6">
-                  <label>Tên đăng nhập</label>
-                  <input type="text" class="form-control" value="Shaurya Preet">
-                </div>
-
-                <div class="form-group col-md-6">
-                  <label>Email</label>
-                  <input type="email" class="form-control" value="preet77@gmail.com">
-                </div>
-
-                <div class="form-group col-md-6">
-                  <label>Họ</label>
-                  <input type="text" class="form-control" value="Web Designer">
-                </div>
-
-                <div class="form-group col-md-6">
-                  <label>Tên</label>
-                  <input type="text" class="form-control" value="123 456 5847">
-                </div>
-
-              </div>
-            </div>
-          </div>
-
-          <div class="form-submit">
-            <h4>Thông tin liện hệ</h4>
-            <div class="submit-section">
-              <div class="row">
-                <div class="form-group col-md-8">
-                  <div class="form-group">
-                    <label>Facebook</label>
-                    <input type="text" class="form-control" value="https://facebook.com/">
-                  </div>
-
-                  <div class="form-group">
-                    <label>Google</label>
-                    <input type="email" class="form-control" value="https://twitter.com/">
-                  </div>
-
-                </div>
-                <div class="form-group col-md-4">
-                  <div class="form-group">
-                    <label>Số điện thoại</label>
-                    <input type="text" class="form-control" value="Canada">
-                  </div>
-                  <div class="form-group">
-                    <label>Hình đại diện</label>
-                    <div class="custom-file">
-                      <input type="file" class="custom-file-input" id="inputGroupFile01">
+                  <div class="form-group col-md-6">
+                    <div>
+                      <label>Tên đăng nhập</label>
+                      <input type="text" class="form-control" formControlName="username">
                     </div>
                   </div>
+
+                  <div class="form-group col-md-6">
+                    <div>
+                      <label>Email</label>
+                      <input type="email" class="form-control" formControlName="email">
+                    </div>
+                    <div *ngIf="submitted && f.email.errors">
+                      <small *ngIf="f.email.errors.required" class="text-muted small-popup">Email không được bỏ
+                        trống!</small>
+                      <small *ngIf="f.email.errors.email" class="text-muted small-popup">Email không hợp lệ!</small>
+                    </div>
+                  </div>
+
+                  <div class="form-group col-md-6">
+                    <div>
+                      <label>Họ</label>
+                      <input type="text" class="form-control" formControlName="firstName">
+                    </div>
+                    <div *ngIf="submitted && f.firstName.errors">
+                      <small *ngIf="f.firstName.errors.required" class="text-muted small-popup">
+                        Tên không được bỏ trống!
+                      </small>
+                    </div>
+                  </div>
+
+                  <div class="form-group col-md-6">
+                    <div>
+                      <label>Tên</label>
+                      <input type="text" class="form-control" formControlName="lastName">
+                    </div>
+                    <div *ngIf="submitted && f.lastName.errors">
+                      <small *ngIf="f.lastName.errors.required" class="text-muted small-popup">
+                        Họ không được bỏ trống!
+                      </small>
+                    </div>
+                  </div>
+
                 </div>
-
-
-                <div class="form-group col-lg-12 col-md-12">
-                  <button class="btn btn-theme-light-2 rounded" type="submit">Cập nhật tài khoản</button>
-                </div>
-
               </div>
             </div>
-          </div>
+
+            <div class="form-submit">
+              <h4>Thông tin liện hệ</h4>
+              <div class="submit-section">
+                <div class="row">
+                  <div class="form-group col-md-8">
+                    <div class="form-group">
+                      <label>Facebook</label>
+                      <input type="text" formControlName="facebook" class="form-control" value="https://facebook.com/">
+                    </div>
+
+                    <div class="form-group">
+                      <label>Google</label>
+                      <input type="email" formControlName="google" class="form-control" value="https://google.com/">
+                    </div>
+
+                  </div>
+                  <div class="form-group col-md-4">
+                    <div class="form-group">
+                      <div>
+                        <label>Số điện thoại</label>
+                        <input type="text" class="form-control" formControlName="phone">
+                      </div>
+                      <div *ngIf="submitted && f.phone.errors">
+                        <small *ngIf="f.phone.errors.required" class="text-muted small-popup">
+                          Số điện thoại không được bỏ trống!
+                        </small>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label>Hình đại diện</label>
+                      <input type="text" class="form-control" formControlName="avatar">
+                    </div>
+                  </div>
+
+
+                  <div class="form-group col-lg-12 col-md-12">
+                    <button class="btn btn-theme-light-2 rounded" type="submit">Cập nhật tài khoản</button>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+          </form>
 
         </div>
       </div>

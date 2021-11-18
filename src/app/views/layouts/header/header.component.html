@@ -40,21 +40,28 @@
 
         </ul>
 
-        <ul class="nav-menu nav-menu-social align-to-right nav-res">
-          <li *ngIf="!auth.isLoggedIn">
+        <ul class="nav-menu nav-menu-social align-to-right nav-res" *ngIf="!auth.isLoggedIn">
+          <li>
             <a routerLink="dang-ky" class="text-success"><img src="assets/img/submit.svg" width="20" alt=""
                 class="mr-2" />Đăng Kí</a>
           </li>
-          <li class="add-listing" routerLinkActive="active" *ngIf="!auth.isLoggedIn">
+          <li class="add-listing" routerLinkActive="active">
             <a routerLink="dang-nhap"><img src="assets/img/user-light.svg" width="12" alt="" class="mr-2" />Đăng
               Nhập</a>
           </li>
-          <li *ngIf="auth.isLoggedIn" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+        </ul>
+        <ul class="nav-menu nav-menu-social align-to-right nav-res" *ngIf="auth.isLoggedIn">
+          <li>
             <a routerLink="my-account" class="add-listing2">
               <div class="avatar avatar-md avatar-indicators avatar-online">
-                <img alt="avatar" src="https://via.placeholder.com/40x40" class="rounded-circle">
+                <img *ngIf="currentUser?.avatar" alt="avatar" src="{{currentUser?.avatar}}" class="rounded-circle">
+                <img *ngIf="!currentUser?.avatar" alt="avatar" src="https://via.placeholder.com/40x40"
+                  class="rounded-circle">
               </div>
-              <span>
+              <span *ngIf="currentUser?.firstName && currentUser?.lastName">
+                {{currentUser?.firstName}} <span>{{currentUser?.lastName}}</span>
+              </span>
+              <span *ngIf="!currentUser?.firstName && !currentUser?.lastName">
                 {{currentUser?.username}}
               </span>
             </a>
@@ -119,7 +126,7 @@
               </ul>
             </ul>
           </li>
-          <li *ngIf="auth.isLoggedIn" class="add-listing add-bg1">
+          <li class="add-listing add-bg1">
             <a routerLink="dang-bai" class="text-success" style="color: #0499a8 !important;">Đăng
               Bài</a>
           </li>

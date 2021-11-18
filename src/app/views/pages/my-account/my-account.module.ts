@@ -10,7 +10,9 @@ import { NotificationComponent } from './notification/notification.component';
 import { BookmarkComponent } from './bookmark/bookmark.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { DashboardNavigationComponent } from './dashboard-navigation/dashboard-navigation.component';
-
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -21,11 +23,19 @@ import { DashboardNavigationComponent } from './dashboard-navigation/dashboard-n
     NotificationComponent,
     BookmarkComponent,
     ChangePasswordComponent,
-    DashboardNavigationComponent
+    DashboardNavigationComponent,
   ],
+
   imports: [
     CommonModule,
-    MyAccountRoutingModule
-  ]
+    MyAccountRoutingModule,
+    ToastrModule.forRoot({
+      closeButton: true,
+      timeOut: 3000, // 2 seconds
+      progressBar: true,
+    }),
+    HttpClientModule,
+    ReactiveFormsModule,
+  ],
 })
-export class MyAccountModule { }
+export class MyAccountModule {}

@@ -17,10 +17,7 @@ export class HeaderComponent implements OnInit {
     private catBlogs: BlogCategoriesService,
     public auth: AuthService,
     private customSer: CustomersService
-  ) {
-    // this.currentUser = JSON.parse(localStorage.getItem('currentUser')!);
-    // console.log(this.currentUser);
-  }
+  ) {}
 
   ngOnInit(): void {
     const id = localStorage.getItem('currentUser');
@@ -36,7 +33,6 @@ export class HeaderComponent implements OnInit {
   getById(id: string): void {
     this.customSer.get(id).subscribe((res) => {
       this.currentUser = res;
-      console.log(res);
     });
   }
 }

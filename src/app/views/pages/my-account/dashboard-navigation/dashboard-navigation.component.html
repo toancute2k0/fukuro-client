@@ -1,7 +1,13 @@
 <div class="d-user-avater">
-  <img src="https://via.placeholder.com/40x40" class="img-fluid avater" alt="">
-  <h4>Trần Quốc Toản</h4>
-  <span>admin@gmail.com</span>
+  <img *ngIf="!currentUser?.avatar" src="https://via.placeholder.com/40x40" class="img-fluid avater" alt="">
+  <img *ngIf="currentUser?.avatar" src="{{currentUser?.avatar}}" class="img-fluid avater" alt="">
+  <h4 *ngIf="currentUser?.firstName && currentUser?.lastName">
+    {{currentUser?.firstName}} <span>{{currentUser?.lastName}}</span>
+  </h4>
+  <h4 *ngIf="!currentUser?.firstName && !currentUser?.lastName">
+    {{currentUser?.username}}
+  </h4>
+  <span>{{currentUser?.email}}</span>
 </div>
 
 <div class="d-navigation">

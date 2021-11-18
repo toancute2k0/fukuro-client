@@ -88,7 +88,7 @@ export class LoginComponent implements OnInit {
           this.auth.loggedIn();
 
           this._router.navigateByUrl(this.returnUrl);
-          // window.location.reload();
+          window.location.reload();
           this.toastrService.success('Đăng nhập thành công!');
         },
         (error) => {

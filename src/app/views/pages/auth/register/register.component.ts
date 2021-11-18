@@ -35,6 +35,7 @@ export class RegisterComponent implements OnInit {
           Validators.pattern(/^\S*$/),
         ]),
       ],
+      status: ['1'],
     },
     {
       validator: MustMatch('password', 'confirmPassword'),
