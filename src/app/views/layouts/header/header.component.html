@@ -59,7 +59,7 @@
                   class="rounded-circle">
               </div>
               <span *ngIf="currentUser?.firstName && currentUser?.lastName">
-                {{currentUser?.firstName}} <span>{{currentUser?.lastName}}</span>
+                {{currentUser?.firstName}}<span>{{currentUser?.lastName}}</span>
               </span>
               <span *ngIf="!currentUser?.firstName && !currentUser?.lastName">
                 {{currentUser?.username}}

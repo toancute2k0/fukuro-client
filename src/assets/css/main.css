@@ -37,7 +37,8 @@
 /*------------------------------------
 	Fonts
 ------------------------------------*/
-@import url("https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700;800&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700;800&display=swap"); */
+@import url("https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Muli:300,400,600,700");
 
 /*------------------------------------
@@ -131,7 +132,7 @@ body {
   background: #ffffff;
   color: #4e5c79;
   font-size: 16px;
-  font-family: "Muli", sans-serif;
+  font-family: "Lora", serif;
   margin: 0;
   overflow-x: hidden !important;
   font-weight: 400;
@@ -303,7 +304,7 @@ h6 {
   color: #2d3954;
   font-weight: 700;
   text-transform: capitalize;
-  font-family: "Jost", sans-serif;
+  font-family: "Lora", serif;
 }
 
 h5,
@@ -3751,7 +3752,7 @@ nav a:hover {
   padding: 30px 12px;
   display: inline-block;
   transition: color 0.3s, background 0.3s;
-  font-family: "Jost", sans-serif;
+  font-family: "Lora", serif;
   font-weight: 500;
 }
 
@@ -4112,7 +4113,7 @@ nav a:hover {
   -moz-transition: all 0.3s ease 0s;
   -o-transition: all 0.3s ease 0s;
   transition: all 0.3s ease 0s;
-  font-family: "Jost", sans-serif;
+  font-family: "Lora", serif;
 }
 .nav-dropdown > li:last-child > a {
   border-bottom: none;
@@ -5750,7 +5751,7 @@ label {
   font-size: 14px;
   font-weight: 600;
   color: #455892;
-  font-family: "Jost", sans-serif;
+  font-family: "Lora", serif;
 }
 .hero-search-content.side-form .form-control::-webkit-input-placeholder {
   color: #6877a5;
@@ -6021,7 +6022,7 @@ span.hm_nav_clear {
   text-transform: capitalize;
   font-weight: 400;
   color: #72809d;
-  font-family: "Muli", sans-serif;
+  font-family: "Lora", serif;
 }
 .filter_wraps .radio-custom + .radio-custom-label:before {
   margin-right: 0px;
@@ -7025,7 +7026,7 @@ span.property-type.elt_rent {
   font-size: 14px;
   line-height: 18px;
   color: #828aaf;
-  font-family: "Jost", sans-serif;
+  font-family: "Lora", serif;
   font-weight: 500;
 }
 .content_block_2 .content-box .btn-box .download-btn h3 {
@@ -8452,7 +8453,7 @@ ul.like_share_list li a i {
   margin: 0;
   font-weight: 700;
   font-size: 16px;
-  font-family: "Muli", sans-serif;
+  font-family: "Lora", serif;
   color: #140c40;
 }
 .property_block_wrap.style-2 .property_block_wrap_header h4:after {
@@ -8535,7 +8536,7 @@ ul.deatil_features li strong {
   font-size: 14px;
   margin: 0;
   color: #140c40;
-  font-family: "Muli", sans-serif;
+  font-family: "Lora", serif;
 }
 .neary_section_last {
   display: flex;
@@ -10481,7 +10482,7 @@ h3.pa-name {
   font-size: 15px;
   display: inline-block;
   font-weight: 600;
-  font-family: "Jost", sans-serif;
+  font-family: "Lora", serif;
 }
 .d-navigation ul li a i {
   margin-right: 10px;
