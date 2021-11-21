@@ -12,7 +12,11 @@ import { RentalNewsComponent } from './views/pages/rental-news/rental-news.compo
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'dang-bai', component: RentalNewsComponent, canActivate: [AuthGuard]},
+  {
+    path: 'dang-bai',
+    component: RentalNewsComponent,
+    canActivate: [AuthGuard],
+  },
   { path: 'lien-he', component: ContactComponent },
   { path: 'trang-chu', redirectTo: '', pathMatch: 'full' },
   {
@@ -31,8 +35,14 @@ const routes: Routes = [
   },
   { path: 'dang-ky', component: RegisterComponent },
   { path: 'dang-nhap', component: LoginComponent, canActivate: [NoAuthGuard] },
-  { path: 'my-account',
-    loadChildren: () => import('./views/pages/my-account/my-account.module').then(m => m.MyAccountModule), canActivate: [AuthGuard] },
+  {
+    path: 'my-account',
+    loadChildren: () =>
+      import('./views/pages/my-account/my-account.module').then(
+        (m) => m.MyAccountModule
+      ),
+    canActivate: [AuthGuard],
+  },
   { path: '**', component: NotFoundComponent },
 ];
 
@@ -40,6 +50,7 @@ const routes: Routes = [
   imports: [
     RouterModule.forRoot(routes, {
       preloadingStrategy: PreloadAllModules,
+      relativeLinkResolution: 'legacy',
     }),
   ],
   exports: [RouterModule],
