@@ -18,6 +18,7 @@
 
   <div class="container">
 
+    <form [formGroup]="contact" (ngSubmit)="onSubmit()">
     <!-- row Start -->
     <div class="row">
 
@@ -26,26 +27,65 @@
         <div class="row">
           <div class="col-lg-6 col-md-6">
             <div class="form-group">
-              <label>Họ và Tên</label>
-              <input type="text" class="form-control simple">
+              <label>Họ</label>
+              <input type="text" class="form-control simple"  formControlName="lastName">
+              <div *ngIf="submitted && f.lastName.errors">
+                <small *ngIf="f.lastName.errors.required" class="text-muted small-popup">Họ không được bỏ
+                  trống!</small>
+              </div>
             </div>
           </div>
           <div class="col-lg-6 col-md-6">
             <div class="form-group">
+              <label>Tên</label>
+              <input type="text" class="form-control simple"  formControlName="firstName">
+              <div *ngIf="submitted && f.firstName.errors">
+                <small *ngIf="f.firstName.errors.required" class="text-muted small-popup">Tên không được bỏ
+                  trống!</small>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6 col-md-6">
+            <div class="form-group">
               <label>Email</label>
-              <input type="email" class="form-control simple">
+              <input type="email" class="form-control simple" formControlName="email">
+              <div *ngIf="submitted && f.email.errors">
+                <small *ngIf="f.email.errors.required" class="text-muted small-popup">Email không được bỏ
+                  trống!</small>
+                <small *ngIf="f.email.errors.email" class="text-muted small-popup">Email không hợp lệ!</small>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6 col-md-6">
+            <div class="form-group">
+              <label>Số điện thoại</label>
+              <input type="text" class="form-control simple" formControlName="phone">
+              <div *ngIf="submitted && f.phone.errors">
+                <small *ngIf="f.phone.errors.required" class="text-muted small-popup">Số điện thoại không được bỏ
+                  trống!</small>
+              </div>
             </div>
           </div>
         </div>
 
         <div class="form-group">
           <label>Tiêu đề</label>
-          <input type="text" class="form-control simple">
+          <input type="text" class="form-control simple" formControlName="subject">
+          <div *ngIf="submitted && f.subject.errors">
+            <small *ngIf="f.subject.errors.required" class="text-muted small-popup">Tiêu đề không được bỏ
+              trống!</small>
+          </div>
         </div>
 
         <div class="form-group">
           <label>Nội dung</label>
-          <textarea class="form-control simple"></textarea>
+          <textarea class="form-control simple" formControlName="message"></textarea>
+          <div *ngIf="submitted && f.message.errors">
+            <small *ngIf="f.message.errors.required" class="text-muted small-popup">Nội dung không được bỏ
+              trống!</small>
+          </div>
         </div>
 
         <div class="form-group">
@@ -96,6 +136,7 @@
 
     </div>
     <!-- /row -->
+    </form>
 
   </div>
 
