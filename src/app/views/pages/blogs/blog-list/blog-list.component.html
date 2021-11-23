@@ -35,18 +35,18 @@
       <div class="col-lg-4 col-md-6" *ngFor="let blog of blogs ">
         <div class="blog-wrap-grid">
           <div class="blog-thumb">
-            <a routerLink="/bai-viet/{{blog.slug}}"><img src="assets/img/blog/{{blog.image}}" class="img-fluid"
+            <a routerLink="/bai-viet/{{blog.id}}"><img src="assets/img/blog/{{blog.thumbnail}}" class="img-fluid"
                 alt="" /></a>
           </div>
 
           <div class="blog-info">
-            <span class="post-date"><i class="ti-calendar"></i>{{blog.created_at | date: 'shortDate'}}</span>
+            <span class="post-date"><i class="ti-calendar"></i>{{blog.createdAt | date: 'dd/MM/yyyy'}}</span>
           </div>
 
           <div class="blog-body">
-            <h4 class="bl-title"><a routerLink="/bai-viet/{{blog.slug}}">{{blog.name}}</a></h4>
+            <h4 class="bl-title"><a routerLink="/bai-viet/{{blog.id}}">{{blog.title}}</a></h4>
             <p>{{blog.summary}}</p>
-            <a routerLink="/bai-viet/{{blog.slug}}" class="bl-continue">Xem Tiếp</a>
+            <a routerLink="/bai-viet/{{blog.id}}" class="bl-continue">Xem Tiếp</a>
           </div>
         </div>
       </div>

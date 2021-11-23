@@ -9642,6 +9642,9 @@ a.bl-continue:before {
 .post-featured-img img {
   border-radius: 6px;
 }
+.single-post-item img{
+  width: 100% !important;
+}
 .single-post-item .post-details .meta-comment-tag {
   padding: 0;
   list-style: none;

@@ -25,8 +25,9 @@ export class HeaderComponent implements OnInit {
     if (id) {
       this.getById(id);
     }
-    this.catBlogs.getAllCat().subscribe((res) => {
-      this.cat = res;
+    this.catBlogs.getAllCat()
+      .subscribe((res: any | undefined) => {
+      this.cat = res['rows'];
     });
   }
 

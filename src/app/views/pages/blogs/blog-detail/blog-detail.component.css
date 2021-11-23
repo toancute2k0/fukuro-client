@@ -2,8 +2,7 @@
   width: 100%;
 }
 
-.blog-details img {
-  overflow: hidden;
-  clear: both !important;
-  width: 100%;
+.blog-details .img-fluid {
+  height: 500px;
+  object-fit: cover;
 }

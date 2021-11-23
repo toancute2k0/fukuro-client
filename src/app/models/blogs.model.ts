@@ -1,15 +1,18 @@
 export class Blogs {
   id?: number;
-  name?: string;
+  title?: string;
   slug?: string;
-  image?: string;
+  thumbnail?: string;
   summary?: string;
   description?: string;
-  category_id?: string;
-  created_at?: string;
+  tag?: string;
+  status?: string;
+  customerId?: string;
+  blogCategoryId?: string;
+  createdAt?: string;
 }
 
-export interface BlogLimit {
-  count: number;
-  blog: Blogs[];
-}
+// export interface BlogLimit {
+//   count: number;
+//   blog: Blogs[];
+// }

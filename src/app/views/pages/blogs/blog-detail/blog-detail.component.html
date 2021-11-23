@@ -3,10 +3,8 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-12 col-md-12">
-
-        <h2 class="ipt-title">{{blog_details?.name}}</h2>
-        <span class="ipn-subtitle">{{blog_details?.created_at | date: 'shortDate'}}</span>
-
+        <h2 class="ipt-title">{{blog_details?.title}}</h2>
+        <span class="ipn-subtitle"><i _ngcontent-bnq-c55="" class="ti-calendar"></i> {{blog_details?.createdAt | date: 'dd/MM/yyyy'}}</span>
       </div>
     </div>
   </div>
@@ -29,7 +27,7 @@
               <div class="post-details">
 
                 <div class="post-featured-img">
-                  <img class="img-fluid" src="assets/img/blog/{{blog_details?.image}}">
+                  <img class="img-fluid" src="{{blog_details?.thumbnail}}">
                 </div>
 
                 <div class="post-top-meta">
@@ -38,7 +36,7 @@
                     <li><a href="#"><span class="icons"><i class="ti-comment-alt"></i></span>0 nhận xét</a></li>
                   </ul>
                 </div>
-                <h2 class="post-title">{{blog_details?.name}}</h2>
+                <h2 class="post-title">{{blog_details?.title}}</h2>
                 <div class="description">
                   <div [innerHTML]="blog_details?.description" style="clear:both;"></div>
                 </div>
@@ -66,32 +64,32 @@
             </div>
 
             <!-- Author Detail -->
-            <div class="blog-details single-post-item format-standard">
+<!--            <div class="blog-details single-post-item format-standard">-->
 
-              <div class="posts-author">
-                <span class="img"><img class="img-fluid" src="https://via.placeholder.com/400x400" alt=""></span>
-                <h3 class="pa-name">Quốc Toản</h3>
-                <ul class="social-links">
-                  <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                  <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                  <li><a href="#"><i class="fab fa-behance"></i></a></li>
-                  <li><a href="#"><i class="fab fa-youtube"></i></a></li>
-                  <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
-                </ul>
-                <p class="pa-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                  incididunt ut labore et dolore magna
-                  aliqua. Ut enim ad minim veniam, quis nostrud
-                  exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p>
-              </div>
+<!--              <div class="posts-author">-->
+<!--                <span class="img"><img class="img-fluid" src="https://via.placeholder.com/400x400" alt=""></span>-->
+<!--                <h3 class="pa-name">Quốc Toản</h3>-->
+<!--                <ul class="social-links">-->
+<!--                  <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>-->
+<!--                  <li><a href="#"><i class="fab fa-twitter"></i></a></li>-->
+<!--                  <li><a href="#"><i class="fab fa-behance"></i></a></li>-->
+<!--                  <li><a href="#"><i class="fab fa-youtube"></i></a></li>-->
+<!--                  <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>-->
+<!--                </ul>-->
+<!--                <p class="pa-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor-->
+<!--                  incididunt ut labore et dolore magna-->
+<!--                  aliqua. Ut enim ad minim veniam, quis nostrud-->
+<!--                  exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p>-->
+<!--              </div>-->
 
-            </div>
+<!--            </div>-->
 
             <!-- Blog Comment -->
             <div class="blog-details single-post-item format-standard">
 
               <div class="comment-area">
                 <div class="all-comments">
-                  <h3 class="comments-title">0 nhận xét</h3>
+                  <h3 class="comments-title">0 bình luận</h3>
                   <!-- <div class="comment-list">
                     <ul>
                       <li class="single-comment">
@@ -202,35 +200,35 @@
                     </ul>
                   </div> -->
                 </div>
-                <div class="comment-box submit-form">
-                  <h3 class="reply-title">Thêm nhận xét</h3>
-                  <div class="comment-form">
-                    <form action="#">
+                <div class="comment-box submit-form" >
+                  <h3 class="reply-title">Thêm bình luận</h3>
+                  <div class="comment-form" *ngIf="auth.isLoggedIn">
+                    <form [formGroup]="comment" (ngSubmit)="onSubmit()">
                       <div class="row">
-                        <div class="col-lg-6 col-md-6 col-sm-12">
-                          <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Tên đăng nhập">
-                          </div>
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-12">
-                          <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Email">
-                          </div>
-                        </div>
                         <div class="col-lg-12 col-md-12 col-sm-12">
                           <div class="form-group">
                             <textarea name="comment" class="form-control" cols="30" rows="6"
-                              placeholder="Nội dung nhận xét..."></textarea>
+                              placeholder="Nội dung bình luận..." formControlName="content"></textarea>
+                            <div *ngIf="submitted && f.content.errors">
+                              <small *ngIf="f.content.errors.required" class="text-danger small-popup">Nội dung bình luận không được bỏ trống!</small>
+                            </div>
                           </div>
                         </div>
                         <div class="col-lg-12 col-md-12 col-sm-12">
                           <div class="form-group">
-                            <a href="#" class="btn btn-theme-light-2 rounded full-width">Đăng Tin</a>
+                            <button type="submit" class="btn btn-theme-light-2 rounded full-width">Gửi</button>
                           </div>
                         </div>
                       </div>
                     </form>
                   </div>
+                  <p *ngIf="!auth.isLoggedIn">
+                    Vui lòng
+                    <a routerLink="/dang-nhap" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#login"
+                       style="color: #1266e3">Đăng Nhập</a> để có thể bình luận. Nếu bạn chưa có tài khoản vui lòng
+                    <a routerLink="/dang-ky" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#signup"
+                       style="color: #1266e3">Đăng Ký</a> tại đậy
+                  </p>
                 </div>
               </div>
 
@@ -255,8 +253,8 @@
             <div class="single-widgets widget_category">
               <h4 class="title">Danh mục bài viết</h4>
               <ul>
-                <li *ngFor="let cat of cat">
-                  <a href="#">{{cat.name}}</a>
+                <li *ngFor="let cn of cat">
+                  <a href="/danh-muc-bai-viet/{{cn.id}}">{{cn.name}}</a>
                 </li>
               </ul>
             </div>
@@ -267,11 +265,11 @@
               <ul>
                 <li *ngFor="let blog of blogs;">
                   <span class="left">
-                    <img src="assets/img/blog/{{blog.image}}" alt="" class="">
+                    <img src="{{blog.thumbnail}}" alt="" class="">
                   </span>
                   <span class="right">
-                    <a class="feed-title" href="#">{{blog.name}}</a>
-                    <span class="post-date"><i class="ti-calendar"></i>{{blog.created_at | date: 'shortDate'}}</span>
+                    <a class="feed-title" href="#">{{blog.title}}</a>
+                    <span class="post-date"><i class="ti-calendar"></i>{{blog.createdAt | date: 'dd/MM/yyyy'}}</span>
                   </span>
                 </li>
               </ul>
@@ -279,13 +277,9 @@
 
             <!-- Tags Cloud -->
             <div class="single-widgets widget_tags">
-              <h4 class="title">Tags Cloud</h4>
-              <ul>
-                <li><a href="#">Lifestyle</a></li>
-                <li><a href="#">Travel</a></li>
-                <li><a href="#">Fashion</a></li>
-                <li><a href="#">Branding</a></li>
-                <li><a href="#">Music</a></li>
+              <h4 class="title">Tags</h4>
+              <ul *ngFor="let t of tag">
+                <li><a href="#">{{ t.value }}</a></li>
               </ul>
             </div>
 

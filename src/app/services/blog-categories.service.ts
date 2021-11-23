@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { BlogCategories } from '../models/blog-categories.model';
+import { environment as env } from '../../environments/environment';
 
-const API_URL = 'http://toan2000.ml/api/blog_categories';
+const API_URL = `${env.apiURL}/blog-categories`;
 
 @Injectable({
   providedIn: 'root',

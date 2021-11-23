@@ -65,6 +65,7 @@
               <div *ngIf="submitted && f.phone.errors">
                 <small *ngIf="f.phone.errors.required" class="text-muted small-popup">Số điện thoại không được bỏ
                   trống!</small>
+                <small *ngIf="f.phone.errors.pattern" class="text-danger small-popup">Số điện thoại chưa đúng!</small>
               </div>
             </div>
           </div>

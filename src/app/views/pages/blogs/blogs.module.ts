@@ -6,7 +6,7 @@ import { BlogsComponent } from './blogs.component';
 import { BlogDetailComponent } from './blog-detail/blog-detail.component';
 import { BlogListComponent } from './blog-list/blog-list.component';
 import { ComponentsModule } from '../../components/components.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BlogCategoryComponent } from './blog-category/blog-category.component';
 
 @NgModule({
@@ -16,6 +16,6 @@ import { BlogCategoryComponent } from './blog-category/blog-category.component';
     BlogListComponent,
     BlogCategoryComponent,
   ],
-  imports: [CommonModule, BlogsRoutingModule, ComponentsModule, FormsModule],
+  imports: [CommonModule, BlogsRoutingModule, ComponentsModule, FormsModule, ReactiveFormsModule],
 })
 export class BlogsModule {}
