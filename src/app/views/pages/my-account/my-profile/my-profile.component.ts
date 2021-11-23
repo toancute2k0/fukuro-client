@@ -40,7 +40,7 @@ export class MyProfileComponent implements OnInit {
       this.updateCus = this.fb.group({
         id: [user.id],
         username: [
-          { value: user.username, disabled: true },
+          user.username,
           Validators.compose([Validators.required, Validators.minLength(6)]),
         ],
         email: [
@@ -75,14 +75,14 @@ export class MyProfileComponent implements OnInit {
   onSubmit(): any {
     this.submitted = true;
     const id = localStorage.getItem('currentUser');
-    if (this.updateCus.invalid) {
-      return false;
-    }
-    // console.log(this.updateCus.value);
+    // if (this.updateCus.invalid) {
+    //   return false;
+    // }
+    console.log(this.updateCus.value);
     this.customSer.update(id!, this.updateCus.value).subscribe(
       (res) => {
         console.log(res.data);
-        window.location.reload();
+        // window.location.reload();
         this.toastrService.success('Cập nhật tài khoản thành công!');
       },
       (error) => {

@@ -86,9 +86,13 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('timer', JSON.stringify(time_to_login));
 
           this.auth.loggedIn();
+          // this._router.navigateByUrl(this.returnUrl);
+          this._router
+            .navigateByUrl(this.returnUrl, { skipLocationChange: true })
+            .then(() => {
+              this._router.navigate(['/']);
+            });
 
-          this._router.navigateByUrl(this.returnUrl);
-          window.location.reload();
           this.toastrService.success('Đăng nhập thành công!');
         },
         (error) => {
