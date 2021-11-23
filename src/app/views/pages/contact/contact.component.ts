@@ -22,7 +22,7 @@ export class ContactComponent implements OnInit {
     firstName: ['', Validators.compose([Validators.required])],
     lastName: ['', Validators.compose([Validators.required])],
     email: ['', Validators.compose([Validators.required, Validators.email])],
-    phone: ['', Validators.compose([Validators.required])],
+    phone: ['', Validators.compose([Validators.required, Validators.pattern('[0-9 ]{10}')])],
     subject: ['', Validators.compose([Validators.required])],
     message: ['', Validators.compose([Validators.required])],
     status: ['1'],
@@ -47,9 +47,9 @@ export class ContactComponent implements OnInit {
       phone: this.contact.value['phone'],
       subject: this.contact.value['subject'],
       message: this.contact.value['message'],
-      status: ['1'],
+      status: '1',
     }
-    this.adminContactsService.create(this.contact.value).subscribe(
+    this.adminContactsService.create(data).subscribe(
       (res) => {
         this.resetForm();
         this.toastrService.success('Gửi liên hệ thành công! Vui lòng kiểm tra email để xem phản hồi!');

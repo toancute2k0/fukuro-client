@@ -15,16 +15,15 @@ export class BlogCategoryComponent implements OnInit {
 
   ngOnInit(): void {
     this._route.paramMap.subscribe((params) => {
-      this.catId = params.get('slug');
+      this.catId = params.get('id');
     });
     this.getByCatBlog(this.catId);
   }
 
-  getByCatBlog(slug: any): void {
-    this.blogSer.getByCatId(slug).subscribe(
-      (data) => {
-        this.blogs_cat = data;
-        console.log(this.blogs_cat);
+  getByCatBlog(catId: any): void {
+    this.blogSer.getByCatId(catId).subscribe(
+      (data: any | undefined) => {
+        this.blogs_cat = data['rows'];
       },
       (err) => {
         console.log(err);

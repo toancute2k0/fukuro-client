@@ -1,10 +1,11 @@
-export class AdminContacts {
+export class CustomerContacts {
     id?: number;
     firstName?:string;
     lastName?: string;
     email?: string;
     phone?: string;
-    subject?: string;
     message?: string;
     status?:string;
+    rentalNewsId?: string;
+    customerId?: string;
 }
