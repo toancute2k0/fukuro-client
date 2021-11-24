@@ -20,10 +20,13 @@
     "@angular/router": "~12.2.0",
     "jquery": "^3.6.0",
     "jw-angular-pagination": "^1.2.0",
+    "ngx-dropzone": "^3.0.0",
     "ngx-owl-carousel-o": "^6.0.0",
+    "ngx-summernote": "^0.8.7",
     "ngx-toastr": "^14.1.4",
     "rxjs": "~6.6.0",
     "select2": "^4.1.0-rc.0",
+    "summernote": "^0.8.20",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
   },

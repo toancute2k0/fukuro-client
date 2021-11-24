@@ -18,7 +18,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { AuthGuard } from './guards/auth.guard';
 import { NoAuthGuard } from './guards/noauth.guard';
-
+import { NgxSummernoteModule } from 'ngx-summernote';
+import { NgxDropzoneModule } from 'ngx-dropzone';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,8 @@ import { NoAuthGuard } from './guards/noauth.guard';
     ComponentsModule,
     HttpClientModule,
     ReactiveFormsModule,
+    NgxSummernoteModule,
+    NgxDropzoneModule,
   ],
   providers: [AuthGuard, NoAuthGuard],
   bootstrap: [AppComponent],

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {RentalNews} from "../../../../models/rental-news.model";
-import {RentalNewsService} from "../../../../services/rental-news.service";
+import { RentalNews } from '../../../../models/rental-news.model';
+import { RentalNewsService } from '../../../../services/rental-news.service';
 
 @Component({
   selector: 'app-motel-list',
@@ -14,12 +14,9 @@ export class MotelListComponent implements OnInit {
   rentalNews: any | undefined;
   public isMobile = false;
 
+  constructor(private rentalNewsService: RentalNewsService) {}
 
-  constructor(
-    private rentalNewsService: RentalNewsService,
-  ) {}
-
-  ngOnInit():void {
+  ngOnInit(): void {
     this.rentalNewsService.getAll(this.page, this.count).subscribe(
       (data: any | undefined) => {
         this.count = data['count'];
@@ -29,21 +26,21 @@ export class MotelListComponent implements OnInit {
         console.log(err);
       }
     );
-    // window.onresize = () => (this.isMobile = window.innerWidth <= 768);
+    window.onresize = () => (this.isMobile = window.innerWidth <= 768);
   }
-  getData(n:any, c:any):void{
+  getData(n: any, c: any): void {
     this.rentalNewsService.getAll(n, c).subscribe(
       (data: any | undefined) => {
         this.rentalNews = data['rows'];
-        for (var i=0; i<data['rows'].length; i++){
+        for (var i = 0; i < data['rows'].length; i++) {
           data['rows'][i].image = JSON.parse(data['rows'][i].image);
         }
       },
-    (err) => {
-      console.log(err);
-    })
+      (err) => {
+        console.log(err);
+      }
+    );
   }
-
 
   // imagesList = [
   //   {
@@ -101,6 +98,4 @@ export class MotelListComponent implements OnInit {
   //       'https://cdn.chotot.com/oUcg3LgIaZ--qJpZKdVthrKZdyWgAq_83VWOHlzoAr8/preset:view/plain/83178c0a3a5653e0e4ba2f3dc27c2759-2745320048951484742.jpg',
   //   },
   // ];
-
-
 }
