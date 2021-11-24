@@ -14,8 +14,8 @@ import { environment } from 'src/environments/environment';
 export class RentalNewsComponent implements OnInit {
   submitted = false;
   result = false;
-  files: File[] = [];
   multipleImages: File[] = [];
+  selectedCheck!: boolean;
 
   rentalForm = this.fb.group({
     name: [
@@ -137,19 +137,19 @@ export class RentalNewsComponent implements OnInit {
   };
 
   onSelect(event: any) {
-    this.files.push(...event.addedFiles);
+    this.multipleImages.push(...event.addedFiles);
     if (event.addedFiles.length > 0) {
       this.multipleImages = event.addedFiles;
     }
     this.rentalForm.patchValue({
-      image: this.files,
+      image: this.multipleImages,
     });
   }
 
   onRemove(event: any) {
     console.log(event);
+    console.log(this.multipleImages);
     this.multipleImages.splice(this.multipleImages.indexOf(event), 1);
-    this.files.splice(this.files.indexOf(event), 1);
   }
 
   onSubmit(): any {
@@ -159,29 +159,60 @@ export class RentalNewsComponent implements OnInit {
     for (let img of this.multipleImages) {
       formData.append('files', img);
     }
-    console.log(this.rentalForm.value);
-    // if (this.rentalForm.invalid) {
-    //   return false;
-    // }
+    // console.log(this.rentalForm.value);
+    if (this.rentalForm.invalid) {
+      return false;
+    }
 
     this.http
       .post(environment.apiPostImg, formData)
       .toPromise()
-      .then((res) => {
+      .then((res: any) => {
         this.result = true;
         if (this.result == true) {
-          // const data = {
-          //   image: JSON.stringify(this.rentalForm.value['image']),
-          // };
-          // this.rentalServe.create(data).subscribe(
-          //   (response) => {
-          //     this.toastrService.success('Thêm mới thành công!');
-          //   },
-          //   (error) => {
-          //     this.toastrService.success('Thêm mới thất bại!');
-          //   }
-          // );
+          const imgFile: any[] = (this.rentalForm.value['image'] = []);
+          for (let img of res) {
+            imgFile.push(img.filename);
+          }
+          const data = {
+            image: JSON.stringify(imgFile),
+            name: this.rentalForm.value['name'],
+            slug: this.rentalForm.value['slug'],
+            price: this.rentalForm.value['price'],
+            quantity: this.rentalForm.value['quantity'],
+            type: this.rentalForm.value['type'],
+            area: this.rentalForm.value['area'],
+            address: this.rentalForm.value['address'],
+            description: this.rentalForm.value['description'],
+            customer_id: localStorage.getItem('currentUser'),
+          };
+          this.rentalServe.create(data).subscribe(
+            (res) => {
+              this.resetForm();
+              this.multipleImages.length = 0;
+              this.toastrService.success('Thêm mới thành công!');
+            },
+            (error) => {
+              this.toastrService.error('Thêm mới thất bại!');
+            }
+          );
         }
       });
+  }
+
+  resetForm(): void {
+    this.submitted = false;
+    this.rentalForm = this.fb.group({
+      name: [''],
+      slug: [''],
+      image: [''],
+      price: [''],
+      quantity: [''],
+      type: [''],
+      area: [''],
+      address: [''],
+      description: [''],
+      status: [''],
+    });
   }
 }

@@ -35,14 +35,14 @@
                     <div *ngIf="submitted && f.name.errors">
                       <small *ngIf="f.name.errors.required" class="text-muted small-popup">Tiều đề bài đăng không được
                         bỏ
-                        trống!</small>
+                        trống !</small>
                       <small *ngIf="f.name.errors.minlength" class="text-muted small-popup">Tiều đề bài đăng phải ít
                         nhất
-                        6 kí tự!</small>
+                        6 kí tự !</small>
                     </div>
                   </div>
 
-                  <div class="form-group col-md-12">
+                  <div class="form-group col-md-12" hidden>
                     <input type="text" formControlName="slug" class="form-control" />
                   </div>
 
@@ -51,10 +51,11 @@
                     <input type="text" formControlName="price" id="price" class="form-control" placeholder="VNĐ" />
                     <div *ngIf="submitted && f.price.errors">
                       <small *ngIf="f.price.errors.required" class="text-muted small-popup"> Giá cho thuê không được
-                        trống</small>
-                      <small *ngIf="f.price.errors.minlength" class="text-muted small-popup">Ít nhất là 6 chữ số</small>
+                        trống !</small>
+                      <small *ngIf="f.price.errors.minlength" class="text-muted small-popup">Ít nhất là 6 chữ
+                        số !</small>
                       <small *ngIf="f.price.errors.pattern" class="text-muted small-popup"> Giá cho thuê phải là kiểu
-                        số</small>
+                        số !</small>
                     </div>
                   </div>
 
@@ -80,9 +81,9 @@
                       placeholder="VD: 334B/10, Đường Nguyễn Văn Linh, Phường An Khánh, Quận Ninh Kiều Thành Phố Cần Thơ" />
                     <div *ngIf="submitted && f.address.errors">
                       <small *ngIf="f.address.errors.required" class="text-muted small-popup"> Địa chỉ không được
-                        trống</small>
+                        trống !</small>
                       <small *ngIf="f.address.errors.minlength" class="text-muted small-popup">Phải ít nhất có 9
-                        tự</small>
+                        tự !</small>
                     </div>
                   </div>
                 </div>
@@ -97,9 +98,9 @@
                     <input type="text" formControlName="area" class="form-control" placeholder="vd: 10m2" />
                     <div *ngIf="submitted && f.area.errors">
                       <small *ngIf="f.area.errors.required" class="text-muted small-popup"> Diện tích không được
-                        trống</small>
+                        trống !</small>
                       <small *ngIf="f.area.errors.pattern" class="text-muted small-popup"> Diện tích phải là kiểu
-                        số</small>
+                        số !</small>
                     </div>
                   </div>
 
@@ -109,7 +110,7 @@
                     <div *ngIf="submitted && f.quantity.errors">
                       <small *ngIf="f.quantity.errors.required" class="text-muted small-popup"> Số phòng ngủ không được
                         trống
-                      </small>
+                        !</small>
                     </div>
                   </div>
 
@@ -124,7 +125,7 @@
                       <small *ngIf="f.type.errors.required" class="text-muted small-popup"> Loại hình cho thuê không
                         được
                         trống
-                      </small>
+                        !</small>
                     </div>
                   </div>
 
@@ -147,9 +148,9 @@
                   </div>
                   <div *ngIf="submitted && f.description.errors">
                     <small *ngIf="f.description.errors.required" class="text-muted small-popup">Mô tả không được bỏ
-                      trống!</small>
+                      trống !</small>
                     <small *ngIf="f.description.errors.minlength" class="text-muted small-popup">Mô tả phải có ít nhất 6
-                      kí tự</small>
+                      kí tự !</small>
                   </div>
                 </div>
               </div>
@@ -169,33 +170,31 @@
                           <p>Kéo và thả hình ảnh</p>
                         </div>
                       </ngx-dropzone-label>
-                      <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files" [file]="f"
-                        [removable]="true" (removed)="onRemove(f)">
+                      <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of multipleImages"
+                        [file]="f" [removable]="true" (removed)="onRemove(f)">
                       </ngx-dropzone-image-preview>
                     </div>
                   </div>
                   <div *ngIf="submitted && f.image.errors">
                     <small *ngIf="f.image.errors.required" class="text-muted small-popup"> Hình ảnh cho thuê không được
-                      trống
-                    </small>
+                      bỏ trống
+                      !</small>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="form-group col-lg-12 col-md-12">
+            <!-- <div class="form-group col-lg-12 col-md-12">
               <label>Thoả thuận *</label>
               <ul class="no-ul-list">
                 <li>
-                  <input id="aj-1" class="checkbox-custom" name="aj-1" type="checkbox" />
+                  <input id="aj-1" class="checkbox-custom" type="checkbox" formControlName="checkF" />
                   <label for="aj-1" class="checkbox-custom-label">Tôi đồng ý để trang web này lưu trữ thông tin đã gửi
                     của tôi
                     để họ có thể trả lời yêu cầu của tôi.</label>
                 </li>
-
               </ul>
-
-            </div>
-            <div class="form-group col-lg-12 col-md-12">
+            </div> -->
+            <div class="form-group col-lg-12 col-md-12 mt-2">
               <button class="btn btn-theme-light-2 rounded" type="submit">
                 Gửi & Xem trước
               </button>

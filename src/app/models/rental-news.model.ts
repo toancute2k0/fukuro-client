@@ -3,6 +3,7 @@ export class RentalNews {
   name?: string;
   image?: string;
   price?: string;
+  area?: string;
   quantity?: string;
   type?: string;
   address?: string;
