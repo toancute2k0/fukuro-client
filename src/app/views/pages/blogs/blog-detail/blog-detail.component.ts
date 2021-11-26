@@ -5,9 +5,12 @@ import { Blogs } from 'src/app/models/blogs.model';
 import { BlogCategoriesService } from 'src/app/services/blog-categories.service';
 import { BlogsService } from 'src/app/services/blogs.service';
 import { AuthService } from 'src/app/services/auth.service';
-import {Validators, FormBuilder} from "@angular/forms";
+import { Validators, FormBuilder } from '@angular/forms';
 import { CommentsService } from 'src/app/services/comments.service';
-import {ToastrService} from 'ngx-toastr';
+import { ToastrService } from 'ngx-toastr';
+import { Comments } from 'src/app/models/comments.model';
+import { CustomersService } from 'src/app/services/customers.service';
+import { Customers } from 'src/app/models/customers.model';
 
 @Component({
   selector: 'app-blog-detail',
@@ -15,12 +18,13 @@ import {ToastrService} from 'ngx-toastr';
   styleUrls: ['./blog-detail.component.css'],
 })
 export class BlogDetailComponent implements OnInit {
-  id?: any;
   cat?: BlogCategories[];
   blogs?: Blogs[];
   blog_details?: Blogs | undefined;
-  newArray = [];
   tag?: any;
+  cmt?: Comments[];
+  count?: number;
+  userCmt?: Customers | undefined;
 
   submitted = false;
 
@@ -31,25 +35,22 @@ export class BlogDetailComponent implements OnInit {
     public auth: AuthService,
     public fb: FormBuilder,
     private commentsService: CommentsService,
+    private customerSer: CustomersService,
     private toastrService: ToastrService
   ) {}
   comment = this.fb.group({
-    content: ['', Validators.compose([Validators.required, Validators.minLength(6)]),],
-    status: ['1'],
-    customerId: [],
-    blogId: [this.id],
+    content: [
+      '',
+      Validators.compose([Validators.required, Validators.minLength(6)]),
+    ],
   });
   ngOnInit(): void {
-    this.id = this.route.snapshot.paramMap.get('id');
-    const currentUser = localStorage.getItem('currentUser');
-    if(currentUser){
-      this.comment.patchValue({customerId: currentUser});
+    const slug = this.route.snapshot.paramMap.get('slug');
+    if (slug) {
+      this.getById(slug);
     }
-    if (this.id) {
-      this.comment.patchValue({blogId: this.id});
-      this.getById(this.id);
-    }
-    this.getBlogs();
+
+    this.getLatest();
     this.catBlogs.getAllCat().subscribe((res: any | undefined) => {
       this.cat = res['rows'];
     });
@@ -57,7 +58,7 @@ export class BlogDetailComponent implements OnInit {
   get f() {
     return this.comment.controls;
   }
-  getBlogs(): void {
+  getLatest(): void {
     this.blogSer.getLatest().subscribe(
       (data: any | undefined) => {
         this.blogs = data['rows'];
@@ -68,17 +69,46 @@ export class BlogDetailComponent implements OnInit {
     );
   }
 
-  getById(id: string): void {
-    this.blogSer.get(id).subscribe(
+  getById(slug: string): void {
+    this.blogSer.getBySlug(slug).subscribe(
       (data: any | undefined) => {
         this.blog_details = data;
         this.tag = JSON.parse(data.tag);
+        this.getAllCmt(JSON.parse(data.id));
       },
       (err) => {
         console.log(err);
       }
     );
   }
+
+  getAllCmt(id: string): void {
+    this.commentsService.getAllByIdBlog(id).subscribe(
+      (data: any | undefined) => {
+        this.cmt = data['rows'];
+        this.count = data['rows'].length;
+        for (var i = 0; i < data['rows'].length; i++) {
+          this.getUserCmt(data['rows'][i].customerId);
+        }
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+  }
+
+  getUserCmt(id: string): void {
+    this.customerSer.get(id).subscribe(
+      (data) => {
+        this.userCmt = data;
+        // console.log(this.userCmt);
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+  }
+
   onSubmit(): any {
     this.submitted = true;
     // return validators
@@ -87,24 +117,23 @@ export class BlogDetailComponent implements OnInit {
     }
     const data = {
       content: this.comment.value['content'],
-      status: this.comment.value['status'],
-      customer_id: this.comment.value['customerId'],
-      blog_id: this.comment.value['blogId'],
-    }
-    this.commentsService.create(data)
-      .subscribe(
-        response => {
-          this.resetForm();
-          this.toastrService.success('Bình luận thành công!');
-        },
-        error => {
-          this.toastrService.success('Bình luận thất bại!');
-        });
+      customer_id: localStorage.getItem('currentUser'),
+      blog_id: this.blog_details?.id,
+    };
+    this.commentsService.create(data).subscribe(
+      (response) => {
+        this.resetForm();
+        this.toastrService.success('Bình luận thành công!');
+      },
+      (error) => {
+        this.toastrService.success('Bình luận thất bại!');
+      }
+    );
   }
   resetForm(): void {
     this.submitted = false;
-    this.comment = this.fb.group(
-      {
-        content: ['']});
+    this.comment = this.fb.group({
+      content: [''],
+    });
   }
 }

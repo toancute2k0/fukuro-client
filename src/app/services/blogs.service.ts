@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { Blogs } from '../models/blogs.model';
 import { BlogCategories } from '../models/blog-categories.model';
 import { map, catchError } from 'rxjs/operators';
-import { environment as env } from '../../environments/environment'
+import { environment as env } from '../../environments/environment';
 const API_URL = `${env.apiURL}/blogs`;
 
 @Injectable({
@@ -21,15 +21,23 @@ export class BlogsService {
     return this.http.get(`${API_URL}/${id}`);
   }
 
-  getLatest(): Observable<Blogs> {
-    return this.http.get(`${API_URL}/latest`);
+  getAllLatest(limit: string): Observable<Blogs[]> {
+    return this.http.get<Blogs[]>(`${API_URL}/latest?limit=${limit}`);
   }
 
-  getById(slug: string): Observable<Blogs | undefined> {
-    return this.getAll().pipe(
-      map((blogs: Blogs[]) => blogs.find((p) => p.slug === slug))
-    );
+  getBySlug(slug: string): Observable<Blogs[]> {
+    return this.http.get<Blogs[]>(`${API_URL}/slug/${slug}`);
   }
+
+  getLatest(): Observable<Blogs[]> {
+    return this.http.get<Blogs[]>(`${API_URL}/latest?limit=3`);
+  }
+
+  // getById(slug: string): Observable<Blogs | undefined> {
+  //   return this.getAll().pipe(
+  //     map((blogs: Blogs[]) => blogs.find((p) => p.slug === slug))
+  //   );
+  // }
 
   // getByCatId(slug: any): Observable<BlogCategories | undefined> {
   //   return this.getAll().pipe(
@@ -37,9 +45,7 @@ export class BlogsService {
   //   );
   // }
 
-  getByCatId(id: any): Observable<Blogs | undefined> {
+  getByCatId(id: number): Observable<Blogs | undefined> {
     return this.http.get(`${API_URL}/category/${id}`);
   }
-
-
 }

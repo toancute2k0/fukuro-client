@@ -27,20 +27,20 @@
             <span><i class="lni-map-marker"></i>
               {{ rentalNewsDetail?.address }}</span>
             <h3 class="prt-price-fix">
-              {{ rentalNewsDetail?.price }}<sub>/tháng</sub>
+              {{rentalNewsDetail?.price | number }} Vnđ<sub>/tháng</sub>
             </h3>
             <div class="list-fx-features">
               <div class="listing-card-info-icon">
                 <div class="inc-fleat-icon">
                   <img src="assets/img/bed.svg" width="13" alt="" />
                 </div>
-                {{ rentalNewsDetail?.quantity }}
+                {{ rentalNewsDetail?.quantity }} Phòng
               </div>
               <div class="listing-card-info-icon">
                 <div class="inc-fleat-icon">
                   <img src="assets/img/bathtub.svg" width="13" alt="" />
                 </div>
-                1
+                1 Tolet
               </div>
               <div class="listing-card-info-icon">
                 <div class="inc-fleat-icon">

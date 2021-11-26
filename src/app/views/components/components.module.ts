@@ -8,6 +8,8 @@ import { LatestPropertyComponent } from './latest-property/latest-property.compo
 import { MotelSearchComponent } from './motel-search/motel-search.component';
 import { OrderPackageComponent } from './order-package/order-package.component';
 import { CarouselModule } from 'ngx-owl-carousel-o';
+import { RouterModule } from '@angular/router';
+import { ListBlogRentalComponent } from './list-blog-rental/list-blog-rental.component';
 
 @NgModule({
   declarations: [
@@ -17,8 +19,9 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
     LatestPropertyComponent,
     MotelSearchComponent,
     OrderPackageComponent,
+    ListBlogRentalComponent,
   ],
-  imports: [CommonModule, HttpClientModule, CarouselModule],
+  imports: [CommonModule, HttpClientModule, CarouselModule, RouterModule],
   exports: [
     BannerComponent,
     FeaturedPropertyComponent,
@@ -26,6 +29,7 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
     LatestPropertyComponent,
     MotelSearchComponent,
     OrderPackageComponent,
+    ListBlogRentalComponent,
   ],
 })
 export class ComponentsModule {}

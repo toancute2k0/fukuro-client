@@ -16,6 +16,12 @@ import { BlogCategoryComponent } from './blog-category/blog-category.component';
     BlogListComponent,
     BlogCategoryComponent,
   ],
-  imports: [CommonModule, BlogsRoutingModule, ComponentsModule, FormsModule, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    BlogsRoutingModule,
+    ComponentsModule,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
 })
 export class BlogsModule {}

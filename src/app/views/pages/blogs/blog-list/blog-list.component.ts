@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Blogs } from 'src/app/models/blogs.model';
 import { BlogsService } from 'src/app/services/blogs.service';
-import { BlogCategories } from 'src/app/models/blog-categories.model';
-import { BlogCategoriesService } from 'src/app/services/blog-categories.service';
 
 @Component({
   selector: 'app-blog-list',
@@ -11,22 +9,15 @@ import { BlogCategoriesService } from 'src/app/services/blog-categories.service'
 })
 export class BlogListComponent implements OnInit {
   blogs?: Blogs[];
-  cat?: BlogCategories[];
-  constructor(
-    private blogSer: BlogsService,
-    private catBlogs: BlogCategoriesService
-  ) {}
+  constructor(private blogSer: BlogsService) {}
   ngOnInit(): void {
     this.getBlogs();
-    this.catBlogs.getAllCat().subscribe((res) => {
-      this.cat = res;
-    });
   }
 
   getBlogs(): void {
-    this.blogSer.getAll().subscribe(
-      (data) => {
-        this.blogs = data;
+    this.blogSer.getAllLatest('6').subscribe(
+      (data: any) => {
+        this.blogs = data['rows'];
       },
       (err) => {
         console.log(err);

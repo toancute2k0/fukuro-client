@@ -19,4 +19,8 @@ export class BlogCategoriesService {
   get(id: any): Observable<BlogCategories> {
     return this.http.get(`${API_URL}/${id}`);
   }
+
+  getSlug(slug: string): Observable<BlogCategories> {
+    return this.http.get(`${API_URL}/slug/${slug}`);
+  }
 }

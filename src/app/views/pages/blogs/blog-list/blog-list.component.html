@@ -35,8 +35,7 @@
       <div class="col-lg-4 col-md-6" *ngFor="let blog of blogs ">
         <div class="blog-wrap-grid">
           <div class="blog-thumb">
-            <a routerLink="/bai-viet/{{blog.id}}"><img src="assets/img/blog/{{blog.thumbnail}}" class="img-fluid"
-                alt="" /></a>
+            <a routerLink="/bai-viet/{{blog.slug}}"><img src="{{blog.thumbnail}}" class="img-fluid" alt="" /></a>
           </div>
 
           <div class="blog-info">
@@ -44,9 +43,9 @@
           </div>
 
           <div class="blog-body">
-            <h4 class="bl-title"><a routerLink="/bai-viet/{{blog.id}}">{{blog.title}}</a></h4>
-            <p>{{blog.summary}}</p>
-            <a routerLink="/bai-viet/{{blog.id}}" class="bl-continue">Xem Tiếp</a>
+            <h4 class="bl-title"><a routerLink="/bai-viet/{{blog.slug}}">{{blog.title}}</a></h4>
+            <p>{{blog.summary | slice:0:120}}...</p>
+            <a routerLink="/bai-viet/{{blog.slug}}" class="bl-continue">Xem Tiếp</a>
           </div>
         </div>
       </div>

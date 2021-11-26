@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
       <div class="col-lg-7 col-md-10 text-center">
         <div class="sec-heading center mb-4">
-          <h2>Nhà trọ cho thuê gần đây</h2>
+          <h2>Nhà trọ nổi bật</h2>
           <p>Fukuro nơi mang lại cho bạn sự yên tâm, chất lượng, giá cả hợp lí, dịch vụ tốt.</p>
         </div>
       </div>
@@ -17,7 +17,7 @@
 
           <!-- Single Property -->
           <owl-carousel-o [options]="customOptions">
-            <ng-template carouselSlide *ngFor="let imgs of imagesList">
+            <ng-template carouselSlide *ngFor="let item of rentalNews">
               <div class="single-items">
                 <div class="property-listing shadow-none property-2 border" style="width: 360px;">
 
@@ -25,7 +25,9 @@
                     <div class="list-img-slide">
                       <div class="click">
                         <div>
-                          <a href="#"><img src="{{imgs.image}}" class="img-fluid mx-auto" alt="" /></a>
+                          <a routerLink="/thue-nha-dat/{{ item.id }}">
+                            <img src="http://localhost:3000/img/{{item.image[0]}}" class="img-fluid mx-auto" alt="" />
+                          </a>
                         </div>
                       </div>
                     </div>
@@ -34,22 +36,29 @@
                   <div class="listing-detail-wrapper">
                     <div class="listing-short-detail-wrap">
                       <div class="listing-short-detail">
-                        <span class="property-type">{{imgs.rent}}</span>
-                        <h4 class="listing-name verified"><a href="single-property-1.html"
-                            class="prt-link-detail">{{imgs.name}}</a></h4>
+                        <span *ngIf="item.type == 1" class="prt-types sale">Phòng trọ</span>
+                        <span *ngIf="item.type == 2" class="prt-types sale">Mặt bằng</span>
+                        <span *ngIf="item.type == 3" class="prt-types sale">Căn hộ</span>
+                        <h4 class="listing-name"><a routerLink="/thue-nha-dat/{{ item.id }}">{{ item.name }}</a></h4>
                       </div>
                     </div>
                   </div>
 
-                  <div class="listing-detail-wrapper" style="padding: 0 24px;">
-                    <h6 class="listing-card-info-price">{{imgs.price}} VNĐ</h6>
+                  <div class="d-flex justify-content-between" style="padding-right: 1.5rem ">
+                    <h6 class="listing-card-info-price" style="padding-left: 1.5rem !important; margin: 0 !important;">
+                      {{item.price | number }} Vnđ
+                    </h6>
+                    <div class="prop-favorite">
+                      <i class="fa fa-heart"></i>
+                    </div>
                   </div>
 
                   <div class="price-features-wrapper">
                     <div class="list-fx-features">
                       <div class="listing-card-info-icon">
                         <div class="inc-fleat-icon"><img src="assets/img/bed.svg"
-                            style="width: 13px !important; height: 13px !important" alt="" /></div>1 phòng
+                            style="width: 13px !important; height: 13px !important" alt="" /></div>{{item.quantity}}
+                        phòng
                       </div>
                       <div class="listing-card-info-icon">
                         <div class="inc-fleat-icon"><img src="assets/img/bathtub.svg"
@@ -57,7 +66,7 @@
                       </div>
                       <div class="listing-card-info-icon">
                         <div class="inc-fleat-icon"><img src="assets/img/move.svg"
-                            style="width: 13px !important; height: 13px !important" alt="" /></div>25 m &#178;
+                            style="width: 13px !important; height: 13px !important" alt="" /></div>{{item.area}} m&#178;
                       </div>
                     </div>
                   </div>
@@ -65,7 +74,8 @@
                   <div class="listing-detail-footer">
                     <div class="footer-first">
                       <div class="foot-location"><img src="assets/img/pin.svg"
-                          style="width: 18px !important; height: 18px !important" />{{imgs.address}}</div>
+                          style="width: 18px !important; height: 18px !important" />{{item.address | slice:0:50 }}...
+                      </div>
                     </div>
                     <div class="footer-flex">
                       <a href="property-detail.html" class="prt-view">Xem</a>

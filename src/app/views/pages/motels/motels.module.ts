@@ -9,6 +9,7 @@ import { ComponentsModule } from '../../components/components.module';
 import { HttpClientModule } from '@angular/common/http';
 import { JwPaginationModule } from 'jw-angular-pagination';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LatestPropertyComponent } from '../../components/latest-property/latest-property.component';
 
 @NgModule({
   declarations: [MotelsComponent, MotelListComponent, MotelDetailComponent],
@@ -19,7 +20,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     HttpClientModule,
     ComponentsModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
 })
 export class MotelsModule {}

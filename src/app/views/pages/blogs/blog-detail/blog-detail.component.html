@@ -4,7 +4,8 @@
     <div class="row">
       <div class="col-lg-12 col-md-12">
         <h2 class="ipt-title">{{blog_details?.title}}</h2>
-        <span class="ipn-subtitle"><i _ngcontent-bnq-c55="" class="ti-calendar"></i> {{blog_details?.createdAt | date: 'dd/MM/yyyy'}}</span>
+        <span class="ipn-subtitle"><i _ngcontent-bnq-c55="" class="ti-calendar"></i> {{blog_details?.createdAt | date:
+          'dd/MM/yyyy'}}</span>
       </div>
     </div>
   </div>
@@ -64,35 +65,37 @@
             </div>
 
             <!-- Author Detail -->
-<!--            <div class="blog-details single-post-item format-standard">-->
+            <!--            <div class="blog-details single-post-item format-standard">-->
 
-<!--              <div class="posts-author">-->
-<!--                <span class="img"><img class="img-fluid" src="https://via.placeholder.com/400x400" alt=""></span>-->
-<!--                <h3 class="pa-name">Quốc Toản</h3>-->
-<!--                <ul class="social-links">-->
-<!--                  <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>-->
-<!--                  <li><a href="#"><i class="fab fa-twitter"></i></a></li>-->
-<!--                  <li><a href="#"><i class="fab fa-behance"></i></a></li>-->
-<!--                  <li><a href="#"><i class="fab fa-youtube"></i></a></li>-->
-<!--                  <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>-->
-<!--                </ul>-->
-<!--                <p class="pa-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor-->
-<!--                  incididunt ut labore et dolore magna-->
-<!--                  aliqua. Ut enim ad minim veniam, quis nostrud-->
-<!--                  exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p>-->
-<!--              </div>-->
+            <!--              <div class="posts-author">-->
+            <!--                <span class="img"><img class="img-fluid" src="https://via.placeholder.com/400x400" alt=""></span>-->
+            <!--                <h3 class="pa-name">Quốc Toản</h3>-->
+            <!--                <ul class="social-links">-->
+            <!--                  <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>-->
+            <!--                  <li><a href="#"><i class="fab fa-twitter"></i></a></li>-->
+            <!--                  <li><a href="#"><i class="fab fa-behance"></i></a></li>-->
+            <!--                  <li><a href="#"><i class="fab fa-youtube"></i></a></li>-->
+            <!--                  <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>-->
+            <!--                </ul>-->
+            <!--                <p class="pa-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor-->
+            <!--                  incididunt ut labore et dolore magna-->
+            <!--                  aliqua. Ut enim ad minim veniam, quis nostrud-->
+            <!--                  exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p>-->
+            <!--              </div>-->
 
-<!--            </div>-->
+            <!--            </div>-->
 
             <!-- Blog Comment -->
             <div class="blog-details single-post-item format-standard">
 
               <div class="comment-area">
                 <div class="all-comments">
-                  <h3 class="comments-title">0 bình luận</h3>
-                  <!-- <div class="comment-list">
+                  <h3 class="comments-title">
+                    {{ count }} Bình luận
+                  </h3>
+                  <div class="comment-list">
                     <ul>
-                      <li class="single-comment">
+                      <li class="single-comment" *ngFor="let cmts of cmt; let i = index">
                         <article>
                           <div class="comment-author">
                             <img src="https://via.placeholder.com/400x400" alt="">
@@ -100,117 +103,36 @@
                           <div class="comment-details">
                             <div class="comment-meta">
                               <div class="comment-left-meta">
-                                <h4 class="author-name">Rosalina Kelian <span class="selected"><i
-                                      class="fas fa-bookmark"></i></span></h4>
-                                <div class="comment-date">19th May 2018</div>
+                                <h4 class="author-name"></h4>
+                                <div class="comment-date">{{cmts.createdAt | date:
+                                  'dd/MM/yyyy'}}</div>
                               </div>
-                              <div class="comment-reply">
-                                <a href="#" class="reply"><span class="icona"><i class="ti-back-left"></i></span>
-                                  Reply</a>
-                              </div>
-                            </div>
-                            <div class="comment-text">
-                              <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-                                mollit
-                                anim laborumab.
-                                perspiciatis unde omnis iste natus error.</p>
-                            </div>
-                          </div>
-                        </article>
-                        <ul class="children">
-                          <li class="single-comment">
-                            <article>
-                              <div class="comment-author">
-                                <img src="https://via.placeholder.com/400x400" alt="">
-                              </div>
-                              <div class="comment-details">
-                                <div class="comment-meta">
-                                  <div class="comment-left-meta">
-                                    <h4 class="author-name">Rosalina Kelian</h4>
-                                    <div class="comment-date">19th May 2018</div>
-                                  </div>
-                                  <div class="comment-reply">
-                                    <a href="#" class="reply"><span class="icons"><i class="ti-back-left"></i></span>
-                                      Reply</a>
-                                  </div>
-                                </div>
-                                <div class="comment-text">
-                                  <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-                                    mollit anim laborumab.
-                                    perspiciatis unde omnis iste natus error.</p>
-                                </div>
-                              </div>
-                            </article>
-                            <ul class="children">
-                              <li class="single-comment">
-                                <article>
-                                  <div class="comment-author">
-                                    <img src="https://via.placeholder.com/400x400" alt="">
-                                  </div>
-                                  <div class="comment-details">
-                                    <div class="comment-meta">
-                                      <div class="comment-left-meta">
-                                        <h4 class="author-name">Rosalina Kelian</h4>
-                                        <div class="comment-date">19th May 2018</div>
-                                      </div>
-                                      <div class="comment-reply">
-                                        <a href="#" class="reply"><span class="icons"><i
-                                              class="ti-back-left"></i></span>
-                                          Reply</a>
-                                      </div>
-                                    </div>
-                                    <div class="comment-text">
-                                      <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-                                        deserunt
-                                        mollit anim laborumab.
-                                        perspiciatis unde omnis iste natus error.</p>
-                                    </div>
-                                  </div>
-                                </article>
-                              </li>
-                            </ul>
-                          </li>
-                        </ul>
-                      </li>
-                      <li class="single-comment">
-                        <article>
-                          <div class="comment-author">
-                            <img src="https://via.placeholder.com/400x400" alt="">
-                          </div>
-                          <div class="comment-details">
-                            <div class="comment-meta">
-                              <div class="comment-left-meta">
-                                <h4 class="author-name">Rosalina Kelian</h4>
-                                <div class="comment-date">19th May 2018</div>
-                              </div>
-                              <div class="comment-reply">
+                              <!-- <div class="comment-reply">
                                 <a href="#" class="reply"><span class="icons"><i class="ti-back-left"></i></span>
                                   Reply</a>
-                              </div>
+                              </div> -->
                             </div>
                             <div class="comment-text">
-                              <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-                                mollit
-                                anim laborumab.
-                                perspiciatis unde omnis iste natus error.</p>
+                              <p>{{ cmts.content }}</p>
                             </div>
                           </div>
                         </article>
                       </li>
                     </ul>
-                  </div> -->
+                  </div>
                 </div>
-                <div class="comment-box submit-form" >
+                <div class="comment-box submit-form">
                   <h3 class="reply-title">Thêm bình luận</h3>
                   <div class="comment-form" *ngIf="auth.isLoggedIn">
                     <form [formGroup]="comment" (ngSubmit)="onSubmit()">
                       <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12">
                           <div class="form-group">
-                            <textarea name="comment" class="form-control" cols="30" rows="6"
-                              placeholder="Nội dung bình luận..." formControlName="content"></textarea>
+                            <textarea class="form-control" cols="30" rows="6" placeholder="Nội dung bình luận..."
+                              formControlName="content"></textarea>
                             <div *ngIf="submitted && f.content.errors">
-                              <small *ngIf="f.content.errors.required" class="text-danger small-popup">Nội dung bình luận không được bỏ trống!</small>
+                              <small *ngIf="f.content.errors.required" class="text-danger small-popup">Nội dung bình
+                                luận không được bỏ trống!</small>
                             </div>
                           </div>
                         </div>
@@ -225,9 +147,9 @@
                   <p *ngIf="!auth.isLoggedIn">
                     Vui lòng
                     <a routerLink="/dang-nhap" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#login"
-                       style="color: #1266e3">Đăng Nhập</a> để có thể bình luận. Nếu bạn chưa có tài khoản vui lòng
+                      style="color: #1266e3">Đăng Nhập</a> để có thể bình luận. Nếu bạn chưa có tài khoản vui lòng
                     <a routerLink="/dang-ky" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#signup"
-                       style="color: #1266e3">Đăng Ký</a> tại đậy
+                      style="color: #1266e3">Đăng Ký</a> tại đậy
                   </p>
                 </div>
               </div>
@@ -260,20 +182,7 @@
             </div>
 
             <!-- Trending Posts -->
-            <div class="single-widgets widget_thumb_post">
-              <h4 class="title">Bài viết mới nhất</h4>
-              <ul>
-                <li *ngFor="let blog of blogs;">
-                  <span class="left">
-                    <img src="{{blog.thumbnail}}" alt="" class="">
-                  </span>
-                  <span class="right">
-                    <a class="feed-title" href="#">{{blog.title}}</a>
-                    <span class="post-date"><i class="ti-calendar"></i>{{blog.createdAt | date: 'dd/MM/yyyy'}}</span>
-                  </span>
-                </li>
-              </ul>
-            </div>
+            <app-list-blog-rental></app-list-blog-rental>
 
             <!-- Tags Cloud -->
             <div class="single-widgets widget_tags">

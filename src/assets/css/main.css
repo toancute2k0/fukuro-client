@@ -60,6 +60,30 @@
 .form-group {
   margin-bottom: 15px;
 }
+/* wishlist */
+.prop-favorite {
+  font-size: 21px;
+  line-height: 22px;
+  cursor: pointer;
+  width: 36px;
+  background: #f2f4f7;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+}
+
+.prop-favorite i {
+  margin: auto;
+  color: #657786;
+  font-weight: 600;
+  transition: all 1s;
+}
+
+.prop-favorite i:hover {
+  color: #eb3264;
+  transition: all 1s;
+}
+
 .preloader {
   width: 50px;
   height: 50px;
@@ -6716,7 +6740,7 @@ span.tag_t {
   font-size: 22px;
   color: #08184b;
   line-height: 1.4;
-  padding-left: 0.35em;
+  padding-left: 1rem;
 }
 .price-prefix:before {
   content: "$";
@@ -6886,6 +6910,7 @@ span.tag_t {
   color: #fd9428;
 }
 .foot-location {
+  line-height: 1rem;
   font-size: 15px;
   display: flex;
   align-items: center;
@@ -9350,6 +9375,7 @@ span.mod-close {
   color: #8866da;
 }
 .listing-locate {
+  line-height: 1rem;
   flex: 1;
 }
 .list-layout .property-listing.property-1 .listing-img-wrapper {
@@ -9642,7 +9668,7 @@ a.bl-continue:before {
 .post-featured-img img {
   border-radius: 6px;
 }
-.single-post-item img{
+.single-post-item img {
   width: 100% !important;
 }
 .single-post-item .post-details .meta-comment-tag {

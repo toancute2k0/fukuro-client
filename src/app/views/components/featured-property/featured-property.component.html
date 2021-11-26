@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
       <div class="col-lg-7 col-md-10 text-center">
         <div class="sec-heading center">
-          <h2>Nhà trọ nổi bật</h2>
+          <h2>Nhà trọ cho thuê gần đây</h2>
           <p>Fukuro nơi mang lại cho bạn sự yên tâm, chất lượng, giá cả hợp lí, dịch vụ tốt.</p>
         </div>
       </div>
@@ -14,12 +14,12 @@
     <div class="row list-layout">
 
       <!-- Single Property Start -->
-      <div class="col-lg-6 col-md-12" *ngFor="let imgs of imagesList">
+      <div class="col-lg-6 col-md-12" *ngFor="let item of rentalNews">
         <div class="property-listing property-1">
-
           <div class="listing-img-wrapper">
-            <a href="single-property-2.html">
-              <img src="{{imgs.image}}" class="img-fluid mx-auto" alt="" />
+
+            <a routerLink="/thue-nha-dat/{{ item.id }}">
+              <img src="http://localhost:3000/img/{{item.image[0]}}" class="img-fluid mx-auto" alt="" />
             </a>
           </div>
 
@@ -28,7 +28,7 @@
             <div class="listing-detail-wrapper-box">
               <div class="listing-detail-wrapper">
                 <div class="listing-short-detail">
-                  <h4 class="listing-name"><a href="single-property-2.html">{{imgs.name}}</a></h4>
+                  <h4 class="listing-name"><a routerLink="/thue-nha-dat/{{ item.id }}">{{ item.name }}</a></h4>
                   <div class="fr-can-rating">
                     <i class="fas fa-star filled"></i>
                     <i class="fas fa-star filled"></i>
@@ -37,12 +37,19 @@
                     <i class="fas fa-star"></i>
                     <span class="reviews_text">(0 nhận xét)</span>
                   </div>
-                  <span class="prt-types sale">{{imgs.rent}}</span>
+                  <span *ngIf="item.type == 1" class="prt-types sale">Phòng trọ</span>
+                  <span *ngIf="item.type == 2" class="prt-types sale">Mặt bằng</span>
+                  <span *ngIf="item.type == 3" class="prt-types sale">Căn hộ</span>
                 </div>
               </div>
             </div>
-            <div class="list-price">
-              <h6 class="listing-card-info-price">{{imgs.price}} VNĐ</h6>
+            <div class="d-flex justify-content-between" style="padding-right: 1rem ">
+              <h6 class="listing-card-info-price">
+                {{item.price | number }} Vnđ
+              </h6>
+              <div class="prop-favorite">
+                <i class="fa fa-heart"></i>
+              </div>
             </div>
             <!-- <div class="price-features-wrapper">
               <div class="list-fx-features">
@@ -58,11 +65,11 @@
               </div>
             </div> -->
 
-            <div class="listing-footer-wrapper">
+            <div class="listing-footer-wrapper" style="padding: 0rem 1rem !important;">
               <div class="listing-locate">
-                <span class="listing-location"><i class="ti-location-pin"></i>{{imgs.address}}</span>
+                <span class="listing-location"><i class="ti-location-pin"></i>{{item.address | slice:0:45 }}...</span>
               </div>
-              <div class="listing-detail-btn">
+              <div class="listing-detail-btn" style="padding: 0.9rem 0rem !important;">
                 <a href="single-property-2.html" class="more-btn">Xem</a>
               </div>
             </div>
@@ -78,7 +85,7 @@
     <!-- Pagination -->
     <div class="row">
       <div class="col-lg-12 col-md-12 col-sm-12 text-center">
-        <a href="listings-list-with-sidebar.html" class="btn btn-theme-light rounded">Xem thêm</a>
+        <a routerLink="/thue-nha-dat" class="btn btn-theme-light rounded">Xem thêm</a>
       </div>
     </div>
 

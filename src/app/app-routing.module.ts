@@ -25,7 +25,7 @@ const routes: Routes = [
       import('./views/pages/blogs/blogs.module').then((m) => m.BlogsModule),
   },
   {
-    path: 'danh-muc-bai-viet/:id',
+    path: 'danh-muc-bai-viet/:slug',
     component: BlogCategoryComponent,
   },
   {

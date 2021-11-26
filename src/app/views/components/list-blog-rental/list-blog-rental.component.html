@@ -1,0 +1,14 @@
+<div class="single-widgets widget_thumb_post">
+  <h4 class="title">Bài viết mới nhất</h4>
+  <ul>
+    <li *ngFor="let blog of blogs;">
+      <span class="left">
+        <img src="{{blog.thumbnail}}" alt="blog.title" class="">
+      </span>
+      <span class="right">
+        <a class="feed-title" routerLink="/bai-viet/{{blog.slug}}">{{blog.title}}</a>
+        <span class="post-date"><i class="ti-calendar"></i>{{blog.createdAt | date: 'dd/MM/yyyy'}}</span>
+      </span>
+    </li>
+  </ul>
+</div>
