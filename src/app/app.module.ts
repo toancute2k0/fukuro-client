@@ -20,6 +20,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { NoAuthGuard } from './guards/noauth.guard';
 import { NgxSummernoteModule } from 'ngx-summernote';
 import { NgxDropzoneModule } from 'ngx-dropzone';
+import { PromotionsComponent } from './views/pages/promotions/promotions.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
     ContactComponent,
     HomeComponent,
     RentalNewsComponent,
+    PromotionsComponent,
   ],
   imports: [
     BrowserModule,
