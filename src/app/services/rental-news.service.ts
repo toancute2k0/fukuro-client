@@ -30,4 +30,8 @@ export class RentalNewsService {
   getLatest(): Observable<Blogs> {
     return this.http.get(`${API_URL}/latest`);
   }
+
+  getLatestDetail(limit: number): Observable<RentalNews[]> {
+    return this.http.get<RentalNews[]>(`${API_URL}/latest?limit=${limit}`);
+  }
 }

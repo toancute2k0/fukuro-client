@@ -579,17 +579,30 @@
           <!-- Agent Detail -->
           <div class="sides-widget">
             <div class="sides-widget-header">
-              <div class="agent-photo" *ngIf="currentUser && !currentUser?.avatar">
+              <div class="agent-photo" *ngIf="currentUser?.avatar">
                 <img src="{{ currentUser?.avatar }}" alt="" />
               </div>
+              <div class="agent-photo" *ngIf="!currentUser?.avatar">
+                <img src="https://via.placeholder.com/40x40" alt="" />
+              </div>
               <div class="sides-widget-details">
-                <h4>
+                <h4 *ngIf="currentUser?.firstName">
                   <a href="#">
                     {{ currentUser?.firstName }} {{ currentUser?.lastName }}
                   </a>
                 </h4>
-                <span><i class="lni-phone-handset"></i>
+                <h4 *ngIf="!currentUser?.firstName">
+                  <a href="#">
+                    {{ currentUser?.username }}
+                  </a>
+                </h4>
+                <span *ngIf="currentUser?.phone">
+                  <i class="lni-phone-handset"></i>
                   {{ currentUser?.phone }}
+                </span>
+                <span *ngIf="!currentUser?.phone">
+                  <i class="lni-phone-handset"></i>
+                  0822576436
                 </span>
               </div>
               <div class="clearfix"></div>
@@ -712,24 +725,24 @@
                 </div>
                 <div class="sides_list_property_detail">
                   <h4>
-                    <a routerLink="/bai-viet/{{ rental.id }}">{{
+                    <a routerLink="/thue-nha-dat/{{ rental.id }}">{{
                       rental.name
                       }}</a>
                   </h4>
                   <span style="
-                      display: inline-block;
-                      white-space: nowrap;
-                      overflow: hidden;
-                      text-overflow: ellipsis;
-                      max-width: 22ch;
-                    ">
+                              display: inline-block;
+                              white-space: nowrap;
+                              overflow: hidden;
+                              text-overflow: ellipsis;
+                              max-width: 22ch;
+                            ">
                     <i class="ti-location-pin"></i>{{ rental.address }}</span>
                   <div class="lists_property_price">
                     <!--                    <div class="lists_property_types">-->
                     <!--                      <div class="property_types_vlix sale">For Sale</div>-->
                     <!--                    </div>-->
                     <div class="lists_property_price_value">
-                      <h4>{{ rental.price }}</h4>
+                      <h4>{{rental.price | number }} Vnđ<sub>/tháng</sub></h4>
                     </div>
                   </div>
                 </div>

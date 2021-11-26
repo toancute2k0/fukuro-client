@@ -11,4 +11,5 @@ export class RentalNews {
   status?: string;
   promotionId?: string;
   customerId?: string;
+  slug?: string;
 }
