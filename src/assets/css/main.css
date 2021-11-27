@@ -6483,9 +6483,9 @@ span.tag_t {
   bottom: 0;
 }
 .property-listing.property-2 .listing-img-wrapper img {
-  max-height: 240px;
-  min-height: 240px;
+  height: 240px;
   width: 100%;
+  object-fit: cover;
 }
 .property-listing.property-2 .listing-detail-wrapper {
   padding: 1rem 1.5rem;

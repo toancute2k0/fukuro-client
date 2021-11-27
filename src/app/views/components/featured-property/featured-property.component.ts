@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Bookmarks } from 'src/app/models/bookmarks.model';
+import { BookmarksService } from 'src/app/services/bookmarks.service';
 import { RentalNewsService } from 'src/app/services/rental-news.service';
 
 @Component({
@@ -8,7 +10,11 @@ import { RentalNewsService } from 'src/app/services/rental-news.service';
 })
 export class FeaturedPropertyComponent implements OnInit {
   rentalNews: any | undefined;
-  constructor(private rentalNewsService: RentalNewsService) {}
+  // wishList?: Bookmarks[];
+  constructor(
+    private rentalNewsService: RentalNewsService,
+    private bookmarkSer: BookmarksService
+  ) {}
 
   ngOnInit(): void {
     this.rentalNewsService.getLatest().subscribe(
@@ -17,6 +23,19 @@ export class FeaturedPropertyComponent implements OnInit {
         for (var i = 0; i < data['rows'].length; i++) {
           data['rows'][i].image = JSON.parse(data['rows'][i].image);
         }
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+
+    this.wishList();
+  }
+
+  wishList(): void {
+    this.bookmarkSer.updateBookMark(1, 21).subscribe(
+      (res) => {
+        console.log(res);
       },
       (err) => {
         console.log(err);
