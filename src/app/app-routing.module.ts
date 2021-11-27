@@ -4,6 +4,8 @@ import { AuthGuard } from './guards/auth.guard';
 import { NoAuthGuard } from './guards/noauth.guard';
 import { LoginComponent } from './views/pages/auth/login/login.component';
 import { RegisterComponent } from './views/pages/auth/register/register.component';
+import { ForgotPasswordComponent } from './views/pages/auth/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './views/pages/auth/reset-password/reset-password.component';
 import { BlogCategoryComponent } from './views/pages/blogs/blog-category/blog-category.component';
 import { ContactComponent } from './views/pages/contact/contact.component';
 import { HomeComponent } from './views/pages/home/home.component';
@@ -35,6 +37,8 @@ const routes: Routes = [
       import('./views/pages/motels/motels.module').then((m) => m.MotelsModule),
   },
   { path: 'dang-ky', component: RegisterComponent },
+  { path: 'forgot-password', component: ForgotPasswordComponent },
+  { path: 'reset-password', component: ResetPasswordComponent },
   { path: 'dang-nhap', component: LoginComponent, canActivate: [NoAuthGuard] },
   { path: 'thanh-toan', component: PromotionsComponent,},
   { path: 'chinh-sua-bai-viet', component: EditRentalComponent, canActivate: [AuthGuard] },

@@ -7,6 +7,8 @@ import { FooterComponent } from './views/layouts/footer/footer.component';
 import { HeaderComponent } from './views/layouts/header/header.component';
 import { LoginComponent } from './views/pages/auth/login/login.component';
 import { RegisterComponent } from './views/pages/auth/register/register.component';
+import { ForgotPasswordComponent } from './views/pages/auth/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './views/pages/auth/reset-password/reset-password.component';
 import { NotFoundComponent } from './views/pages/not-found/not-found.component';
 import { ContactComponent } from './views/pages/contact/contact.component';
 import { HomeComponent } from './views/pages/home/home.component';
@@ -21,6 +23,7 @@ import { NoAuthGuard } from './guards/noauth.guard';
 import { NgxSummernoteModule } from 'ngx-summernote';
 import { NgxDropzoneModule } from 'ngx-dropzone';
 import { PromotionsComponent } from './views/pages/promotions/promotions.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -34,6 +37,8 @@ import { PromotionsComponent } from './views/pages/promotions/promotions.compone
     HomeComponent,
     RentalNewsComponent,
     PromotionsComponent,
+    ForgotPasswordComponent,
+    ResetPasswordComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,6 +54,7 @@ import { PromotionsComponent } from './views/pages/promotions/promotions.compone
     ReactiveFormsModule,
     NgxSummernoteModule,
     NgxDropzoneModule,
+    NgbModule,
   ],
   providers: [AuthGuard, NoAuthGuard],
   bootstrap: [AppComponent],

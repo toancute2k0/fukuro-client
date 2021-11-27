@@ -11,7 +11,7 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./edit-rental.component.css']
 })
 export class EditRentalComponent implements OnInit {
-  id:'';
+  // id:'';
   submitted = false;
   result = false;
   multipleImages: File[] = [];
@@ -216,22 +216,22 @@ export class EditRentalComponent implements OnInit {
     });
   }
   //get old data
-  getData(id): void {
-    this.RentalNewsService.get(id)
-      .subscribe(
-        data => {
-          this.customers = this.fb.group({
-            avatar: [data.avatar, Validators.compose([Validators.required, Validators.minLength(6)])],
-            username: [data.username, Validators.compose([Validators.required])],
-            email: [data.email, Validators.compose([Validators.required, Validators.email])],
-            firstName: [data.firstName, Validators.compose([Validators.required])],
-            lastName: [data.lastName, Validators.compose([Validators.required])],
-            phone: [data.phone, Validators.compose([Validators.required, Validators.pattern('[0-9 ]{10}')])],
-            status: [data.status],
-          });
-        },
-        error => {
-          console.log(error);
-        });
-  }
+  // getData(id): void {
+  //   this.RentalNewsService.get(id)
+  //     .subscribe(
+  //       data => {
+  //         this.customers = this.fb.group({
+  //           avatar: [data.avatar, Validators.compose([Validators.required, Validators.minLength(6)])],
+  //           username: [data.username, Validators.compose([Validators.required])],
+  //           email: [data.email, Validators.compose([Validators.required, Validators.email])],
+  //           firstName: [data.firstName, Validators.compose([Validators.required])],
+  //           lastName: [data.lastName, Validators.compose([Validators.required])],
+  //           phone: [data.phone, Validators.compose([Validators.required, Validators.pattern('[0-9 ]{10}')])],
+  //           status: [data.status],
+  //         });
+  //       },
+  //       error => {
+  //         console.log(error);
+  //       });
+  // }
 }
