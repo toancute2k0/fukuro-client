@@ -22,7 +22,7 @@ export class BlogDetailComponent implements OnInit {
   blogs?: Blogs[];
   blog_details?: Blogs | undefined;
   tag?: any;
-  cmt?: Comments[];
+  cmt?: any[];
   count?: number;
   userCmt?: Customers | undefined;
   id_blog: any;
@@ -75,7 +75,6 @@ export class BlogDetailComponent implements OnInit {
       (data: any | undefined) => {
         this.blog_details = data;
         this.id_blog = data.id;
-        console.log(this.id_blog);
         this.tag = JSON.parse(data.tag);
         this.getAllCmt(JSON.parse(data.id));
       },
@@ -87,24 +86,10 @@ export class BlogDetailComponent implements OnInit {
 
   getAllCmt(id: string): void {
     this.commentsService.getAllByIdBlog(id).subscribe(
-      (data: any | undefined) => {
-        this.cmt = data['rows'];
-        this.count = data['rows'].length;
-        for (var i = 0; i < data['rows'].length; i++) {
-          this.getUserCmt(data['rows'][i].customerId);
-        }
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
-  }
-
-  getUserCmt(id: string): void {
-    this.customerSer.get(id).subscribe(
-      (data) => {
-        this.userCmt = data;
-        // console.log(this.userCmt);
+      (data: any) => {
+        this.cmt = data;
+        this.count = data.length;
+        console.log(data);
       },
       (err) => {
         console.log(err);

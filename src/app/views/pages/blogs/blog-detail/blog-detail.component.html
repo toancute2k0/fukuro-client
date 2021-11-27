@@ -98,12 +98,15 @@
                       <li class="single-comment" *ngFor="let cmts of cmt; let i = index">
                         <article>
                           <div class="comment-author">
-                            <img src="https://via.placeholder.com/400x400" alt="">
+                            <img *ngIf="cmts.customer_info.avatar" src="{{cmts.customer_info.avatar}}" alt="">
+                            <img *ngIf="!cmts.customer_info.avatar" src="https://via.placeholder.com/400x400" alt="">
                           </div>
                           <div class="comment-details">
                             <div class="comment-meta">
                               <div class="comment-left-meta">
-                                <h4 class="author-name"></h4>
+                                <h4 class="author-name">
+                                  {{ cmts.customer_info.username }}
+                                </h4>
                                 <div class="comment-date">{{cmts.createdAt | date:
                                   'dd/MM/yyyy'}}</div>
                               </div>

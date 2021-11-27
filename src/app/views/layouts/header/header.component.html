@@ -55,42 +55,42 @@
               <a id="dropdownBasic1" ngbDropdownToggle style="padding: 10px;">
                 <div class="avatar avatar-md avatar-indicators avatar-online">
                   <img *ngIf="avatar" alt="avatar" src="{{avatar}}" class="rounded-circle">
-                  <img *ngIf="!avatar" alt="avatar" src="https://via.placeholder.com/40x40"
-                       class="rounded-circle">
+                  <img *ngIf="!avatar" alt="avatar" src="https://via.placeholder.com/40x40" class="rounded-circle">
                 </div>
-                <span>{{name}}</span>
-<!--                <span *ngIf="name == undefined">{{username}}</span>-->
+
+                <!-- <span *ngIf="name">{{name}}</span> -->
+                <span>{{username}}</span>
               </a>
               <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
                 <button ngbDropdownItem>
                   <a class="dropdown-item dropright-lg dropdown-list-group-item" routerLink="my-account/renal-manage">
-                      <span class="mr-1">
-                        <i class="ti-home"></i>
-                      </span>
+                    <span class="mr-1">
+                      <i class="ti-home"></i>
+                    </span>
                     Quản lí tin cho thuê
                   </a>
                 </button>
                 <button ngbDropdownItem>
                   <a class="dropdown-item dropright-lg" routerLink="my-account/my-profile">
-                      <span class="mr-1">
-                        <i class="ti-user"></i>
-                      </span>
+                    <span class="mr-1">
+                      <i class="ti-user"></i>
+                    </span>
                     Thông tin tài khoản
                   </a>
                 </button>
                 <button ngbDropdownItem>
                   <a class="dropdown-item dropright-lg" routerLink="my-account/notification">
-                      <span class="mr-1">
-                        <i class="ti-bell"></i>
-                      </span>
+                    <span class="mr-1">
+                      <i class="ti-bell"></i>
+                    </span>
                     Thông báo
                   </a>
                 </button>
                 <button ngbDropdownItem>
                   <a class="dropdown-item dropright-lg" routerLink="my-account/bookmark">
-                      <span class="mr-1">
-                        <i class="ti-heart"></i>
-                      </span>
+                    <span class="mr-1">
+                      <i class="ti-heart"></i>
+                    </span>
                     Tin đã lưu
                   </a>
                 </button>
@@ -106,8 +106,8 @@
                   <a class="dropdown-item dropright-lg" (click)="auth.logout()">
                     <span class="mr-2">
                       <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
-                           stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                           class="feather feather-power">
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="feather feather-power">
                         <path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path>
                         <line x1="12" y1="2" x2="12" y2="12"></line>
                       </svg></span>Đăng xuất
