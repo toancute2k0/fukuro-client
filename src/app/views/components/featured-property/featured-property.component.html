@@ -48,9 +48,9 @@
                 {{item.price | number }} Vnđ
               </h6>
               <div class="prop-favorite">
-                <i *ngIf="addedToWishlist" class="far fa-heart" (click)="handleRemoveFromWishlist()"
+                <i *ngIf="addedToWishlist" class="far fa-heart" (click)="handleRemoveFromWishlist(item.id)"
                   style="color: palevioletred !important;"></i>
-                <i *ngIf="!addedToWishlist" class="ti-heart" (click)="handleAddToWishlist()"></i>
+                <i *ngIf="!addedToWishlist" class="ti-heart" (click)="handleAddToWishlist(item.id)"></i>
               </div>
             </div>
             <!-- <div class="price-features-wrapper">

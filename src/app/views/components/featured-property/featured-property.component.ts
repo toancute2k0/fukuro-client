@@ -30,16 +30,21 @@ export class FeaturedPropertyComponent implements OnInit {
     );
   }
 
-  handleAddToWishlist() {
-    // this.bookmarkSer.updateBookMark(this.productItem.id).subscribe(() => {
-    //   this.addedToWishlist = true;
-    // });
+  handleAddToWishlist(id: string) {
+    const _id = localStorage.getItem('currentUser');
+    const data = {
+      rental_news: id,
+    };
+    this.bookmarkSer.updateBookMark(_id, data).subscribe((res) => {
+      this.addedToWishlist = true;
+      console.log(res);
+    });
     this.addedToWishlist = true;
-    console.log(this.rentalNews.id);
+    console.log(id);
   }
 
-  handleRemoveFromWishlist() {
+  handleRemoveFromWishlist(id: string) {
     this.addedToWishlist = false;
-    console.log(3);
+    console.log(id);
   }
 }

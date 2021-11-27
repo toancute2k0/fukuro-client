@@ -11,13 +11,7 @@ const API_URL = `${env.apiURL}/bookmarks`;
 })
 export class BookmarksService {
   constructor(private http: HttpClient) {}
-  updateBookMark(
-    customer_id: string,
-    rental_news: string
-  ): Observable<Bookmarks[]> {
-    return this.http.post<Bookmarks[]>(
-      `${API_URL}/customer/${customer_id}`,
-      rental_news
-    );
+  updateBookMark(id: any, data: any): Observable<Bookmarks[]> {
+    return this.http.post<Bookmarks[]>(`${API_URL}/customer/${id}`, data);
   }
 }
