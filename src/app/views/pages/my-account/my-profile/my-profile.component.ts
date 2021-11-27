@@ -75,14 +75,24 @@ export class MyProfileComponent implements OnInit {
   onSubmit(): any {
     this.submitted = true;
     const id = localStorage.getItem('currentUser');
-    // if (this.updateCus.invalid) {
-    //   return false;
-    // }
-    console.log(this.updateCus.value);
-    this.customSer.update(id!, this.updateCus.value).subscribe(
-      (res) => {
-        console.log(res.data);
-        // window.location.reload();
+    if (this.updateCus.invalid) {
+      return false;
+    }
+    const data = {
+      avatar: this.updateCus.value['avatar'],
+      username: this.updateCus.value['username'],
+      email: this.updateCus.value['email'],
+      first_name: this.updateCus.value['firstName'],
+      last_name: this.updateCus.value['lastName'],
+      phone: this.updateCus.value['phone'],
+      status: this.updateCus.value['status'],
+    }
+    this.customSer.update(id!, data).subscribe(
+      (res: any) => {
+        let name = this.updateCus.value['firstName']+' '+this.updateCus.value['lastName'];
+        this.customSer.profileImageUpdate$.next(this.updateCus.value['avatar']);
+        this.customSer.profileName$.next(name );
+        this.customSer.profileUsername$.next( this.updateCus.value['username']);
         this.toastrService.success('Cập nhật tài khoản thành công!');
       },
       (error) => {
