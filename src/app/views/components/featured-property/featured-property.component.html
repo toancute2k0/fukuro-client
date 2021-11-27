@@ -47,8 +47,10 @@
               <h6 class="listing-card-info-price">
                 {{item.price | number }} Vnđ
               </h6>
-              <div class="prop-favorite" (click)="wishList">
-                <i class="fa fa-heart"></i>
+              <div class="prop-favorite">
+                <i *ngIf="addedToWishlist" class="far fa-heart" (click)="handleRemoveFromWishlist()"
+                  style="color: palevioletred !important;"></i>
+                <i *ngIf="!addedToWishlist" class="ti-heart" (click)="handleAddToWishlist()"></i>
               </div>
             </div>
             <!-- <div class="price-features-wrapper">

@@ -10,7 +10,7 @@ import { RentalNewsService } from 'src/app/services/rental-news.service';
 })
 export class FeaturedPropertyComponent implements OnInit {
   rentalNews: any | undefined;
-  // wishList?: Bookmarks[];
+  addedToWishlist?: boolean;
   constructor(
     private rentalNewsService: RentalNewsService,
     private bookmarkSer: BookmarksService
@@ -28,18 +28,18 @@ export class FeaturedPropertyComponent implements OnInit {
         console.log(err);
       }
     );
-
-    this.wishList();
   }
 
-  wishList(): void {
-    this.bookmarkSer.updateBookMark(1, 21).subscribe(
-      (res) => {
-        console.log(res);
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
+  handleAddToWishlist() {
+    // this.bookmarkSer.updateBookMark(this.productItem.id).subscribe(() => {
+    //   this.addedToWishlist = true;
+    // });
+    this.addedToWishlist = true;
+    console.log(this.rentalNews.id);
+  }
+
+  handleRemoveFromWishlist() {
+    this.addedToWishlist = false;
+    console.log(3);
   }
 }

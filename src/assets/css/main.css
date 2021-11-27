@@ -74,13 +74,12 @@
 
 .prop-favorite i {
   margin: auto;
-  color: #657786;
   font-weight: 600;
   transition: all 1s;
 }
 
 .prop-favorite i:hover {
-  color: #eb3264;
+  color: palevioletred;
   transition: all 1s;
 }
 
