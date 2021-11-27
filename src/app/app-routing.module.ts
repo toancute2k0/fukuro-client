@@ -10,7 +10,7 @@ import { HomeComponent } from './views/pages/home/home.component';
 import { NotFoundComponent } from './views/pages/not-found/not-found.component';
 import { PromotionsComponent } from './views/pages/promotions/promotions.component';
 import { RentalNewsComponent } from './views/pages/rental-news/rental-news.component';
-
+import { EditRentalComponent } from './views/pages/my-account/edit-rental/edit-rental.component';
 const routes: Routes = [
   { path: '', component: HomeComponent },
   {
@@ -36,7 +36,8 @@ const routes: Routes = [
   },
   { path: 'dang-ky', component: RegisterComponent },
   { path: 'dang-nhap', component: LoginComponent, canActivate: [NoAuthGuard] },
-  { path: 'thanh-toan', component: PromotionsComponent, canActivate: [NoAuthGuard] },
+  { path: 'thanh-toan', component: PromotionsComponent,},
+  { path: 'chinh-sua-bai-viet', component: EditRentalComponent, canActivate: [AuthGuard] },
   {
     path: 'my-account',
     loadChildren: () =>

@@ -1,15 +1,34 @@
 import { Component, OnInit } from '@angular/core';
-
+import { RentalNews } from 'src/app/models/rental-news.model';
+import { RentalNewsService } from 'src/app/services/rental-news.service';
 @Component({
   selector: 'app-rental-manage',
   templateUrl: './rental-manage.component.html',
   styleUrls: ['./rental-manage.component.css']
 })
 export class RentalManageComponent implements OnInit {
-
-  constructor() { }
+  rental?:RentalNews[];
+  id:any;
+  constructor(private rentalNewsService:RentalNewsService) {}
 
   ngOnInit(): void {
+    this.id=localStorage.getItem('currentUser');
+    this.getRentalNews();
+  }
+  getRentalNews():void{
+    this.rentalNewsService.getfindByCustomerId(this.id).subscribe(
+      (data: any) => {
+        console.log(data);
+        this.rental = data['rows'];
+        for (var i = 0; i < data['rows'].length; i++) {
+          data['rows'][i].image= JSON.parse(data['rows'][i].image);
+          data['rows'][i].image = data['rows'][i].image[0];
+        }
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
   }
   openFilterSearch()
   {
