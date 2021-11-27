@@ -87,12 +87,12 @@ export class LoginComponent implements OnInit {
 
           this.auth.loggedIn();
           // this._router.navigateByUrl(this.returnUrl);
-          this._router
-            .navigateByUrl(this.returnUrl, { skipLocationChange: true })
-            .then(() => {
-              this._router.navigate(['/']);
-            });
-
+          // this._router
+          //   .navigateByUrl(this.returnUrl, { skipLocationChange: true })
+          //   .then(() => {
+          //     this._router.navigate(['/']);
+          //   });
+          this._router.navigate(['/']);
           this.toastrService.success('Đăng nhập thành công!');
         },
         (error) => {

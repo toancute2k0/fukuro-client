@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 import { Customers } from '../models/customers.model';
 import { environment as env } from '../../environments/environment';
 import { map } from 'rxjs/operators';
@@ -11,6 +11,9 @@ const API_URL = `${env.apiURL}/customers`;
   providedIn: 'root',
 })
 export class CustomersService {
+  profileImageUpdate$ = new Subject<string>();
+  profileName$ = new Subject<string>();
+  profileUsername$ = new Subject<string>();
   constructor(private http: HttpClient) {}
 
   getAll(): Observable<Customers[]> {
@@ -69,5 +72,14 @@ export class CustomersService {
         Authorization: `Bearer ${localStorage.getItem('token')}`,
       },
     };
+  }
+  changePassword(data: any): Observable<any> {
+    return this.http.post(`${API_URL}/change-password`, data);
+  }
+  forgotPassword(data: any): Observable<any> {
+    return this.http.post(`${API_URL}/forgot-password`, data);
+  }
+  resetPassword(data: any): Observable<any> {
+    return this.http.post(`${env.apiURL}/password-resets/customer`, data);
   }
 }

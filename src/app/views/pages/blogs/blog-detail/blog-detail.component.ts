@@ -25,6 +25,7 @@ export class BlogDetailComponent implements OnInit {
   cmt?: Comments[];
   count?: number;
   userCmt?: Customers | undefined;
+  id_blog: any;
 
   submitted = false;
 
@@ -73,6 +74,8 @@ export class BlogDetailComponent implements OnInit {
     this.blogSer.getBySlug(slug).subscribe(
       (data: any | undefined) => {
         this.blog_details = data;
+        this.id_blog = data.id;
+        console.log(this.id_blog);
         this.tag = JSON.parse(data.tag);
         this.getAllCmt(JSON.parse(data.id));
       },
@@ -112,6 +115,7 @@ export class BlogDetailComponent implements OnInit {
   onSubmit(): any {
     this.submitted = true;
     // return validators
+
     if (this.comment.invalid) {
       return false;
     }
@@ -120,8 +124,11 @@ export class BlogDetailComponent implements OnInit {
       customer_id: localStorage.getItem('currentUser'),
       blog_id: this.blog_details?.id,
     };
+
     this.commentsService.create(data).subscribe(
-      (response) => {
+      (response: any) => {
+        const slug = this.route.snapshot.paramMap.get('slug');
+        this.getAllCmt(this.id_blog);
         this.resetForm();
         this.toastrService.success('Bình luận thành công!');
       },
