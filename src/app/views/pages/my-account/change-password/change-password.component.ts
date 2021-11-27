@@ -44,7 +44,7 @@ export class ChangePasswordComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.id = localStorage.getItem('id');
+    this.id = localStorage.getItem('currentUser');
   }
 
   get f() {
