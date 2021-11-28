@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { RentalNewsService } from 'src/app/services/rental-news.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-latest-property',
@@ -8,6 +9,7 @@ import { RentalNewsService } from 'src/app/services/rental-news.service';
   styleUrls: ['./latest-property.component.css'],
 })
 export class LatestPropertyComponent implements OnInit {
+  linkImg = environment.linkImg;
   rentalNews: any | undefined;
 
   constructor(private rentalNewsService: RentalNewsService) {}

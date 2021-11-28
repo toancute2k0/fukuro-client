@@ -9,6 +9,7 @@ import { ToastrService } from 'ngx-toastr';
 import { RentalNews } from '../../../../models/rental-news.model';
 import { CustomersService } from '../../../../services/customers.service';
 import { AdminContactsService } from '../../../../services/customer-contacts.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-motel-detail',
@@ -16,6 +17,7 @@ import { AdminContactsService } from '../../../../services/customer-contacts.ser
   styleUrls: ['./motel-detail.component.css'],
 })
 export class MotelDetailComponent implements OnInit {
+  linkImg = environment.linkImg;
   id?: any;
   rentalNews: any | undefined;
   rentalNewsDetail?: RentalNews | undefined;

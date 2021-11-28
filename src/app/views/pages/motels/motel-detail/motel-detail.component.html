@@ -254,8 +254,8 @@
             <div class="block-body">
               <ul class="list-gallery-inline">
                 <li *ngFor="let item of listImage">
-                  <a href="http://localhost:3000/img/{{ item }}" class="mfp-gallery"><img
-                      src="http://localhost:3000/img/{{ item }}" class="img-fluid mx-auto" alt="" /></a>
+                  <a href="{{linkImg}}{{ item }}" class="mfp-gallery"><img src="{{linkImg}}{{ item }}"
+                      class="img-fluid mx-auto" alt="" /></a>
                 </li>
               </ul>
             </div>
@@ -721,7 +721,7 @@
               <!-- List Sibar Property -->
               <div class="sides_list_property" *ngFor="let rental of rentalNews">
                 <div class="sides_list_property_thumb">
-                  <img src="http://localhost:3000/img/{{ rental.image[0] }}" class="img-fluid" alt="" />
+                  <img src="{{linkImg}}{{ rental.image[0] }}" class="img-fluid" alt="" />
                 </div>
                 <div class="sides_list_property_detail">
                   <h4>

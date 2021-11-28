@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Bookmarks } from 'src/app/models/bookmarks.model';
 import { BookmarksService } from 'src/app/services/bookmarks.service';
 import { RentalNewsService } from 'src/app/services/rental-news.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-featured-property',
@@ -11,6 +12,7 @@ import { RentalNewsService } from 'src/app/services/rental-news.service';
 export class FeaturedPropertyComponent implements OnInit {
   rentalNews: any | undefined;
   addedToWishlist?: boolean;
+  linkImg = environment.linkImg;
   constructor(
     private rentalNewsService: RentalNewsService,
     private bookmarkSer: BookmarksService

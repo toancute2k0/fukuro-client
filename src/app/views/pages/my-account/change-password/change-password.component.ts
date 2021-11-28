@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, Validators} from "@angular/forms";
-import {CustomersService} from "../../../../services/customers.service";
-import {Router} from "@angular/router";
-import {ToastrService} from "ngx-toastr";
-import {HttpClient} from "@angular/common/http";
-import {MustMatch} from "../../../../services/validators/must-match.validator";
+import { FormBuilder, Validators } from '@angular/forms';
+import { CustomersService } from '../../../../services/customers.service';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { HttpClient } from '@angular/common/http';
+import { MustMatch } from '../../../../services/validators/must-match.validator';
 
 @Component({
   selector: 'app-change-password',
   templateUrl: './change-password.component.html',
-  styleUrls: ['./change-password.component.css']
+  styleUrls: ['./change-password.component.css'],
 })
 export class ChangePasswordComponent implements OnInit {
   id: any;
@@ -21,27 +21,37 @@ export class ChangePasswordComponent implements OnInit {
     private toastrService: ToastrService,
     private http: HttpClient
   ) {}
-  changePassword = this.fb.group({
-    old_password: ['', Validators.compose([
-      Validators.required,
-      Validators.minLength(6),
-      Validators.pattern(/^\S*$/)
-    ])],
-    new_password: ['', Validators.compose([
-      Validators.required,
-      Validators.minLength(6),
-      Validators.pattern(/^\S*$/)
-    ])],
-    cf_password: ['', Validators.compose([
-      Validators.required,
-      Validators.minLength(6),
-      Validators.pattern(/^\S*$/)
-    ])],
-  },
+  changePassword = this.fb.group(
+    {
+      old_password: [
+        '',
+        Validators.compose([
+          Validators.required,
+          Validators.minLength(6),
+          Validators.pattern(/^\S*$/),
+        ]),
+      ],
+      new_password: [
+        '',
+        Validators.compose([
+          Validators.required,
+          Validators.minLength(6),
+          Validators.pattern(/^\S*$/),
+        ]),
+      ],
+      cf_password: [
+        '',
+        Validators.compose([
+          Validators.required,
+          Validators.minLength(6),
+          Validators.pattern(/^\S*$/),
+        ]),
+      ],
+    },
     {
       validator: MustMatch('new_password', 'cf_password'),
-    });
-
+    }
+  );
 
   ngOnInit(): void {
     this.id = localStorage.getItem('currentUser');
@@ -59,16 +69,18 @@ export class ChangePasswordComponent implements OnInit {
     const data = {
       id: this.id,
       old_password: this.changePassword.value['old_password'],
-      new_password: this.changePassword.value['new_password']};
+      new_password: this.changePassword.value['new_password'],
+    };
     this.customersService.changePassword(data).subscribe(
       (res) => {
         this.newForm();
-        this.toastrService.success(res.message);
+        this.toastrService.success('Đổi mật khẩu thành công!');
       },
       (error) => {
         const mess = error.error.text;
-        this.toastrService.error(mess);
-      });
+        this.toastrService.error('Đổi mật khẩu thất bại!');
+      }
+    );
   }
 
   newForm(): void {
@@ -80,16 +92,14 @@ export class ChangePasswordComponent implements OnInit {
     });
   }
 
-  openFilterSearch()
-  {
-    let textArea =(document.getElementById('filter_search') as HTMLTextAreaElement)
-    if(textArea.style.display =='none')
-    {
-      textArea.style.display ='block'
-    }
-    else
-    {
-      textArea.style.display ='none'
+  openFilterSearch() {
+    let textArea = document.getElementById(
+      'filter_search'
+    ) as HTMLTextAreaElement;
+    if (textArea.style.display == 'none') {
+      textArea.style.display = 'block';
+    } else {
+      textArea.style.display = 'none';
     }
   }
 }

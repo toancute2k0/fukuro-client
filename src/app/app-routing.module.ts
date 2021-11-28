@@ -40,8 +40,16 @@ const routes: Routes = [
   { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: 'reset-password', component: ResetPasswordComponent },
   { path: 'dang-nhap', component: LoginComponent, canActivate: [NoAuthGuard] },
-  { path: 'thanh-toan', component: PromotionsComponent,},
-  { path: 'chinh-sua-bai-viet', component: EditRentalComponent, canActivate: [AuthGuard] },
+  {
+    path: 'thanh-toan',
+    component: PromotionsComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'chinh-sua-bai-viet',
+    component: EditRentalComponent,
+    canActivate: [AuthGuard],
+  },
   {
     path: 'my-account',
     loadChildren: () =>

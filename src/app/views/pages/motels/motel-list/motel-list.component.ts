@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RentalNews } from '../../../../models/rental-news.model';
 import { RentalNewsService } from '../../../../services/rental-news.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-motel-list',
@@ -8,6 +9,7 @@ import { RentalNewsService } from '../../../../services/rental-news.service';
   styleUrls: ['./motel-list.component.css'],
 })
 export class MotelListComponent implements OnInit {
+  linkImg = environment.linkImg;
   page = 1;
   length = 8;
   count = 8;
