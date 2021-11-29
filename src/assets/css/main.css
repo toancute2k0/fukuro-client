@@ -10604,11 +10604,12 @@ table.property-table-wrap .property-container .title span {
 table.property-table-wrap .property-container .title .table-property-price {
   display: inline-block;
   background: #f1f3f7;
-  color: #677994;
+  color: #0fca98;
   border-radius: 2px;
   font-size: 13px;
   margin-top: 9px;
   padding: 2px 10px;
+  font-weight: 700;
 }
 
 /*-------------------------------------------------

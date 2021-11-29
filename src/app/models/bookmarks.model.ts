@@ -1,5 +1,5 @@
 export class Bookmarks {
-  id?: number;
+  id?: string;
   customer_id?: string;
   rental_news?: string;
 }

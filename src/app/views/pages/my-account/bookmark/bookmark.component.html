@@ -37,74 +37,36 @@
 
           <!-- Bookmark Property -->
           <div class="form-submit">
-            <h4>Bookmark Property</h4>
+            <h4>Tin cho thuê đã lưu</h4>
           </div>
 
           <table class="property-table-wrap responsive-table bkmark">
 
             <tbody>
               <tr>
-                <th><i class="fa fa-file-text"></i> Property</th>
+                <th><i class="fa fa-file-text"></i> Tất cả các tin</th>
                 <th></th>
               </tr>
 
               <!-- Item #1 -->
-              <tr>
+              <tr *ngFor="let wish of bookMark">
                 <td class="property-container">
-                  <img src="https://via.placeholder.com/1200x800" alt="">
+                  <a routerLink="/thue-nha-dat/{{ wish.id }}">
+                    <img src="{{linkImg}}{{wish.image[0]}}" alt="">
+                  </a>
                   <div class="title">
-                    <h4><a href="#">Serene Uptown</a></h4>
-                    <span>6 Bishop Ave. Perkasie, PA </span>
-                    <span class="table-property-price">$900 / monthly</span>
+                    <h4><a routerLink="/thue-nha-dat/{{ wish.id }}">{{wish.name}}</a></h4>
+                    <span>{{wish.address}}</span>
+                    <span class="table-property-price">
+                      <i>{{wish.price | number }} Vnđ<sub>/tháng</sub></i>
+                    </span>
                   </div>
                 </td>
                 <td class="action">
-                  <a href="#" class="delete"><i class="ti-close"></i> Delete</a>
-                </td>
-              </tr>
-
-              <!-- Item #2 -->
-              <tr>
-                <td class="property-container">
-                  <img src="https://via.placeholder.com/1200x800" alt="">
-                  <div class="title">
-                    <h4><a href="#">Oak Tree Villas</a></h4>
-                    <span>71 Lower River Dr. Bronx, NY</span>
-                    <span class="table-property-price">$535,000</span>
-                  </div>
-                </td>
-                <td class="action">
-                  <a href="#" class="delete"><i class="ti-close"></i> Delete</a>
-                </td>
-              </tr>
-
-              <!-- Item #3 -->
-              <tr>
-                <td class="property-container">
-                  <img src="https://via.placeholder.com/1200x800" alt="">
-                  <div class="title">
-                    <h4><a href="#">Selway Villas</a></h4>
-                    <span>33 William St. Northbrook, IL </span>
-                    <span class="table-property-price">$420,000</span>
-                  </div>
-                </td>
-                <td class="action">
-                  <a href="#" class="delete"><i class="ti-close"></i> Delete</a>
-                </td>
-              </tr>
-
-              <!-- Item #4 -->
-              <tr>
-                <td class="property-container">
-                  <img src="https://via.placeholder.com/1200x800" alt="">
-                  <div class="title">
-                    <h4><a href="#">Town Manchester</a></h4>
-                    <span> 7843 Durham Avenue, MD </span>
-                    <span class="table-property-price">$420,000</span>
-                  </div>
-                </td>
-                <td class="action">
-                  <a href="#" class="delete"><i class="ti-close"></i> Delete</a>
+                  <a class="delete" (click)="handleRemoveFromWishlist(wish.id)">
+                    <i class="ti-close"></i>
+                    Xoá
+                  </a>
                 </td>
               </tr>
 

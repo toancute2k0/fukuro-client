@@ -3,7 +3,8 @@ import { Bookmarks } from 'src/app/models/bookmarks.model';
 import { BookmarksService } from 'src/app/services/bookmarks.service';
 import { RentalNewsService } from 'src/app/services/rental-news.service';
 import { environment } from 'src/environments/environment';
-import {ToastrService} from "ngx-toastr";
+import { ToastrService } from 'ngx-toastr';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-featured-property',
@@ -18,14 +19,15 @@ export class FeaturedPropertyComponent implements OnInit {
   constructor(
     private rentalNewsService: RentalNewsService,
     private bookmarkSer: BookmarksService,
-    private toastrService: ToastrService
+    public auth: AuthService
   ) {}
 
   ngOnInit(): void {
-   this.getWishlist();
+    this.getWishlist();
+    this.getRentalNews();
   }
 
-  getWishlist(){
+  getWishlist() {
     this.bookmarkSer.getAll().subscribe(
       (data: any | undefined) => {
         var arr = data['rows'][0].rentalNews;
@@ -35,9 +37,10 @@ export class FeaturedPropertyComponent implements OnInit {
       },
       (err) => {
         console.log(err);
-      });
+      }
+    );
   }
-  getRentalNews(){
+  getRentalNews() {
     this.rentalNewsService.getLatest().subscribe(
       (data: any | undefined) => {
         this.rentalNews = data['rows'];
@@ -47,11 +50,12 @@ export class FeaturedPropertyComponent implements OnInit {
         for (let item of this.rentalNews) {
           item.wishlist = false;
           for (var i = 0; i < this.wishlist.length; i++) {
-            if(item.id == this.wishlist[i]){
+            if (item.id == this.wishlist[i]) {
               item.wishlist = true;
             }
           }
         }
+        console.log(this.rentalNews);
       },
       (err) => {
         console.log(err);
@@ -66,15 +70,16 @@ export class FeaturedPropertyComponent implements OnInit {
     };
     this.bookmarkSer.updateBookMark(_id, data).subscribe((res) => {
       this.getWishlist();
-      this.toastrService.success('Thêm item wishlist thành công!');
     });
   }
 
   handleRemoveFromWishlist(id: string) {
-    this.bookmarkSer.delete(id).subscribe((res) => {
-      console.log(id);
+    const _id = localStorage.getItem('currentUser');
+    const data = {
+      rental_news: id.toString(),
+    };
+    this.bookmarkSer.updateBookMark(_id, data).subscribe((res) => {
       this.getWishlist();
-      this.toastrService.success('Xoá item wishlist thành công!');
     });
   }
 }
