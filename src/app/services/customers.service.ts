@@ -14,6 +14,8 @@ export class CustomersService {
   profileImageUpdate$ = new Subject<string>();
   profileName$ = new Subject<string>();
   profileUsername$ = new Subject<string>();
+  profileId$ = new Subject<number>();
+
   constructor(private http: HttpClient) {}
 
   getAll(): Observable<Customers[]> {

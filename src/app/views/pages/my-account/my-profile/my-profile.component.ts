@@ -91,7 +91,7 @@ export class MyProfileComponent implements OnInit {
       (res: any) => {
         let name = this.updateCus.value['firstName']+' '+this.updateCus.value['lastName'];
         this.customSer.profileImageUpdate$.next(this.updateCus.value['avatar']);
-        this.customSer.profileName$.next(name );
+        this.customSer.profileName$.next(name);
         this.customSer.profileUsername$.next( this.updateCus.value['username']);
         this.toastrService.success('Cập nhật tài khoản thành công!');
       },
