@@ -18,6 +18,9 @@ export class RentalNewsService {
   get(id: any): Observable<RentalNews> {
     return this.http.get(`${API_URL}/${id}`);
   }
+  getBySlug(slug: string): Observable<RentalNews[]> {
+    return this.http.get<RentalNews[]>(`${API_URL}/slug/${slug}`);
+  }
   getAll(page: any, limit: any): Observable<RentalNews[]> {
     return this.http.get<RentalNews[]>(
       `${API_URL}?page=${page}&limit=${limit}`

@@ -25,7 +25,7 @@
                     <div class="list-img-slide">
                       <div class="click">
                         <div>
-                          <a routerLink="/thue-nha-dat/{{ item.id }}">
+                          <a routerLink="/thue-nha-dat/{{ item.slug }}">
                             <img src="{{linkImg}}{{item.image[0]}}" class="img-fluid mx-auto" alt="" />
                           </a>
                         </div>
@@ -39,7 +39,7 @@
                         <span *ngIf="item.type == 1" class="prt-types sale">Phòng trọ</span>
                         <span *ngIf="item.type == 2" class="prt-types sale">Mặt bằng</span>
                         <span *ngIf="item.type == 3" class="prt-types sale">Căn hộ</span>
-                        <h4 class="listing-name"><a routerLink="/thue-nha-dat/{{ item.id }}">{{ item.name }}</a></h4>
+                        <h4 class="listing-name"><a routerLink="/thue-nha-dat/{{ item.slug }}">{{ item.name }}</a></h4>
                       </div>
                     </div>
                   </div>
@@ -48,8 +48,18 @@
                     <h6 class="listing-card-info-price" style="padding-left: 1.5rem !important; margin: 0 !important;">
                       {{item.price | number }} Vnđ
                     </h6>
-                    <div class="prop-favorite">
-                      <i class="fa fa-heart"></i>
+                    <div class="prop-favorite" *ngIf="auth.isLoggedIn">
+                      <i *ngIf="item.wishlist == true" class="far fa-heart" (click)="handleRemoveFromWishlist(item.id)"
+                        style="color: palevioletred !important;">
+                      </i>
+                      <i *ngIf="item.wishlist == false" class="ti-heart" (click)="handleAddToWishlist(item.id)">
+                      </i>
+                    </div>
+                    <div class="prop-favorite" *ngIf="!auth.isLoggedIn">
+                      <a routerLink="dang-nhap">
+                        <i class="ti-heart">
+                        </i>
+                      </a>
                     </div>
                   </div>
 

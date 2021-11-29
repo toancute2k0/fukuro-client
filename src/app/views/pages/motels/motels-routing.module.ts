@@ -14,7 +14,7 @@ const routes: Routes = [
         component: MotelListComponent,
       },
       {
-        path: ':id',
+        path: ':slug',
         component: MotelDetailComponent,
       },
     ],

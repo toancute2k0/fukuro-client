@@ -18,6 +18,9 @@ export class BookmarksService {
   getAllCus(id: any): Observable<Bookmarks[]> {
     return this.http.get<Bookmarks[]>(`${API_URL}/customer/${id}`);
   }
+  deleteCusById(id: any): Observable<Bookmarks[]> {
+    return this.http.delete<Bookmarks[]>(`${API_URL}/customer/${id}`);
+  }
   updateBookMark(id: any, data: any): Observable<Bookmarks[]> {
     return this.http.post<Bookmarks[]>(`${API_URL}/customer/${id}`, data);
   }

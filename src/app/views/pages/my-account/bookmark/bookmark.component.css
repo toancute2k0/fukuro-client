@@ -1,0 +1,14 @@
+.clean_all a {
+  color: #fff;
+  cursor: pointer;
+}
+.clean_all a:hover {
+  color: #0fca98;
+  transition: all 5s;
+}
+.clean_all i {
+  position: relative;
+  top: -2px;
+  font-size: 20px;
+  margin-right: 5px;
+}

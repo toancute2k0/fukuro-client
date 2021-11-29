@@ -1,3 +1,4 @@
+y
 <!-- ============================ All Property ================================== -->
 <section class="bg-light">
   <div class="container">
@@ -18,7 +19,7 @@
         <div class="property-listing property-1">
           <div class="listing-img-wrapper">
 
-            <a routerLink="/thue-nha-dat/{{ item.id }}">
+            <a routerLink="/thue-nha-dat/{{ item.slug }}">
               <img src="{{linkImg}}{{item.image[0]}}" class="img-fluid mx-auto" alt="" />
             </a>
           </div>
@@ -28,7 +29,7 @@
             <div class="listing-detail-wrapper-box">
               <div class="listing-detail-wrapper">
                 <div class="listing-short-detail">
-                  <h4 class="listing-name"><a routerLink="/thue-nha-dat/{{ item.id }}">{{ item.name }}</a></h4>
+                  <h4 class="listing-name"><a routerLink="/thue-nha-dat/{{ item.slug }}">{{ item.name }}</a></h4>
                   <div class="fr-can-rating">
                     <i class="fas fa-star filled"></i>
                     <i class="fas fa-star filled"></i>

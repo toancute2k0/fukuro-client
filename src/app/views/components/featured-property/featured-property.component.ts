@@ -3,7 +3,7 @@ import { BookmarksService } from 'src/app/services/bookmarks.service';
 import { RentalNewsService } from 'src/app/services/rental-news.service';
 import { environment } from 'src/environments/environment';
 import { AuthService } from 'src/app/services/auth.service';
-import {CustomersService} from "../../../services/customers.service";
+import { CustomersService } from '../../../services/customers.service';
 
 @Component({
   selector: 'app-featured-property',
@@ -12,7 +12,7 @@ import {CustomersService} from "../../../services/customers.service";
 })
 export class FeaturedPropertyComponent implements OnInit {
   rentalNews: any | undefined;
-  id:any;
+  id: any;
   linkImg = environment.linkImg;
   wishlist = [];
   constructor(
@@ -27,7 +27,7 @@ export class FeaturedPropertyComponent implements OnInit {
     if (id) {
       this.getById(id);
     }
-    this.customSer.profileId$.subscribe((profileId) => this.id = profileId);
+    this.customSer.profileId$.subscribe((profileId) => (this.id = profileId));
     this.getRentalNews();
   }
 
@@ -46,7 +46,6 @@ export class FeaturedPropertyComponent implements OnInit {
       },
       (err: any | undefined) => {
         console.log(err);
-
       }
     );
   }
@@ -57,7 +56,7 @@ export class FeaturedPropertyComponent implements OnInit {
         for (var i = 0; i < data['rows'].length; i++) {
           data['rows'][i].image = JSON.parse(data['rows'][i].image);
         }
-        if(this.wishlist){
+        if (this.wishlist) {
           for (let item of this.rentalNews) {
             item.wishlist = false;
             for (var i = 0; i < this.wishlist.length; i++) {
@@ -78,7 +77,7 @@ export class FeaturedPropertyComponent implements OnInit {
     const data = {
       rental_news: id,
     };
-    this.bookmarkSer.updateBookMark(this.id, data).subscribe((res) => {
+    this.bookmarkSer.updateBookMark(this.id, data).subscribe(() => {
       this.getWishlist();
     });
   }
@@ -87,7 +86,7 @@ export class FeaturedPropertyComponent implements OnInit {
     const data = {
       rental_news: id.toString(),
     };
-    this.bookmarkSer.updateBookMark(this.id, data).subscribe((res) => {
+    this.bookmarkSer.updateBookMark(this.id, data).subscribe(() => {
       this.getWishlist();
     });
   }

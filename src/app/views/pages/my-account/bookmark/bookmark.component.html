@@ -25,7 +25,6 @@
           <div class="sidebar-widgets">
             <div class="dashboard-navbar">
               <app-dashboard-navigation></app-dashboard-navigation>
-
             </div>
           </div>
 
@@ -44,8 +43,15 @@
 
             <tbody>
               <tr>
-                <th><i class="fa fa-file-text"></i> Tất cả các tin</th>
-                <th></th>
+                <th>
+                  <span>Danh sách</span>
+                </th>
+                <th class="clean_all">
+                  <a class="d-flex flex-row-reverse" (click)="deleteCusById()">
+                    Xoá tất cả
+                    <i class="ti-trash"></i>
+                  </a>
+                </th>
               </tr>
 
               <!-- Item #1 -->
@@ -63,8 +69,8 @@
                   </div>
                 </td>
                 <td class="action">
-                  <a class="delete" (click)="handleRemoveFromWishlist(wish.id)">
-                    <i class="ti-close"></i>
+                  <a class="delete" (click)="handleRemoveFromWishlist(wish.id)" style="cursor: pointer;">
+                    <i class="ti-trash"></i>
                     Xoá
                   </a>
                 </td>

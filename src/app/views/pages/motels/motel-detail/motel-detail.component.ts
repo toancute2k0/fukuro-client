@@ -18,7 +18,6 @@ import { environment } from 'src/environments/environment';
 })
 export class MotelDetailComponent implements OnInit {
   linkImg = environment.linkImg;
-  id?: any;
   rentalNews: any | undefined;
   rentalNewsDetail?: RentalNews | undefined;
   listImage = [];
@@ -52,8 +51,10 @@ export class MotelDetailComponent implements OnInit {
   });
 
   ngOnInit(): void {
-    this.id = this.route.snapshot.paramMap.get('id');
-    this.getRentalNews(this.id);
+    const slug = this.route.snapshot.paramMap.get('slug');
+    if (slug) {
+      this.getRentalNews(slug);
+    }
     this.getLatestRentalNews();
   }
   get f() {
@@ -73,8 +74,8 @@ export class MotelDetailComponent implements OnInit {
       }
     );
   }
-  getRentalNews(id: string): void {
-    this.rentalNewsService.get(id).subscribe(
+  getRentalNews(slug: string): void {
+    this.rentalNewsService.getBySlug(slug).subscribe(
       (data: any | undefined) => {
         this.rentalNewsDetail = data;
         this.listImage = JSON.parse(data.image);
