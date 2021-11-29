@@ -41,7 +41,6 @@ export class HeaderComponent implements OnInit {
       this.avatar = res['avatar'];
       this.name = res['firstName']+' '+res['lastName'];
       this.username = res['username'];
-
     });
   }
 }

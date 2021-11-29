@@ -36,7 +36,6 @@ export class BookmarkComponent implements OnInit {
         for (var i = 0; i < data.length; i++) {
           data[i].image = JSON.parse(data[i].image);
         }
-        console.log(this.bookMark);
       },
       (err) => {
         console.log(err);

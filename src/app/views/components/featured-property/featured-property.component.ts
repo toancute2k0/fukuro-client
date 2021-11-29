@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Bookmarks } from 'src/app/models/bookmarks.model';
 import { BookmarksService } from 'src/app/services/bookmarks.service';
 import { RentalNewsService } from 'src/app/services/rental-news.service';
 import { environment } from 'src/environments/environment';
-import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/auth.service';
+import {CustomersService} from "../../../services/customers.service";
 
 @Component({
   selector: 'app-featured-property',
@@ -13,30 +12,41 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class FeaturedPropertyComponent implements OnInit {
   rentalNews: any | undefined;
-  rentalNewsWl: any | undefined;
+  id:any;
   linkImg = environment.linkImg;
   wishlist = [];
   constructor(
     private rentalNewsService: RentalNewsService,
     private bookmarkSer: BookmarksService,
-    public auth: AuthService
+    public auth: AuthService,
+    private customSer: CustomersService
   ) {}
 
   ngOnInit(): void {
-    this.getWishlist();
+    const id = localStorage.getItem('currentUser');
+    if (id) {
+      this.getById(id);
+    }
+    this.customSer.profileId$.subscribe((profileId) => this.id = profileId);
     this.getRentalNews();
   }
 
+  getById(id: string): void {
+    this.customSer.get(id).subscribe((res: any) => {
+      this.id = res['id'];
+      this.getWishlist();
+    });
+  }
+
   getWishlist() {
-    this.bookmarkSer.getAll().subscribe(
-      (data: any | undefined) => {
-        var arr = data['rows'][0].rentalNews;
-        var fields = arr.split(',');
-        this.wishlist = fields;
+    this.bookmarkSer.getAllCus(this.id).subscribe(
+      (data: any) => {
+        this.wishlist = data;
         this.getRentalNews();
       },
-      (err) => {
+      (err: any | undefined) => {
         console.log(err);
+
       }
     );
   }
@@ -47,15 +57,16 @@ export class FeaturedPropertyComponent implements OnInit {
         for (var i = 0; i < data['rows'].length; i++) {
           data['rows'][i].image = JSON.parse(data['rows'][i].image);
         }
-        for (let item of this.rentalNews) {
-          item.wishlist = false;
-          for (var i = 0; i < this.wishlist.length; i++) {
-            if (item.id == this.wishlist[i]) {
-              item.wishlist = true;
+        if(this.wishlist){
+          for (let item of this.rentalNews) {
+            item.wishlist = false;
+            for (var i = 0; i < this.wishlist.length; i++) {
+              if (item.id == this.wishlist[i]['id']) {
+                item.wishlist = true;
+              }
             }
           }
         }
-        console.log(this.rentalNews);
       },
       (err) => {
         console.log(err);
@@ -64,21 +75,19 @@ export class FeaturedPropertyComponent implements OnInit {
   }
 
   handleAddToWishlist(id: string) {
-    const _id = localStorage.getItem('currentUser');
     const data = {
       rental_news: id,
     };
-    this.bookmarkSer.updateBookMark(_id, data).subscribe((res) => {
+    this.bookmarkSer.updateBookMark(this.id, data).subscribe((res) => {
       this.getWishlist();
     });
   }
 
   handleRemoveFromWishlist(id: string) {
-    const _id = localStorage.getItem('currentUser');
     const data = {
       rental_news: id.toString(),
     };
-    this.bookmarkSer.updateBookMark(_id, data).subscribe((res) => {
+    this.bookmarkSer.updateBookMark(this.id, data).subscribe((res) => {
       this.getWishlist();
     });
   }

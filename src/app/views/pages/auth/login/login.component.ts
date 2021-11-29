@@ -92,6 +92,11 @@ export class LoginComponent implements OnInit {
           //   .then(() => {
           //     this._router.navigate(['/']);
           //   });
+          let name = data.data.firstName+' '+data.data.lastName;
+          this.customSer.profileImageUpdate$.next(data.data.avatar);
+          this.customSer.profileName$.next(name);
+          this.customSer.profileUsername$.next( data.data.username);
+          this.customSer.profileId$.next(data.data.id);
           this._router.navigate(['/']);
           this.toastrService.success('Đăng nhập thành công!');
         },
