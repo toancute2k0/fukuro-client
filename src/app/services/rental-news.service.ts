@@ -18,8 +18,11 @@ export class RentalNewsService {
   get(id: any): Observable<RentalNews> {
     return this.http.get(`${API_URL}/${id}`);
   }
-  getBySlug(slug: string): Observable<RentalNews[]> {
-    return this.http.get<RentalNews[]>(`${API_URL}/slug/${slug}`);
+  update(id:any,data:any): Observable<RentalNews[]> {
+    return this.http.put<RentalNews[]>(`${API_URL}/${id}`, data);
+  }
+  getBySlug(id: string): Observable<RentalNews[]> {
+    return this.http.get<RentalNews[]>(`${API_URL}/${id}`);
   }
   getAll(page: any, limit: any): Observable<RentalNews[]> {
     return this.http.get<RentalNews[]>(
@@ -40,4 +43,8 @@ export class RentalNewsService {
   getfindByCustomerId(id: any): Observable<RentalNews> {
     return this.http.get(`${API_URL}/customer/${id}`);
   }
+  delete(id:any):Observable<RentalNews> {
+    return this.http.delete(`${API_URL}/${id}`);
+  }
+  
 }

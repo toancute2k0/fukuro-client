@@ -24,7 +24,7 @@ import { NgxSummernoteModule } from 'ngx-summernote';
 import { NgxDropzoneModule } from 'ngx-dropzone';
 import { PromotionsComponent } from './views/pages/promotions/promotions.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
+import { EditRentalComponent } from './views/pages/my-account/edit-rental/edit-rental.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,6 +39,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     PromotionsComponent,
     ForgotPasswordComponent,
     ResetPasswordComponent,
+    EditRentalComponent
   ],
   imports: [
     BrowserModule,

@@ -13,7 +13,6 @@ import { DashboardNavigationComponent } from './dashboard-navigation/dashboard-n
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
-import { EditRentalComponent } from './edit-rental/edit-rental.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +24,6 @@ import { EditRentalComponent } from './edit-rental/edit-rental.component';
     BookmarkComponent,
     ChangePasswordComponent,
     DashboardNavigationComponent,
-    EditRentalComponent,
   ],
 
   imports: [

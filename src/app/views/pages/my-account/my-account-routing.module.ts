@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BookmarkComponent } from './bookmark/bookmark.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
+import { EditRentalComponent } from './edit-rental/edit-rental.component';
 import { MyAccountComponent } from './my-account.component';
 import { MyProfileComponent } from './my-profile/my-profile.component';
 import { NotificationComponent } from './notification/notification.component';
@@ -32,6 +33,10 @@ const routes: Routes = [
       {
         path: 'renal-manage',
         component: RentalManageComponent,
+      },
+      {
+        path: 'chinh-sua-tin-cho-thue/:id',
+        component: EditRentalComponent,
       },
       {
         path: '',
