@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { RentalNews } from 'src/app/models/rental-news.model';
 import { RentalNewsService } from 'src/app/services/rental-news.service';
 import { environment } from 'src/environments/environment';
+import { ToastrService } from 'ngx-toastr';
+import { BookmarksService } from 'src/app/services/bookmarks.service';
+import { CustomersService } from 'src/app/services/customers.service';
 @Component({
   selector: 'app-rental-manage',
   templateUrl: './rental-manage.component.html',
@@ -9,22 +12,56 @@ import { environment } from 'src/environments/environment';
 })
 export class RentalManageComponent implements OnInit {
   linkImg = environment.linkImg;
-  rental?: RentalNews[];
+  rental: any | undefined;
   id: any;
-  constructor(private rentalNewsService: RentalNewsService) {}
+  wishlist=[];
+  constructor(private rentalNewsService: RentalNewsService,
+    private toastrService: ToastrService,
+    private bookmarkSer:BookmarksService,
+    private customSer: CustomersService) {}
 
   ngOnInit(): void {
     this.id = localStorage.getItem('currentUser');
+    if (this.id) {
+      this.getById(this.id);
+    }
     this.getRentalNews();
   }
-  getRentalNews(): void {
-    this.rentalNewsService.getfindByCustomerId(this.id).subscribe(
+  getById(id: string): void {
+    this.customSer.get(id).subscribe((res: any) => {
+      this.id = res['id'];
+      this.getWishlist();
+    });
+  }
+  getWishlist() {
+    this.bookmarkSer.getAllCus(this.id).subscribe(
       (data: any) => {
-        console.log(data);
+        this.wishlist = data;
+        console.log(data)
+        this.getRentalNews();
+      },
+      (err: any | undefined) => {
+        console.log(err);
+      }
+    );
+  }
+  getRentalNews() {
+    this.rentalNewsService.getfindByCustomerId(this.id).subscribe(
+      (data: any | undefined) => {
         this.rental = data['rows'];
         for (var i = 0; i < data['rows'].length; i++) {
           data['rows'][i].image = JSON.parse(data['rows'][i].image);
-          data['rows'][i].image = data['rows'][i].image[0];
+        }
+        console.log(this.rental)
+        if (this.wishlist) {
+          for (let item of this.rental) {
+            item.wishlist = false;
+            for (var i = 0; i < this.wishlist.length; i++) {
+              if (item.id == this.wishlist[i]['id']) {
+                item.wishlist = true;
+              }
+            }
+          }
         }
       },
       (err) => {
@@ -42,4 +79,34 @@ export class RentalManageComponent implements OnInit {
       textArea.style.display = 'none';
     }
   }
+  deleteRentalNews(id:any){
+    if (window.confirm('Bạn có chắn chắn sẽ xoá không?')) {
+      this.rentalNewsService.delete(id)
+        .subscribe(
+          response => {
+            this.getRentalNews();
+            this.toastrService.success('Xóa tin cho thuê thành công ');
+          },
+          error => {
+            this.toastrService.success(error);
+          });
+    }
+      }
+      handleAddToWishlist(id:any) {
+        const data = {
+          rental_news: id.toString(),
+        };
+        this.bookmarkSer.updateBookMark(this.id, data).subscribe(() => {
+          this.getWishlist();
+        });
+      }
+    
+      handleRemoveFromWishlist(id: string) {
+        const data = {
+          rental_news: id.toString(),
+        };
+        this.bookmarkSer.updateBookMark(this.id, data).subscribe(() => {
+          this.getWishlist();
+        });
+      }
 }

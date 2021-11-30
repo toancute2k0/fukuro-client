@@ -68,11 +68,15 @@
                                     <div class="action">
                                         <a routerLink="/my-account/chinh-sua-tin-cho-thue/{{ item.id }}" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"><i
                         class="ti-pencil"></i></a>
-                                        <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="202 User View"><i
+                                        <a routerLink="/thue-nha-dat/{{item.slug}}" title="202 User View"><i
                         class="ti-eye"></i></a>
-                                        <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete Property" class="delete"><i class="ti-close"></i></a>
-                                        <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Make Featured" class="delete"><i
-                        class="ti-star"></i></a>
+                                        <a (click)="deleteRentalNews(item.id)" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete Property" class="delete"><i class="ti-close"></i></a>
+                                        <a class="prop-favorite" data-bs-toggle="tooltip" data-bs-placement="top">
+                                            <i *ngIf="item.wishlist == true" class="far fa-heart" (click)="handleRemoveFromWishlist(item.id)" style="color: rgb(253, 253, 253) !important;">
+                                            </i>
+                                            <i *ngIf="item.wishlist == false" class="ti-heart" (click)="handleAddToWishlist(item.id)">
+                                            </i>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
