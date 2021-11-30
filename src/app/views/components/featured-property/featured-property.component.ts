@@ -73,16 +73,16 @@ export class FeaturedPropertyComponent implements OnInit {
     );
   }
 
-  handleAddToWishlist(id: string) {
+  handleAddToWishlist(id: any) {
     const data = {
-      rental_news: id,
+      rental_news: id.toString(),
     };
     this.bookmarkSer.updateBookMark(this.id, data).subscribe(() => {
       this.getWishlist();
     });
   }
 
-  handleRemoveFromWishlist(id: string) {
+  handleRemoveFromWishlist(id: any) {
     const data = {
       rental_news: id.toString(),
     };

@@ -21,8 +21,8 @@ export class RentalNewsService {
   update(id:any,data:any): Observable<RentalNews[]> {
     return this.http.put<RentalNews[]>(`${API_URL}/${id}`, data);
   }
-  getBySlug(id: string): Observable<RentalNews[]> {
-    return this.http.get<RentalNews[]>(`${API_URL}/${id}`);
+  getBySlug(slug: string): Observable<RentalNews[]> {
+    return this.http.get<RentalNews[]>(`${API_URL}/slug/${slug}`);
   }
   getAll(page: any, limit: any): Observable<RentalNews[]> {
     return this.http.get<RentalNews[]>(
@@ -46,5 +46,5 @@ export class RentalNewsService {
   delete(id:any):Observable<RentalNews> {
     return this.http.delete(`${API_URL}/${id}`);
   }
-  
+
 }

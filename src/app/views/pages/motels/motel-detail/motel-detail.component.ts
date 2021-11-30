@@ -77,6 +77,7 @@ export class MotelDetailComponent implements OnInit {
   getRentalNews(slug: string): void {
     this.rentalNewsService.getBySlug(slug).subscribe(
       (data: any | undefined) => {
+        console.log(data);
         this.rentalNewsDetail = data;
         this.listImage = JSON.parse(data.image);
         this.customSer.get(data.customerId).subscribe((res) => {
