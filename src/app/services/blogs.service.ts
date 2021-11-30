@@ -5,6 +5,7 @@ import { Blogs } from '../models/blogs.model';
 import { BlogCategories } from '../models/blog-categories.model';
 import { map, catchError } from 'rxjs/operators';
 import { environment as env } from '../../environments/environment';
+import {RentalNews} from "../models/rental-news.model";
 const API_URL = `${env.apiURL}/blogs`;
 
 @Injectable({
@@ -13,8 +14,10 @@ const API_URL = `${env.apiURL}/blogs`;
 export class BlogsService {
   constructor(private http: HttpClient) {}
 
-  getAll(): Observable<Blogs[]> {
-    return this.http.get<Blogs[]>(API_URL);
+  getAll(page: any, limit: any): Observable<Blogs[]> {
+    return this.http.get<Blogs[]>(
+      `${API_URL}?page=${page}&limit=${limit}`
+    );
   }
 
   get(id: any): Observable<BlogCategories> {

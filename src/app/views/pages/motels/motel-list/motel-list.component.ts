@@ -14,12 +14,13 @@ import { CustomersService } from 'src/app/services/customers.service';
 export class MotelListComponent implements OnInit {
   linkImg = environment.linkImg;
   page = 1;
-  length = 6;
   count = 6;
   rentalNews: any | undefined;
   id: any;
   wishlist = [];
   public isMobile = false;
+
+  cp: number = 1;
 
   constructor(
     private rentalNewsService: RentalNewsService,
@@ -62,6 +63,7 @@ export class MotelListComponent implements OnInit {
             }
           }
         }
+        console.log(this.rentalNews);
       },
       (err) => {
         console.log(err);

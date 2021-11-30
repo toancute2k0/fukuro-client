@@ -9,11 +9,12 @@ import { ComponentsModule } from '../../components/components.module';
 import { HttpClientModule } from '@angular/common/http';
 import { JwPaginationModule } from 'jw-angular-pagination';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { LatestPropertyComponent } from '../../components/latest-property/latest-property.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [MotelsComponent, MotelListComponent, MotelDetailComponent],
   imports: [
+    NgxPaginationModule,
     JwPaginationModule,
     CommonModule,
     MotelsRoutingModule,
