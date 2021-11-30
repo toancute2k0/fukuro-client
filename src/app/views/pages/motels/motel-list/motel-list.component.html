@@ -36,7 +36,7 @@
         <div class="item-shorting-box">
           <div class="item-shorting clearfix">
             <div class="left-column pull-left">
-              <h4 class="m-0">Tìm thấy 1-{{ count }} trong số {{ count }} kết quả</h4>
+              <h4 class="m-0">Hiển thị 1-{{ count }} trong số {{ count }} kết quả</h4>
             </div>
           </div>
           <div class="item-shorting-box-right">
@@ -62,7 +62,7 @@
         <div class="row">
 
           <!-- Single Property Start -->
-          <div class="col-lg-6 col-md-12" *ngFor="let item of rentalNews">
+          <div class="col-lg-6 col-md-12" *ngFor="let item of rentalNews | paginate: { itemsPerPage: 6, currentPage: cp }">
             <div class="property-listing property-1">
 
               <div class="listing-img-wrapper">
@@ -144,26 +144,14 @@
 
         <!-- Pagination -->
         <hr>
+
         <div class="row">
           <div class="col-lg-12 col-md-12 col-sm-12">
             <ul class="pagination p-center">
-              <li class="page-item">
-                <a class="page-link" href="#" aria-label="Previous">
-                  <span class="ti-arrow-left"></span>
-                  <span class="sr-only">Previous</span>
-                </a>
-              </li>
-              <li class="page-item"><a class="page-link" href="#">1</a></li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item active"><a class="page-link" href="#">3</a></li>
-              <li class="page-item"><a class="page-link" href="#">...</a></li>
-              <li class="page-item"><a class="page-link" href="#">18</a></li>
-              <li class="page-item">
-                <a class="page-link" href="#" aria-label="Next">
-                  <span class="ti-arrow-right"></span>
-                  <span class="sr-only">Next</span>
-                </a>
-              </li>
+              <pagination-controls (pageChange)="cp = $event"
+                                   previousLabel="Trước"
+                                   nextLabel="Sau"
+              ></pagination-controls>
             </ul>
           </div>
         </div>

@@ -8,16 +8,27 @@ import { BlogsService } from 'src/app/services/blogs.service';
   styleUrls: ['./blog-list.component.css'],
 })
 export class BlogListComponent implements OnInit {
-  blogs?: Blogs[];
+  cp: number = 1;
+  page = 1;
+  count = 6;
+  blogs: any | undefined;
   constructor(private blogSer: BlogsService) {}
   ngOnInit(): void {
-    this.getBlogs();
+    this.blogSer.getAll(this.page, this.count).subscribe(
+      (data: any | undefined) => {
+        this.count = data['count'];
+        this.getBlogs(1, this.count);
+      },
+      (err) => {
+        console.log(err);
+      });
   }
 
-  getBlogs(): void {
-    this.blogSer.getAllLatest('6').subscribe(
+  getBlogs(n: any, c: any): void {
+    this.blogSer.getAll(n, c).subscribe(
       (data: any) => {
         this.blogs = data['rows'];
+        console.log(this.blogs);
       },
       (err) => {
         console.log(err);

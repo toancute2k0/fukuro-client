@@ -8,6 +8,7 @@ import { BlogListComponent } from './blog-list/blog-list.component';
 import { ComponentsModule } from '../../components/components.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BlogCategoryComponent } from './blog-category/blog-category.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { BlogCategoryComponent } from './blog-category/blog-category.component';
     BlogCategoryComponent,
   ],
   imports: [
+    NgxPaginationModule,
     CommonModule,
     BlogsRoutingModule,
     ComponentsModule,
