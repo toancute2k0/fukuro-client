@@ -1,89 +1,88 @@
 <!-- ============================ User Dashboard ================================== -->
 <section class="bg-light">
-  <div class="container-fluid">
+    <div class="container-fluid">
 
-    <div class="row">
-      <div class="col-lg-12 col-md-12">
-        <div class="filter_search_opt">
-          <a href="javascript:void(0);" (click)="openFilterSearch()">Dashboard Menu<i class="ml-2 ti-menu"></i></a>
-        </div>
-      </div>
-    </div>
-
-    <div class="row">
-
-      <div class="col-lg-3 col-md-12">
-
-        <div class="simple-sidebar sm-sidebar" id="filter_search">
-
-          <div class="search-sidebar_header">
-            <h4 class="ssh_heading">Đóng</h4>
-            <button (click)="openFilterSearch()" class="w3-bar-item w3-button w3-large"><i
-                class="ti-close"></i></button>
-          </div>
-
-          <div class="sidebar-widgets">
-            <div class="dashboard-navbar">
-
-              <app-dashboard-navigation></app-dashboard-navigation>
-
+        <div class="row">
+            <div class="col-lg-12 col-md-12">
+                <div class="filter_search_opt">
+                    <a href="javascript:void(0);" (click)="openFilterSearch()">Dashboard Menu<i class="ml-2 ti-menu"></i></a>
+                </div>
             </div>
-          </div>
-
         </div>
-      </div>
 
-      <div class="col-lg-9 col-md-12">
-        <div class="dashboard-wraper">
+        <div class="row">
 
-          <!-- Bookmark Property -->
-          <!-- <div class="form-submit">
+            <div class="col-lg-3 col-md-12">
+
+                <div class="simple-sidebar sm-sidebar" id="filter_search">
+
+                    <div class="search-sidebar_header">
+                        <h4 class="ssh_heading">Đóng</h4>
+                        <button (click)="openFilterSearch()" class="w3-bar-item w3-button w3-large"><i
+                class="ti-close"></i></button>
+                    </div>
+
+                    <div class="sidebar-widgets">
+                        <div class="dashboard-navbar">
+
+                            <app-dashboard-navigation></app-dashboard-navigation>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-lg-9 col-md-12">
+                <div class="dashboard-wraper">
+
+                    <!-- Bookmark Property -->
+                    <!-- <div class="form-submit">
                       <h4>Bài đăng của bạn</h4>
                   </div> -->
 
-          <div class="row">
+                    <div class="row">
 
-            <!-- Single Property -->
-            <div class="col-md-12 col-sm-12 col-md-12" *ngFor="let item of rental">
-              <div class="singles-dashboard-list">
-                <div class="sd-list-left">
-                  <a routerLink="/thue-nha-dat/{{ item.id }}">
-                    <img src="{{linkImg}}{{item.image}}" class="img-fluid mx-auto" alt="" />
-                  </a>
-                </div>
-                <div class="sd-list-right">
-                  <h4 class="listing_dashboard_title"><a href="#" class="theme-cl">{{ item.name }}</a></h4>
-                  <div class="user_dashboard_listed">
-                    Giá: {{item.price | number }} Vnđ
-                  </div>
-                  <div class="user_dashboard_listed">
-                    Loại hình cho thuê:
-                    <span *ngIf="item.type =='1'" class="prt-types sale">Phòng trọ</span>
-                    <span *ngIf="item.type == '2'" class="prt-types sale">Mặt bằng</span>
-                    <span *ngIf="item.type == '3'" class="prt-types sale">Căn hộ</span>
-                  </div>
-                  <div class="user_dashboard_listed">
-                    Địa chỉ: {{item.address}}
-                  </div>
-                  <div class="action">
-                    <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"><i
+                        <!-- Single Property -->
+                        <div class="col-md-12 col-sm-12 col-md-12" *ngFor="let item of rental">
+                            <div class="singles-dashboard-list">
+                                <div class="sd-list-left">
+                                    <a routerLink="/thue-nha-dat/{{ item.id }}">
+                                        <img src="{{linkImg}}{{item.image}}" class="img-fluid mx-auto" alt="" />
+                                    </a>
+                                </div>
+                                <div class="sd-list-right">
+                                    <h4 class="listing_dashboard_title"><a href="#" class="theme-cl">{{ item.name }}</a></h4>
+                                    <div class="user_dashboard_listed">
+                                        Giá: {{item.price | number }} Vnđ
+                                    </div>
+                                    <div class="user_dashboard_listed">
+                                        Loại hình cho thuê:
+                                        <span *ngIf="item.type =='1'" class="prt-types sale">Phòng trọ</span>
+                                        <span *ngIf="item.type == '2'" class="prt-types sale">Mặt bằng</span>
+                                        <span *ngIf="item.type == '3'" class="prt-types sale">Căn hộ</span>
+                                    </div>
+                                    <div class="user_dashboard_listed">
+                                        Địa chỉ: {{item.address}}
+                                    </div>
+                                    <div class="action">
+                                        <a routerLink="/my-account/chinh-sua-tin-cho-thue/{{ item.id }}" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"><i
                         class="ti-pencil"></i></a>
-                    <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="202 User View"><i
+                                        <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="202 User View"><i
                         class="ti-eye"></i></a>
-                    <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete Property"
-                      class="delete"><i class="ti-close"></i></a>
-                    <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Make Featured" class="delete"><i
+                                        <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete Property" class="delete"><i class="ti-close"></i></a>
+                                        <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Make Featured" class="delete"><i
                         class="ti-star"></i></a>
-                  </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
-              </div>
             </div>
-          </div>
 
         </div>
-      </div>
-
     </div>
-  </div>
 </section>
 <!-- ============================ User Dashboard End ================================== -->

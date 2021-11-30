@@ -14,7 +14,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { EditRentalComponent } from './edit-rental/edit-rental.component';
-
 @NgModule({
   declarations: [
     MyAccountComponent,

@@ -12,7 +12,6 @@ import { HomeComponent } from './views/pages/home/home.component';
 import { NotFoundComponent } from './views/pages/not-found/not-found.component';
 import { PromotionsComponent } from './views/pages/promotions/promotions.component';
 import { RentalNewsComponent } from './views/pages/rental-news/rental-news.component';
-import { EditRentalComponent } from './views/pages/my-account/edit-rental/edit-rental.component';
 const routes: Routes = [
   { path: '', component: HomeComponent },
   {
@@ -32,6 +31,10 @@ const routes: Routes = [
     component: BlogCategoryComponent,
   },
   {
+    path: 'chinh-sua-bai-viet/:slug',
+    component: BlogCategoryComponent,
+  },
+  {
     path: 'thue-nha-dat',
     loadChildren: () =>
       import('./views/pages/motels/motels.module').then((m) => m.MotelsModule),
@@ -43,11 +46,6 @@ const routes: Routes = [
   {
     path: 'thanh-toan',
     component: PromotionsComponent,
-    canActivate: [AuthGuard],
-  },
-  {
-    path: 'chinh-sua-bai-viet',
-    component: EditRentalComponent,
     canActivate: [AuthGuard],
   },
   {
