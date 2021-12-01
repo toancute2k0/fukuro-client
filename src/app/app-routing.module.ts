@@ -27,6 +27,11 @@ const routes: Routes = [
       import('./views/pages/blogs/blogs.module').then((m) => m.BlogsModule),
   },
   {
+    path: 'hoi-dap',
+    loadChildren: () =>
+      import('./views/pages/questions-and-answers/questions-and-answers.module').then((m) => m.QuestionsAndAnswersModule),
+  },
+  {
     path: 'danh-muc-bai-viet/:slug',
     component: BlogCategoryComponent,
   },
