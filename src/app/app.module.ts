@@ -40,7 +40,7 @@ import { EditRentalComponent } from './views/pages/my-account/edit-rental/edit-r
     PromotionsComponent,
     ForgotPasswordComponent,
     ResetPasswordComponent,
-    EditRentalComponent
+    EditRentalComponent,
   ],
   imports: [
     BrowserModule,

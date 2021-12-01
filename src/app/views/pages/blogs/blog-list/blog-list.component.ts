@@ -28,7 +28,6 @@ export class BlogListComponent implements OnInit {
     this.blogSer.getAll(n, c).subscribe(
       (data: any) => {
         this.blogs = data['rows'];
-        console.log(this.blogs);
       },
       (err) => {
         console.log(err);
