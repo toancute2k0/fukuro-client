@@ -72,6 +72,10 @@
   display: flex;
 }
 
+.prop-favorite a {
+  display: contents;
+}
+
 .prop-favorite i {
   margin: auto;
   font-weight: 600;
