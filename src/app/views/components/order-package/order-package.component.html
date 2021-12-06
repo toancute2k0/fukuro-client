@@ -15,7 +15,27 @@
 
     <div class="row">
 
-      <!-- Single Package -->
+      <div class="col-lg-4 col-md-4" *ngFor=" let item of premium">
+        <div class="pricing-wrap standard-pr">
+
+          <div class="pricing-header">
+            <h4 class="pr-value"><sup>VNĐ</sup>{{item.price | number}}</h4>
+            <h4 class="pr-title">{{item.name}}</h4>
+          </div>
+          <div class="pricing-body">
+            <ul>
+              <li class="available">
+                {{item.description}}
+              </li>
+            </ul>
+          </div>
+          <div class="pricing-bottom">
+            <a routerLink="/thanh-toan" class="btn-pricing">Mua Ngay</a>
+          </div>
+
+        </div>
+      </div>
+      <!--
       <div class="col-lg-4 col-md-4">
         <div class="pricing-wrap basic-pr">
 
@@ -35,10 +55,10 @@
           </div>
 
         </div>
-      </div>
+      </div> -->
 
       <!-- Single Package -->
-      <div class="col-lg-4 col-md-4">
+      <!-- <div class="col-lg-4 col-md-4">
         <div class="pricing-wrap platinum-pr recommended">
 
           <div class="pricing-header">
@@ -57,10 +77,10 @@
           </div>
 
         </div>
-      </div>
+      </div> -->
 
       <!-- Single Package -->
-      <div class="col-lg-4 col-md-4">
+      <!-- <div class="col-lg-4 col-md-4">
         <div class="pricing-wrap standard-pr">
 
           <div class="pricing-header">
@@ -79,7 +99,7 @@
           </div>
 
         </div>
-      </div>
+      </div> -->
 
     </div>
 

@@ -11,9 +11,9 @@ import { CustomersService } from 'src/app/services/customers.service';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit {
-  name : string | undefined;
-  avatar : string | undefined;
-  username : string | undefined;
+  name: string | undefined;
+  avatar: string | undefined;
+  username: string | undefined;
   cat?: BlogCategories[];
   currentUser?: any;
   constructor(
@@ -31,15 +31,21 @@ export class HeaderComponent implements OnInit {
     this.catBlogs.getAllCat().subscribe((res: any | undefined) => {
       this.cat = res['rows'];
     });
-    this.customSer.profileImageUpdate$.subscribe((profileImage) => this.avatar = profileImage);
-    this.customSer.profileName$.subscribe((profileName) => this.name = profileName);
-    this.customSer.profileUsername$.subscribe((profileUsername) => this.username = profileUsername);
+    this.customSer.profileImageUpdate$.subscribe(
+      (profileImage) => (this.avatar = profileImage)
+    );
+    this.customSer.profileName$.subscribe(
+      (profileName) => (this.name = profileName)
+    );
+    this.customSer.profileUsername$.subscribe(
+      (profileUsername) => (this.username = profileUsername)
+    );
   }
 
   getById(id: string): void {
     this.customSer.get(id).subscribe((res) => {
       this.avatar = res['avatar'];
-      this.name = res['firstName']+' '+res['lastName'];
+      this.name = res['firstName'] + ' ' + res['lastName'];
       this.username = res['username'];
     });
   }

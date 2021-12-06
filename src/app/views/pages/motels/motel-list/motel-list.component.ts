@@ -63,7 +63,6 @@ export class MotelListComponent implements OnInit {
             }
           }
         }
-        console.log(this.rentalNews);
       },
       (err) => {
         console.log(err);

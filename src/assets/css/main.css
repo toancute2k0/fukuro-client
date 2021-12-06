@@ -3821,10 +3821,6 @@ nav a:hover {
   border: none !important;
 }
 
-.navigation-portrait .nav-menu.nav-menu-social > li {
-  width: auto;
-}
-
 .nav-menu.nav-menu-social > li > a > [class*="ion-"] {
   font-size: 12px;
 }
@@ -12022,6 +12018,8 @@ ul.packages-lists-list li {
     color: #8594b3;
   }
   .nav-menu.nav-menu-social > li.add-listing {
+    width: auto;
+    width: 90%;
     top: 0;
   }
   .core-nav .dropdown > .dropdown-menu {

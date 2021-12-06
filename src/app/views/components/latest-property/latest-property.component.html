@@ -19,7 +19,7 @@
           <owl-carousel-o [options]="customOptions">
             <ng-template carouselSlide *ngFor="let item of rentalNews">
               <div class="single-items">
-                <div class="property-listing shadow-none property-2 border" style="width: 360px;">
+                <div class="property-listing shadow-none property-2 border" style="width: 390px;">
 
                   <div class="listing-img-wrapper">
                     <div class="list-img-slide">
@@ -88,7 +88,7 @@
                       </div>
                     </div>
                     <div class="footer-flex">
-                      <a href="property-detail.html" class="prt-view">Xem</a>
+                      <a routerLink="/thue-nha-dat/{{ item.slug }}" class="prt-view">Xem</a>
                     </div>
                   </div>
                 </div>
