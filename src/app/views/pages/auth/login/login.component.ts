@@ -7,6 +7,9 @@ import { CustomersService } from 'src/app/services/customers.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { first } from 'rxjs/operators';
 
+import { SocialAuthService, GoogleLoginProvider, SocialUser } from 'angularx-social-login';
+
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -37,8 +40,10 @@ export class LoginComponent implements OnInit {
     private route: ActivatedRoute,
     private _router: Router,
     private toastrService: ToastrService,
-    private auth: AuthService
-  ) {}
+    private auth: AuthService,
+    private socialAuthService: SocialAuthService
+
+  ) { }
 
   ngOnInit(): void {
     // get return url from route parameters or default to '/'
@@ -92,10 +97,10 @@ export class LoginComponent implements OnInit {
           //   .then(() => {
           //     this._router.navigate(['/']);
           //   });
-          let name = data.data.firstName+' '+data.data.lastName;
+          let name = data.data.firstName + ' ' + data.data.lastName;
           this.customSer.profileImageUpdate$.next(data.data.avatar);
           this.customSer.profileName$.next(name);
-          this.customSer.profileUsername$.next( data.data.username);
+          this.customSer.profileUsername$.next(data.data.username);
           this.customSer.profileId$.next(data.data.id);
           this._router.navigate(['/']);
           this.toastrService.success('Đăng nhập thành công!');
@@ -106,4 +111,70 @@ export class LoginComponent implements OnInit {
         }
       );
   }
+
+
+  loginWithGoogle(): void {
+    this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID).then((res) => {
+      console.log(res);
+      
+      var data ={
+        token: res.idToken
+      }
+      
+      this.submitted = true;
+      console.log(res.idToken);
+
+
+      this.customSer
+      .loginWithGoogle(data).subscribe(
+        (res) => {
+          localStorage.setItem('token', res.token);
+          const time_to_login = Date.now() + 604800000;
+          localStorage.setItem('timer', JSON.stringify(time_to_login));
+          localStorage.setItem('currentUser', res.data['id']);
+          this.auth.loggedIn();
+          this._router.navigate(['/']);
+          this.toastrService.success('Đăng nhập thành công!');
+        },
+        (error) => {
+          this.error = error.error.message;
+          this.toastrService.error(this.error);
+        }
+      );
+
+      // this.customSer
+      //   .loginWithGoogle(res.idToken)
+      //   .pipe(first())
+      //   .subscribe(
+      //     (data) => {
+      //       localStorage.setItem('token', data.token);
+      //       const time_to_login = Date.now() + 604800000; // one week
+      //       localStorage.setItem('timer', JSON.stringify(time_to_login));
+
+      //       this.auth.loggedIn();
+      //       // this._router.navigateByUrl(this.returnUrl);
+      //       // this._router
+      //       //   .navigateByUrl(this.returnUrl, { skipLocationChange: true })
+      //       //   .then(() => {
+      //       //     this._router.navigate(['/']);
+      //       //   });
+      //       let name = data.data.firstName + ' ' + data.data.lastName;
+      //       this.customSer.profileImageUpdate$.next(data.data.avatar);
+      //       this.customSer.profileName$.next(name);
+      //       this.customSer.profileUsername$.next(data.data.username);
+      //       this.customSer.profileId$.next(data.data.id);
+      //       this._router.navigate(['/']);
+      //       this.toastrService.success('Đăng nhập thành công!');
+      //     },
+      //     (error) => {
+      //       this.error = error.error.message;
+      //       this.toastrService.error(this.error);
+      //     }
+      //   );
+
+
+
+    });
+  }
+
 }

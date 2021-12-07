@@ -26,6 +26,9 @@ import { PromotionsComponent } from './views/pages/promotions/promotions.compone
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { EditRentalComponent } from './views/pages/my-account/edit-rental/edit-rental.component';
 
+import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
+import { GoogleLoginProvider } from 'angularx-social-login';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -57,8 +60,24 @@ import { EditRentalComponent } from './views/pages/my-account/edit-rental/edit-r
     NgxSummernoteModule,
     NgxDropzoneModule,
     NgbModule,
+    SocialLoginModule,
   ],
-  providers: [AuthGuard, NoAuthGuard],
+  providers: [AuthGuard, NoAuthGuard,
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(
+              '874412646109-e8bcgddegegmrs60v388uvr7nkph1gp4.apps.googleusercontent.com'
+            )
+          }
+        ]
+      } as SocialAuthServiceConfig,
+    }
+  ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

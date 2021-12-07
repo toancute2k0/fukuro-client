@@ -52,6 +52,29 @@ export class CustomersService {
       );
   }
 
+  loginWithGoogle(token: any): Observable<any> {
+    return this.http.post(`${API_URL}/login-with-google`, token);
+  }
+
+  // loginWithGoogle(token: any) {
+  //   return this.http
+  //     .post<any>(`${API_URL}/login-with-google`, {
+  //       token: token
+  //     })
+  //     .pipe(
+  //       map((user) => {
+  //         // login successful if there's a jwt token in the response
+  //         if (user && user.token) {
+  //           // store user details and jwt token in local storage to keep user logged in between page refreshes
+  //           localStorage.setItem('currentUser', user.data['id']);
+  //         }
+  //         return user;
+  //       })
+  //     );
+  // }
+
+
+
   update(id: string, data: any): Observable<any> {
     return this.http.put(`${API_URL}/${id}`, data);
   }

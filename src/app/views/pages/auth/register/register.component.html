@@ -4,21 +4,35 @@
       <div class="modal-body">
         <h4 class="modal-header-title">Đăng Ký</h4>
         <div class="login-form">
-          <form [formGroup]="register" (ngSubmit)="onSubmit()">
-
+          <form
+            [formGroup]="register"
+            (ngSubmit)="onSubmit()"
+            autocomplete="off"
+          >
             <div class="row">
-
               <div class="col-lg-6 col-md-6">
                 <div class="form-group">
                   <div class="input-with-icon">
-                    <input type="text" class="form-control" placeholder="Tên đăng nhập" formControlName="username">
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Tên đăng nhập"
+                      formControlName="username"
+                      autocomplete="off"
+                    />
                     <i class="ti-user"></i>
                   </div>
                   <div *ngIf="submitted && f.username.errors">
-                    <small *ngIf="f.username.errors.required" class="text-muted small-popup">Tên đăng nhập không được bỏ
-                      trống!</small>
-                    <small *ngIf="f.username.errors.minlength" class="text-muted small-popup">Tên đăng nhập phải ít nhất
-                      6 kí tự!</small>
+                    <small
+                      *ngIf="f.username.errors.required"
+                      class="text-muted small-popup"
+                      >Tên đăng nhập không được bỏ trống!</small
+                    >
+                    <small
+                      *ngIf="f.username.errors.minlength"
+                      class="text-muted small-popup"
+                      >Tên đăng nhập phải ít nhất 6 kí tự!</small
+                    >
                   </div>
                 </div>
               </div>
@@ -26,13 +40,26 @@
               <div class="col-lg-6 col-md-6">
                 <div class="form-group">
                   <div class="input-with-icon">
-                    <input type="email" class="form-control" placeholder="Email" formControlName="email">
+                    <input
+                      type="email"
+                      class="form-control"
+                      placeholder="Email"
+                      formControlName="email"
+                      autocomplete="off"
+                    />
                     <i class="ti-email"></i>
                   </div>
                   <div *ngIf="submitted && f.email.errors">
-                    <small *ngIf="f.email.errors.required" class="text-muted small-popup">Email không được bỏ
-                      trống!</small>
-                    <small *ngIf="f.email.errors.email" class="text-muted small-popup">Email không hợp lệ!</small>
+                    <small
+                      *ngIf="f.email.errors.required"
+                      class="text-muted small-popup"
+                      >Email không được bỏ trống!</small
+                    >
+                    <small
+                      *ngIf="f.email.errors.email"
+                      class="text-muted small-popup"
+                      >Email không hợp lệ!</small
+                    >
                   </div>
                 </div>
               </div>
@@ -40,16 +67,31 @@
               <div class="col-lg-6 col-md-6">
                 <div class="form-group">
                   <div class="input-with-icon">
-                    <input type="password" class="form-control" placeholder="Mật khẩu" formControlName="password">
+                    <input
+                      type="password"
+                      class="form-control"
+                      placeholder="Mật khẩu"
+                      formControlName="password"
+                      autocomplete="off"
+                    />
                     <i class="ti-unlock"></i>
                   </div>
                   <div *ngIf="submitted && f.password.errors">
-                    <small *ngIf="f.password.errors.required" class="text-muted small-popup">Password không được bỏ
-                      trống!</small>
-                    <small *ngIf="f.password.errors.minlength" class="text-muted small-popup">Password phải ít nhất 6 kí
-                      tự! <br></small>
-                    <small *ngIf="f.password.errors.pattern" class="text-muted small-popup">Mật khẩu không được chứa
-                      khoảng trắng!</small>
+                    <small
+                      *ngIf="f.password.errors.required"
+                      class="text-muted small-popup"
+                      >Password không được bỏ trống!</small
+                    >
+                    <small
+                      *ngIf="f.password.errors.minlength"
+                      class="text-muted small-popup"
+                      >Password phải ít nhất 6 kí tự! <br
+                    /></small>
+                    <small
+                      *ngIf="f.password.errors.pattern"
+                      class="text-muted small-popup"
+                      >Mật khẩu không được chứa khoảng trắng!</small
+                    >
                   </div>
                 </div>
               </div>
@@ -57,29 +99,49 @@
               <div class="col-lg-6 col-md-6">
                 <div class="form-group">
                   <div class="input-with-icon">
-                    <input type="password" class="form-control" placeholder="Mật khẩu"
-                      formControlName="confirmPassword">
+                    <input
+                      type="password"
+                      class="form-control"
+                      placeholder="Mật khẩu"
+                      formControlName="confirmPassword"
+                      autocomplete="off"
+                    />
                     <i class="ti-unlock"></i>
                   </div>
                   <div *ngIf="submitted && f.confirmPassword.errors">
-                    <small *ngIf="f.confirmPassword.errors.required" class="text-muted small-popup">
+                    <small
+                      *ngIf="f.confirmPassword.errors.required"
+                      class="text-muted small-popup"
+                    >
                       Confirm Password không được bỏ trống!
                     </small>
-                    <small *ngIf="f.confirmPassword.errors.minlength" class="text-muted small-popup">Password phải ít
-                      nhất 6 kí
-                      tự! <br></small>
-                    <small *ngIf="f.confirmPassword.errors.mustMatch" class="text-muted small-popup">Mật khẩu không
-                      trùng khớp!</small>
-                    <small *ngIf="f.confirmPassword.errors.pattern" class="text-muted small-popup">Mật khẩu không được
-                      chứa khoảng trắng!</small>
+                    <small
+                      *ngIf="f.confirmPassword.errors.minlength"
+                      class="text-muted small-popup"
+                      >Password phải ít nhất 6 kí tự! <br
+                    /></small>
+                    <small
+                      *ngIf="f.confirmPassword.errors.mustMatch"
+                      class="text-muted small-popup"
+                      >Mật khẩu không trùng khớp!</small
+                    >
+                    <small
+                      *ngIf="f.confirmPassword.errors.pattern"
+                      class="text-muted small-popup"
+                      >Mật khẩu không được chứa khoảng trắng!</small
+                    >
                   </div>
                 </div>
               </div>
-
             </div>
 
             <div class="form-group">
-              <button type="submit" class="btn btn-md full-width btn-theme-light-2 rounded">Đăng Ký</button>
+              <button
+                type="submit"
+                class="btn btn-md full-width btn-theme-light-2 rounded"
+              >
+                Đăng Ký
+              </button>
             </div>
             <!-- <pre>{{ signInForm.value | json }}</pre>
                   <pre>{{ customers | json }}</pre> -->
@@ -88,13 +150,20 @@
         <div class="modal-divider"><span>Hoặc đăng nhập bằng</span></div>
         <div class="social-login mb-3">
           <ul>
-<!--            <li><a href="#" class="btn connect-fb"><i class="ti-facebook"></i>Facebook</a></li>-->
-            <li style="display: contents; width: 100%"><a href="#" class="btn connect-google"><i class="ti-google"></i>Google+</a></li>
+            <!--            <li><a href="#" class="btn connect-fb"><i class="ti-facebook"></i>Facebook</a></li>-->
+            <!-- <li style="display: contents; width: 100%">
+              <a href="#" class="btn connect-google"
+                ><i class="ti-google"></i>Google+</a
+              >
+            </li> -->
+            <!-- <div class="g-signin2" data-onsuccess="onSignIn"></div> -->
+            <button type="button" (click)="loginWithGoogle()" class="btn btn-danger">Login with Google</button>
           </ul>
         </div>
         <div class="text-center">
           <i class="ti-user mr-1"></i>
-          Bạn đã có tài khoản? <a routerLink="/dang-nhap" style="color: #1266e3">Đăng Nhập</a> Ngay
+          Bạn đã có tài khoản?
+          <a routerLink="/dang-nhap" style="color: #1266e3">Đăng Nhập</a> Ngay
         </div>
       </div>
     </div>

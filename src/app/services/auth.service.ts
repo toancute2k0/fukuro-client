@@ -1,13 +1,18 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   isLoggedIn?: boolean;
+  error = '';
 
-  constructor(private _router: Router) {}
+  constructor(
+    private _router: Router,
+    private toastrService: ToastrService,
+  ) { }
 
   loggedIn() {
     const token = localStorage.getItem('token');
@@ -21,6 +26,8 @@ export class AuthService {
     localStorage.removeItem('token');
     localStorage.removeItem('currentUser');
     this._router.navigate(['/']);
+    this.toastrService.success('Đăng xuất thành công!');
+
   }
 
   getToken() {
