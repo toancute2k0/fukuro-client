@@ -110,4 +110,12 @@ hr {
 .align-bottom {
   vertical-align: bottom!important;
 }
-
+.table tr{
+  padding: 0 !important;
+  margin: 0 !important;
+}
+@media only screen and (max-width: 768px) {
+  .float-responsive{
+    display: grid !important;
+  }
+}

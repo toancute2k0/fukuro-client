@@ -37,7 +37,8 @@ export class BlogDetailComponent implements OnInit {
     public fb: FormBuilder,
     private commentsService: CommentsService,
     private customerSer: CustomersService,
-    private toastrService: ToastrService
+    private toastrService: ToastrService,
+    private _router: Router,
   ) {}
   comment = this.fb.group({
     content: [
@@ -48,7 +49,7 @@ export class BlogDetailComponent implements OnInit {
   ngOnInit(): void {
     const slug = this.route.snapshot.paramMap.get('slug');
     if (slug) {
-      this.getById(slug);
+      this.getBySlug(slug);
     }
 
     this.getLatest();
@@ -70,7 +71,7 @@ export class BlogDetailComponent implements OnInit {
     );
   }
 
-  getById(slug: string): void {
+  getBySlug(slug: string): void {
     this.blogSer.getBySlug(slug).subscribe(
       (data: any | undefined) => {
         this.blog_details = data;
@@ -82,6 +83,11 @@ export class BlogDetailComponent implements OnInit {
         console.log(err);
       }
     );
+  }
+
+  redirect(slug: any){
+    this.getBySlug(slug);
+    this._router.navigate([`/bai-viet/${slug}`]);
   }
 
   getAllCmt(id: string): void {

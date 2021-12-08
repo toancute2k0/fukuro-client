@@ -33,7 +33,8 @@ export class MotelDetailComponent implements OnInit {
     private commentsService: CommentsService,
     private toastrService: ToastrService,
     private customSer: CustomersService,
-    private adminContactsService: AdminContactsService
+    private adminContactsService: AdminContactsService,
+    private _router: Router,
   ) {}
 
   contact = this.fb.group({
@@ -60,6 +61,10 @@ export class MotelDetailComponent implements OnInit {
   get f() {
     return this.contact.controls;
   }
+  redirect(slug: any){
+    this.getRentalNews(slug);
+    this._router.navigate([`/thue-nha-dat/${slug}`]);
+  }
 
   getLatestRentalNews(): void {
     this.rentalNewsService.getLatestDetail(3).subscribe(
@@ -77,7 +82,6 @@ export class MotelDetailComponent implements OnInit {
   getRentalNews(slug: string): void {
     this.rentalNewsService.getBySlug(slug).subscribe(
       (data: any | undefined) => {
-        console.log(data);
         this.rentalNewsDetail = data;
         this.listImage = JSON.parse(data.image);
         this.customSer.get(data.customerId).subscribe((res) => {
