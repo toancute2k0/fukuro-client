@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {NgbModalConfig, NgbModal, NgbCollapse} from '@ng-bootstrap/ng-bootstrap';
-
+import { BlogCategoriesService } from 'src/app/services/blog-categories.service';
+import { BlogsService } from 'src/app/services/blogs.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { BlogCategories } from 'src/app/models/blog-categories.model';
 @Component({
   selector: 'app-questions-and-answers-detail',
   templateUrl: './questions-and-answers-detail.component.html',
@@ -8,10 +11,12 @@ import {NgbModalConfig, NgbModal, NgbCollapse} from '@ng-bootstrap/ng-bootstrap'
   providers: [NgbModalConfig, NgbModal, NgbCollapse]
 })
 export class QuestionsAndAnswersDetailComponent implements OnInit {
+  cat?: BlogCategories[];
   public isCollapsed: any;
   public isCollapsed2: any;
   constructor(config: NgbModalConfig,
               private modalService: NgbModal,
+              private catBlogs: BlogCategoriesService,private route: ActivatedRoute,
   public ngbCollapse: NgbCollapse) {
     // customize default values of modals used by this component tree
     config.backdrop = 'static';
@@ -59,5 +64,10 @@ export class QuestionsAndAnswersDetailComponent implements OnInit {
   ngOnInit(): void {
     this.isCollapsed = true;
     this.isCollapsed2 = true;
+    const slug = this.route.snapshot.paramMap.get('slug');
+    this.catBlogs.getAllCat().subscribe((res: any | undefined) => {
+      this.cat = res['rows'];
+    });
   }
+
 }
