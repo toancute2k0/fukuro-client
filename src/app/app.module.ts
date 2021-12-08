@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { DatePipe } from '@angular/common';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -22,7 +23,6 @@ import { AuthGuard } from './guards/auth.guard';
 import { NoAuthGuard } from './guards/noauth.guard';
 import { NgxSummernoteModule } from 'ngx-summernote';
 import { NgxDropzoneModule } from 'ngx-dropzone';
-import { PromotionsComponent } from './views/pages/promotions/promotions.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { EditRentalComponent } from './views/pages/my-account/edit-rental/edit-rental.component';
 
@@ -40,7 +40,6 @@ import { GoogleLoginProvider } from 'angularx-social-login';
     ContactComponent,
     HomeComponent,
     RentalNewsComponent,
-    PromotionsComponent,
     ForgotPasswordComponent,
     ResetPasswordComponent,
     EditRentalComponent,
@@ -62,7 +61,7 @@ import { GoogleLoginProvider } from 'angularx-social-login';
     NgbModule,
     SocialLoginModule,
   ],
-  providers: [AuthGuard, NoAuthGuard,
+  providers: [AuthGuard, NoAuthGuard, DatePipe,
     {
       provide: 'SocialAuthServiceConfig',
       useValue: {
