@@ -26,7 +26,7 @@ export class PaymentComponent implements OnInit {
   price: any;
   priceCus: any;
   name: any;
-  expire: any;
+  expire = 1;
   constructor(
     private fb: FormBuilder,
     private _router: Router,
@@ -81,7 +81,6 @@ export class PaymentComponent implements OnInit {
   }
 
   onChange(event: any): void {
-    // console.log(event.target.value);
     this.expire = event.target.value;
     this.price = this.priceCus * event.target.value;
   }
