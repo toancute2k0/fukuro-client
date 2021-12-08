@@ -1,0 +1,109 @@
+<!-- ============================ Page Title Start================================== -->
+<div class="page-title">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12">
+
+                <h2 class="ipt-title">Trang thanh toán</h2>
+                <span class="ipn-subtitle">Vui lòng kiểm tra đầy đủ thông tin thanh toán trước khi xác nhận thanh toán</span>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ============================ Page Title End ================================== -->
+
+<!-- ============================ Agency List Start ================================== -->
+<section>
+    <div class="container">
+      <form [formGroup]="infoCus" (ngSubmit)="onSubmit()">
+            <!-- row Start -->
+            <div class="row">
+                <div class="col-lg-8 col-md-8">
+                  <div class=" single-post-item">
+                    <h5 class="my-0">Thông tin khách hàng</h5><hr>
+                    <div class="row">
+                      <div class="col-lg-6 col-md-6">
+                        <div class="form-group">
+                          <label>Họ</label>
+                          <input type="text" class="form-control simple" formControlName="lastName">
+                          <div *ngIf="submitted && f.lastName.errors">
+                            <small *ngIf="f.lastName.errors.required" class="text-muted small-popup">Họ không được bỏ
+                              trống!</small>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-lg-6 col-md-6">
+                        <div class="form-group">
+                          <label>Tên</label>
+                          <input type="text" class="form-control simple" formControlName="firstName">
+                          <div *ngIf="submitted && f.firstName.errors">
+                            <small *ngIf="f.firstName.errors.required" class="text-muted small-popup">Tên không được bỏ
+                              trống!</small>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-6 col-md-6">
+                        <div class="form-group">
+                          <label>Email</label>
+                          <input type="email" class="form-control simple" formControlName="email">
+                          <div *ngIf="submitted && f.email.errors">
+                            <small *ngIf="f.email.errors.required" class="text-muted small-popup">Email không được bỏ
+                              trống!</small>
+                            <small *ngIf="f.email.errors.email" class="text-muted small-popup">Email không hợp lệ!</small>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-lg-6 col-md-6">
+                        <div class="form-group">
+                          <label>Số điện thoại</label>
+                          <input type="text" class="form-control simple" formControlName="phone">
+                          <div *ngIf="submitted && f.phone.errors">
+                            <small *ngIf="f.phone.errors.required" class="text-muted small-popup">Số điện thoại không được bỏ
+                              trống!</small>
+                            <small *ngIf="f.phone.errors.pattern" class="text-danger small-popup">Số điện thoại chưa đúng!</small>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class=" single-post-item">
+                    <h5 class="my-0">Phương thức thanh toán</h5><hr>
+                    <div class="img_payment">
+                      <img src="../../../../../assets/img/vnpay_logo.png">
+                      <span>&#10003;</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-lg-4 col-md-4">
+                  <div class="single-post-item">
+                    <h5 class="my-0">Thông tin thanh toán</h5><hr>
+                    <ul class="list-group">
+                      <li class="list-group-item d-flex justify-content-between ">
+                       <span class="my-0">Tên premium</span>
+                        <span class="text-success">{{ name }}</span>
+                      </li>
+                      <li class="list-group-item d-flex justify-content-between ">
+                        <span class="my-0" style="line-height: 45px;">Thời hạn</span>
+                        <input type="number" value="1" min="1" class="form-control simple w-25" (change)="onChange($event)">
+                      </li>
+                      <li class="list-group-item d-flex justify-content-between">
+                        <h6 class="mb-0">Tổng cộng</h6>
+                        <strong class="text-success">{{ price | currency: "VND" }}</strong>
+                      </li>
+                    </ul>
+
+                  </div>
+                  <div class="form-group">
+                    <button type="submit" class="btn btn-theme-light-2 rounded w-100" >Xác nhận thanh toán </button>
+                  </div>
+                </div>
+            </div>
+            <!-- /row -->
+        </form>
+    </div>
+
+</section>
+<!-- ============================ Agency List End ================================== -->

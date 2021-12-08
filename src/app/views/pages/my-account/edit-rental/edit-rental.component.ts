@@ -71,9 +71,8 @@ export class EditRentalComponent implements OnInit {
     this.rentalServe.get(id)
       .subscribe(
         (data: any) => {
-          for (var i = 0; i < data.length; i++) {
-            data[i].image = JSON.parse(data[i].image);
-          }
+          data.image = JSON.parse(data.image);
+          console.log(data.image);
           this.EditRentalForm = this.fb.group({
             name: [
               data.name,
@@ -231,5 +230,5 @@ export class EditRentalComponent implements OnInit {
       }
     );
   }
- 
+
 }

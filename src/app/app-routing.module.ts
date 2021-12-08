@@ -10,7 +10,7 @@ import { BlogCategoryComponent } from './views/pages/blogs/blog-category/blog-ca
 import { ContactComponent } from './views/pages/contact/contact.component';
 import { HomeComponent } from './views/pages/home/home.component';
 import { NotFoundComponent } from './views/pages/not-found/not-found.component';
-import { PromotionsComponent } from './views/pages/promotions/promotions.component';
+import { PaymentComponent } from './views/pages/payments/payment/payment.component';
 import { RentalNewsComponent } from './views/pages/rental-news/rental-news.component';
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -49,8 +49,9 @@ const routes: Routes = [
   { path: 'reset-password', component: ResetPasswordComponent },
   { path: 'dang-nhap', component: LoginComponent, canActivate: [NoAuthGuard] },
   {
-    path: 'thanh-toan',
-    component: PromotionsComponent,
+    path: 'premium',
+    loadChildren: () =>
+      import('./views/pages/payments/payments.module').then((m) => m.PaymentsModule),
     canActivate: [AuthGuard],
   },
   {
