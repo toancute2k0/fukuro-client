@@ -30,8 +30,8 @@
           <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a routerLink="bai-viet">Bài
               Viết<span class="submenu-indicator"></span></a>
             <ul class="nav-dropdown nav-submenu">
-              <li *ngFor="let cat of cat">
-                <a routerLink="/danh-muc-bai-viet/{{cat.slug}}">{{cat.name}}</a>
+              <li *ngFor="let cat of cats">
+                <a (click)="redirect(cat.slug)">{{cat.name}}</a>
               </li>
             </ul>
           </li>

@@ -1,15 +1,15 @@
 <!--&lt;!&ndash; ============================ Page Title Start================================== &ndash;&gt;-->
-<!--<div class="page-title">-->
-<!--    <div class="container">-->
-<!--        <div class="row">-->
-<!--            <div class="col-lg-12 col-md-12">-->
+<div class="page-title">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12">
 
-<!--                <h2 class="ipt-title">Trang thanh toán</h2>-->
-<!--                <span class="ipn-subtitle">Vui lòng kiểm tra đầy đủ thông tin thanh toán trước khi xác nhận thanh toán</span>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
+                <h2 class="ipt-title">Kết quả thanh toán</h2>
+                <span class="ipn-subtitle">Vui lòng kiểm tra email khi thanh toán thành công</span>
+            </div>
+        </div>
+    </div>
+</div>
 <!--&lt;!&ndash; ============================ Page Title End ================================== &ndash;&gt;-->
 
 <!-- ============================ Agency List Start ================================== -->
@@ -49,7 +49,7 @@
                       <span class="badge badge-warning badge-pill px-25"> Đang chờ duyệt</span>
                     </div>
                   </div>
-                  <div class="col-lg-6 float-right">
+                  <div class="col-lg-6 float-responsive">
                     <div class="float-right">
                       <div class="my-2">
                         <i class="fa fa-circle text-blue-m2 text-xs mr-1"></i>
@@ -67,30 +67,31 @@
             </div>
             <!-- /.col -->
           </div>
-
-          <div class="mt-4">
-            <div class="row text-600 text-white bgc-default-tp1 py-25">
-              <div class="col-9 col-sm-5">Tên gói Premium</div>
-              <div class="d-none d-sm-block col-4 col-sm-2">Thời hạn</div>
-              <div class="d-none d-sm-block col-sm-2">Giá tiền</div>
-              <div class="col-2">Tổng</div>
-            </div>
-
-            <div class="text-95 text-secondary-d3">
-              <div class="row mb-2 mb-sm-0 py-25">
-                <div class="col-9 col-sm-5">{{ bill.premium_name }}</div>
-                <div class="d-none d-sm-block col-2">{{ bill.expire }} tháng</div>
-                <div class="d-none d-sm-block col-2 text-95">{{ bill.price | currency: "VND" }}</div>
-                <div class="col-2 text-secondary-d2">{{ bill.expire * bill.price | currency: "VND" }}</div>
-              </div>
-            </div>
-            <div class="row border-b-2 brc-default-l2"></div>
-            <hr />
-            <div class="row mt-3">
-            <div class="col-12 col-sm-7">
-              <a class="btn btn-outline-success rounded"> Khám phá trang quản lý trọ </a>
-            </div>
-             <div class="col-12 col-sm-5 text-grey text-90 order-first order-sm-last text-right">
+          <div class="table-responsive-sm">
+            <table class="table">
+              <thead class="mt-4">
+              <tr class="row text-600 text-white bgc-default-tp1 py-25">
+                <th class="col-4">Tên gói Premium</th>
+                <th class="col-2">Thời hạn (tháng)</th>
+                <th class="col-3">Giá tiền</th>
+                <th class="col-3">Tổng</th>
+              </tr>
+            </thead>
+              <tbody class="text-95 text-secondary-d3">
+                <tr class="row mb-2 mb-sm-0 py-25">
+                  <td class="col-4">{{ bill.premium_name }}</td>
+                  <td class="col-2">{{ bill.expire }}</td>
+                  <td class="col-3 text-95">{{ bill.price | currency: "VND" }}</td>
+                  <td class="col-3 text-secondary-d2">{{ bill.expire * bill.price | currency: "VND" }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="row mt-3">
+          <div class="col-12 col-sm-7">
+            <a class="btn btn-outline-success rounded"> Khám phá trang quản lý trọ </a>
+          </div>
+          <div class="col-12 col-sm-5 text-grey text-90 order-first order-sm-last text-right">
 
                 <div class="row my-2 align-items-center bgc-primary-l3 p-2">
                   <div class="col-7 text-right">
@@ -101,7 +102,6 @@
                   </div>
                 </div>
               </div>
-            </div>
           </div>
         </div>
       </div>

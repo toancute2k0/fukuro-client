@@ -3,7 +3,9 @@ import { BlogCategories } from 'src/app/models/blog-categories.model';
 import { Customers } from 'src/app/models/customers.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { BlogCategoriesService } from 'src/app/services/blog-categories.service';
+import { BlogsService } from 'src/app/services/blogs.service';
 import { CustomersService } from 'src/app/services/customers.service';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-header',
@@ -14,12 +16,14 @@ export class HeaderComponent implements OnInit {
   name: string | undefined;
   avatar: string | undefined;
   username: string | undefined;
-  cat?: BlogCategories[];
+  cats?: BlogCategories[];
   currentUser?: any;
   constructor(
     private catBlogs: BlogCategoriesService,
     public auth: AuthService,
-    private customSer: CustomersService
+    private customSer: CustomersService,
+    private _router: Router,
+    private blogsService: BlogsService
   ) {}
 
   ngOnInit(): void {
@@ -29,7 +33,7 @@ export class HeaderComponent implements OnInit {
       this.getById(id);
     }
     this.catBlogs.getAllCat().subscribe((res: any | undefined) => {
-      this.cat = res['rows'];
+      this.cats = res['rows'];
     });
     this.customSer.profileImageUpdate$.subscribe(
       (profileImage) => (this.avatar = profileImage)
@@ -49,4 +53,11 @@ export class HeaderComponent implements OnInit {
       this.username = res['username'];
     });
   }
+
+  redirect(slug: any){
+    this._router.navigateByUrl('/danh-muc-bai-viet', { skipLocationChange: true }).then(() => {
+      this._router.navigate([`/danh-muc-bai-viet/${slug}`]);
+    });
+  }
+
 }

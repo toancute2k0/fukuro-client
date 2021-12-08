@@ -6,3 +6,6 @@
   height: 500px;
   object-fit: cover;
 }
+.feed-title{
+  cursor: pointer;
+}
