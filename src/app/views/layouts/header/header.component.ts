@@ -6,6 +6,7 @@ import { BlogCategoriesService } from 'src/app/services/blog-categories.service'
 import { BlogsService } from 'src/app/services/blogs.service';
 import { CustomersService } from 'src/app/services/customers.service';
 import {Router} from "@angular/router";
+import {environment} from "../../../../environments/environment";
 
 @Component({
   selector: 'app-header',
@@ -48,7 +49,7 @@ export class HeaderComponent implements OnInit {
 
   getById(id: string): void {
     this.customSer.get(id).subscribe((res) => {
-      this.avatar = res['avatar'];
+      this.avatar = environment.linkImg+res['avatar'];
       this.name = res['firstName'] + ' ' + res['lastName'];
       this.username = res['username'];
     });
