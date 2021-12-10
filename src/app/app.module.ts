@@ -6,6 +6,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FooterComponent } from './views/layouts/footer/footer.component';
 import { HeaderComponent } from './views/layouts/header/header.component';
+import { HeaderManageComponent } from './views/layouts/header-manage/header-manage.component';
+import { FooterManageComponent } from './views/layouts/footer-manage/footer-manage.component';
+import { SiteLayoutComponent } from './views/layouts/site-layout/site-layout.component';
+import { ManageLayoutComponent } from './views/layouts/manage-layout/manage-layout.component';
 import { LoginComponent } from './views/pages/auth/login/login.component';
 import { RegisterComponent } from './views/pages/auth/register/register.component';
 import { ForgotPasswordComponent } from './views/pages/auth/forgot-password/forgot-password.component';
@@ -43,6 +47,10 @@ import { GoogleLoginProvider } from 'angularx-social-login';
     ForgotPasswordComponent,
     ResetPasswordComponent,
     EditRentalComponent,
+    SiteLayoutComponent,
+    ManageLayoutComponent,
+    HeaderManageComponent,
+    FooterManageComponent
   ],
   imports: [
     BrowserModule,
@@ -78,5 +86,6 @@ import { GoogleLoginProvider } from 'angularx-social-login';
     }
   ],
   bootstrap: [AppComponent],
+  exports: []
 })
 export class AppModule { }

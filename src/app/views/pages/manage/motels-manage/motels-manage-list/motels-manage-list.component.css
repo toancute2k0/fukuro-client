@@ -1,0 +1,26 @@
+.container{
+  padding: 80px 0;
+}
+:host /deep/ ng2-smart-table table th,
+:host /deep/ ng2-smart-table table td{
+  border: 1px solid #e0ecf5;
+}
+:host /deep/ ng2-st-tbody-custom{
+  display: flex;
+  justify-content: space-around;
+}
+
+:host /deep/ ng2-st-tbody-custom a.ng2-smart-action.ng2-smart-action-custom-custom {
+  display: inline-block;
+  width: 50px;
+  text-align: center;
+  font-size: 1.1em;
+}
+
+:host /deep/ ng2-st-tbody-custom a.ng2-smart-action.ng2-smart-action-custom-custom:hover {
+  color: #5dcfe3;
+}
+:host /deep/ ng2-smart-table-title a:hover,
+:host /deep/ ng2-st-tbody-custom a:hover{
+  text-decoration: none !important;
+}
