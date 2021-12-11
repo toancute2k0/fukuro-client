@@ -5,9 +5,7 @@
             <div class="col-lg-12 col-md-12">
                 <div class="full-search-2 eclip-search italian-search hero-search-radius shadow">
                     <div class="hero-search-content">
-
                         <div class="row">
-
                             <div class="col-lg-3 col-md-3 col-sm-12 b-r">
                                 <div class="form-group borders">
                                     <div class="input-with-icon">
@@ -30,9 +28,10 @@
                                 <div class="form-group borders">
                                     <div class="input-with-icon b-l">
                                         <select id="real-home" class="form-control" style="cursor: pointer;">
-                      <option value="">Chọn chuyên mục</option>
-                    <option *ngFor="let cn of cat"><a href="/danh-muc-bai-viet/{{cn.slug}}">{{cn.name}}</a></option>
-                    </select>
+                                                <option value="">Chọn chuyên mục</option>
+                                                <option *ngFor="let cn of cat"><a
+                                                        href="/danh-muc-bai-viet/{{cn.slug}}">{{cn.name}}</a></option>
+                                            </select>
                                         <i class="ti-angle-down"></i>
                                         <i class="ti-home"></i>
                                     </div>
@@ -67,7 +66,6 @@
 
                     <!-- Single blog Grid -->
                     <div class="col-lg-3 col-md-12 col-sm-12 col-12">
-
                         <!-- Tags Cloud -->
                         <div class="single-widgets widget_category">
                             <h4 class="title">Chuyên mục</h4>
@@ -87,26 +85,39 @@
                                 <div class="modal-header">
                                     <h4 class="modal-title" id="modal-basic-title">Thêm câu hỏi</h4>
                                     <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
                                 </div>
-                                <div class="modal-body">
-                                    <input type="text" class="form-control" placeholder="Chủ đề cho câu hỏi">
-                                    <br>
-                                    <textarea type="text" class="form-control" placeholder="Nội dung câu hỏi"></textarea>
-                                    <br>
-                                    <select name="status" class="form-control">
-                    <option value="">Chọn chuyên mục</option>
-                    <option *ngFor="let cn of cat"><a href="/danh-muc-bai-viet/{{cn.slug}}">{{cn.name}}</a></option>
-
-                  </select>
-                                    <br>
-                                    <div>
-                                        <button type="button" class="btn text-warning font-bold" (click)="c('Save click')">Huỷ</button>
-                                        <button type="button" class="btn btn-primary rounded float-right" (click)="c('Save click')">Lưu</button>
+                                <form [formGroup]="question" (ngSubmit)="onSubmit()">
+                                    <div class="modal-body">
+                                        <input type="text" class="form-control" placeholder="Chủ đề cho câu hỏi" formControlName="title">
+                                        <div *ngIf="submitted && f.title.errors">
+                                            <small *ngIf="f.title.errors.required" class="text-danger small-popup">Chủ đề câu hỏi không được bỏ trống</small>
+                                        </div>
+                                        <br>
+                                        <textarea type="text" class="form-control" formControlName="content" placeholder="Nội dung câu hỏi"></textarea>
+                                        <div *ngIf="submitted && f.content.errors">
+                                            <small *ngIf="f.content.errors.required" class="text-danger small-popup">Nội dung bình
+                luận không được bỏ trống!</small>
+                                        </div>
+                                        <br>
+                                        <label>Chọn chuyên mục</label>
+                                        <select name="status" class="form-control" formControlName="question_category_id">
+                
+                                        <option *ngFor="let cn of cat" value="{{cn.id}}">
+                                            <a href="/danh-muc-bai-viet/{{cn.slug}}">{{cn.name}}</a>
+                                        </option>
+                                    </select>
+                                        <div *ngIf="submitted && f.question_category_id.errors">
+                                            <small *ngIf="f.question_category_id.errors.required" class="text-danger small-popup">Vui lòng chọn chuyên mục hỏi đáp</small>
+                                        </div>
+                                        <br>
+                                        <div>
+                                            <button type="button" class="btn text-warning font-bold" (click)="c('Save click')">Huỷ</button>
+                                            <button type="submit" class="btn btn-primary rounded float-right">Lưu</button>
+                                        </div>
                                     </div>
-                                </div>
-
+                                </form>
                                 <!--                <div class="modal-footer">-->
                                 <!--                  <button type="button" class="btn btn-outline-dark" (click)="c('Save click')">Save</button>-->
                                 <!--                </div>-->
@@ -116,7 +127,8 @@
                             <div class="post-details">
                                 <div class="post-top-meta">
                                     <ul class="meta-comment-tag">
-                                        <li><span class="icons text-blue"><i class="fa fa-user-circle" aria-hidden="true"></i></span></li>
+                                        <li><span class="icons text-blue"><i class="fa fa-user-circle"
+                                                    aria-hidden="true"></i></span></li>
                                         <li><span>Câu hỏi của bạn là gì?</span></li>
                                     </ul>
                                 </div>
@@ -134,23 +146,8 @@
                                 <div class="post-top-meta">
                                     <ul class="meta-comment-tag questions-and-answers-comment">
                                         <li><a><span class="icons"><i class="ti-user"></i></span>Quốc Toản</a></li>
-                                        <li><a><span class="icons"><i class="ti-comment-alt"></i></span>0 bình luận</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="blog-details single-post-item format-standard">
-                            <div class="post-details">
-
-                                <a routerLink="/hoi-dap/chi-tiet">
-                                    <h5>Dạ a,c cho hỏi là , dự án Tây Nam Center chủ đầu tư Cty Tây Nam Land , dự án đó đầu tư thấy khả thi k mọi người</h5>
-                                </a>
-                                <hr>
-
-                                <div class="post-top-meta">
-                                    <ul class="meta-comment-tag questions-and-answers-comment">
-                                        <li><a href="#"><span class="icons"><i class="ti-user"></i></span>Phương Bình</a></li>
-                                        <li><a href="#"><span class="icons"><i class="ti-comment-alt"></i></span>0 bình luận</a></li>
+                                        <li><a><span class="icons"><i class="ti-comment-alt"></i></span>0 bình luận</a>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>

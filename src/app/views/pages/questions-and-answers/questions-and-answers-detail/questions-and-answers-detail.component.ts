@@ -4,6 +4,7 @@ import { BlogCategoriesService } from 'src/app/services/blog-categories.service'
 import { BlogsService } from 'src/app/services/blogs.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BlogCategories } from 'src/app/models/blog-categories.model';
+import { Validators, FormBuilder } from '@angular/forms';
 @Component({
   selector: 'app-questions-and-answers-detail',
   templateUrl: './questions-and-answers-detail.component.html',
@@ -17,12 +18,13 @@ export class QuestionsAndAnswersDetailComponent implements OnInit {
   constructor(config: NgbModalConfig,
               private modalService: NgbModal,
               private catBlogs: BlogCategoriesService,private route: ActivatedRoute,
-  public ngbCollapse: NgbCollapse) {
+  public ngbCollapse: NgbCollapse,
+  public fb: FormBuilder,) {
     // customize default values of modals used by this component tree
     config.backdrop = 'static';
     config.keyboard = false;
   }
-
+ 
   //summernote editer
   config = {
     placeholder: '',
