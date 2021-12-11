@@ -1,12 +1,8 @@
 <div class="d-user-avater">
   <img *ngIf="!currentUser?.avatar" src="https://via.placeholder.com/40x40" class="img-fluid avater" alt="">
-  <img *ngIf="currentUser?.avatar" src="{{currentUser?.avatar}}" class="img-fluid avater" alt="">
-  <h4 *ngIf="currentUser?.firstName && currentUser?.lastName">
-    {{currentUser?.firstName}} <span>{{currentUser?.lastName}}</span>
-  </h4>
-  <h4 *ngIf="!currentUser?.firstName && !currentUser?.lastName">
-    {{currentUser?.username}}
-  </h4>
+  <img *ngIf="currentUser?.avatar" src="{{avatar}}" class="img-fluid avater" alt="">
+  <h4 *ngIf="currentUser?.firstName && currentUser?.lastName"><span>{{name}}</span></h4>
+  <h4 *ngIf="!currentUser?.firstName && !currentUser?.lastName">{{username}}</h4>
   <span>{{currentUser?.email}}</span>
 </div>
 

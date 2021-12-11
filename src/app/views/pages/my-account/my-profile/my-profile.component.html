@@ -41,15 +41,26 @@
               <h4>Thông tin tài khoản</h4>
               <div class="submit-section">
                 <div class="row">
+                  <div class="form-group form-group-avatar">
+                    <!-- Image Preview -->
+                    <div class="imagePreview" *ngIf="updateCus.value['avatar']" >
+                      <img [src]="updateCus.value['avatar']">
+                    </div>
 
-                  <div class="form-group col-md-6">
+                    <!-- Select File -->
+                    <input type="file" nbInput fullWidth accept="image/*" (change)="showPreview($event)" />
+                    <div *ngIf="submitted && f.avatar.errors">
+                      <small *ngIf="f.avatar.errors.required" class="text-danger small-popup">Ảnh đại diện không được bỏ trống!</small>
+                    </div>
+                  </div>
+                  <div class="form-group col-md-12">
                     <div>
                       <label>Tên đăng nhập</label>
                       <input type="text" class="form-control" formControlName="username">
                     </div>
                   </div>
 
-                  <div class="form-group col-md-6">
+                  <div class="form-group col-md-12">
                     <div>
                       <label>Email</label>
                       <input type="email" class="form-control" formControlName="email">
@@ -85,49 +96,21 @@
                     </div>
                   </div>
 
-                </div>
-              </div>
-            </div>
-
-            <div class="form-submit">
-              <h4>Thông tin liện hệ</h4>
-              <div class="submit-section">
-                <div class="row">
-                  <div class="form-group col-md-8">
-                    <div class="form-group">
-                      <label>Facebook</label>
-                      <input type="text" formControlName="facebook" class="form-control" value="https://facebook.com/">
+                  <div class="form-group col-md-12">
+                    <div>
+                      <label>Số điện thoại</label>
+                      <input type="text" class="form-control" formControlName="phone">
                     </div>
-
-                    <div class="form-group">
-                      <label>Google</label>
-                      <input type="email" formControlName="google" class="form-control" value="https://google.com/">
-                    </div>
-
-                  </div>
-                  <div class="form-group col-md-4">
-                    <div class="form-group">
-                      <div>
-                        <label>Số điện thoại</label>
-                        <input type="text" class="form-control" formControlName="phone">
-                      </div>
-                      <div *ngIf="submitted && f.phone.errors">
-                        <small *ngIf="f.phone.errors.required" class="text-muted small-popup">
-                          Số điện thoại không được bỏ trống!
-                        </small>
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label>Hình đại diện</label>
-                      <input type="text" class="form-control" formControlName="avatar">
+                    <div *ngIf="submitted && f.phone.errors">
+                      <small *ngIf="f.phone.errors.required" class="text-muted small-popup">
+                        Số điện thoại không được bỏ trống!
+                      </small>
                     </div>
                   </div>
-
 
                   <div class="form-group col-lg-12 col-md-12">
-                    <button class="btn btn-theme-light-2 rounded" type="submit">Cập nhật tài khoản</button>
+                    <button class="btn btn-theme-light-2 rounded float-right" type="submit">Cập nhật</button>
                   </div>
-
                 </div>
               </div>
             </div>

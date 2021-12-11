@@ -1,10 +1,15 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { DatePipe } from '@angular/common';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FooterComponent } from './views/layouts/footer/footer.component';
 import { HeaderComponent } from './views/layouts/header/header.component';
+import { HeaderManageComponent } from './views/layouts/header-manage/header-manage.component';
+import { FooterManageComponent } from './views/layouts/footer-manage/footer-manage.component';
+import { SiteLayoutComponent } from './views/layouts/site-layout/site-layout.component';
+import { ManageLayoutComponent } from './views/layouts/manage-layout/manage-layout.component';
 import { LoginComponent } from './views/pages/auth/login/login.component';
 import { RegisterComponent } from './views/pages/auth/register/register.component';
 import { ForgotPasswordComponent } from './views/pages/auth/forgot-password/forgot-password.component';
@@ -22,7 +27,6 @@ import { AuthGuard } from './guards/auth.guard';
 import { NoAuthGuard } from './guards/noauth.guard';
 import { NgxSummernoteModule } from 'ngx-summernote';
 import { NgxDropzoneModule } from 'ngx-dropzone';
-import { PromotionsComponent } from './views/pages/promotions/promotions.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { EditRentalComponent } from './views/pages/my-account/edit-rental/edit-rental.component';
 
@@ -40,10 +44,13 @@ import { GoogleLoginProvider } from 'angularx-social-login';
     ContactComponent,
     HomeComponent,
     RentalNewsComponent,
-    PromotionsComponent,
     ForgotPasswordComponent,
     ResetPasswordComponent,
     EditRentalComponent,
+    SiteLayoutComponent,
+    ManageLayoutComponent,
+    HeaderManageComponent,
+    FooterManageComponent
   ],
   imports: [
     BrowserModule,
@@ -62,7 +69,7 @@ import { GoogleLoginProvider } from 'angularx-social-login';
     NgbModule,
     SocialLoginModule,
   ],
-  providers: [AuthGuard, NoAuthGuard,
+  providers: [AuthGuard, NoAuthGuard, DatePipe,
     {
       provide: 'SocialAuthServiceConfig',
       useValue: {
@@ -79,5 +86,6 @@ import { GoogleLoginProvider } from 'angularx-social-login';
     }
   ],
   bootstrap: [AppComponent],
+  exports: []
 })
 export class AppModule { }

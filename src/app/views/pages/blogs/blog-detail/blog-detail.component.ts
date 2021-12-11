@@ -11,6 +11,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Comments } from 'src/app/models/comments.model';
 import { CustomersService } from 'src/app/services/customers.service';
 import { Customers } from 'src/app/models/customers.model';
+import {environment} from "../../../../../environments/environment";
 
 @Component({
   selector: 'app-blog-detail',
@@ -37,18 +38,19 @@ export class BlogDetailComponent implements OnInit {
     public fb: FormBuilder,
     private commentsService: CommentsService,
     private customerSer: CustomersService,
-    private toastrService: ToastrService
+    private toastrService: ToastrService,
+    private _router: Router,
   ) {}
   comment = this.fb.group({
     content: [
       '',
-      Validators.compose([Validators.required, Validators.minLength(6)]),
+      Validators.compose([Validators.required]),
     ],
   });
   ngOnInit(): void {
     const slug = this.route.snapshot.paramMap.get('slug');
     if (slug) {
-      this.getById(slug);
+      this.getBySlug(slug);
     }
 
     this.getLatest();
@@ -62,6 +64,9 @@ export class BlogDetailComponent implements OnInit {
   getLatest(): void {
     this.blogSer.getLatest().subscribe(
       (data: any | undefined) => {
+        for (var i = 0; i < data['rows'].length; i++) {
+          data['rows'][i].thumbnail = environment.linkImg+data['rows'][i].thumbnail;
+        }
         this.blogs = data['rows'];
       },
       (err) => {
@@ -70,9 +75,10 @@ export class BlogDetailComponent implements OnInit {
     );
   }
 
-  getById(slug: string): void {
+  getBySlug(slug: string): void {
     this.blogSer.getBySlug(slug).subscribe(
       (data: any | undefined) => {
+        data.thumbnail = environment.linkImg+data.thumbnail;
         this.blog_details = data;
         this.id_blog = data.id;
         this.tag = JSON.parse(data.tag);
@@ -82,6 +88,11 @@ export class BlogDetailComponent implements OnInit {
         console.log(err);
       }
     );
+  }
+
+  redirect(slug: any){
+    this.getBySlug(slug);
+    this._router.navigate([`/bai-viet/${slug}`]);
   }
 
   getAllCmt(id: string): void {

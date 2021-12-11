@@ -1,0 +1,29 @@
+.img_payment{
+  width: 15% !important;
+  position: relative;
+}
+.img_payment img{
+  border: 1px solid #e5e8f3;
+  padding: 10px;
+  border-radius: 5px;
+}
+.img_payment span{
+  padding: 3px 7px;
+  background: #4caf50;
+  color: white;
+  border-radius: 50%;
+  font-size: 10px;
+  position: absolute;
+  top: -5px;
+  right: -5px;
+}
+.list-group-item{
+  border: none !important;
+  padding-left: 0;
+  padding-right: 0;
+  border-bottom: 1px solid rgba(0,0,0,.125) !important;
+}
+.list-group-item:last-child{
+  padding-top: 15px;
+  border: none !important;
+}
