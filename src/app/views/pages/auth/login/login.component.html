@@ -6,34 +6,58 @@
         <h4 class="modal-header-title">Đăng Nhập</h4>
         <div class="login-form">
           <form [formGroup]="login" (ngSubmit)="onSubmit()">
-
             <div class="form-group">
               <label>Tên đăng nhập</label>
               <div class="input-with-icon">
-                <input type="text" class="form-control" placeholder="Tên đăng nhập" formControlName="username">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Tên đăng nhập"
+                  formControlName="username"
+                />
                 <i class="ti-user"></i>
               </div>
               <div *ngIf="submitted && f.username.errors">
-                <small *ngIf="f.username.errors.required" class="text-muted small-popup">Tên đăng nhập không được bỏ
-                  trống!</small>
-                <small *ngIf="f.username.errors.minlength" class="text-muted small-popup">Tên đăng nhập phải ít nhất
-                  6 kí tự!</small>
+                <small
+                  *ngIf="f.username.errors.required"
+                  class="text-muted small-popup"
+                  >Tên đăng nhập không được bỏ trống!</small
+                >
+                <small
+                  *ngIf="f.username.errors.minlength"
+                  class="text-muted small-popup"
+                  >Tên đăng nhập phải ít nhất 6 kí tự!</small
+                >
               </div>
             </div>
 
             <div class="form-group">
               <label>Mật Khẩu</label>
               <div class="input-with-icon">
-                <input type="password" class="form-control" placeholder="Mật khẩu" formControlName="password">
+                <input
+                  type="password"
+                  class="form-control"
+                  placeholder="Mật khẩu"
+                  formControlName="password"
+                />
                 <i class="ti-unlock"></i>
               </div>
               <div *ngIf="submitted && f.password.errors">
-                <small *ngIf="f.password.errors.required" class="text-muted small-popup">Password không được bỏ
-                  trống!</small>
-                <small *ngIf="f.password.errors.minlength" class="text-muted small-popup">Password phải ít nhất 6 kí
-                  tự! <br></small>
-                <small *ngIf="f.password.errors.pattern" class="text-muted small-popup">Mật khẩu không được chứa
-                  khoảng trắng!</small>
+                <small
+                  *ngIf="f.password.errors.required"
+                  class="text-muted small-popup"
+                  >Password không được bỏ trống!</small
+                >
+                <small
+                  *ngIf="f.password.errors.minlength"
+                  class="text-muted small-popup"
+                  >Password phải ít nhất 6 kí tự! <br
+                /></small>
+                <small
+                  *ngIf="f.password.errors.pattern"
+                  class="text-muted small-popup"
+                  >Mật khẩu không được chứa khoảng trắng!</small
+                >
               </div>
               <!-- <div *ngIf="error">
                 <small class="text-muted small-popup">{{error}}</small>
@@ -41,25 +65,42 @@
             </div>
 
             <div class="form-group">
-              <button type="submit" class="btn btn-md full-width btn-theme-light-2 rounded">Đăng Nhập</button>
+              <button
+                type="submit"
+                class="btn btn-md full-width btn-theme-light-2 rounded"
+              >
+                Đăng Nhập
+              </button>
             </div>
-
           </form>
         </div>
-        <div class="modal-divider"><span>Hoặc đăng nhập bằng
-          </span></div>
+        <div class="modal-divider"><span>Hoặc đăng nhập bằng </span></div>
         <div class="social-login mb-3">
           <ul>
-<!--            <li><a href="#" class="btn connect-fb"><i class="ti-facebook"></i>Facebook</a></li>-->
-            <li style="display: contents; width: 100%"><a href="#" class="btn connect-google"><i class="ti-google"></i>Google+</a></li>
+            <!--            <li><a href="#" class="btn connect-fb"><i class="ti-facebook"></i>Facebook</a></li>-->
+            <!-- <li style="display: contents; width: 100%">
+              <a href="#" class="btn connect-google"
+                ><i class="ti-google"></i>Google+</a
+              >
+            </li> -->
+            <button
+              type="button"
+              (click)="loginWithGoogle()"
+              class="btn btn-danger-gradiant w-100"
+            >
+              Login with Google
+            </button>
           </ul>
         </div>
         <div class="text-center">
-          <p class="mt-4"><a routerLink="/forgot-password" class="link">Quên mật khẩu?</a></p>
+          <p class="mt-4">
+            <a routerLink="/forgot-password" class="link">Quên mật khẩu?</a>
+          </p>
         </div>
         <div class="text-center">
           <i class="ti-user mr-1"></i>
-          Bạn đã có tài khoản? <a routerLink="/dang-ky" style="color: #1266e3">Đăng Kí</a> Ngay
+          Bạn đã có tài khoản?
+          <a routerLink="/dang-ky" style="color: #1266e3">Đăng Kí</a> Ngay
         </div>
       </div>
     </div>

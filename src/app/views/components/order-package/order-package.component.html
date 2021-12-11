@@ -6,9 +6,7 @@
       <div class="col-lg-7 col-md-10 text-center">
         <div class="sec-heading center">
           <h2>Gói dịch vụ đăng tin</h2>
-          <p>Nhưng, quả thật, cả hai chúng ta đều buộc tội họ, và cho rằng họ đáng bị chỉ là hận thù nhất, những người,
-            bằng sự tâng
-            bốc của những thú vui hiện tại, được xoa dịu và hư hỏng bởi những nỗi buồn đó.</p>
+          <p>Fukuro luôn cung cấp các gói Premium để nâng cấp chức năng cho khách hàng thành viên</p>
         </div>
       </div>
     </div>
@@ -23,14 +21,10 @@
             <h4 class="pr-title">{{item.name}}</h4>
           </div>
           <div class="pricing-body">
-            <ul>
-              <li class="available">
-                {{item.description}}
-              </li>
-            </ul>
+            <div [innerHTML]="item.description"></div>
           </div>
           <div class="pricing-bottom">
-            <a routerLink="/thanh-toan" class="btn-pricing">Mua Ngay</a>
+            <a routerLink="/premium/thanh-toan/{{item.id}}" class="btn-pricing">Mua Ngay</a>
           </div>
 
         </div>

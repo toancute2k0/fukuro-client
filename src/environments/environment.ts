@@ -6,8 +6,10 @@ export const environment = {
   production: false,
   title: 'Local Environment Heading',
   apiURL: 'http://localhost:8000/api',
+  apiPostOneImg: 'http://localhost:3000/file',
   apiPostImg: 'http://localhost:3000/multipleFiles',
   linkImg: 'http://localhost:3000/img/',
+  apiDeleteImg: 'http://localhost:3000/file/delete',
 };
 
 /*

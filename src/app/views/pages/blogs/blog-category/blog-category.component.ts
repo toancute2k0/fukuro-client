@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BlogCategoriesService } from 'src/app/services/blog-categories.service';
 import { BlogsService } from 'src/app/services/blogs.service';
+import { RouterModule, Router } from '@angular/router';
 
 @Component({
   selector: 'app-blog-category',
@@ -15,10 +16,12 @@ export class BlogCategoryComponent implements OnInit {
   page = 1;
   count = 6;
   cp = 1;
+  flag = false;
   constructor(
     private blogSer: BlogsService,
     private _route: ActivatedRoute,
-    private catSer: BlogCategoriesService
+    private catSer: BlogCategoriesService,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
