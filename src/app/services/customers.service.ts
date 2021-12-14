@@ -4,7 +4,6 @@ import { Subject, Observable } from 'rxjs';
 import { Customers } from '../models/customers.model';
 import { environment as env } from '../../environments/environment';
 import { map } from 'rxjs/operators';
-
 const API_URL = `${env.apiURL}/customers`;
 
 @Injectable({
@@ -15,7 +14,6 @@ export class CustomersService {
   profileName$ = new Subject<string>();
   profileUsername$ = new Subject<string>();
   profileId$ = new Subject<number>();
-
   constructor(private http: HttpClient) {}
 
   getAll(): Observable<Customers[]> {

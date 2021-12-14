@@ -88,15 +88,8 @@
                     <div class="col-lg-6 col-md-12 col-sm-12 col-12 questions-and-answers">
                         <div class="blog-details single-post-item format-standard">
                             <div class="post-details">
-
                                 <div class="post-featured-img">
                                     <h5>A/C E cho em hỏi xíu ạ, dự án bên phim trường HTV ở củ chi thuộc xã hòa phú có đầu tư được k vậy.</h5>
-                                </div>
-                                <div class="widget_tags">
-                                    <ul>
-                                        <li class="mr-2"><a href="#">Luật</a></li>
-                                        <li><a href="#">Đầu tư</a></li>
-                                    </ul>
                                 </div>
                                 <div class="pt-3 post-top-meta">
                                     <div class="post-top-meta">
@@ -121,18 +114,25 @@
                                                         <ul>
                                                             <li class="single-comment">
                                                                 <article class="mb-0">
-                                                                    <div class="comment-author">
-                                                                        <img src="https://via.placeholder.com/400x400" alt="" style="width: 50% !important;">Toản
+                                                                    <div class="comment-author" *ngIf="name" style="
+                                                                    font-weight: 600;
+                                                                    font-size: 67%;
+                                                                ">
+                                                                        <img src="{{avatar}}" alt="" style="width: 30% !important;"> {{name}}
                                                                     </div>
                                                                 </article>
                                                             </li>
                                                         </ul>
-
-                                                        <div>
-                                                            <textarea rows="4" cols="50">Nhập nội dung câu hỏi ở đây </textarea>
-
-                                                        </div>
-                                                        <button type="submit" class="btn btn-md  btn-theme-light-2 rounded">Gửi</button>
+                                                        <form [formGroup]="answers" (ngSubmit)="onSubmit()">
+                                                            <div>
+                                                                <textarea type="text" class="form-control" formControlName="content" placeholder="Nội dung câu trả lời ở đây"></textarea>
+                                                                <div *ngIf="submitted && f.content.errors">
+                                                                    <small *ngIf="f.content.errors.required" class="text-danger small-popup">Nội dung bình
+                                    luận không được bỏ trống!</small>
+                                                                </div>
+                                                            </div>
+                                                            <button type="submit" class="btn btn-md  btn-theme-light-2 rounded">Gửi</button>
+                                                        </form>
                                                     </div>
                                                 </div>
                                             </div>

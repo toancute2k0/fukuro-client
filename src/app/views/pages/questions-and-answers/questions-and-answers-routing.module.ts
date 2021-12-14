@@ -17,6 +17,13 @@ const routes: Routes = [
         path: 'chi-tiet',
         component: QuestionsAndAnswersDetailComponent,
       },
+      {
+        path: 'chi-tiet/:slug',
+        children:
+          [
+            { path: '', component: QuestionsAndAnswersDetailComponent, pathMatch: 'full'}
+          ],
+      },
     ],
   },
 ];
