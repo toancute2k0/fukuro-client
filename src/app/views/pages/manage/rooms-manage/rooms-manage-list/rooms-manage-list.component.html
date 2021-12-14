@@ -8,11 +8,35 @@
         <a routerLink="/manage/rooms/create" class="btn btn-primary">Thêm mới</a>
       </div>
     </div>
-    <select id="status" name="status" class="form-control simple w-25 mb-5">
-      <option value="1">Nhà trọ 1</option>
-      <option value="2">Nhà trọ 2</option>
-    </select>
+<!--    <label>Chọn trọ thuê</label>-->
+<!--    <select id="status" name="status" class="form-control simple w-25 mb-5" (change)="change($event)">-->
+<!--      <option *ngFor="let item of rentals" [value]="item.id">{{ item.name }}</option>-->
+<!--    </select>-->
   </div>
-  <ng2-smart-table [settings]="settings" [source]="source" (custom)="onCustomAction($event)"></ng2-smart-table>
+  <div class="container">
+    <div class="row">
+      <div *ngIf="isRental == false">
+        <br>
+        <h5 class="text-warning text-center">Vui lòng thêm trọ nhiều phòng để quản lý phòng trọ!</h5>
+      </div>
+      <div class="col-md-3">
+        <div class="control-box ">
+          <h5 class="p-3 m-0">Danh sách trọ thuê nhiều phòng</h5>
+          <ul class="links">
+              <li *ngFor="let item of rentals" class="p-2">
+                <a (click)="change(item.id)">{{ item.name }}</a>
+              </li>
+            </ul>
+        </div>
+
+      </div>
+      <div class="col-md-9">
+        <div *ngIf="isRental == true">
+          <ng2-smart-table [settings]="settings" [source]="source" (custom)="onCustomAction($event)"></ng2-smart-table>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>
 

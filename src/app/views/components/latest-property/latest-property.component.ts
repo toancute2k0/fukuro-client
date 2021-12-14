@@ -112,8 +112,14 @@ export class LatestPropertyComponent implements OnInit {
     const data = {
       rental_news: id.toString(),
     };
-    this.bookmarkSer.updateBookMark(this.id, data).subscribe(() => {
-      this.getWishlist();
+    this.bookmarkSer.updateBookMark(this.id, data).subscribe((res: any) => {
+      if(res.message == 'empty'){
+        for (let item of this.rentalNews) {
+          item.wishlist = false;
+        }
+      }else{
+        this.getWishlist();
+      }
     });
   }
 }

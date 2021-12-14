@@ -88,7 +88,7 @@ export class RentalManageComponent implements OnInit {
             this.toastrService.success('Xóa tin cho thuê thành công ');
           },
           error => {
-            this.toastrService.success(error);
+            this.toastrService.error(error);
           });
     }
       }
@@ -100,13 +100,19 @@ export class RentalManageComponent implements OnInit {
           this.getWishlist();
         });
       }
-    
+
       handleRemoveFromWishlist(id: string) {
         const data = {
           rental_news: id.toString(),
         };
-        this.bookmarkSer.updateBookMark(this.id, data).subscribe(() => {
-          this.getWishlist();
+        this.bookmarkSer.updateBookMark(this.id, data).subscribe((res: any) => {
+          if(res.message == 'empty'){
+            for (let item of this.rental) {
+              item.wishlist = false;
+            }
+          }else{
+            this.getWishlist();
+          }
         });
       }
 }
