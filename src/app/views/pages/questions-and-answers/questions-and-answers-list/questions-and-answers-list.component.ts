@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BlogCategories } from 'src/app/models/blog-categories.model';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { BlogCategoriesService } from 'src/app/services/blog-categories.service';
-import { BlogsService } from 'src/app/services/blogs.service';
+import { QuestionCategoriesService } from 'src/app/services/question-cate.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Validators, FormBuilder } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
@@ -16,10 +15,13 @@ import {QuestionService} from 'src/app/services/question.service'
 export class QuestionsAndAnswersListComponent implements OnInit {
   cat?: BlogCategories[];
   submitted = false;
+  count = 6;
+  page = 1;
+  questionList: any | undefined;
   constructor(
     config: NgbModalConfig, 
     private modalService: NgbModal, 
-    private catBlogs: BlogCategoriesService,
+    private catQuestions: QuestionCategoriesService,
     private route: ActivatedRoute, 
     public fb: FormBuilder,
     private toastrService: ToastrService,
@@ -31,10 +33,8 @@ export class QuestionsAndAnswersListComponent implements OnInit {
     
   }
   question = this.fb.group({
-    content: [
-      '',
-      Validators.compose([Validators.required]),
-    ],
+   
+    content: ['', Validators.compose([Validators.required])],
     question_category_id: [
       '',
       Validators.compose([Validators.required]),
@@ -43,23 +43,79 @@ export class QuestionsAndAnswersListComponent implements OnInit {
       '',
       Validators.compose([Validators.required]),
     ],
+    slug: [''],
   });
   open(content:any) {
     this.modalService.open(content);
   }
   ngOnInit(): void {
     const slug = this.route.snapshot.paramMap.get('slug');
-    this.catBlogs.getAllCat().subscribe((res: any | undefined) => {
+    this.catQuestions.getAllCat().subscribe((res: any | undefined) => {
       this.cat = res['rows'];
     });
+    this.questionService.getAll(this.page, this.count).subscribe(
+      (data: any | undefined) => {
+        this.count = data['count'];
+        this.getBlogs(1, this.count);
+      },
+      (err) => {
+        console.log(err);
+      });
   }
   get f() {
     return this.question.controls;
   }
+  getBlogs(n: any, c: any): void {
+    this.questionService.getAll(n, c).subscribe(
+      (data: any) => {
+        this.questionList = data['rows'];
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+  }
+   // Create slug
+   modelChangeFn(e: string) {
+    const text = this.transform(e);
+    this.question.patchValue({ slug: text });
+  }
+
+  // Handle slug
+  transform(value: string) {
+    let text = value.toLowerCase();
+    // --------------------------
+    // Đổi ký tự có dấu thành không dấu
+    text = text.replace(/á|à|ả|ạ|ã|ă|ắ|ằ|ẳ|ẵ|ặ|â|ấ|ầ|ẩ|ẫ|ậ/gi, 'a');
+    text = text.replace(/é|è|ẻ|ẽ|ẹ|ê|ế|ề|ể|ễ|ệ/gi, 'e');
+    text = text.replace(/i|í|ì|ỉ|ĩ|ị/gi, 'i');
+    text = text.replace(/ó|ò|ỏ|õ|ọ|ô|ố|ồ|ổ|ỗ|ộ|ơ|ớ|ờ|ở|ỡ|ợ/gi, 'o');
+    text = text.replace(/ú|ù|ủ|ũ|ụ|ư|ứ|ừ|ử|ữ|ự/gi, 'u');
+    text = text.replace(/ý|ỳ|ỷ|ỹ|ỵ/gi, 'y');
+    text = text.replace(/đ/gi, 'd');
+    // Xóa các ký tự đặt biệt
+    text = text.replace(
+      /\`|\~|\!|\@|\#|\||\$|\%|\^|\&|\*|\(|\)|\+|\=|\,|\.|\/|\?|\>|\<|\'|\"|\:|\;|_/gi,
+      ''
+    );
+    // Đổi khoảng trắng thành ký tự gạch ngang
+    text = text.replace(/ /gi, '-');
+    // Đổi nhiều ký tự gạch ngang liên tiếp thành 1 ký tự gạch ngang
+    // Phòng trường hợp người nhập vào quá nhiều ký tự trắng
+    text = text.replace(/\-\-\-\-\-/gi, '-');
+    text = text.replace(/\-\-\-\-/gi, '-');
+    text = text.replace(/\-\-\-/gi, '-');
+    text = text.replace(/\-\-/gi, '-');
+    // Xóa các ký tự gạch ngang ở đầu và cuối
+    text = '@' + text + '@';
+    text = text.replace(/\@\-|\-\@|\@/gi, '');
+
+    return text;
+  }
   onSubmit(): any {
     this.submitted = true;
     
-    console.log(this.question)
+    console.log(this.question.value)
     if (this.question.invalid) {
       return false;
     }
@@ -68,7 +124,7 @@ export class QuestionsAndAnswersListComponent implements OnInit {
       question_category_id: this.question.value['question_category_id'],
       title:this.question.value['title'],
       customer_id: localStorage.getItem('currentUser'),
-      slug:'hoi-dap',
+      slug:this.question.value['slug'],
     };
     console.log(data);
     this.questionService.create(data).subscribe(
@@ -87,6 +143,7 @@ export class QuestionsAndAnswersListComponent implements OnInit {
       content: [''],
       question_category_id: [''],
       title: [''],
+      slug:['']
     });
   }
 

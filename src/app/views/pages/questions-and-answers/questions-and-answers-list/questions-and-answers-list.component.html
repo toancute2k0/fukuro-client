@@ -90,7 +90,7 @@
                                 </div>
                                 <form [formGroup]="question" (ngSubmit)="onSubmit()">
                                     <div class="modal-body">
-                                        <input type="text" class="form-control" placeholder="Chủ đề cho câu hỏi" formControlName="title">
+                                        <input type="text" class="form-control" placeholder="Chủ đề cho câu hỏi" formControlName="title" (ngModelChange)="modelChangeFn($event)">
                                         <div *ngIf="submitted && f.title.errors">
                                             <small *ngIf="f.title.errors.required" class="text-danger small-popup">Chủ đề câu hỏi không được bỏ trống</small>
                                         </div>
@@ -135,17 +135,19 @@
                             </div>
                         </div>
                         <div class="blog-details single-post-item format-standard">
-                            <div class="post-details">
+                            <div class="post-details" *ngFor="let questionList of questionList ">
 
-                                <a routerLink="/hoi-dap/chi-tiet">
-                                    <h5>A/C E cho em hỏi xíu ạ, dự án bên phim trường HTV ở củ chi thuộc xã hòa phú có đầu tư được k vậy.
+                                <a routerLink="/hoi-dap/chi-tiet/{{questionList.slug}}">
+                                    <h5>{{questionList.title}}
                                     </h5>
                                 </a>
                                 <hr>
 
                                 <div class="post-top-meta">
                                     <ul class="meta-comment-tag questions-and-answers-comment">
-                                        <li><a><span class="icons"><i class="ti-user"></i></span>Quốc Toản</a></li>
+                                        <li>
+                                            <a><span class="icons"><i class="ti-user"></i></span>{{questionList.customerId}}</a>
+                                        </li>
                                         <li><a><span class="icons"><i class="ti-comment-alt"></i></span>0 bình luận</a>
                                         </li>
                                     </ul>
