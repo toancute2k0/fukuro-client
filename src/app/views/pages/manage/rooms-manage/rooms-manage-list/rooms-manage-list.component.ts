@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
 import { Ng2SmartTableModule, LocalDataSource } from 'ng2-smart-table';
+import {RentalRoomsService} from "../../../../../services/rental-rooms.service";
+import {RentalsService} from "../../../../../services/rentals.service";
 
 @Component({
   selector: 'app-rooms-manage-list',
@@ -8,6 +10,9 @@ import { Ng2SmartTableModule, LocalDataSource } from 'ng2-smart-table';
   styleUrls: ['./rooms-manage-list.component.css'],
 })
 export class RoomsManageListComponent implements OnInit {
+  id: any;
+  limit = 6;
+  rentals: any;
   settings = {
     actions: {
       custom: [
@@ -26,9 +31,6 @@ export class RoomsManageListComponent implements OnInit {
       position: 'right',
     },
     columns: {
-      id: {
-        title: 'STT'
-      },
       name: {
         title: 'Tên phòng trọ'
       },
@@ -38,28 +40,91 @@ export class RoomsManageListComponent implements OnInit {
       area: {
         title: 'Diện tích'
       },
-      amountPeople: {
+      numberPeople: {
         title: 'Số người phù hợp'
       },
-      renterName: {
-        title: 'Tên người thuê'
-      },
-      endDate: {
+      vacancyDate: {
         title: 'Ngày phòng sẽ trống'
-      }
+      },
+      status: {
+        title: 'Trạng Thái',
+        type: 'html',
+        valuePrepareFunction: (value: any) => {
+          return value == 1 ? 'Đã cho thuê' : 'Chưa cho thuê';
+        },
+      },
     },
   }
 
-  data = [];
+  isRental = true;
 
-  source: LocalDataSource;
+  source: LocalDataSource = new LocalDataSource();
 
-  constructor(private _router: Router) {
-    this.source = new LocalDataSource(this.data);
-  }
+  constructor(private _router: Router,
+              private rentalRoomsService: RentalRoomsService,
+              private rentalsService: RentalsService
+              ) {}
 
   ngOnInit(): void {
+    this.rentals = [];
+    this.id = localStorage.getItem('currentUser');
+    if (this.id) {
+      this.retrieveRentalsByCustomerId(this.id);
+    }
+  }
 
+  retrieveRentalsByCustomerId(id: any): void {
+    this.rentalsService.getFindByCustomerId(id, this.limit)
+      .subscribe(
+        (data: any) => {
+          if(data['count'] > 0){
+            this.limit = data['count'];
+            this.rentalsService.getFindByCustomerId(id, this.limit)
+              .subscribe(
+                (res: any) => {
+                  for (var i = 0; i < res['rows'].length; i++) {
+                    if(res['rows'][i].type == 1){
+                      this.rentals.push(res['rows'][i]);
+                    }
+                  }
+                });
+          }else {
+            this.isRental = false;
+          }
+        },
+        error => {
+          console.log(error);
+        });
+  }
+
+  change(event: any){
+    // if(event.target.value != ''){
+    //   if(event.target.value == 1){
+    //     this.isRental = 1;
+    //   }else{
+    //     this.isRental = 2;
+    //   }
+    //   this.retrieveRentalsByRentalId(event.target.value);
+    // }else{
+    //   this.isRental = 0;
+    //   this.retrieveRentalsByRentalId(0);
+    // }
+  }
+
+  retrieveRentalsByRentalId(id: any): void {
+    this.rentalRoomsService.getFindByRentalId(id, this.limit)
+      .subscribe(
+        (data: any) => {
+          this.limit = data['count'];
+          this.rentalRoomsService.getFindByRentalId(id, this.limit)
+            .subscribe(
+              (res: any) => {
+                this.source = new LocalDataSource(res['rows']);
+              });
+        },
+        error => {
+          console.log(error);
+        });
   }
 
   onCustomAction(event: any) {

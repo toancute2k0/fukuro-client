@@ -45,7 +45,8 @@ export class FeaturedPropertyComponent implements OnInit {
         this.getRentalNews();
       },
       (err: any | undefined) => {
-        console.log(err);
+        this.getRentalNews();
+        // console.log(err);
       }
     );
   }
@@ -56,14 +57,18 @@ export class FeaturedPropertyComponent implements OnInit {
         for (var i = 0; i < data['rows'].length; i++) {
           data['rows'][i].image = JSON.parse(data['rows'][i].image);
         }
-        if (this.wishlist) {
+        if (this.wishlist.length > 0) {
           for (let item of this.rentalNews) {
             item.wishlist = false;
             for (var i = 0; i < this.wishlist.length; i++) {
-              if (item.id == this.wishlist[i]['id']) {
-                item.wishlist = true;
+                if (item.id == this.wishlist[i]['id']) {
+                  item.wishlist = true;
+                }
               }
-            }
+          }
+        }else{
+          for (let item of this.rentalNews) {
+            item.wishlist = false;
           }
         }
       },
@@ -86,8 +91,14 @@ export class FeaturedPropertyComponent implements OnInit {
     const data = {
       rental_news: id.toString(),
     };
-    this.bookmarkSer.updateBookMark(this.id, data).subscribe(() => {
-      this.getWishlist();
+    this.bookmarkSer.updateBookMark(this.id, data).subscribe((res: any) => {
+      if(res.message == 'empty'){
+        for (let item of this.rentalNews) {
+          item.wishlist = false;
+        }
+      }else{
+        this.getWishlist();
+      }
     });
   }
 }

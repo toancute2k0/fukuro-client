@@ -1,0 +1,72 @@
+.css-custom-list-image{
+  align-items: center;
+  background: #fff;
+  border: 2px dashed #717386;
+  border-radius: 5px;
+  color: #717386;
+  cursor: pointer;
+  /*display: flex;*/
+  font-size: 16px;
+  /*height: 180px;*/
+  /*overflow-x: auto;*/
+}
+.css-custom-list-image .custom-box{
+  display: flex;
+  height: 180px;
+  overflow-x: auto;
+}
+.css-custom-list-image .custom-dropzone{
+  border: none !important;
+}
+.list-image{
+  display: inline-block;
+}
+.list-image .list-image-div{
+  position: relative;
+  margin: 10px;
+}
+
+.list-image .list-image-div img{
+  align-items: center;
+  border-radius: 5px;
+  display: flex;
+  height: 140px;
+  justify-content: center;
+  min-height: 140px;
+  min-width: 220px;
+  object-fit: cover;
+}
+
+.list-image .list-image-div:hover{
+  opacity: .7;
+}
+.list-image .list-image-div:hover i{
+  opacity: 1;
+}
+.list-image-div i{
+  color: white;
+  opacity: 0;
+  align-items: center;
+  background: #BBBBBB;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  height: 22px;
+  justify-content: center;
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  width: 22px;
+}
+
+.list-image-div i:hover{
+  background: #AEAEAE;
+}
+.custom-dropzone ngx-dropzone-image-preview{
+  min-width: 220px !important;
+}
+
+:host ::ng-deep img {
+  width: 100% !important;
+  object-fit: cover !important;
+}

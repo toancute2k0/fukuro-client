@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
@@ -12,10 +12,12 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./edit-rental.component.css']
 })
 export class EditRentalComponent implements OnInit {
+  linkImg = environment.linkImg;
   id: any;
   submitted = false;
   result = false;
   multipleImages: File[] = [];
+  // multipleImagesCus : any[];
   selectedCheck!: boolean;
   EditRentalForm = this.fb.group({
     name: [
@@ -49,6 +51,9 @@ export class EditRentalComponent implements OnInit {
     status: [''],
   });
   RentalNewsService: any;
+  flag = false;
+  arrDelete : any[] = (this.EditRentalForm.value['image'] = []);
+  multipleImagesCus: any[] = (this.EditRentalForm.value['image'] = []);
 
   constructor(
     private fb: FormBuilder,
@@ -72,7 +77,7 @@ export class EditRentalComponent implements OnInit {
       .subscribe(
         (data: any) => {
           data.image = JSON.parse(data.image);
-          console.log(data.image);
+          this.multipleImagesCus = data.image;
           this.EditRentalForm = this.fb.group({
             name: [
               data.name,
@@ -193,9 +198,13 @@ export class EditRentalComponent implements OnInit {
   }
 
   onRemove(event: any) {
-    console.log(event);
-    console.log(this.multipleImages);
     this.multipleImages.splice(this.multipleImages.indexOf(event), 1);
+  }
+
+  delete(img: any){
+    this.flag = true;
+    this.arrDelete.push(img);
+    this.multipleImagesCus.splice(this.multipleImagesCus.indexOf(img), 1);
   }
 
   onSubmit(): any {
@@ -205,30 +214,77 @@ export class EditRentalComponent implements OnInit {
     for (let img of this.multipleImages) {
       formData.append('files', img);
     }
-    // console.log(this.EditRentalForm.value);
     if (this.EditRentalForm.invalid) {
       return false;
     }
-    const data = {
-      image: this.EditRentalForm.value['image'],
-      name: this.EditRentalForm.value['name'],
-      slug: this.EditRentalForm.value['slug'],
-      price: this.EditRentalForm.value['price'],
-      quantity: this.EditRentalForm.value['quantity'],
-      type: this.EditRentalForm.value['type'],
-      area: this.EditRentalForm.value['area'],
-      address: this.EditRentalForm.value['address'],
-      description: this.EditRentalForm.value['description'],
-      customerId: localStorage.getItem('currentUser'),
-    };
-    this.rentalServe.update(this.id,data).subscribe(
-      (res) => {
-        this.toastrService.success('Cập nhật thành công!');
-      },
-      (error) => {
-        this.toastrService.error('Cập nhật thất bại!');
-      }
-    );
+
+    if(this.flag == true){
+      const options = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+        }),
+        body: {
+          files_name: this.arrDelete,
+        },
+      };
+      this.http.delete(environment.apiDeleteMultipleImg, options).subscribe();
+
+    }
+
+    if (this.multipleImages.length === 0){
+      const data = {
+        image: JSON.stringify(this.multipleImagesCus),
+        name: this.EditRentalForm.value['name'],
+        slug: this.EditRentalForm.value['slug'],
+        price: this.EditRentalForm.value['price'],
+        quantity: this.EditRentalForm.value['quantity'],
+        type: this.EditRentalForm.value['type'],
+        area: this.EditRentalForm.value['area'],
+        address: this.EditRentalForm.value['address'],
+        description: this.EditRentalForm.value['description'],
+        customerId: localStorage.getItem('currentUser'),
+      };
+      this.rentalServe.update(this.id, data).subscribe(
+        (response: any) => {
+          this.multipleImages.length = 0;
+          this.toastrService.success(response.message);
+        },
+        (error) => {
+          this.toastrService.error(error.message);
+        }
+      );
+    }else{
+      this.http.post(environment.apiPostImg, formData).toPromise().then((res: any) => {
+        this.result = true;
+        if (this.result == true) {
+          for (let img of res) {
+            this.multipleImagesCus.push(img.filename);
+          }
+          const data = {
+            image: JSON.stringify(this.multipleImagesCus),
+            name: this.EditRentalForm.value['name'],
+            slug: this.EditRentalForm.value['slug'],
+            price: this.EditRentalForm.value['price'],
+            quantity: this.EditRentalForm.value['quantity'],
+            type: this.EditRentalForm.value['type'],
+            area: this.EditRentalForm.value['area'],
+            address: this.EditRentalForm.value['address'],
+            description: this.EditRentalForm.value['description'],
+            customerId: localStorage.getItem('currentUser'),
+          };
+          this.rentalServe.update(this.id, data).subscribe(
+            (response: any) => {
+              this.multipleImages.length = 0;
+              this.toastrService.success(response.message);
+            },
+            (error) => {
+              this.toastrService.error(error.message);
+            }
+          );
+        }
+      });
+    }
+
   }
 
 }

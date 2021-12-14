@@ -162,7 +162,7 @@ export class MyProfileComponent implements OnInit {
               this.toastrService.success(response.message);
             },
             (error) => {
-              this.toastrService.success(error.message);
+              this.toastrService.error(error.message);
             });
         }
       });

@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
+import {RentalsService} from "../../../../../services/rentals.service";
+import { LocalDataSource } from 'ng2-smart-table';
+import {CustomersService} from "../../../../../services/customers.service";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-motels-manage-list',
@@ -25,19 +29,16 @@ export class MotelsManageListComponent implements OnInit {
       position: 'right',
     },
     columns: {
-      id: {
-        title: 'STT'
-      },
       name: {
         title: 'Tên trọ'
       },
-      username: {
+      quantity: {
         title: 'Số phòng'
       },
       address: {
         title: 'Địa chỉ'
       },
-      customerId: {
+      customerName: {
         title: 'Tên chủ trọ'
       },
       email: {
@@ -48,21 +49,76 @@ export class MotelsManageListComponent implements OnInit {
       }
     },
   }
+  limit = 6;
+  id: any;
+  data: any;
+  constructor(
+    private rentalsService: RentalsService,
+    private _router: Router,
+    private customSer: CustomersService,
+    private toastrService: ToastrService,
+  ) { }
 
-  data = [];
-
-  constructor(private _router: Router) { }
+  source: LocalDataSource = new LocalDataSource();
 
   ngOnInit(): void {
+    this.data = [];
+    this.id = localStorage.getItem('currentUser');
+    if (this.id) {
+      this.retrieveRentalsByCustomerId(this.id);
+    }
+  }
 
+  retrieveRentalsByCustomerId(id: any): void {
+    this.rentalsService.getFindByCustomerId(id, this.limit)
+      .subscribe(
+        (data: any) => {
+          this.limit = data['count'];
+          this.rentalsService.getFindByCustomerId(id, this.limit)
+            .subscribe(
+              (res: any) => {
+                this.getCustomer(this.id);
+                for (var i = 0; i < res['rows'].length; i++) {
+                  this.data.push(res['rows'][i]);
+                }
+              });
+        },
+        error => {
+          console.log(error);
+        });
+  }
+
+  getCustomer(id: any){
+    this.customSer.get(id)
+      .subscribe(
+        (data: any) => {
+          for (let item of this.data) {
+            item.customerName = data.firstName + ' '+ data.lastName;
+            item.email = data.email;
+            item.phone = data.phone;
+          }
+          this.source = this.data;
+        },
+        (error )=> {
+          console.log(error);
+        });
   }
 
   onCustomAction(event: any) {
     if(event.action == 'edit'){
       this._router.navigate(['/manage/motels/edit/'+event.data['id']]);
     }
-    if(event.action == 'delete'){
-     window.confirm('Bạn có chắn chắn sẽ xoá không?');
+    if (window.confirm('Bạn có chắn chắn sẽ xoá không?')) {
+      this.rentalsService.delete(event.data['id'])
+        .subscribe(
+          (response: any) => {
+            this.data = [];
+            this.retrieveRentalsByCustomerId(this.id);
+            this.toastrService.success(response.message);
+          },
+          (error: any) => {
+            this.toastrService.error(error.message);
+          });
     }
   }
 

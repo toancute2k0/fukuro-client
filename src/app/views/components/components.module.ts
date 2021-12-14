@@ -10,6 +10,7 @@ import { OrderPackageComponent } from './order-package/order-package.component';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { RouterModule } from '@angular/router';
 import { ListBlogRentalComponent } from './list-blog-rental/list-blog-rental.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,11 @@ import { ListBlogRentalComponent } from './list-blog-rental/list-blog-rental.com
     OrderPackageComponent,
     ListBlogRentalComponent,
   ],
-  imports: [CommonModule, HttpClientModule, CarouselModule, RouterModule],
+  imports: [
+    FormsModule,
+    ReactiveFormsModule,
+    CommonModule, HttpClientModule, CarouselModule, RouterModule
+  ],
   exports: [
     BannerComponent,
     FeaturedPropertyComponent,
