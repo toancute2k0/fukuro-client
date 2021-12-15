@@ -2,6 +2,64 @@
   <h2 class="pb-5 d-inline-block">Danh sách người thuê</h2>
   <a routerLink="/manage/renters/create" class="btn btn-primary float-right">Thêm mới</a>
 
-  <ng2-smart-table [settings]="settings" [source]="data" (custom)="onCustomAction($event)"></ng2-smart-table>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3">
+        <div class="control-box ">
+          <h5 class="p-3 m-0">Trọ thuê nhiều phòng</h5>
+          <ul class="links">
+            <li *ngFor="let item of rentals" class="p-2">
+              <a (click)="change(item.id)" [ngClass]="item.active == true ? 'special': ''">{{ item.name }}</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-9">
+        <div>
+          <ng2-smart-table [settings]="settings" [source]="source" (custom)="onCustomAction($event)"></ng2-smart-table>
+        </div>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div class="container" *ngIf="apartment.length > 0">
+    <div class="row">
+      <div class="col-md-3">
+        <div class="control-box ">
+          <h5 class="p-3 m-0">Mặt bằng</h5>
+          <ul class="links">
+            <li *ngFor="let item of apartment" class="p-2">
+              <a (click)="change2(item.id)" [ngClass]="item.active == true ? 'special': ''">{{ item.name }}</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-9">
+        <div>
+          <ng2-smart-table [settings]="settings" [source]="source2" (custom)="onCustomAction($event)"></ng2-smart-table>
+        </div>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div class="container" *ngIf="ground.length > 0">
+    <div class="row">
+      <div class="col-md-3">
+        <div class="control-box ">
+          <h5 class="p-3 m-0">Căn hộ</h5>
+          <ul class="links">
+            <li *ngFor="let item of ground" class="p-2">
+              <a (click)="change3(item.id)" [ngClass]="item.active == true ? 'special': ''">{{ item.name }}</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-9">
+        <div>
+          <ng2-smart-table [settings]="settings" [source]="source3" (custom)="onCustomAction($event)"></ng2-smart-table>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 

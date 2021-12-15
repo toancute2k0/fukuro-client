@@ -17,7 +17,7 @@
 
   <div class="container">
 
-    <form>
+    <form [formGroup]="renterForm" (ngSubmit)="onSubmit()">
       <!-- row Start -->
       <div class="row">
 
@@ -27,13 +27,19 @@
             <div class="col-lg-6 col-md-6">
               <div class="form-group">
                 <label>Họ và tên</label>
-                <input type="text" class="form-control simple" >
+                <input type="text" class="form-control simple" formControlName="name">
+                <div *ngIf="submitted && f.name.errors">
+                  <small *ngIf="f.name.errors.required" class="text-muted small-popup">Họ và tên không được bỏ trống!</small>
+                </div>
               </div>
             </div>
             <div class="col-lg-6 col-md-6">
               <div class="form-group">
                 <label>Ngày sinh</label>
-                <input type="email" class="form-control simple">
+                <input type="date" class="form-control simple" formControlName="birth">
+                <div *ngIf="submitted && f.birth.errors">
+                  <small *ngIf="f.birth.errors.required" class="text-muted small-popup">Ngày sinh không được bỏ trống!</small>
+                </div>
               </div>
             </div>
           </div>
@@ -41,64 +47,62 @@
             <div class="col-lg-6 col-md-6">
               <div class="form-group">
                 <label>Email</label>
-                <input type="email" class="form-control simple">
+                <input type="email" class="form-control simple" formControlName="email">
+                <div *ngIf="submitted && f.email.errors">
+                  <small *ngIf="f.email.errors.required" class="text-muted small-popup">Email không được bỏ trống!</small>
+                  <small *ngIf="f.email.errors.email" class="text-muted small-popup">Email không hợp lệ!</small>
+                </div>
               </div>
             </div>
             <div class="col-lg-6 col-md-6">
               <div class="form-group">
                 <label>Số điện thoại</label>
-                <input type="text" class="form-control simple">
+                <input type="text" class="form-control simple" formControlName="phone">
+                <div *ngIf="submitted && f.phone.errors">
+                  <small *ngIf="f.phone.errors.required" class="text-muted small-popup">Số điện thoại không được bỏ trống!</small>
+                  <small *ngIf="f.phone.errors.pattern" class="text-muted small-popup">Số điện thoại phải là kiểu số!</small>
+                </div>
               </div>
             </div>
           </div>
           <div class="row">
             <div class="col-lg-6 col-md-6">
               <div class="form-group">
-                <label>Thành phố</label>
-                <input type="email" class="form-control simple">
+                <label>Chứng minh nhân dân</label>
+                <input type="text" class="form-control simple" formControlName="idNumber">
+                <div *ngIf="submitted && f.idNumber.errors">
+                  <small *ngIf="f.idNumber.errors.required" class="text-muted small-popup">Chứng minh nhân dân không được bỏ trống!</small>
+                  <small *ngIf="f.idNumber.errors.pattern" class="text-muted small-popup">Chứng minh nhân dân phải là kiểu số!</small>
+                </div>
               </div>
             </div>
             <div class="col-lg-6 col-md-6">
-              <div class="form-group">
-                <label>Quận</label>
-                <input type="text" class="form-control simple">
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-lg-6 col-md-6">
-              <div class="form-group">
-                <label>Phường</label>
-                <input type="email" class="form-control simple">
-              </div>
-            </div>
-            <div class="col-lg-6 col-md-6">
-              <div class="form-group">
-                <label>Địa chỉ</label>
-                <input type="text" class="form-control simple">
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-lg-4 col-md-4">
               <div class="form-group">
                 <label>Tiền cọc</label>
-                <input type="text" class="form-control simple">
+                <input type="text" class="form-control simple" formControlName="deposit">
+                <div *ngIf="submitted && f.deposit.errors">
+                  <small *ngIf="f.deposit.errors.required" class="text-muted small-popup">Tiền cọc không được bỏ trống!</small>
+                </div>
               </div>
             </div>
-            <div class="col-lg-4 col-md-4">
+          </div>
+          <div class="row">
+            <div class="col-lg-6 col-md-6">
               <div class="form-group">
-                <label>Chu kỳ</label>
-                <select class="form-control simple">
-                  <option value="1">1 tháng</option>
-                  <option value="2">2 tháng</option>
-                </select>
+                <label>Chu kỳ / tháng</label>
+                <input type="text" class="form-control simple" formControlName="period">
+                <div *ngIf="submitted && f.period.errors">
+                  <small *ngIf="f.period.errors.required" class="text-muted small-popup">Chu kỳ không được bỏ trống!</small>
+                </div>
               </div>
             </div>
-            <div class="col-lg-4 col-md-4">
+            <div class="col-lg-6 col-md-6">
               <div class="form-group">
                 <label>Ngày chốt tiền phòng hàng tháng</label>
-                <input type="email" class="form-control simple">
+                <input type="text" class="form-control simple" formControlName="paymentDate">
+                <div *ngIf="submitted && f.period.errors">
+                  <small *ngIf="f.period.errors.required" class="text-muted small-popup">Ngày chốt tiền phòng hàng tháng không được bỏ trống!</small>
+                </div>
               </div>
             </div>
           </div>
@@ -106,19 +110,24 @@
             <div class="col-lg-6 col-md-6">
               <div class="form-group">
                 <label>Nhà trọ</label>
-                <select class="form-control simple">
-                  <option value="1">Nhà trọ 1</option>
-                  <option value="2">Nhà trọ 2</option>
+                <select id="status" name="status" class="form-control simple" formControlName="rentalId" (click)="change($event)">
+                  <option value="">Chọn trọ thuê</option>
+                  <option *ngFor="let item of rentals" [value]="item.id">{{ item.name }}</option>
                 </select>
+                <div *ngIf="submitted && f.rentalId.errors">
+                  <small *ngIf="f.rentalId.errors.required" class="text-muted small-popup">Vui lòng chọn trọ thuê!</small>
+                </div>
               </div>
             </div>
-            <div class="col-lg-6 col-md-6">
+            <div class="col-lg-6 col-md-6" *ngIf="isRoom == 1">
               <div class="form-group">
                 <label>Phòng trọ</label>
-                <select class="form-control simple">
-                  <option value="1">Phòng trọ 1</option>
-                  <option value="2">Phòng trọ 2</option>
+                <select class="form-control simple" formControlName="rentalRoomId">
+                  <option *ngFor="let rm of rooms" [value]="rm.id">{{ rm.name }}</option>
                 </select>
+<!--                <div *ngIf="submitted && f.rentalRoomId.errors">-->
+<!--                  <small *ngIf="f.rentalRoomId.errors.required" class="text-muted small-popup">Vui lòng chọn trọ thuê!</small>-->
+<!--                </div>-->
               </div>
             </div>
           </div>

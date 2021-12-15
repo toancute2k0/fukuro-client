@@ -26,9 +26,8 @@ export class MotelsManageCreateComponent implements OnInit {
     private rentalsService: RentalsService,
     private _router: Router,
     private toastrService: ToastrService
-  ) {
+  ) {}
 
-  }
   get f() {
     return this.rentalForm.controls;
   }

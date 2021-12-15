@@ -108,17 +108,19 @@ export class MotelsManageListComponent implements OnInit {
     if(event.action == 'edit'){
       this._router.navigate(['/manage/motels/edit/'+event.data['id']]);
     }
-    if (window.confirm('Bạn có chắn chắn sẽ xoá không?')) {
-      this.rentalsService.delete(event.data['id'])
-        .subscribe(
-          (response: any) => {
-            this.data = [];
-            this.retrieveRentalsByCustomerId(this.id);
-            this.toastrService.success(response.message);
-          },
-          (error: any) => {
-            this.toastrService.error(error.message);
-          });
+    if(event.action == 'delete'){
+      if (window.confirm('Bạn có chắn chắn sẽ xoá không?')) {
+        this.rentalsService.delete(event.data['id'])
+          .subscribe(
+            (response: any) => {
+              this.data = [];
+              this.retrieveRentalsByCustomerId(this.id);
+              this.toastrService.success(response.message);
+            },
+            (error: any) => {
+              this.toastrService.error(error.message);
+            });
+      }
     }
   }
 
