@@ -17,7 +17,7 @@
 
   <div class="container">
 
-    <form>
+    <form [formGroup]="billForm" (ngSubmit)="onSubmit()">
       <!-- row Start -->
       <div class="row">
 
@@ -26,13 +26,20 @@
             <div class="col-lg-6 col-md-6">
               <div class="form-group">
                 <label>Tên hoá đơn</label>
-                <input type="text" class="form-control simple" >
+                <input type="text" class="form-control simple" formControlName="name">
+                <div *ngIf="submitted && f.name.errors">
+                  <small *ngIf="f.name.errors.required" class="text-muted small-popup">Tên hoá đơn không được bỏ trống !</small>
+                </div>
               </div>
             </div>
             <div class="col-lg-6 col-md-6">
               <div class="form-group">
                 <label>Giá tiền phòng</label>
-                <input type="email" class="form-control simple">
+                <input type="text" class="form-control simple" formControlName="price">
+                <div *ngIf="submitted && f.price.errors">
+                  <small *ngIf="f.price.errors.required" class="text-muted small-popup">Giá tiền phòng không được bỏ trống !</small>
+                  <small *ngIf="f.price.errors.pattern" class="text-muted small-popup">Giá tiền phòng phải là kiểu số!</small>
+                </div>
               </div>
             </div>
           </div>
@@ -40,13 +47,16 @@
             <div class="col-lg-6 col-md-6">
               <div class="form-group">
                 <label>Tiền Internet</label>
-                <input type="email" class="form-control simple">
+                <input type="text" class="form-control simple" formControlName="internetFee">
               </div>
             </div>
             <div class="col-lg-6 col-md-6">
               <div class="form-group">
                 <label>Trả trước</label>
-                <input type="text" class="form-control simple">
+                <input type="text" class="form-control simple" formControlName="prepay">
+                <div *ngIf="submitted && f.prepay.errors">
+                  <small *ngIf="f.prepay.errors.required" class="text-muted small-popup">Trả trước phải là kiểu số!</small>
+                </div>
               </div>
             </div>
           </div>
@@ -54,61 +64,45 @@
         <div class="form-submit mt-5">
           <h4>Tính tiền điện</h4>
           <div class="row">
-            <div class="col-lg-6 col-md-6">
+            <div class="col-lg-4 col-md-4">
               <div class="form-group">
-                <label>Chỉ số đầu</label>
-                <input type="text" class="form-control simple" >
+                <label>Giá tiền điện</label>
+                <input type="text" class="form-control simple" formControlName="electricityPrice" readonly>
               </div>
             </div>
-            <div class="col-lg-6 col-md-6">
-              <div class="form-group">
-                <label>Chỉ số cuối</label>
-                <input type="email" class="form-control simple">
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-lg-6 col-md-6">
+            <div class="col-lg-4 col-md-4">
               <div class="form-group">
                 <label>Số lượng</label>
-                <input type="text" class="form-control simple" >
+                <input type="text" class="form-control simple" readonly formControlName="electricityQuantity">
               </div>
             </div>
-            <div class="col-lg-6 col-md-6">
+            <div class="col-lg-4 col-md-4">
               <div class="form-group">
-                <label>Tổng tiền</label>
-                <input type="email" class="form-control simple">
+                <label>Tổng tiền điện</label>
+                <input type="text" class="form-control simple" readonly formControlName="electricityAmount">
               </div>
             </div>
           </div>
         </div>
-        <div class="form-submit">
+        <div class="form-submit mt-5">
           <h4>Tính tiền nước</h4>
           <div class="row">
-            <div class="col-lg-6 col-md-6">
+            <div class="col-lg-4 col-md-4">
               <div class="form-group">
-                <label>Chỉ số đầu</label>
-                <input type="text" class="form-control simple" >
+                <label>Giá tiền nước</label>
+                <input type="text" class="form-control simple" formControlName="waterPrice" readonly>
               </div>
             </div>
-            <div class="col-lg-6 col-md-6">
-              <div class="form-group">
-                <label>Chỉ số cuối</label>
-                <input type="email" class="form-control simple">
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-lg-6 col-md-6">
+            <div class="col-lg-4 col-md-4">
               <div class="form-group">
                 <label>Số lượng</label>
-                <input type="text" class="form-control simple" >
+                <input type="text" class="form-control simple" readonly formControlName="waterQuantity">
               </div>
             </div>
-            <div class="col-lg-6 col-md-6">
+            <div class="col-lg-4 col-md-4">
               <div class="form-group">
-                <label>Tổng tiền</label>
-                <input type="email" class="form-control simple">
+                <label>Tổng tiền nước</label>
+                <input type="text" class="form-control simple" readonly formControlName="waterAmount" >
               </div>
             </div>
           </div>
@@ -116,16 +110,66 @@
         <div class="row mt-5">
           <div class="col-lg-6 col-md-6">
             <div class="form-group">
-              <label>Giảm giá</label>
-              <input type="email" class="form-control simple">
+              <label>Phí phát sinh (nếu có)</label>
+              <input type="text" class="form-control simple" formControlName="otherFee">
             </div>
           </div>
           <div class="col-lg-6 col-md-6">
             <div class="form-group">
-              <label>Tổng tiền</label>
-              <input type="text" class="form-control simple">
+              <label>Mô tả phí phát sinh</label>
+              <input type="text" class="form-control simple" formControlName="feeDesc">
             </div>
           </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6 col-md-6">
+            <div class="form-group">
+              <label>Giảm giá %</label>
+              <input type="text" class="form-control simple" formControlName="discountPrice">
+              <div *ngIf="submitted && f.discountPrice.errors">
+                <small *ngIf="f.discountPrice.errors.pattern" class="text-muted small-popup">Giảm giá phải là kiểu số!</small>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6 col-md-6">
+            <div class="form-group">
+              <label>Trạng thái thanh toán</label>
+              <select class="form-control simple" formControlName="status">
+                <option value="">Chọn trạng thái thanh toán</option>
+                <option value="1">Đã thanh toán</option>
+                <option value="0">Chưa thanh toán</option>
+              </select>
+              <div *ngIf="submitted && f.status.errors">
+                <small *ngIf="f.status.errors.required" class="text-muted small-popup">Vui lòng chọn trạng thái thanh toán!</small>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6 col-md-6">
+            <div class="form-group">
+              <label>Nhà trọ</label>
+              <select id="status" name="status" class="form-control simple" formControlName="rentalId" (click)="change($event)">
+                <option value="">Chọn trọ thuê</option>
+                <option *ngFor="let item of rentals" [value]="item.id">{{ item.name }}</option>
+              </select>
+              <div *ngIf="submitted && f.rentalId.errors">
+                <small *ngIf="f.rentalId.errors.required" class="text-muted small-popup">Vui lòng chọn trọ thuê!</small>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6 col-md-6">
+            <div class="form-group">
+              <label>Phòng trọ</label>
+              <select class="form-control simple" formControlName="rentalRoomId">
+                <option *ngFor="let rm of rooms" [value]="rm.id">{{ rm.name }}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Ghi chú</label>
+          <textarea class="form-control simple" formControlName="note"></textarea>
         </div>
         <div class="form-group mt-3">
           <button class="btn btn-theme-light-2 rounded" type="submit">Cập nhật</button>

@@ -99,7 +99,6 @@ export class RoomsManageEditComponent implements OnInit {
       status: this.roomForm.value['status'],
       rental_id: this.roomForm.value['rentalId'],
     };
-    console.log(data);
     this.rentalRoomsService.update(this.id, data).subscribe(
       (res: any) => {
         this.toastrService.success(res.message);

@@ -3,6 +3,7 @@ import {Router} from "@angular/router";
 import { Ng2SmartTableModule, LocalDataSource } from 'ng2-smart-table';
 import {RentalRoomsService} from "../../../../../services/rental-rooms.service";
 import {RentalsService} from "../../../../../services/rentals.service";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-rooms-manage-list',
@@ -62,7 +63,8 @@ export class RoomsManageListComponent implements OnInit {
 
   constructor(private _router: Router,
               private rentalRoomsService: RentalRoomsService,
-              private rentalsService: RentalsService
+              private rentalsService: RentalsService,
+              private toastrService: ToastrService,
               ) {}
 
   ngOnInit(): void {
@@ -87,6 +89,10 @@ export class RoomsManageListComponent implements OnInit {
                       this.rentals.push(res['rows'][i]);
                     }
                   }
+                  if(this.rentals.length > 0){
+                    this.retrieveRentalsByRentalId(this.rentals[0].id);
+                    this.rentals[0].active = true;
+                  }
                 });
           }else {
             this.isRental = false;
@@ -98,17 +104,13 @@ export class RoomsManageListComponent implements OnInit {
   }
 
   change(event: any){
-    // if(event.target.value != ''){
-    //   if(event.target.value == 1){
-    //     this.isRental = 1;
-    //   }else{
-    //     this.isRental = 2;
-    //   }
-    //   this.retrieveRentalsByRentalId(event.target.value);
-    // }else{
-    //   this.isRental = 0;
-    //   this.retrieveRentalsByRentalId(0);
-    // }
+    for (let item of this.rentals) {
+      item.active = false;
+      if(item.id == event){
+        item.active = true;
+      }
+    }
+    this.retrieveRentalsByRentalId(event);
   }
 
   retrieveRentalsByRentalId(id: any): void {
@@ -132,7 +134,18 @@ export class RoomsManageListComponent implements OnInit {
       this._router.navigate(['/manage/rooms/edit/'+event.data['id']]);
     }
     if(event.action == 'delete'){
-      window.confirm('Bạn có chắn chắn sẽ xoá không?');
+      if (window.confirm('Bạn có chắn chắn sẽ xoá không?')) {
+        this.rentalRoomsService.delete(event.data['id'])
+          .subscribe(
+            (response: any) => {
+              this.rentals = [];
+              this.retrieveRentalsByCustomerId(this.id);
+              this.toastrService.success(response.message);
+            },
+            (error: any) => {
+              this.toastrService.error(error.message);
+            });
+      }
     }
   }
 }

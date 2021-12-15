@@ -6,4 +6,5 @@ export const environment = {
   apiPostImg: 'http://images.fukuro.website/multipleFiles',
   linkImg: 'http://images.fukuro.website/upload/',
   apiDeleteImg: 'http://images.fukuro.website/file/delete',
+  apiDeleteMultipleImg: 'http://images.fukuro.website/files/delete',
 };

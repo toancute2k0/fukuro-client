@@ -24,3 +24,24 @@
 :host /deep/ ng2-st-tbody-custom a:hover{
   text-decoration: none !important;
 }
+.control-box h5{
+  font-size: 16px;
+  background: #1B2132;
+  color: #858b9f;
+}
+
+.control-box .links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.control-box .links li {
+  cursor: pointer;
+  border: 1px solid #dddcd8;
+  background-color: #fff;
+}
+
+.special{
+  color: #aa1212;
+}

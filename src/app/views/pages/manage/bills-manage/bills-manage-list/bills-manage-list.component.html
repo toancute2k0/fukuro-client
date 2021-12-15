@@ -2,6 +2,6 @@
   <h2 class="pb-5 d-inline-block">Danh sách hoá đơn</h2>
   <a routerLink="/manage/bills/create" class="btn btn-primary float-right">Thêm mới</a>
 
-  <ng2-smart-table [settings]="settings" [source]="data" (custom)="onCustomAction($event)"></ng2-smart-table>
+  <ng2-smart-table [settings]="settings" [source]="source" (custom)="onCustomAction($event)"></ng2-smart-table>
 </div>
 
