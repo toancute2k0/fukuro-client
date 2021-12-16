@@ -1,7 +1,7 @@
 export class Answers {
     id?:string;
     content?:string;
-    status?:string;
+    status?:number;
     like?:number;
     disklike?:number;
     customer_id?:string;

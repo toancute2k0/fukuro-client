@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { QuestionCategories } from '../models/question-cat.model';
 import { environment as env } from '../../environments/environment';
-
+import { Question } from '../models/question.model';
 const API_URL = `${env.apiURL}/question-categories`;
 
 @Injectable({
@@ -20,7 +20,5 @@ export class QuestionCategoriesService {
     return this.http.get(`${API_URL}/${id}`);
   }
 
-  // getSlug(slug: string): Observable<QuestionCategories> {
-  //   return this.http.get(`${API_URL}/slug/${slug}`);
-  // }
+  
 }
