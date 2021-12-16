@@ -3,8 +3,10 @@
 <div id="main-wrapper">
     <!-- ============================ Hero Banner Start================================== -->
     <div class="home-map-banner full-wrapious">
-        <div class="hm-map-container fw-map">
-            <div id="map"></div>
+        <div class="hm-map-container">
+          <div *ngIf="apiLoaded | async">
+            <google-map width="100%"></google-map>
+          </div>
         </div>
     </div>
     <!-- ============================ Hero Banner End ================================== -->
