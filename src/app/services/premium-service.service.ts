@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment as env } from '../../environments/environment';
 import { PremiumService } from '../models/premium-service.model';
+import {BlogCategories} from "../models/blog-categories.model";
 
 const API_URL = `${env.apiURL}/premium-services`;
 

@@ -7,12 +7,6 @@ export class RentalNews {
   quantity?: string;
   type?: string;
   address?: string;
-  streetNumber?: string;
-  street?: string;
-  district?: string;
-  city?: string;
-  lat?: string;
-  lng?: string;
   description?: string;
   status?: string;
   promotionId?: string;

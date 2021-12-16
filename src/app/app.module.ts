@@ -1,4 +1,4 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { DatePipe } from '@angular/common';
 
@@ -30,13 +30,9 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { EditRentalComponent } from './views/pages/my-account/edit-rental/edit-rental.component';
 
-import {
-  SocialLoginModule,
-  SocialAuthServiceConfig,
-} from 'angularx-social-login';
+import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
 import { GoogleLoginProvider } from 'angularx-social-login';
-import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
-import { AgmCoreModule } from '@agm/core';
+import { SerchPageComponent } from './views/pages/serch-page/serch-page.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +52,7 @@ import { AgmCoreModule } from '@agm/core';
     ManageLayoutComponent,
     HeaderManageComponent,
     FooterManageComponent,
+    SerchPageComponent
   ],
   imports: [
     BrowserModule,
@@ -66,9 +63,6 @@ import { AgmCoreModule } from '@agm/core';
       timeOut: 3000, // 2 seconds
       progressBar: true,
     }),
-    AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyB0G3dsZ1jIz-10gzsCiH7jlc5X3KCwLNc',
-    }),
     ComponentsModule,
     HttpClientModule,
     ReactiveFormsModule,
@@ -76,12 +70,8 @@ import { AgmCoreModule } from '@agm/core';
     NgxDropzoneModule,
     NgbModule,
     SocialLoginModule,
-    GooglePlaceModule,
   ],
-  providers: [
-    AuthGuard,
-    NoAuthGuard,
-    DatePipe,
+  providers: [AuthGuard, NoAuthGuard, DatePipe,
     {
       provide: 'SocialAuthServiceConfig',
       useValue: {
@@ -90,15 +80,14 @@ import { AgmCoreModule } from '@agm/core';
           {
             id: GoogleLoginProvider.PROVIDER_ID,
             provider: new GoogleLoginProvider(
-              '874412646109-e8bcgddegegmrs60v388uvr7nkph1gp4.apps.googleusercontent.com'
-            ),
-          },
-        ],
+              '874412646109-9dr2vf7ter5fd2f8tovsl7fp2m5ldajk.apps.googleusercontent.com'
+            )
+          }
+        ]
       } as SocialAuthServiceConfig,
-    },
+    }
   ],
-  // schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent],
-  exports: [],
+  exports: []
 })
-export class AppModule {}
+export class AppModule { }

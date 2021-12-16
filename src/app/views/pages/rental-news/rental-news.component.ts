@@ -6,7 +6,6 @@ import { ToastrService } from 'ngx-toastr';
 import { RentalNews } from 'src/app/models/rental-news.model';
 import { RentalNewsService } from 'src/app/services/rental-news.service';
 import { environment } from 'src/environments/environment';
-
 @Component({
   selector: 'app-rental-news',
   templateUrl: './rental-news.component.html',
@@ -17,58 +16,6 @@ export class RentalNewsComponent implements OnInit {
   result = false;
   multipleImages: File[] = [];
   selectedCheck!: boolean;
-
-  fullAddress: string = '';
-  streetNumber: string = '';
-  street: string = '';
-  district: string = '';
-  city: string = '';
-  Latitude: string = '';
-  Longitude: string = '';
-
-  public options: any = {
-    componentRestrictions: { country: 'vn' },
-  };
-
-  handleAddressChange(address: any) {
-    this.fullAddress = address.formatted_address;
-    this.Latitude = address.geometry.location.lat();
-    this.Longitude = address.geometry.location.lng();
-    console.log(address.name);
-    console.log(this.fullAddress);
-    console.log(this.Latitude);
-    console.log(this.Longitude);
-
-    for (const component of address.address_components) {
-      const componentType = component.types[0];
-
-      switch (componentType) {
-        case 'street_number': {
-          this.streetNumber = `${component.long_name}`;
-          console.log(this.streetNumber);
-          break;
-        }
-
-        case 'route': {
-          this.street += component.short_name;
-          console.log(this.street);
-          break;
-        }
-
-        case 'administrative_area_level_2': {
-          this.district = `${component.long_name}`;
-          console.log(this.district);
-          break;
-        }
-
-        case 'administrative_area_level_1': {
-          this.city = `${component.long_name}`;
-          console.log(this.city);
-          break;
-        }
-      }
-    }
-  }
 
   rentalForm = this.fb.group({
     name: [
@@ -235,13 +182,7 @@ export class RentalNewsComponent implements OnInit {
             quantity: this.rentalForm.value['quantity'],
             type: this.rentalForm.value['type'],
             area: this.rentalForm.value['area'],
-            address: this.fullAddress,
-            street_number: this.streetNumber,
-            street: this.street,
-            district: this.district,
-            city: this.city,
-            lat: this.Latitude,
-            lng: this.Longitude,
+            address: this.rentalForm.value['address'],
             description: this.rentalForm.value['description'],
             customer_id: localStorage.getItem('currentUser'),
           };

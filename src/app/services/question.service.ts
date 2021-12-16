@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment as env } from '../../environments/environment';
 import { Question } from '../models/question.model';
-
+import { Answers } from '../models/answers.model';
 const API_URL = `${env.apiURL}/questions`;
 @Injectable({
     providedIn: 'root',
@@ -18,7 +18,11 @@ const API_URL = `${env.apiURL}/questions`;
         `${API_URL}?page=${page}&limit=${limit}`
       );
     }
-    getSlug(slug: string): Observable<Question> {
-      return this.http.get(`${API_URL}/slug/${slug}`);
+    getBySlug(slug: string): Observable<Question[]> {
+      return this.http.get<Question[]>(`${API_URL}/slug/${slug}`);
     }
+    getLatest(): Observable<Question[]> {
+      return this.http.get<Question[]>(`${API_URL}/latest?limit=10`);
+    }
+  
   }

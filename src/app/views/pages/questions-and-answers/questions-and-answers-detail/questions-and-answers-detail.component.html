@@ -89,7 +89,7 @@
                         <div class="blog-details single-post-item format-standard">
                             <div class="post-details">
                                 <div class="post-featured-img">
-                                    <h5>A/C E cho em hỏi xíu ạ, dự án bên phim trường HTV ở củ chi thuộc xã hòa phú có đầu tư được k vậy.</h5>
+                                    <h5>{{questions_details.content}}</h5>
                                 </div>
                                 <div class="pt-3 post-top-meta">
                                     <div class="post-top-meta">
@@ -125,12 +125,14 @@
                                                         </ul>
                                                         <form [formGroup]="answers" (ngSubmit)="onSubmit()">
                                                             <div>
+                                                                <input class="form-control" formControlName="question_id" type="hidden">
                                                                 <textarea type="text" class="form-control" formControlName="content" placeholder="Nội dung câu trả lời ở đây"></textarea>
                                                                 <div *ngIf="submitted && f.content.errors">
                                                                     <small *ngIf="f.content.errors.required" class="text-danger small-popup">Nội dung bình
                                     luận không được bỏ trống!</small>
                                                                 </div>
                                                             </div>
+
                                                             <button type="submit" class="btn btn-md  btn-theme-light-2 rounded">Gửi</button>
                                                         </form>
                                                     </div>
@@ -148,7 +150,7 @@
                                     <div class="comment-area">
                                         <div class="all-comments">
                                             <div class="comment-list">
-                                                <ul>
+                                                <ul *ngFor="let anw of anw">
                                                     <li class="single-comment">
                                                         <article>
                                                             <div class="comment-author">
@@ -157,12 +159,12 @@
                                                             <div class="comment-details">
                                                                 <div class="comment-meta">
                                                                     <div class="comment-left-meta">
-                                                                        <h4 class="author-name">Toản Toản</h4>
-                                                                        <div class="comment-date">20/12/2021</div>
+                                                                        <h4 class="author-name">{{anw.customerId}}</h4>
+                                                                        <div class="comment-date">{{anw.updatedAt}}</div>
                                                                     </div>
                                                                 </div>
                                                                 <div class="comment-text mt-2">
-                                                                    <p>Được nha bạn :))</p>
+                                                                    <p>{{anw.content}}</p>
                                                                 </div>
                                                             </div>
                                                         </article>
@@ -219,11 +221,11 @@
                             <h4 class="title">Thống kê</h4>
                             <ul class="topicContent">
                                 <li class="topicItem">
-                                    <div>2853</div>
+                                    <div>{{count}}</div>
                                     <div>Câu hỏi</div>
                                 </li>
                                 <li class="topicItem">
-                                    <div>4587</div>
+                                    <div>{{count}}</div>
                                     <div>Trả lời</div>
                                 </li>
                                 <li class="topicItem">

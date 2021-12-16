@@ -7,10 +7,14 @@ import {
 import { BlogCategories } from 'src/app/models/blog-categories.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { QuestionCategoriesService } from 'src/app/services/question-cate.service';
+import { QuestionService } from 'src/app/services/question.service';
+import { Question } from 'src/app/models/question.model';
 import { Validators, FormBuilder } from '@angular/forms';
 import { CustomersService } from 'src/app/services/customers.service';
 import { Customers } from 'src/app/models/customers.model';
 import { environment } from 'src/environments/environment';
+import { ToastrService } from 'ngx-toastr';
+import { AnswersService } from 'src/app/services/answers.service';
 @Component({
   selector: 'app-questions-and-answers-detail',
   templateUrl: './questions-and-answers-detail.component.html',
@@ -18,23 +22,27 @@ import { environment } from 'src/environments/environment';
   providers: [NgbModalConfig, NgbModal, NgbCollapse],
 })
 export class QuestionsAndAnswersDetailComponent implements OnInit {
+  anw?:any;
+  count?:any;
   cat?: BlogCategories[];
   submitted = false;
   avatar: string | undefined;
   username: string | undefined;
-  name:string | undefined;
-
+  name: string | undefined;
+  questions_details: any;
   public isCollapsed: any;
   public isCollapsed2: any;
   constructor(
-    
+    private toastrService: ToastrService,
     config: NgbModalConfig,
     private modalService: NgbModal,
     private catQuestions: QuestionCategoriesService,
+    private QuestionService: QuestionService,
     private route: ActivatedRoute,
     public ngbCollapse: NgbCollapse,
     public fb: FormBuilder,
     private customSer: CustomersService,
+    private AnswersService:AnswersService,
   ) {
     // customize default values of modals used by this component tree
     config.backdrop = 'static';
@@ -42,6 +50,8 @@ export class QuestionsAndAnswersDetailComponent implements OnInit {
   }
   answers = this.fb.group({
     content: ['', Validators.compose([Validators.required])],
+    question_id:[''],
+    status:[1]
   });
   get f() {
     return this.answers.controls;
@@ -85,24 +95,64 @@ export class QuestionsAndAnswersDetailComponent implements OnInit {
     this.modalService.open(content);
   }
   ngOnInit(): void {
+    const question_id='39';
+    if (question_id) {
+      console.log('hiiiiii')
+      this.getAllByIdQuestions(question_id);
+    }(err:any) => {
+      console.log(err);
+    } 
     const id = localStorage.getItem('currentUser');
-
     if (id) {
       this.getById(id);
+     
     }
+    const slug = this.route.snapshot.paramMap.get('slug');
+    if (slug) {
+      this.getBySlug(slug);
+    }
+      (err:any) => {
+        console.log(err);
+      } 
     this.isCollapsed = true;
     this.isCollapsed2 = true;
-    const slug = this.route.snapshot.paramMap.get('slug');
     this.catQuestions.getAllCat().subscribe((res: any | undefined) => {
       this.cat = res['rows'];
     });
+  
   }
   getById(id: string): void {
     this.customSer.get(id).subscribe((res) => {
-      this.avatar = environment.linkImg+res['avatar'];
+      this.avatar = environment.linkImg + res['avatar'];
       this.name = res['firstName'] + ' ' + res['lastName'];
       this.username = res['username'];
     });
+  }
+  getAllByIdQuestions(id: string): void {
+    this.AnswersService.getAllByIdQuestions(id).subscribe(
+      (data: any) => {
+        this.anw = data;
+        this.count = data.length;
+        console.log(data);
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+  }
+  getBySlug(slug: string): void {
+    this.QuestionService.getBySlug(slug).subscribe(
+      (data: any | undefined) => {
+        this.questions_details = data;
+        this.answers = this.fb.group({
+          question_id: [this.questions_details.id, Validators.compose([Validators.required]),],
+          content: [''],
+        });
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
   }
   transform(value: string) {
     let text = value.toLowerCase();
@@ -136,8 +186,31 @@ export class QuestionsAndAnswersDetailComponent implements OnInit {
   }
   onSubmit(): any {
     this.submitted = true;
+    console.log(this.answers.value)
+    if (this.answers.invalid) {
+      return false;
+    }
+    const data = {
+      content: this.answers.value['content'],
+      customer_id:localStorage.getItem('currentUser'),
+      question_id:this.answers.value['question_id'],
+      status:this.answers.value['status'],
+    };
+    console.log(data);
+    this.AnswersService.create(data).subscribe(
+      (response: any) => {
+        this.resetForm();
+        this.toastrService.success('Đăng câu trả lời thành công!');
+      },
+      (error) => {
+        this.toastrService.success('Đăng câu trả lời thất bại!');
+      }   
+    );
   }
   resetForm(): void {
     this.submitted = false;
+    this.answers= this.fb.group({
+      content:['']
+    })
   }
 }

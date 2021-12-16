@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { environment as env } from '../../environments/environment';
 import { RentalNews } from '../models/rental-news.model';
 import { Comments } from '../models/comments.model';
-
 const API_URL = `${env.apiURL}/comments`;
 
 @Injectable({

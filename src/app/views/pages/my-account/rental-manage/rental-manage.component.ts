@@ -14,13 +14,11 @@ export class RentalManageComponent implements OnInit {
   linkImg = environment.linkImg;
   rental: any | undefined;
   id: any;
-  wishlist = [];
-  constructor(
-    private rentalNewsService: RentalNewsService,
+  wishlist=[];
+  constructor(private rentalNewsService: RentalNewsService,
     private toastrService: ToastrService,
-    private bookmarkSer: BookmarksService,
-    private customSer: CustomersService
-  ) {}
+    private bookmarkSer:BookmarksService,
+    private customSer: CustomersService) {}
 
   ngOnInit(): void {
     this.id = localStorage.getItem('currentUser');
@@ -39,6 +37,7 @@ export class RentalManageComponent implements OnInit {
     this.bookmarkSer.getAllCus(this.id).subscribe(
       (data: any) => {
         this.wishlist = data;
+        console.log(data)
         this.getRentalNews();
       },
       (err: any | undefined) => {
@@ -53,6 +52,7 @@ export class RentalManageComponent implements OnInit {
         for (var i = 0; i < data['rows'].length; i++) {
           data['rows'][i].image = JSON.parse(data['rows'][i].image);
         }
+        console.log(this.rental)
         if (this.wishlist) {
           for (let item of this.rental) {
             item.wishlist = false;
@@ -79,40 +79,40 @@ export class RentalManageComponent implements OnInit {
       textArea.style.display = 'none';
     }
   }
-  deleteRentalNews(id: any) {
+  deleteRentalNews(id:any){
     if (window.confirm('Bạn có chắn chắn sẽ xoá không?')) {
-      this.rentalNewsService.delete(id).subscribe(
-        (response) => {
-          this.getRentalNews();
-          this.toastrService.success('Xóa tin cho thuê thành công ');
-        },
-        (error) => {
-          this.toastrService.error(error);
-        }
-      );
+      this.rentalNewsService.delete(id)
+        .subscribe(
+          response => {
+            this.getRentalNews();
+            this.toastrService.success('Xóa tin cho thuê thành công ');
+          },
+          error => {
+            this.toastrService.error(error);
+          });
     }
-  }
-  handleAddToWishlist(id: any) {
-    const data = {
-      rental_news: id.toString(),
-    };
-    this.bookmarkSer.updateBookMark(this.id, data).subscribe(() => {
-      this.getWishlist();
-    });
-  }
-
-  handleRemoveFromWishlist(id: string) {
-    const data = {
-      rental_news: id.toString(),
-    };
-    this.bookmarkSer.updateBookMark(this.id, data).subscribe((res: any) => {
-      if (res.message == 'empty') {
-        for (let item of this.rental) {
-          item.wishlist = false;
-        }
-      } else {
-        this.getWishlist();
       }
-    });
-  }
+      handleAddToWishlist(id:any) {
+        const data = {
+          rental_news: id.toString(),
+        };
+        this.bookmarkSer.updateBookMark(this.id, data).subscribe(() => {
+          this.getWishlist();
+        });
+      }
+
+      handleRemoveFromWishlist(id: string) {
+        const data = {
+          rental_news: id.toString(),
+        };
+        this.bookmarkSer.updateBookMark(this.id, data).subscribe((res: any) => {
+          if(res.message == 'empty'){
+            for (let item of this.rental) {
+              item.wishlist = false;
+            }
+          }else{
+            this.getWishlist();
+          }
+        });
+      }
 }

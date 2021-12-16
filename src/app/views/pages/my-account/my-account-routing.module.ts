@@ -6,8 +6,6 @@ import { EditRentalComponent } from './edit-rental/edit-rental.component';
 import { MyAccountComponent } from './my-account.component';
 import { MyProfileComponent } from './my-profile/my-profile.component';
 import { NotificationComponent } from './notification/notification.component';
-import { OrderDetailsComponent } from './order-history/order-details/order-details.component';
-import { OrderHistoryComponent } from './order-history/order-history.component';
 import { RentalManageComponent } from './rental-manage/rental-manage.component';
 import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
 
@@ -37,14 +35,6 @@ const routes: Routes = [
         component: RentalManageComponent,
       },
       {
-        path: 'order-history',
-        component: OrderHistoryComponent,
-      },
-      {
-        path: 'order-history/:id',
-        component: OrderDetailsComponent,
-      },
-      {
         path: 'chinh-sua-tin-cho-thue/:id',
         component: EditRentalComponent,
       },
@@ -58,6 +48,6 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule],
+  exports: [RouterModule]
 })
-export class MyAccountRoutingModule {}
+export class MyAccountRoutingModule { }

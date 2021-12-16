@@ -25,7 +25,7 @@
                         <!--            <span class="prt-types sale">For Sale</span>-->
                         <h3>{{ rentalNewsDetail?.name }}</h3>
                         <span><i class="lni-map-marker"></i>
-                            {{ rentalNewsDetail?.address }}</span>
+              {{ rentalNewsDetail?.address }}</span>
                         <h3 class="prt-price-fix">
                             {{rentalNewsDetail?.price | number }} Vnđ<sub>/tháng</sub>
                         </h3>
@@ -88,8 +88,7 @@
                 <!-- Single Block Wrap -->
                 <div class="property_block_wrap style-2">
                     <div class="property_block_wrap_header">
-                        <a data-bs-toggle="collapse" data-parent="#dsrp" data-bs-target="#clTwo" aria-controls="clTwo"
-                            href="javascript:void(0);" aria-expanded="true">
+                        <a data-bs-toggle="collapse" data-parent="#dsrp" data-bs-target="#clTwo" aria-controls="clTwo" href="javascript:void(0);" aria-expanded="true">
                             <h4 class="property_block_title">Mô tả</h4>
                         </a>
                     </div>
@@ -244,8 +243,7 @@
                 <!-- Single Block Wrap -->
                 <div class="property_block_wrap style-2">
                     <div class="property_block_wrap_header">
-                        <a data-bs-toggle="collapse" data-parent="#clSev" data-bs-target="#clSev" aria-controls="clOne"
-                            href="javascript:void(0);" aria-expanded="true" class="collapsed">
+                        <a data-bs-toggle="collapse" data-parent="#clSev" data-bs-target="#clSev" aria-controls="clOne" href="javascript:void(0);" aria-expanded="true" class="collapsed">
                             <h4 class="property_block_title">Thư viện ảnh</h4>
                         </a>
                     </div>
@@ -254,35 +252,13 @@
                         <div class="block-body">
                             <ul class="list-gallery-inline">
                                 <li *ngFor="let item of listImage">
-                                    <a href="{{linkImg}}{{ item }}" class="mfp-gallery"><img src="{{linkImg}}{{ item }}"
-                                            class="img-fluid mx-auto" alt="" /></a>
+                                    <a href="{{linkImg}}{{ item }}" class="mfp-gallery"><img src="{{linkImg}}{{ item }}" class="img-fluid mx-auto" alt="" /></a>
                                 </li>
                             </ul>
                         </div>
                     </div>
                 </div>
 
-
-                <div class="property_block_wrap style-2">
-                    <div class="property_block_wrap_header">
-                        <a data-bs-toggle="collapse" data-parent="#dsrp" data-bs-target="#clTwo" aria-controls="clTwo"
-                            href="javascript:void(0);" aria-expanded="true">
-                            <h4 class="property_block_title">Bản đồ</h4>
-                        </a>
-                    </div>
-                    <div id="clTwo" class="panel-collapse collapse show" aria-expanded="true">
-                        <div class="block-body" style="clear: both">
-                            <!-- app.component.html -->
-                            <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="15" style="height: 500px">
-                                <agm-marker [latitude]="latitude" [longitude]="longitude">
-                                    <!-- <agm-info-window>
-                                        hihi
-                                    </agm-info-window> -->
-                                </agm-marker>
-                            </agm-map>
-                        </div>
-                    </div>
-                </div>
                 <!-- All over Review -->
                 <!--        <div class="rating-overview">-->
                 <!--          <div class="rating-overview-box">-->
@@ -609,22 +585,22 @@
                             <div class="sides-widget-details">
                                 <h4 *ngIf="currentUser?.firstName">
                                     <a href="#">
-                                        {{ currentUser?.firstName }} {{ currentUser?.lastName }}
-                                    </a>
+                    {{ currentUser?.firstName }} {{ currentUser?.lastName }}
+                  </a>
                                 </h4>
                                 <h4 *ngIf="!currentUser?.firstName">
                                     <a href="#">
-                                        {{ currentUser?.username }}
-                                    </a>
+                    {{ currentUser?.username }}
+                  </a>
                                 </h4>
                                 <span *ngIf="currentUser?.phone">
-                                    <i class="lni-phone-handset"></i>
-                                    {{ currentUser?.phone }}
-                                </span>
+                  <i class="lni-phone-handset"></i>
+                  {{ currentUser?.phone }}
+                </span>
                                 <span *ngIf="!currentUser?.phone">
-                                    <i class="lni-phone-handset"></i>
-                                    0822576436
-                                </span>
+                  <i class="lni-phone-handset"></i>
+                  0822576436
+                </span>
                             </div>
                             <div class="clearfix"></div>
                         </div>
@@ -634,24 +610,20 @@
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label>Họ</label>
-                                        <input type="text" class="form-control" placeholder="Họ"
-                                            formControlName="lastName" />
+                                        <input type="text" class="form-control" placeholder="Họ" formControlName="lastName" />
                                         <div *ngIf="submitted && f.lastName.errors">
-                                            <small *ngIf="f.lastName.errors.required" class="text-muted small-popup">Họ
-                                                không được bỏ
-                                                trống!</small>
+                                            <small *ngIf="f.lastName.errors.required" class="text-muted small-popup">Họ không được bỏ
+                        trống!</small>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label>Tên</label>
-                                        <input type="text" class="form-control" placeholder="Tên"
-                                            formControlName="firstName" />
+                                        <input type="text" class="form-control" placeholder="Tên" formControlName="firstName" />
                                         <div *ngIf="submitted && f.firstName.errors">
-                                            <small *ngIf="f.firstName.errors.required"
-                                                class="text-muted small-popup">Tên không được bỏ
-                                                trống!</small>
+                                            <small *ngIf="f.firstName.errors.required" class="text-muted small-popup">Tên không được bỏ
+                        trống!</small>
                                         </div>
                                     </div>
                                 </div>
@@ -660,37 +632,31 @@
                                 <label>Email</label>
                                 <input type="email" class="form-control" placeholder="Email" formControlName="email" />
                                 <div *ngIf="submitted && f.email.errors">
-                                    <small *ngIf="f.email.errors.required" class="text-muted small-popup">Email không
-                                        được bỏ
-                                        trống!</small>
-                                    <small *ngIf="f.email.errors.email" class="text-muted small-popup">Email không được
-                                        bỏ trống!</small>
+                                    <small *ngIf="f.email.errors.required" class="text-muted small-popup">Email không được bỏ
+                    trống!</small>
+                                    <small *ngIf="f.email.errors.email" class="text-muted small-popup">Email không được bỏ trống!</small>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label>Số điện thoại</label>
-                                <input type="text" class="form-control" placeholder="Số điện thoại"
-                                    formControlName="phone" />
+                                <input type="text" class="form-control" placeholder="Số điện thoại" formControlName="phone" />
                                 <div *ngIf="submitted && f.phone.errors">
-                                    <small *ngIf="f.phone.errors.required" class="text-muted small-popup">Số điện thoại
-                                        không được bỏ
-                                        trống!</small>
-                                    <small *ngIf="f.phone.errors.pattern" class="text-danger small-popup">Số điện thoại
-                                        chưa đúng!</small>
+                                    <small *ngIf="f.phone.errors.required" class="text-muted small-popup">Số điện thoại không được bỏ
+                    trống!</small>
+                                    <small *ngIf="f.phone.errors.pattern" class="text-danger small-popup">Số điện thoại chưa đúng!</small>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label>Tin nhắn</label>
                                 <textarea class="form-control" formControlName="message"></textarea>
                                 <div *ngIf="submitted && f.message.errors">
-                                    <small *ngIf="f.message.errors.required" class="text-muted small-popup">Tin nhắn
-                                        không được bỏ
-                                        trống!</small>
+                                    <small *ngIf="f.message.errors.required" class="text-muted small-popup">Tin nhắn không được bỏ
+                    trống!</small>
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-black btn-md rounded full-width">
-                                Gửi tin nhắn
-                            </button>
+                Gửi tin nhắn
+              </button>
                         </form>
                     </div>
 
@@ -765,7 +731,7 @@
                               text-overflow: ellipsis;
                               max-width: 22ch;
                             ">
-                                        <i class="ti-location-pin"></i>{{ rental.address }}</span>
+                    <i class="ti-location-pin"></i>{{ rental.address }}</span>
                                     <div class="lists_property_price">
                                         <!--                    <div class="lists_property_types">-->
                                         <!--                      <div class="property_types_vlix sale">For Sale</div>-->

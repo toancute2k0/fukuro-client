@@ -1,4 +1,4 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { MotelsRoutingModule } from './motels-routing.module';
@@ -10,7 +10,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { JwPaginationModule } from 'jw-angular-pagination';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   declarations: [MotelsComponent, MotelListComponent, MotelDetailComponent],
@@ -23,8 +22,6 @@ import { AgmCoreModule } from '@agm/core';
     ComponentsModule,
     FormsModule,
     ReactiveFormsModule,
-    AgmCoreModule,
   ],
-  // schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class MotelsModule {}
