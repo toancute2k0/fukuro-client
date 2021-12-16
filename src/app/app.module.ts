@@ -32,6 +32,7 @@ import { EditRentalComponent } from './views/pages/my-account/edit-rental/edit-r
 
 import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
 import { GoogleLoginProvider } from 'angularx-social-login';
+import { SerchPageComponent } from './views/pages/serch-page/serch-page.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { GoogleLoginProvider } from 'angularx-social-login';
     SiteLayoutComponent,
     ManageLayoutComponent,
     HeaderManageComponent,
-    FooterManageComponent
+    FooterManageComponent,
+    SerchPageComponent
   ],
   imports: [
     BrowserModule,

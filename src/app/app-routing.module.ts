@@ -14,6 +14,7 @@ import { PaymentComponent } from './views/pages/payments/payment/payment.compone
 import { RentalNewsComponent } from './views/pages/rental-news/rental-news.component';
 import { SiteLayoutComponent } from './views/layouts/site-layout/site-layout.component';
 import { ManageLayoutComponent } from './views/layouts/manage-layout/manage-layout.component';
+import { SerchPageComponent } from './views/pages/serch-page/serch-page.component';
 const routes: Routes = [
   { path: '',
     component: SiteLayoutComponent,
@@ -22,6 +23,7 @@ const routes: Routes = [
         { path: '', component: HomeComponent, pathMatch: 'full'},
         { path: 'trang-chu', redirectTo: '', pathMatch: 'full' },
         { path: 'dang-bai', component: RentalNewsComponent, pathMatch: 'full'},
+        { path: 'tim-kiem', component:  SerchPageComponent, pathMatch: 'full'},
         { path: 'lien-he', component: ContactComponent, pathMatch: 'full'},
         { path: 'bai-viet',
           loadChildren: () =>
