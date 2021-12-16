@@ -24,6 +24,10 @@ export class MotelDetailComponent implements OnInit {
   currentUser?: any;
   submitted = false;
 
+  latitude!: number;
+  longitude!: number;
+  zoom!: number;
+
   constructor(
     private rentalNewsService: RentalNewsService,
     private route: ActivatedRoute,
@@ -34,7 +38,7 @@ export class MotelDetailComponent implements OnInit {
     private toastrService: ToastrService,
     private customSer: CustomersService,
     private adminContactsService: AdminContactsService,
-    private _router: Router,
+    private _router: Router
   ) {}
 
   contact = this.fb.group({
@@ -61,7 +65,7 @@ export class MotelDetailComponent implements OnInit {
   get f() {
     return this.contact.controls;
   }
-  redirect(slug: any){
+  redirect(slug: any) {
     this.getRentalNews(slug);
     this._router.navigate([`/thue-nha-dat/${slug}`]);
   }
@@ -83,10 +87,13 @@ export class MotelDetailComponent implements OnInit {
     this.rentalNewsService.getBySlug(slug).subscribe(
       (data: any | undefined) => {
         this.rentalNewsDetail = data;
+        this.latitude = data.lat;
+        this.longitude = data.lng;
         this.listImage = JSON.parse(data.image);
         this.customSer.get(data.customerId).subscribe((res) => {
           this.currentUser = res;
         });
+        // console.log(this.longitude);
       },
       (err) => {
         console.log(err);

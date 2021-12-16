@@ -77,13 +77,18 @@
                   <div class="form-group col-md-12">
                     <label>Địa chỉ<span class="tip-topdata" data-tip="Property Title"><i
                           class="ti-help"></i></span></label>
-                    <input type="text" formControlName="address" class="form-control"
-                      placeholder="VD: 334B/10, Đường Nguyễn Văn Linh, Phường An Khánh, Quận Ninh Kiều Thành Phố Cần Thơ" />
+                    <input ngx-google-places-autocomplete type="text" formControlName="address" class="form-control"
+                      [options]='options' #placesRef="ngx-places" (onAddressChange)="handleAddressChange($event)" />
                     <div *ngIf="submitted && f.address.errors">
                       <small *ngIf="f.address.errors.required" class="text-muted small-popup"> Địa chỉ không được
                         trống !</small>
-                      <small *ngIf="f.address.errors.minlength" class="text-muted small-popup">Phải ít nhất có 9
+                      <small *ngIf="f.address.errors.minlength && !fullAddress" class="text-muted small-popup">Phải ít
+                        nhất có 9
                         tự !</small>
+                    </div>
+                    <div *ngIf="submitted && !fullAddress">
+                      <small class="text-muted small-popup">Vui lòng
+                        chọn địa chỉ gợi ý !</small>
                     </div>
                   </div>
                 </div>

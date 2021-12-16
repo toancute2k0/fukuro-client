@@ -13,6 +13,8 @@ import { DashboardNavigationComponent } from './dashboard-navigation/dashboard-n
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
+import { OrderHistoryComponent } from './order-history/order-history.component';
+import { OrderDetailsComponent } from './order-history/order-details/order-details.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,8 @@ import { ToastrModule } from 'ngx-toastr';
     BookmarkComponent,
     ChangePasswordComponent,
     DashboardNavigationComponent,
+    OrderHistoryComponent,
+    OrderDetailsComponent,
   ],
 
   imports: [

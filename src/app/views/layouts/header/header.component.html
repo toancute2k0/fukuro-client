@@ -14,20 +14,23 @@
             <div class="nav-menus-wrapper" style="transition-property: none;">
                 <ul class="nav-menu">
 
-                    <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a routerLink="">Trang Chủ<span
-                class="submenu-indicator"></span></a>
+                    <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a routerLink="">Trang
+                            Chủ<span class="submenu-indicator"></span></a>
                     </li>
 
-                    <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a routerLink="thue-nha-dat">Tìm
-              Thuê<span class="submenu-indicator"></span></a>
+                    <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a
+                            routerLink="thue-nha-dat">Tìm
+                            Thuê<span class="submenu-indicator"></span></a>
                     </li>
 
-                    <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a routerLink="/hoi-dap/danh-sach">Hỏi
-              Đáp<span class="submenu-indicator"></span></a>
+                    <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a
+                            routerLink="/hoi-dap/danh-sach">Hỏi
+                            Đáp<span class="submenu-indicator"></span></a>
                     </li>
 
-                    <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a routerLink="bai-viet">Bài
-              Viết<span class="submenu-indicator"></span></a>
+                    <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a
+                            routerLink="bai-viet">Bài
+                            Viết<span class="submenu-indicator"></span></a>
                         <ul class="nav-dropdown nav-submenu">
                             <li *ngFor="let cat of cats">
                                 <a (click)="redirect(cat.slug)">{{cat.name}}</a>
@@ -35,26 +38,31 @@
                         </ul>
                     </li>
 
-                    <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a routerLink="lien-he">Liên
-              Hệ</a></li>
+                    <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a
+                            routerLink="lien-he">Liên
+                            Hệ</a></li>
 
                 </ul>
 
-                <ul class="nav-menu nav-menu-social align-to-right nav-res" [style.display]="!auth.isLoggedIn ? 'block': 'none'">
+                <ul class="nav-menu nav-menu-social align-to-right nav-res"
+                    [style.display]="!auth.isLoggedIn ? 'block': 'none'">
                     <li>
                         <a routerLink="dang-ky" class="text-success">Đăng Ký</a>
                     </li>
                     <li class="add-listing" routerLinkActive="active">
-                        <a routerLink="dang-nhap"><img src="assets/img/user-light.svg" width="12" alt="" class="mr-2" />Đăng Nhập
-                        </a>
+                        <a routerLink="dang-nhap"><img src="assets/img/user-light.svg" width="12" alt=""
+                                class="mr-2" />Đăng
+                            Nhập</a>
                     </li>
                 </ul>
-                <ul class="nav-menu nav-menu-social align-to-right nav-res" [style.display]="auth.isLoggedIn ? 'block': 'none'">
+                <ul class="nav-menu nav-menu-social align-to-right nav-res"
+                    [style.display]="auth.isLoggedIn ? 'block': 'none'">
                     <li>
                         <a routerLink="my-account" class="add-listing2">
                             <div class="avatar avatar-md avatar-indicators avatar-online">
                                 <img *ngIf="avatar" alt="avatar" src="{{avatar}}" class="rounded-circle">
-                                <img *ngIf="!avatar" alt="avatar" src="https://via.placeholder.com/40x40" class="rounded-circle">
+                                <img *ngIf="!avatar" alt="avatar" src="https://via.placeholder.com/40x40"
+                                    class="rounded-circle">
                             </div>
                             <span *ngIf="!name" style="margin-left: 5px;">{{username }}</span>
                             <span *ngIf="name" style="margin-left: 5px;">{{name }}</span>
@@ -63,31 +71,44 @@
                             <div class="">
                                 <ul class="list-unstyled">
                                     <li class="dropdown-submenu">
-                                        <a class="dropdown-item dropright-lg dropdown-list-group-item" routerLink="my-account/renal-manage">
+                                        <a class="dropdown-item dropright-lg dropdown-list-group-item"
+                                            routerLink="my-account/renal-manage">
                                             <span class="mr-1">
-                        <i class="ti-home"></i>
-                      </span> Quản lí tin cho thuê
+                                                <i class="ti-home"></i>
+                                            </span>
+                                            Quản lí tin cho thuê
                                         </a>
                                     </li>
                                     <li>
                                         <a class="dropdown-item dropright-lg" routerLink="my-account/my-profile">
                                             <span class="mr-1">
-                        <i class="ti-user"></i>
-                      </span> Thông tin tài khoản
+                                                <i class="ti-user"></i>
+                                            </span>
+                                            Thông tin tài khoản
                                         </a>
                                     </li>
                                     <li>
                                         <a class="dropdown-item dropright-lg" routerLink="my-account/notification">
                                             <span class="mr-1">
-                        <i class="ti-bell"></i>
-                      </span> Thông báo
+                                                <i class="ti-bell"></i>
+                                            </span>
+                                            Thông báo
                                         </a>
                                     </li>
                                     <li>
                                         <a class="dropdown-item dropright-lg" routerLink="my-account/bookmark">
                                             <span class="mr-1">
-                        <i class="ti-heart"></i>
-                      </span> Tin đã lưu
+                                                <i class="ti-heart"></i>
+                                            </span>
+                                            Tin đã lưu
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item dropright-lg" routerLink="my-account/order-history">
+                                            <span class="mr-1">
+                                                <i class="ti-wallet"></i>
+                                            </span>
+                                            Lịch sử thanh toán
                                         </a>
                                     </li>
                                 </ul>
@@ -97,19 +118,21 @@
                                 <li>
                                     <a class="dropdown-item dropright-lg" routerLink="my-account/change-password">
                                         <span class="mr-1">
-                      <i class="ti-key"></i>
-                    </span> Đổi mật khẩu
+                                            <i class="ti-key"></i>
+                                        </span>
+                                        Đổi mật khẩu
                                     </a>
                                 </li>
                                 <li>
                                     <a class="dropdown-item dropright-lg" (click)="auth.logout()">
                                         <span class="mr-2">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                        class="feather feather-power">
-                        <path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path>
-                        <line x1="12" y1="2" x2="12" y2="12"></line>
-                      </svg></span>Đăng xuất
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+                                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round"
+                                                class="feather feather-power">
+                                                <path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path>
+                                                <line x1="12" y1="2" x2="12" y2="12"></line>
+                                            </svg></span>Đăng xuất
                                     </a>
                                 </li>
                             </ul>
@@ -117,7 +140,7 @@
                     </li>
                     <li class="add-listing add-bg1">
                         <a routerLink="dang-bai" class="text-success" style="color: #0499a8 !important;">Đăng
-              Bài</a>
+                            Bài</a>
                     </li>
                 </ul>
             </div>

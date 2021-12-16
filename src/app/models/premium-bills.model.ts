@@ -8,4 +8,5 @@ export class PremiumBills {
   status?: string;
   customerId?: number;
   premiumId?: number;
+  createdAt?: string;
 }
