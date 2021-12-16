@@ -75,7 +75,6 @@ import { CommonModule } from '@angular/common';
     SocialLoginModule,
     CommonModule,
     GoogleMapsModule,
-    HttpClientModule,
     HttpClientJsonpModule,
   ],
   providers: [AuthGuard, NoAuthGuard, DatePipe,
