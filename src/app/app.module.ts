@@ -19,7 +19,7 @@ import { ContactComponent } from './views/pages/contact/contact.component';
 import { HomeComponent } from './views/pages/home/home.component';
 import { ComponentsModule } from './views/components/components.module';
 import { RentalNewsComponent } from './views/pages/rental-news/rental-news.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
@@ -32,7 +32,10 @@ import { EditRentalComponent } from './views/pages/my-account/edit-rental/edit-r
 
 import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
 import { GoogleLoginProvider } from 'angularx-social-login';
-import { SerchPageComponent } from './views/pages/serch-page/serch-page.component';
+import { SearchPageComponent } from './views/pages/search-page/search-page.component';
+
+import { GoogleMapsModule } from '@angular/google-maps';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -52,7 +55,7 @@ import { SerchPageComponent } from './views/pages/serch-page/serch-page.componen
     ManageLayoutComponent,
     HeaderManageComponent,
     FooterManageComponent,
-    SerchPageComponent
+    SearchPageComponent
   ],
   imports: [
     BrowserModule,
@@ -70,6 +73,10 @@ import { SerchPageComponent } from './views/pages/serch-page/serch-page.componen
     NgxDropzoneModule,
     NgbModule,
     SocialLoginModule,
+    CommonModule,
+    GoogleMapsModule,
+    HttpClientModule,
+    HttpClientJsonpModule,
   ],
   providers: [AuthGuard, NoAuthGuard, DatePipe,
     {

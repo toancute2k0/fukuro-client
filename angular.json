@@ -51,10 +51,7 @@
                             "src/assets/js/lightbox.js",
                             "src/assets/js/imagesloaded.js",
                             "src/assets/js/custom.js",
-                            "src/assets/js/map_infobox.js",
-                            "src/assets/js/markerclusterer.js",
-                            "src/assets/js/map.js"
-
+                            "src/assets/js/markerclusterer.js"
                         ]
                     },
                     "configurations": {
