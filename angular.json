@@ -53,8 +53,7 @@
                             "src/assets/js/custom.js",
                             "src/assets/js/map_infobox.js",
                             "src/assets/js/markerclusterer.js",
-                            "src/assets/js/map.js",
-                            // "https://maps.google.com/maps/api/js?key="
+                            "src/assets/js/map.js"
 
                         ]
                     },
