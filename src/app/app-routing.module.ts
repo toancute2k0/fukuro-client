@@ -15,90 +15,91 @@ import { RentalNewsComponent } from './views/pages/rental-news/rental-news.compo
 import { SiteLayoutComponent } from './views/layouts/site-layout/site-layout.component';
 import { ManageLayoutComponent } from './views/layouts/manage-layout/manage-layout.component';
 const routes: Routes = [
-  { path: '',
+  {
+    path: '',
     component: SiteLayoutComponent,
-    children:
-      [
-        { path: '', component: HomeComponent, pathMatch: 'full'},
-        { path: 'trang-chu', redirectTo: '', pathMatch: 'full' },
-        { path: 'dang-bai', component: RentalNewsComponent, pathMatch: 'full'},
-        { path: 'lien-he', component: ContactComponent, pathMatch: 'full'},
-        { path: 'bai-viet',
-          loadChildren: () =>
-            import('./views/pages/blogs/blogs.module').then((m) => m.BlogsModule),
-        },
-        {
-          path: 'hoi-dap',
-          loadChildren: () =>
-            import('./views/pages/questions-and-answers/questions-and-answers.module').then((m) => m.QuestionsAndAnswersModule),
-        },
-        {
-          path: 'thue-nha-dat',
-          loadChildren: () =>
-            import('./views/pages/motels/motels.module').then((m) => m.MotelsModule),
-        },
-        {
-          path: 'danh-muc-bai-viet/:slug',
-          children:
-            [
-              { path: '', component: BlogCategoryComponent, pathMatch: 'full'}
-            ],
-        },
-        {
-          path: 'chinh-sua-bai-viet/:slug',
-          children:
-            [
-              { path: '', component: BlogCategoryComponent, pathMatch: 'full'}
-            ],
-        },
-        { path: 'dang-ky',
-          children:
-            [
-              { path: '', component: RegisterComponent, pathMatch: 'full'}
-            ],
-        },
-        { path: 'forgot-password',
-          children:
-            [
-              { path: '', component: ForgotPasswordComponent, pathMatch: 'full'}
-            ],
-        },
-        { path: 'reset-password',
-          children:
-            [
-              { path: '', component: ResetPasswordComponent, pathMatch: 'full'}
-            ],
-        },
-        { path: 'dang-nhap',
-          children:
-            [
-              { path: '', component: LoginComponent, pathMatch: 'full'}
-            ],
-          canActivate: [NoAuthGuard]
-        },
-        {
-          path: 'premium',
-          loadChildren: () =>
-            import('./views/pages/payments/payments.module').then((m) => m.PaymentsModule),
-          canActivate: [AuthGuard],
-        },
-        {
-          path: 'my-account',
-          loadChildren: () =>
-            import('./views/pages/my-account/my-account.module').then(
-              (m) => m.MyAccountModule
-            ),
-          canActivate: [AuthGuard],
-        },
-      ]
+    children: [
+      { path: '', component: HomeComponent, pathMatch: 'full' },
+      { path: 'trang-chu', redirectTo: '', pathMatch: 'full' },
+      { path: 'dang-bai', component: RentalNewsComponent, pathMatch: 'full' },
+      { path: 'lien-he', component: ContactComponent, pathMatch: 'full' },
+      {
+        path: 'bai-viet',
+        loadChildren: () =>
+          import('./views/pages/blogs/blogs.module').then((m) => m.BlogsModule),
+      },
+      {
+        path: 'hoi-dap',
+        loadChildren: () =>
+          import(
+            './views/pages/questions-and-answers/questions-and-answers.module'
+          ).then((m) => m.QuestionsAndAnswersModule),
+      },
+      {
+        path: 'thue-nha-dat',
+        loadChildren: () =>
+          import('./views/pages/motels/motels.module').then(
+            (m) => m.MotelsModule
+          ),
+      },
+      {
+        path: 'danh-muc-bai-viet/:slug',
+        children: [
+          { path: '', component: BlogCategoryComponent, pathMatch: 'full' },
+        ],
+      },
+      {
+        path: 'chinh-sua-bai-viet/:slug',
+        children: [
+          { path: '', component: BlogCategoryComponent, pathMatch: 'full' },
+        ],
+      },
+      {
+        path: 'dang-ky',
+        children: [
+          { path: '', component: RegisterComponent, pathMatch: 'full' },
+        ],
+      },
+      {
+        path: 'forgot-password',
+        children: [
+          { path: '', component: ForgotPasswordComponent, pathMatch: 'full' },
+        ],
+      },
+      {
+        path: 'reset-password',
+        children: [
+          { path: '', component: ResetPasswordComponent, pathMatch: 'full' },
+        ],
+      },
+      {
+        path: 'dang-nhap',
+        children: [{ path: '', component: LoginComponent, pathMatch: 'full' }],
+        canActivate: [NoAuthGuard],
+      },
+      {
+        path: 'premium',
+        loadChildren: () =>
+          import('./views/pages/payments/payments.module').then(
+            (m) => m.PaymentsModule
+          ),
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'my-account',
+        loadChildren: () =>
+          import('./views/pages/my-account/my-account.module').then(
+            (m) => m.MyAccountModule
+          ),
+        canActivate: [AuthGuard],
+      },
+    ],
   },
   {
     path: 'manage',
     component: ManageLayoutComponent,
     loadChildren: () =>
-      import('./views/pages/manage/manage.module').then(
-        (m) => m.ManageModule
-      ),
+      import('./views/pages/manage/manage.module').then((m) => m.ManageModule),
     canActivate: [AuthGuard],
   },
   { path: '**', component: NotFoundComponent },
@@ -112,6 +113,5 @@ const routes: Routes = [
     }),
   ],
   exports: [RouterModule],
-
 })
 export class AppRoutingModule {}

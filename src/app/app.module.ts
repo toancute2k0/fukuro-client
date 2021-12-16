@@ -36,7 +36,7 @@ import {
 } from 'angularx-social-login';
 import { GoogleLoginProvider } from 'angularx-social-login';
 import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
-// import { AgmCoreModule } from '@agm/core';
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   declarations: [
@@ -66,9 +66,9 @@ import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
       timeOut: 3000, // 2 seconds
       progressBar: true,
     }),
-    // AgmCoreModule.forRoot({
-    //   apiKey: 'AIzaSyB0G3dsZ1jIz-10gzsCiH7jlc5X3KCwLNc',
-    // }),
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyB0G3dsZ1jIz-10gzsCiH7jlc5X3KCwLNc',
+    }),
     ComponentsModule,
     HttpClientModule,
     ReactiveFormsModule,
@@ -97,7 +97,7 @@ import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
       } as SocialAuthServiceConfig,
     },
   ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  // schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent],
   exports: [],
 })

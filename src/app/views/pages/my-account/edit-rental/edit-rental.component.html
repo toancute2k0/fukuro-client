@@ -182,26 +182,40 @@
                             <div class="submit-section">
                                 <div class="row">
                                     <div class="form-group col-md-12">
-                                        <label>Bộ sưu tập ảnh tải lên</label>
-                                        <div class="custom-dropzone" ngx-dropzone [accept]="'image/*'"
-                                            (change)="onSelect($event)">
-                                            <ngx-dropzone-label>
-                                                <div>
-                                                    <i class="ti-gallery"></i>
-                                                    <p>Kéo và thả hình ảnh</p>
+
+                                        <label class="d-block">Bộ sưu tập ảnh tải lên</label>
+                                        <div class="css-custom-list-image">
+                                            <div class="custom-box">
+                                                <div *ngFor="let item of multipleImagesCus" class="list-image">
+                                                    <div class="list-image-div">
+                                                        <img src="{{linkImg}}{{ item }}" class="img-fluid mx-auto"
+                                                            alt="" />
+                                                        <i class="fa fa-times" aria-hidden="true"
+                                                            (click)="delete(item)"></i>
+                                                    </div>
                                                 </div>
-                                            </ngx-dropzone-label>
-                                            <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview"
-                                                *ngFor="let f of multipleImages" [file]="f" [removable]="true"
-                                                (removed)="onRemove(f)">
-                                            </ngx-dropzone-image-preview>
+                                            </div>
+                                            <div class="custom-dropzone clearfix" ngx-dropzone [accept]="'image/*'"
+                                                (change)="onSelect($event)">
+                                                <ngx-dropzone-label>
+
+                                                    <div>
+                                                        <i class="ti-gallery"></i>
+                                                        <p>Kéo và thả hình ảnh</p>
+                                                    </div>
+                                                </ngx-dropzone-label>
+                                                <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview"
+                                                    *ngFor="let f of multipleImages" [file]="f" [removable]="true"
+                                                    (removed)="onRemove(f)">
+                                                </ngx-dropzone-image-preview>
+                                            </div>
                                         </div>
                                     </div>
                                     <div *ngIf="submitted && f.image.errors">
-                                        <small *ngIf="f.image.errors.required" class="text-muted small-popup"> Hình ảnh
-                                            cho thuê không được
-                                            bỏ trống
-                                            !</small>
+
+                                        <small *ngIf="f.image.errors.required" class="text-muted small-popup"> Hình
+                                            ảnh cho thuê không được bỏ
+                                            trống !</small>
                                     </div>
                                 </div>
                             </div>

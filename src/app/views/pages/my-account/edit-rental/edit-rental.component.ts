@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
@@ -12,6 +12,7 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./edit-rental.component.css'],
 })
 export class EditRentalComponent implements OnInit {
+  linkImg = environment.linkImg;
   id: any;
   submitted = false;
   result = false;
@@ -34,10 +35,6 @@ export class EditRentalComponent implements OnInit {
     this.fullAddress = address.formatted_address;
     this.Latitude = address.geometry.location.lat();
     this.Longitude = address.geometry.location.lng();
-    console.log(address.name);
-    console.log(this.fullAddress);
-    console.log(this.Latitude);
-    console.log(this.Longitude);
 
     for (const component of address.address_components) {
       const componentType = component.types[0];
@@ -45,25 +42,21 @@ export class EditRentalComponent implements OnInit {
       switch (componentType) {
         case 'street_number': {
           this.streetNumber = `${component.long_name}`;
-          console.log(this.streetNumber);
           break;
         }
 
         case 'route': {
           this.street += component.short_name;
-          console.log(this.street);
           break;
         }
 
         case 'administrative_area_level_2': {
           this.district = `${component.long_name}`;
-          console.log(this.district);
           break;
         }
 
         case 'administrative_area_level_1': {
           this.city = `${component.long_name}`;
-          console.log(this.city);
           break;
         }
       }
@@ -102,6 +95,9 @@ export class EditRentalComponent implements OnInit {
     status: [''],
   });
   RentalNewsService: any;
+  flag = false;
+  arrDelete: any[] = (this.EditRentalForm.value['image'] = []);
+  multipleImagesCus: any[] = (this.EditRentalForm.value['image'] = []);
 
   constructor(
     private fb: FormBuilder,
@@ -124,6 +120,7 @@ export class EditRentalComponent implements OnInit {
     this.rentalServe.get(id).subscribe(
       (data: any) => {
         data.image = JSON.parse(data.image);
+        this.multipleImagesCus = data.image;
         this.EditRentalForm = this.fb.group({
           name: [
             data.name,
@@ -251,6 +248,12 @@ export class EditRentalComponent implements OnInit {
     this.multipleImages.splice(this.multipleImages.indexOf(event), 1);
   }
 
+  delete(img: any) {
+    this.flag = true;
+    this.arrDelete.push(img);
+    this.multipleImagesCus.splice(this.multipleImagesCus.indexOf(img), 1);
+  }
+
   onSubmit(): any {
     this.submitted = true;
     // return validators
@@ -258,39 +261,89 @@ export class EditRentalComponent implements OnInit {
     for (let img of this.multipleImages) {
       formData.append('files', img);
     }
-    console.log(this.EditRentalForm.value);
+    // console.log(this.EditRentalForm.value);
     if (this.EditRentalForm.invalid) {
       return false;
     }
-    const data = {
-      // image: this.EditRentalForm.value['image'],
-      name: this.EditRentalForm.value['name'],
-      slug: this.EditRentalForm.value['slug'],
-      price: this.EditRentalForm.value['price'],
-      quantity: this.EditRentalForm.value['quantity'],
-      type: this.EditRentalForm.value['type'],
-      area: this.EditRentalForm.value['area'],
-      address: this.fullAddress,
-      street_number: this.streetNumber,
-      street: this.street,
-      district: this.district,
-      city: this.city,
-      lat: this.Latitude,
-      lng: this.Longitude,
-      description: this.EditRentalForm.value['description'],
-      customerId: localStorage.getItem('currentUser'),
-    };
-    console.log(data);
+    if (this.flag == true) {
+      const options = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+        }),
+        body: {
+          files_name: this.arrDelete,
+        },
+      };
+      this.http.delete(environment.apiDeleteMultipleImg, options).subscribe();
+    }
 
-    this.rentalServe.update(this.id, data).subscribe(
-      (res) => {
-        console.log(res);
-
-        this.toastrService.success('Cập nhật thành công!');
-      },
-      (error) => {
-        this.toastrService.error('Cập nhật thất bại!');
-      }
-    );
+    if (this.multipleImages.length === 0) {
+      const data = {
+        image: JSON.stringify(this.multipleImagesCus),
+        name: this.EditRentalForm.value['name'],
+        slug: this.EditRentalForm.value['slug'],
+        price: this.EditRentalForm.value['price'],
+        quantity: this.EditRentalForm.value['quantity'],
+        type: this.EditRentalForm.value['type'],
+        area: this.EditRentalForm.value['area'],
+        address: this.fullAddress,
+        street_number: this.streetNumber,
+        street: this.street,
+        district: this.district,
+        city: this.city,
+        lat: this.Latitude,
+        lng: this.Longitude,
+        description: this.EditRentalForm.value['description'],
+        customerId: localStorage.getItem('currentUser'),
+      };
+      this.rentalServe.update(this.id, data).subscribe(
+        (response: any) => {
+          this.multipleImages.length = 0;
+          this.toastrService.success(response.message);
+        },
+        (error) => {
+          this.toastrService.error(error.message);
+        }
+      );
+    } else {
+      this.http
+        .post(environment.apiPostImg, formData)
+        .toPromise()
+        .then((res: any) => {
+          this.result = true;
+          if (this.result == true) {
+            for (let img of res) {
+              this.multipleImagesCus.push(img.filename);
+            }
+            const data = {
+              image: JSON.stringify(this.multipleImagesCus),
+              name: this.EditRentalForm.value['name'],
+              slug: this.EditRentalForm.value['slug'],
+              price: this.EditRentalForm.value['price'],
+              quantity: this.EditRentalForm.value['quantity'],
+              type: this.EditRentalForm.value['type'],
+              area: this.EditRentalForm.value['area'],
+              address: this.fullAddress,
+              street_number: this.streetNumber,
+              street: this.street,
+              district: this.district,
+              city: this.city,
+              lat: this.Latitude,
+              lng: this.Longitude,
+              description: this.EditRentalForm.value['description'],
+              customerId: localStorage.getItem('currentUser'),
+            };
+            this.rentalServe.update(this.id, data).subscribe(
+              (response: any) => {
+                this.multipleImages.length = 0;
+                this.toastrService.success(response.message);
+              },
+              (error) => {
+                this.toastrService.error(error.message);
+              }
+            );
+          }
+        });
+    }
   }
 }
