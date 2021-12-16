@@ -30,7 +30,10 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { EditRentalComponent } from './views/pages/my-account/edit-rental/edit-rental.component';
 
-import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
+import {
+  SocialLoginModule,
+  SocialAuthServiceConfig,
+} from 'angularx-social-login';
 import { GoogleLoginProvider } from 'angularx-social-login';
 import { SearchPageComponent } from './views/pages/search-page/search-page.component';
 
@@ -55,7 +58,7 @@ import { CommonModule } from '@angular/common';
     ManageLayoutComponent,
     HeaderManageComponent,
     FooterManageComponent,
-    SearchPageComponent
+    SearchPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -75,10 +78,12 @@ import { CommonModule } from '@angular/common';
     SocialLoginModule,
     CommonModule,
     GoogleMapsModule,
-    HttpClientModule,
     HttpClientJsonpModule,
   ],
-  providers: [AuthGuard, NoAuthGuard, DatePipe,
+  providers: [
+    AuthGuard,
+    NoAuthGuard,
+    DatePipe,
     {
       provide: 'SocialAuthServiceConfig',
       useValue: {
@@ -88,13 +93,13 @@ import { CommonModule } from '@angular/common';
             id: GoogleLoginProvider.PROVIDER_ID,
             provider: new GoogleLoginProvider(
               '874412646109-9dr2vf7ter5fd2f8tovsl7fp2m5ldajk.apps.googleusercontent.com'
-            )
-          }
-        ]
+            ),
+          },
+        ],
       } as SocialAuthServiceConfig,
-    }
+    },
   ],
   bootstrap: [AppComponent],
-  exports: []
+  exports: [],
 })
-export class AppModule { }
+export class AppModule {}
