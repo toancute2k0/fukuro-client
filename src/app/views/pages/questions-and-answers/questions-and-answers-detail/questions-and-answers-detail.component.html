@@ -90,6 +90,7 @@
                             <div class="post-details">
                                 <div class="post-featured-img">
                                     <h5>{{questions_details.content}}</h5>
+
                                 </div>
                                 <div class="pt-3 post-top-meta">
                                     <div class="post-top-meta">
@@ -125,7 +126,7 @@
                                                         </ul>
                                                         <form [formGroup]="answers" (ngSubmit)="onSubmit()">
                                                             <div>
-                                                                <input class="form-control" formControlName="question_id" type="hidden">
+                                                                <input formControlName="question_id" type="hidden">
                                                                 <textarea type="text" class="form-control" formControlName="content" placeholder="Nội dung câu trả lời ở đây"></textarea>
                                                                 <div *ngIf="submitted && f.content.errors">
                                                                     <small *ngIf="f.content.errors.required" class="text-danger small-popup">Nội dung bình
@@ -154,12 +155,12 @@
                                                     <li class="single-comment">
                                                         <article>
                                                             <div class="comment-author">
-                                                                <img src="https://via.placeholder.com/400x400" alt="" style="width: 100% !important;">
+                                                                <img src="{{avatarRep}}" alt="" style="width: 100% !important;">
                                                             </div>
                                                             <div class="comment-details">
                                                                 <div class="comment-meta">
                                                                     <div class="comment-left-meta">
-                                                                        <h4 class="author-name">{{anw.customerId}}</h4>
+                                                                        <h4 class="author-name"> {{nameRep}}</h4>
                                                                         <div class="comment-date">{{anw.updatedAt}}</div>
                                                                     </div>
                                                                 </div>

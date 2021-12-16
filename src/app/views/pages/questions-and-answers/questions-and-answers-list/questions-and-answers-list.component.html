@@ -137,7 +137,7 @@
                         <div class="blog-details single-post-item format-standard">
                             <div class="post-details" *ngFor="let questionList of questionList ">
 
-                                <a routerLink="/hoi-dap/chi-tiet/{{questionList.slug}}">
+                                <a routerLink="/hoi-dap/chi-tiet/{{questionList.customerId}}/{{questionList.id}}/{{questionList.slug}}">
                                     <h5>{{questionList.title}}
                                     </h5>
                                 </a>
