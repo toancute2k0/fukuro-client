@@ -14,4 +14,10 @@ export class PremiumBillsService {
   create(data: any): Observable<PremiumBills> {
     return this.http.post(API_URL, data);
   }
+  get(id: any): Observable<PremiumBills> {
+    return this.http.get(`${API_URL}/${id}`);
+  }
+  getByCustomerId(id: any): Observable<PremiumBills> {
+    return this.http.get(`${API_URL}/customer/${id}?status=both`);
+  }
 }

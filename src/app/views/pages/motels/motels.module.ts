@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { JwPaginationModule } from 'jw-angular-pagination';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { GoogleMapsModule } from '@angular/google-maps';
 
 @NgModule({
   declarations: [MotelsComponent, MotelListComponent, MotelDetailComponent],
@@ -22,6 +23,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     ComponentsModule,
     FormsModule,
     ReactiveFormsModule,
+    GoogleMapsModule
   ],
 })
 export class MotelsModule {}

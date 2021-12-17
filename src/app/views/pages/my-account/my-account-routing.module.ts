@@ -8,6 +8,8 @@ import { MyProfileComponent } from './my-profile/my-profile.component';
 import { NotificationComponent } from './notification/notification.component';
 import { RentalManageComponent } from './rental-manage/rental-manage.component';
 import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
+import { OrderHistoryComponent } from './order-history/order-history.component';
+import { OrderDetailsComponent } from './order-history/order-details/order-details.component';
 
 const routes: Routes = [
   {
@@ -33,6 +35,14 @@ const routes: Routes = [
       {
         path: 'renal-manage',
         component: RentalManageComponent,
+      },
+      {
+        path: 'order-history',
+        component: OrderHistoryComponent,
+      },
+      {
+        path: 'order-history/:id',
+        component: OrderDetailsComponent,
       },
       {
         path: 'chinh-sua-tin-cho-thue/:id',

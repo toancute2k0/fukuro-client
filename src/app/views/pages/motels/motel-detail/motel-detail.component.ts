@@ -10,6 +10,7 @@ import { RentalNews } from '../../../../models/rental-news.model';
 import { CustomersService } from '../../../../services/customers.service';
 import { AdminContactsService } from '../../../../services/customer-contacts.service';
 import { environment } from 'src/environments/environment';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-motel-detail',
@@ -35,6 +36,7 @@ export class MotelDetailComponent implements OnInit {
     private customSer: CustomersService,
     private adminContactsService: AdminContactsService,
     private _router: Router,
+    private httpClient: HttpClient
   ) {}
 
   contact = this.fb.group({
