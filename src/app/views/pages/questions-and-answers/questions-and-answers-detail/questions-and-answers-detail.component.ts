@@ -29,6 +29,8 @@ export class QuestionsAndAnswersDetailComponent implements OnInit {
   avatar: string | undefined;
   username: string | undefined;
   name: string | undefined;
+  nameRep: string | undefined;
+  avatarRep: string | undefined;
   questions_details: any;
   public isCollapsed: any;
   public isCollapsed2: any;
@@ -95,17 +97,20 @@ export class QuestionsAndAnswersDetailComponent implements OnInit {
     this.modalService.open(content);
   }
   ngOnInit(): void {
-    const question_id='39';
-    if (question_id) {
-      console.log('hiiiiii')
-      this.getAllByIdQuestions(question_id);
+    const questionId= this.route.snapshot.paramMap.get('id');
+    if (questionId) {
+      console.log(questionId);
+      this.getAllByIdQuestions(questionId);
     }(err:any) => {
       console.log(err);
     } 
     const id = localStorage.getItem('currentUser');
     if (id) {
       this.getById(id);
-     
+    }
+    const Repid = '1';
+    if (Repid) {
+      this.getUserAwnById(Repid);
     }
     const slug = this.route.snapshot.paramMap.get('slug');
     if (slug) {
@@ -123,17 +128,21 @@ export class QuestionsAndAnswersDetailComponent implements OnInit {
   }
   getById(id: string): void {
     this.customSer.get(id).subscribe((res) => {
-      this.avatar = environment.linkImg + res['avatar'];
-      this.name = res['firstName'] + ' ' + res['lastName'];
-      this.username = res['username'];
+      this.avatar= environment.linkImg + res['avatar'];
+      this.name= res['firstName'] + ' ' + res['lastName'];
     });
   }
-  getAllByIdQuestions(id: string): void {
+  getUserAwnById(id: string): void {
+    this.customSer.get(id).subscribe((res) => {
+      this.avatarRep= environment.linkImg + res['avatar'];
+      this.nameRep= res['firstName'] + ' ' + res['lastName'];
+    });
+  }
+  getAllByIdQuestions(id: any): void {
     this.AnswersService.getAllByIdQuestions(id).subscribe(
       (data: any) => {
         this.anw = data;
         this.count = data.length;
-        console.log(data);
       },
       (err) => {
         console.log(err);
@@ -147,6 +156,7 @@ export class QuestionsAndAnswersDetailComponent implements OnInit {
         this.answers = this.fb.group({
           question_id: [this.questions_details.id, Validators.compose([Validators.required]),],
           content: [''],
+          customer_id:[this.questions_details.customer_id, Validators.compose([Validators.required]),]
         });
       },
       (err) => {
