@@ -10,6 +10,8 @@ import { NotificationComponent } from './notification/notification.component';
 import { BookmarkComponent } from './bookmark/bookmark.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { DashboardNavigationComponent } from './dashboard-navigation/dashboard-navigation.component';
+import { OrderHistoryComponent } from './order-history/order-history.component';
+import { OrderDetailsComponent } from './order-history/order-details/order-details.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
@@ -24,6 +26,8 @@ import { ToastrModule } from 'ngx-toastr';
     BookmarkComponent,
     ChangePasswordComponent,
     DashboardNavigationComponent,
+    OrderHistoryComponent,
+    OrderDetailsComponent
   ],
 
   imports: [
