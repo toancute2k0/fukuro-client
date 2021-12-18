@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MapInfoWindow, MapMarker } from '@angular/google-maps';
 import { RentalNewsService } from '../../../../services/rental-news.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BlogCategoriesService } from '../../../../services/blog-categories.service';
@@ -25,6 +26,13 @@ export class MotelDetailComponent implements OnInit {
   currentUser?: any;
   submitted = false;
 
+  @ViewChild(MapInfoWindow) infoWindow!: MapInfoWindow;
+  center: any;
+  position: any;
+  zoom = 17;
+  latitude?: number;
+  longitude?: number;
+
   constructor(
     private rentalNewsService: RentalNewsService,
     private route: ActivatedRoute,
@@ -38,6 +46,10 @@ export class MotelDetailComponent implements OnInit {
     private _router: Router,
     private httpClient: HttpClient
   ) {}
+
+  openInfoWindow(marker: MapMarker) {
+    this.infoWindow.open(marker);
+  }
 
   contact = this.fb.group({
     firstName: ['', Validators.compose([Validators.required])],
@@ -63,7 +75,7 @@ export class MotelDetailComponent implements OnInit {
   get f() {
     return this.contact.controls;
   }
-  redirect(slug: any){
+  redirect(slug: any) {
     this.getRentalNews(slug);
     this._router.navigate([`/thue-nha-dat/${slug}`]);
   }
@@ -85,6 +97,10 @@ export class MotelDetailComponent implements OnInit {
     this.rentalNewsService.getBySlug(slug).subscribe(
       (data: any | undefined) => {
         this.rentalNewsDetail = data;
+        this.latitude = parseFloat(data.lat);
+        this.longitude = parseFloat(data.lng);
+        this.center = { lat: this.latitude, lng: this.longitude };
+        this.position = this.center;
         this.listImage = JSON.parse(data.image);
         this.customSer.get(data.customerId).subscribe((res) => {
           this.currentUser = res;

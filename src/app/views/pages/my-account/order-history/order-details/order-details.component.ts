@@ -40,4 +40,15 @@ export class OrderDetailsComponent implements OnInit {
         });
     });
   }
+
+  openFilterSearch() {
+    let textArea = document.getElementById(
+      'filter_search'
+    ) as HTMLTextAreaElement;
+    if (textArea.style.display == 'none') {
+      textArea.style.display = 'block';
+    } else {
+      textArea.style.display = 'none';
+    }
+  }
 }

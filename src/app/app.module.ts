@@ -30,33 +30,17 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { EditRentalComponent } from './views/pages/my-account/edit-rental/edit-rental.component';
 
-import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
+import {
+  SocialLoginModule,
+  SocialAuthServiceConfig,
+} from 'angularx-social-login';
 import { GoogleLoginProvider } from 'angularx-social-login';
 import { SearchPageComponent } from './views/pages/search-page/search-page.component';
 
-import { GoogleMapsModule } from '@angular/google-maps';
 import { CommonModule } from '@angular/common';
+import { GoogleMapsModule } from '@angular/google-maps';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    FooterComponent,
-    HeaderComponent,
-    LoginComponent,
-    RegisterComponent,
-    NotFoundComponent,
-    ContactComponent,
-    HomeComponent,
-    RentalNewsComponent,
-    ForgotPasswordComponent,
-    ResetPasswordComponent,
-    EditRentalComponent,
-    SiteLayoutComponent,
-    ManageLayoutComponent,
-    HeaderManageComponent,
-    FooterManageComponent,
-    SearchPageComponent
-  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -77,7 +61,29 @@ import { CommonModule } from '@angular/common';
     GoogleMapsModule,
     HttpClientJsonpModule,
   ],
-  providers: [AuthGuard, NoAuthGuard, DatePipe,
+  declarations: [
+    AppComponent,
+    FooterComponent,
+    HeaderComponent,
+    LoginComponent,
+    RegisterComponent,
+    NotFoundComponent,
+    ContactComponent,
+    HomeComponent,
+    RentalNewsComponent,
+    ForgotPasswordComponent,
+    ResetPasswordComponent,
+    EditRentalComponent,
+    SiteLayoutComponent,
+    ManageLayoutComponent,
+    HeaderManageComponent,
+    FooterManageComponent,
+    SearchPageComponent,
+  ],
+  providers: [
+    AuthGuard,
+    NoAuthGuard,
+    DatePipe,
     {
       provide: 'SocialAuthServiceConfig',
       useValue: {
@@ -87,13 +93,13 @@ import { CommonModule } from '@angular/common';
             id: GoogleLoginProvider.PROVIDER_ID,
             provider: new GoogleLoginProvider(
               '874412646109-9dr2vf7ter5fd2f8tovsl7fp2m5ldajk.apps.googleusercontent.com'
-            )
-          }
-        ]
+            ),
+          },
+        ],
       } as SocialAuthServiceConfig,
-    }
+    },
   ],
   bootstrap: [AppComponent],
-  exports: []
+  exports: [],
 })
-export class AppModule { }
+export class AppModule {}

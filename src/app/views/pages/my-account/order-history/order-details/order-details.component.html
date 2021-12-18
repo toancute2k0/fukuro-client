@@ -1,32 +1,41 @@
-<!--&lt;!&ndash; ============================ Page Title Start================================== &ndash;&gt;-->
-<div class="page-title">
-	<div class="container">
+<!-- ============================ User Dashboard ================================== -->
+<section class="bg-light">
+	<div class="container-fluid">
+
 		<div class="row">
 			<div class="col-lg-12 col-md-12">
-
-				<h2 class="ipt-title">Kết quả thanh toán</h2>
-				<span class="ipn-subtitle">Vui lòng kiểm tra email khi thanh toán thành công</span>
+				<div class="filter_search_opt">
+					<a href="javascript:void(0);" (click)="openFilterSearch()">Dashboard Menu<i
+							class="ml-2 ti-menu"></i></a>
+				</div>
 			</div>
 		</div>
-	</div>
-</div>
-<!--&lt;!&ndash; ============================ Page Title End ================================== &ndash;&gt;-->
 
-<!-- ============================ Agency List Start ================================== -->
-<section>
+		<div class="row">
 
-	<div class="container">
-		<div class="alert alert-success alert-dismissible">
-			<button type="button" class="close" data-dismiss="alert">&times;</button>
-			<strong>Thanh toán thành công!</strong> <br>
-			<span class="font-italic">Hoá đơn của bạn đã được tạo thành công.</span>
-		</div>
-	</div>
+			<div class="col-lg-3 col-md-12">
 
-	<div class="page-content container">
-		<div class="container px-0">
-			<div class="row mt-4 m-0">
-				<div class="col-12 col-lg-12">
+				<div class="simple-sidebar sm-sidebar" id="filter_search">
+
+					<div class="search-sidebar_header">
+						<h4 class="ssh_heading">Đóng</h4>
+						<button (click)="openFilterSearch()" class="w3-bar-item w3-button w3-large"><i
+								class="ti-close"></i></button>
+					</div>
+
+					<div class="sidebar-widgets">
+						<div class="dashboard-navbar">
+
+							<app-dashboard-navigation></app-dashboard-navigation>
+
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+			<div class="col-lg-9 col-md-12">
+				<div class="dashboard-wraper">
 
 					<div class="row">
 						<!-- /.col -->
@@ -54,10 +63,12 @@
 										<div class="my-2">
 											<i class="fa fa-circle text-blue-m2 text-xs mr-1"></i>
 											<span class="text-600 text-90"> Trạng thái hoá đơn: </span>
-											<span *ngIf="premiumBill.status == 1" class="badge badge-warning badge-pill px-25">
+											<span *ngIf="premiumBill.status == 1"
+												class="badge badge-warning badge-pill px-25">
 												Đang xữ lý
 											</span>
-											<span *ngIf="premiumBill.status == 0" class="badge badge-success badge-pill px-25">
+											<span *ngIf="premiumBill.status == 0"
+												class="badge badge-success badge-pill px-25">
 												Xữ lý thành công
 											</span>
 										</div>
@@ -73,10 +84,12 @@
 											<div class="my-2">
 												<i class="fa fa-circle text-blue-m2 text-xs mr-1"></i>
 												<span class="text-600 text-90">Trạng thái thanh toán: </span>
-												<span *ngIf="premiumBill.paymentStatus == 1" class="badge badge-success badge-pill px-25">
+												<span *ngIf="premiumBill.paymentStatus == 1"
+													class="badge badge-success badge-pill px-25">
 													Đã thanh toán
 												</span>
-												<span *ngIf="premiumBill.paymentStatus == 0" class="badge badge-warning badge-pill px-25">
+												<span *ngIf="premiumBill.paymentStatus == 0"
+													class="badge badge-warning badge-pill px-25">
 													Chưa thanh toán
 												</span>
 											</div>
@@ -131,7 +144,11 @@
 						</div>
 					</div>
 				</div>
+
 			</div>
 		</div>
+
 	</div>
+
 </section>
+<!-- ============================ User Dashboard End ================================== -->
