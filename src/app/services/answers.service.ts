@@ -13,8 +13,12 @@ export class AnswersService {
     return this.http.post(API_URL, data);
   }
   getAllByIdQuestions(question_id: string): Observable<Answers[]> {
-    console.log('checkkkkkk')
     return this.http.get<Answers[]>(`${API_URL}/question/${question_id}`);
   }
-
+  getAll(page: any, limit: any): Observable< Answers[]> {
+    console.log(page,limit);
+    return this.http.get< Answers[]>(
+      `${API_URL}?page=${page}&limit=${limit}`
+    );
+  }
 }

@@ -136,7 +136,7 @@ export class RentersManageEditComponent implements OnInit {
 
   onSubmit(): any {
     this.submitted = true;
-
+    window.location.reload();
     if (this.renterForm.invalid) {
       return false;
     }
