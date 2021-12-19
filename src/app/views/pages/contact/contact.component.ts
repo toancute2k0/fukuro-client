@@ -3,6 +3,7 @@ import {FormBuilder, Validators} from "@angular/forms";
 import {AdminContactsService} from "../../../services/admin-contacts.service";
 import {Router} from "@angular/router";
 import {ToastrService} from "ngx-toastr";
+import { environment as env } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-contact',
@@ -47,6 +48,7 @@ export class ContactComponent implements OnInit {
       phone: this.contact.value['phone'],
       subject: this.contact.value['subject'],
       message: this.contact.value['message'],
+      detail_url: '/pages/contacts/info/',
       status: '1',
     }
     this.adminContactsService.create(data).subscribe(
