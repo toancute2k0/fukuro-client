@@ -20,4 +20,7 @@ export class PremiumBillsService {
   getByCustomerId(id: any): Observable<PremiumBills> {
     return this.http.get(`${API_URL}/customer/${id}?status=both`);
   }
+  update(id:any,data:any): Observable<PremiumBills> {
+    return this.http.put(`${API_URL}/${id}`, data);
+  }
 }
