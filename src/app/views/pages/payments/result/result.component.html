@@ -41,7 +41,7 @@
                   <div class="col-lg-6">
                     <div class="my-2">
                       <i class="fa fa-circle text-blue-m2 text-xs mr-1"></i>
-                      <span class="text-600 text-90">Tên hoá đơn:</span> {{ bill.name }}
+                      <span class="text-600 text-90">Tên hoá đơn:</span> {{ nameBill }}
                     </div>
                     <div class="my-2">
                       <i class="fa fa-circle text-blue-m2 text-xs mr-1"></i>
@@ -58,7 +58,7 @@
                       <div class="my-2">
                         <i class="fa fa-circle text-blue-m2 text-xs mr-1"></i>
                         <span class="text-600 text-90">Trạng thái thanh toán:</span>
-                        <span class="badge badge-success badge-pill px-25"> Đã thanh toán</span>
+                        <span class="badge badge-success badge-pill px-25"> {{ paymentStatus }}</span>
                       </div>
                     </div>
                   </div>
@@ -79,10 +79,10 @@
             </thead>
               <tbody class="text-95 text-secondary-d3">
                 <tr class="row mb-2 mb-sm-0 py-25">
-                  <td class="col-4">{{ bill.premium_name }}</td>
+                  <td class="col-4">{{ namePremium }}</td>
                   <td class="col-2">{{ bill.expire }}</td>
-                  <td class="col-3 text-95">{{ bill.price | currency: "VND" }}</td>
-                  <td class="col-3 text-secondary-d2">{{ bill.expire * bill.price | currency: "VND" }}</td>
+                  <td class="col-3 text-95">{{ pricePremium | currency: "VND" }}</td>
+                  <td class="col-3 text-secondary-d2">{{ bill.expire * pricePremium | currency: "VND" }}</td>
                 </tr>
               </tbody>
             </table>
@@ -98,7 +98,7 @@
                     Tổng tiền
                   </div>
                   <div class="col-5">
-                    <span class="text-150 text-success-d3 opacity-2">{{ bill.total_price | currency: "VND" }}</span>
+                    <span class="text-150 text-success-d3 opacity-2">{{ bill.expire * pricePremium | currency: "VND" }}</span>
                   </div>
                 </div>
               </div>

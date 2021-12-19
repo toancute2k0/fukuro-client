@@ -42,7 +42,7 @@ export class PaymentComponent implements OnInit {
     email: ['', Validators.compose([Validators.required, Validators.email])],
     firstName: ['', Validators.compose([Validators.required])],
     lastName: ['', Validators.compose([Validators.required])],
-    phone: ['', Validators.compose([Validators.required])],
+    phone: ['', Validators.compose([Validators.required, Validators.pattern('[0-9 ]{10}')])],
   });
 
   ngOnInit(): void {
@@ -52,13 +52,10 @@ export class PaymentComponent implements OnInit {
     this.customSer.get(this.id).subscribe((res) => {
       let user = res;
       this.infoCus = this.fb.group({
-        email: [
-          user.email,
-          Validators.compose([Validators.required, Validators.email]),
-        ],
+        email: [user.email, Validators.compose([Validators.required, Validators.email])],
         firstName: [user.firstName, Validators.compose([Validators.required])],
         lastName: [user.lastName, Validators.compose([Validators.required])],
-        phone: [user.phone, Validators.compose([Validators.required])],
+        phone: [user.phone, Validators.compose([Validators.required, Validators.pattern('[0-9 ]{10}')])],
       });
     });
 
@@ -90,6 +87,20 @@ export class PaymentComponent implements OnInit {
     if (this.infoCus.invalid) {
       return false;
     }
+    const dataUpdate = {
+      first_name: this.infoCus.value['firstName'],
+      last_name: this.infoCus.value['lastName'],
+      phone: this.infoCus.value['phone'],
+    };
+    this.customSer.update(this.id, dataUpdate).subscribe(
+      (response) => {
+        this.submitted = true;
+        const name = this.infoCus.value['firstName']+' '+this.infoCus.value['lastName'];
+        this.customSer.profileName$.next(name);
+      },
+      (error) => {
+        this.toastrService.success(error.message);
+      });
     const dateNow = this.datePipe.transform(new Date(),"dd-MM-yyyy");
     const data = {
       amount: this.price,
@@ -99,15 +110,8 @@ export class PaymentComponent implements OnInit {
       language: "vn"
     }
     let bill = {
-      name: 'Hóa đơn thanh toán dịch vụ premium',
-      price: this.priceCus,
-      expire: this.expire,
-      total_price: this.price,
-      payment_status: 1,
-      status: 0,
-      customer_id: this.id,
       premium_id: this.idPremium,
-      premium_name: this.name,
+      expire: this.expire,
     }
     localStorage.setItem('bill', JSON.stringify(bill));
     this.paymentService.payment(data).subscribe(
