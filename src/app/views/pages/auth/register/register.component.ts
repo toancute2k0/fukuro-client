@@ -6,7 +6,11 @@ import { CustomersService } from 'src/app/services/customers.service';
 import { MustMatch } from 'src/app/services/validators/must-match.validator';
 import { AuthService } from 'src/app/services/auth.service';
 
-import { SocialAuthService, GoogleLoginProvider, SocialUser } from 'angularx-social-login';
+import {
+  SocialAuthService,
+  GoogleLoginProvider,
+  SocialUser,
+} from 'angularx-social-login';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -51,50 +55,43 @@ export class RegisterComponent implements OnInit {
     private customSer: CustomersService,
     private _router: Router,
     private toastrService: ToastrService,
-    
+
     private auth: AuthService,
     private socialAuthService: SocialAuthService
-  ) { }
+  ) {}
 
   loginWithGoogle(): void {
-    this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID).then((res) => {
-      // console.log(res);
-      
-      var data ={
-        token: res.idToken
-      }
-      
-      this.submitted = true;
-      // console.log(res.idToken);
+    this.socialAuthService
+      .signIn(GoogleLoginProvider.PROVIDER_ID)
+      .then((res) => {
+        // console.log(res);
 
+        var data = {
+          token: res.idToken,
+        };
 
-      this.customSer
-      .loginWithGoogle(data).subscribe(
-        (res) => {
-          localStorage.setItem('token', res.token);
-          const time_to_login = Date.now() + 604800000;
-          localStorage.setItem('timer', JSON.stringify(time_to_login));
-          localStorage.setItem('currentUser', res.data['id']);
-          this.auth.loggedIn();
-          this._router.navigate(['/']);
-          this.toastrService.success('Đăng nhập thành công!');
-        },
-        (error) => {
-          this.error = error.error.message;
-          this.toastrService.error(this.error);
+        this.submitted = true;
+        // console.log(res.idToken);
 
-        }
-      );
-
-    
-
-
-    });
+        this.customSer.loginWithGoogle(data).subscribe(
+          (res) => {
+            localStorage.setItem('token', res.token);
+            const time_to_login = Date.now() + 604800000;
+            localStorage.setItem('timer', JSON.stringify(time_to_login));
+            localStorage.setItem('currentUser', res.data['id']);
+            this.auth.loggedIn();
+            this._router.navigate(['/']);
+            this.toastrService.success('Đăng nhập thành công!');
+          },
+          (error) => {
+            this.error = error.error.message;
+            this.toastrService.error(this.error);
+          }
+        );
+      });
   }
 
-
-
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   get f() {
     return this.register.controls;
@@ -111,18 +108,23 @@ export class RegisterComponent implements OnInit {
     this.customSer.create(this.register.value).subscribe(
       (res) => {
         // console.log(res);
-        this._router.navigate(['/dang-nhap']);
-        this.toastrService.success('Vui lòng đăng nhập', 'Đăng ký thành công!');
+        console.log(res.message);
+        if (res.message) {
+          this.error = res.message;
+          this.toastrService.error(this.error);
+        } else {
+          this._router.navigate(['/dang-nhap']);
+          this.toastrService.success(
+            'Vui lòng đăng nhập',
+            'Đăng ký thành công!'
+          );
+        }
       },
       (error) => {
+        this.error = error.error.message;
+        this.toastrService.error(this.error);
         console.log(error);
       }
     );
   }
-
-
-
-
-
-
 }

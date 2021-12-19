@@ -5,8 +5,8 @@ import { AuthService } from 'src/app/services/auth.service';
 import { BlogCategoriesService } from 'src/app/services/blog-categories.service';
 import { BlogsService } from 'src/app/services/blogs.service';
 import { CustomersService } from 'src/app/services/customers.service';
-import {Router} from "@angular/router";
-import {environment} from "../../../../environments/environment";
+import { Router } from '@angular/router';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-header',
@@ -14,6 +14,7 @@ import {environment} from "../../../../environments/environment";
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit {
+  linkImg = environment.linkImg;
   name: string | undefined;
   avatar: string | undefined;
   username: string | undefined;
@@ -49,16 +50,25 @@ export class HeaderComponent implements OnInit {
 
   getById(id: string): void {
     this.customSer.get(id).subscribe((res) => {
-      this.avatar = environment.linkImg+res['avatar'];
+      this.avatar = this.linkImg + res['avatar'];
       this.name = res['firstName'] + ' ' + res['lastName'];
       this.username = res['username'];
+      this.currentUser = res;
     });
   }
 
-  redirect(slug: any){
-    this._router.navigateByUrl('/danh-muc-bai-viet', { skipLocationChange: true }).then(() => {
-      this._router.navigate([`/danh-muc-bai-viet/${slug}`]);
-    });
+  redirect(slug: any) {
+    this._router
+      .navigateByUrl('/danh-muc-bai-viet', { skipLocationChange: true })
+      .then(() => {
+        this._router.navigate([`/danh-muc-bai-viet/${slug}`]);
+      });
   }
 
+  openFilterSearch() {
+    let textArea = document.getElementById(
+      'filter_search'
+    ) as HTMLTextAreaElement;
+    textArea.style.display = 'none';
+  }
 }

@@ -4,6 +4,13 @@
 }
 .imagePreview img {
   border: 2px solid #edf1f7;
-  width: 100%;
+  height: 150px;
+  width: 150px;
   border-radius: 50%;
+}
+
+.form-group-avatar {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
 }
