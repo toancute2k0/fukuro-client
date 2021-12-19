@@ -22,8 +22,14 @@ import { AnswersService } from 'src/app/services/answers.service';
   providers: [NgbModalConfig, NgbModal, NgbCollapse],
 })
 export class QuestionsAndAnswersDetailComponent implements OnInit {
+  cp: number=1;
   anw?:any;
-  count?:any;
+  anwID?:any;
+  countanw?:any;
+  page=1;
+  countquestion:any|undefined;
+  countanwbyID?:any;
+  countuser?:any;
   cat?: BlogCategories[];
   submitted = false;
   avatar: string | undefined;
@@ -39,12 +45,12 @@ export class QuestionsAndAnswersDetailComponent implements OnInit {
     config: NgbModalConfig,
     private modalService: NgbModal,
     private catQuestions: QuestionCategoriesService,
-    private QuestionService: QuestionService,
+    private questionService: QuestionService,
     private route: ActivatedRoute,
     public ngbCollapse: NgbCollapse,
     public fb: FormBuilder,
     private customSer: CustomersService,
-    private AnswersService:AnswersService,
+    private answersService:AnswersService,
   ) {
     // customize default values of modals used by this component tree
     config.backdrop = 'static';
@@ -53,7 +59,7 @@ export class QuestionsAndAnswersDetailComponent implements OnInit {
   answers = this.fb.group({
     content: ['', Validators.compose([Validators.required])],
     question_id:[''],
-    status:[1]
+    status:[1],
   });
   get f() {
     return this.answers.controls;
@@ -97,20 +103,9 @@ export class QuestionsAndAnswersDetailComponent implements OnInit {
     this.modalService.open(content);
   }
   ngOnInit(): void {
-    const questionId= this.route.snapshot.paramMap.get('id');
-    if (questionId) {
-      console.log(questionId);
-      this.getAllByIdQuestions(questionId);
-    }(err:any) => {
-      console.log(err);
-    } 
     const id = localStorage.getItem('currentUser');
     if (id) {
       this.getById(id);
-    }
-    const Repid = '1';
-    if (Repid) {
-      this.getUserAwnById(Repid);
     }
     const slug = this.route.snapshot.paramMap.get('slug');
     if (slug) {
@@ -119,6 +114,28 @@ export class QuestionsAndAnswersDetailComponent implements OnInit {
       (err:any) => {
         console.log(err);
       } 
+      this.questionService.getAll(this.page, this.countquestion).subscribe(
+        (data: any | undefined) => {
+          this.countquestion = data['count'];
+        },
+        (err) => {
+          console.log(err);
+        });
+        this.answersService.getAll(this.page, this.countquestion).subscribe(
+          (data: any | undefined) => {
+            this.countanw = data['count'];
+            this.countanwbyID= data['count'];
+          },
+          (err) => {
+            console.log(err);
+          });
+          this.customSer.getAll().subscribe(
+            (data: any | undefined) => {
+              this.countuser = data['count'];
+            },
+            (err) => {
+              console.log(err);
+            });
     this.isCollapsed = true;
     this.isCollapsed2 = true;
     this.catQuestions.getAllCat().subscribe((res: any | undefined) => {
@@ -132,17 +149,10 @@ export class QuestionsAndAnswersDetailComponent implements OnInit {
       this.name= res['firstName'] + ' ' + res['lastName'];
     });
   }
-  getUserAwnById(id: string): void {
-    this.customSer.get(id).subscribe((res) => {
-      this.avatarRep= environment.linkImg + res['avatar'];
-      this.nameRep= res['firstName'] + ' ' + res['lastName'];
-    });
-  }
   getAllByIdQuestions(id: any): void {
-    this.AnswersService.getAllByIdQuestions(id).subscribe(
+    this.answersService.getAllByIdQuestions(id).subscribe(
       (data: any) => {
         this.anw = data;
-        this.count = data.length;
       },
       (err) => {
         console.log(err);
@@ -150,13 +160,16 @@ export class QuestionsAndAnswersDetailComponent implements OnInit {
     );
   }
   getBySlug(slug: string): void {
-    this.QuestionService.getBySlug(slug).subscribe(
+    this.questionService.getBySlug(slug).subscribe(
       (data: any | undefined) => {
+        console.log(data);
         this.questions_details = data;
+        this.anwID=[data.id]
+        this.getAllByIdQuestions(this.anwID);
         this.answers = this.fb.group({
-          question_id: [this.questions_details.id, Validators.compose([Validators.required]),],
+          question_id: [data.id],
           content: [''],
-          customer_id:[this.questions_details.customer_id, Validators.compose([Validators.required]),]
+          customer_id:[data.customer_id]
         });
       },
       (err) => {
@@ -164,6 +177,7 @@ export class QuestionsAndAnswersDetailComponent implements OnInit {
       }
     );
   }
+  
   transform(value: string) {
     let text = value.toLowerCase();
     // --------------------------
@@ -205,12 +219,14 @@ export class QuestionsAndAnswersDetailComponent implements OnInit {
       customer_id:localStorage.getItem('currentUser'),
       question_id:this.answers.value['question_id'],
       status:this.answers.value['status'],
+      detail_url:'duong-dan-thong-bao',
     };
     console.log(data);
-    this.AnswersService.create(data).subscribe(
+    this.answersService.create(data).subscribe(
       (response: any) => {
         this.resetForm();
         this.toastrService.success('Đăng câu trả lời thành công!');
+        window.location.reload();
       },
       (error) => {
         this.toastrService.success('Đăng câu trả lời thất bại!');

@@ -11,6 +11,7 @@ export const environment = {
   linkImg: 'http://localhost:3000/img/',
   apiDeleteImg: 'http://localhost:3000/file/delete',
   apiDeleteMultipleImg: 'http://localhost:3000/files/delete',
+  apiDetailURl:'http://localhost:4200/hoi-dap/chi-tiet'
 };
 
 /*
