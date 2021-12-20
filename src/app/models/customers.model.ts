@@ -8,6 +8,6 @@ export class Customers {
   lastName?: string;
   phone?: string;
   status?: string;
-  google?: string;
   facebook?: string;
+  googleId?: string;
 }

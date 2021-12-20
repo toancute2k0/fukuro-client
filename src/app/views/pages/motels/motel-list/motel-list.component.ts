@@ -16,14 +16,22 @@ export class MotelListComponent implements OnInit {
   linkImg = environment.linkImg;
   page = 1;
   count = 6;
+  bySoft: any | undefined;
+  ProdData: any[] = [];
   rentalNews: any | undefined;
   id: any;
   wishlist = [];
+  infoName: any | undefined;
+  infoPrice: any | undefined;
+  infoSlug: any | undefined;
+  infoImage: any | undefined;
+  infoType: any | undefined;
   public isMobile = false;
 
   cp: number = 1;
 
   @ViewChild(MapInfoWindow) infoWindow!: MapInfoWindow;
+  @ViewChild(MapInfoWindow, { static: false }) info!: MapInfoWindow;
   center: any;
   position: any;
   zoom = 13;
@@ -42,8 +50,19 @@ export class MotelListComponent implements OnInit {
     private customSer: CustomersService
   ) {}
 
-  openInfoWindow(marker: MapMarker) {
-    this.infoWindow.open(marker);
+  openInfo(marker: MapMarker, content: any) {
+    this.infoName = content.name;
+    this.infoImage = content.image;
+    this.infoPrice = content.price;
+    this.infoSlug = content.slug;
+    if (content.type == 1) {
+      this.infoType = 'Nhà trọ';
+    } else if (content.type == 2) {
+      this.infoType = 'Mặt bằng';
+    } else {
+      this.infoType = 'Căn hộ';
+    }
+    this.info.open(marker);
   }
 
   ngOnInit(): void {
@@ -61,30 +80,70 @@ export class MotelListComponent implements OnInit {
         console.log(err);
       }
     );
+
     window.onresize = () => (this.isMobile = window.innerWidth <= 768);
   }
+
+  sort(event: any) {
+    switch (event.target.value) {
+      case 'price': {
+        this.ProdData = this.rentalNews.sort(
+          (low: any, high: any) => low.price - high.price
+        );
+        break;
+      }
+
+      case 'price-desc': {
+        this.ProdData = this.rentalNews.sort(
+          (low: any, high: any) => high.price - low.price
+        );
+        break;
+      }
+
+      case 'create_asc': {
+        this.ProdData = this.rentalNews.sort(
+          (low: any, high: any) =>
+            <any>new Date(low.createdAt) - <any>new Date(high.createdAt)
+        );
+        break;
+      }
+
+      default: {
+        this.ProdData = this.rentalNews.sort(
+          (low: any, high: any) =>
+            <any>new Date(high.createdAt) - <any>new Date(low.createdAt)
+        );
+        break;
+      }
+    }
+    return this.ProdData;
+  }
+
   getData(n: any, c: any): void {
     this.rentalNewsService.getAll(n, c).subscribe(
       (data: any | undefined) => {
         this.rentalNews = data['rows'];
+        console.log(this.rentalNews);
+
         this.markersRepartidores = [];
-        for (var i = 0; i < data['rows'].length; i++) {
-          this.latitude = parseFloat(data['rows'][i].lat);
-          this.longitude = parseFloat(data['rows'][i].lng);
+        for (let item of data['rows']) {
+          item.image = JSON.parse(item.image);
           this.center = { lat: 10.0268531, lng: 105.7573112 };
           this.markersRepartidores.push({
             position: {
-              lat: this.latitude,
-              lng: this.longitude,
+              lat: parseFloat(item.lat),
+              lng: parseFloat(item.lng),
             },
-            title: {
-              address: data['rows'][i].address,
-              name: data['rows'][i].name,
+            label: { color: 'red' },
+            title: item.name,
+            data: {
+              image: item.image[0],
+              name: item.name,
+              price: item.price,
+              slug: item.slug,
+              type: item.type,
             },
           });
-          // console.log(this.markersRepartidores);
-
-          data['rows'][i].image = JSON.parse(data['rows'][i].image);
         }
         if (this.wishlist) {
           for (let item of this.rentalNews) {

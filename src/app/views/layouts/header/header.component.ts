@@ -50,7 +50,11 @@ export class HeaderComponent implements OnInit {
 
   getById(id: string): void {
     this.customSer.get(id).subscribe((res) => {
-      this.avatar = this.linkImg + res['avatar'];
+      if(res.googleId != null){
+        this.avatar = res['avatar'];
+      }else{
+        this.avatar = this.linkImg + res['avatar'];
+      }
       this.name = res['firstName'] + ' ' + res['lastName'];
       this.username = res['username'];
       this.currentUser = res;
