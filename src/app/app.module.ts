@@ -35,10 +35,10 @@ import {
   SocialAuthServiceConfig,
 } from 'angularx-social-login';
 import { GoogleLoginProvider } from 'angularx-social-login';
-import { SearchPageComponent } from './views/pages/search-page/search-page.component';
 
 import { CommonModule } from '@angular/common';
 import { GoogleMapsModule } from '@angular/google-maps';
+import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
 
 @NgModule({
   imports: [
@@ -60,6 +60,7 @@ import { GoogleMapsModule } from '@angular/google-maps';
     CommonModule,
     GoogleMapsModule,
     HttpClientJsonpModule,
+    GooglePlaceModule,
   ],
   declarations: [
     AppComponent,
@@ -78,7 +79,6 @@ import { GoogleMapsModule } from '@angular/google-maps';
     ManageLayoutComponent,
     HeaderManageComponent,
     FooterManageComponent,
-    SearchPageComponent,
   ],
   providers: [
     AuthGuard,

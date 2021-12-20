@@ -256,8 +256,20 @@
                                 <div class="hm-map-container">
                                     <google-map [center]="center" width="100%" [zoom]="zoom">
                                         <map-marker #marker="mapMarker" [position]="position"
-                                            (mapClick)="openInfoWindow(marker)">
-                                            <map-info-window>{{ rentalNewsDetail?.address }}</map-info-window>
+                                            (mapClick)="openInfoWindow(marker)" [icon]="icon">
+                                            <map-info-window>
+                                                <div class="map-popup">
+                                                    <div class="property-listing property-2"
+                                                        style="margin: 0 !important;">
+                                                        <div class="listing-detail-wrapper">
+                                                            <h4 class="listing-name">
+                                                                {{ rentalNewsDetail?.address }}
+                                                                <i class="list-status ti-check"></i>
+                                                            </h4>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </map-info-window>
                                         </map-marker>
                                     </google-map>
                                 </div>

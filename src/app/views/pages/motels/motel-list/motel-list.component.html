@@ -1,161 +1,183 @@
-<!-- ============================ Hero Banner  Start================================== -->
-
-<div *ngIf="isMobile">
-  <div class="image-cover hero-banner" style="background:url(assets/img/banner-1.jpg) no-repeat;" data-overlay="4">
-    <div class=" container">
-      <!-- Search Start -->
-      <app-motel-search></app-motel-search>
-      <!-- Search End -->
-    </div>
-  </div>
-</div>
-<div *ngIf="!isMobile">
-  <div class="page-title">
-    <div class=" container">
-      <div class="row">
-        <div class="col-lg-12 col-md-12">
-
-          <!-- Search Start -->
-          <app-motel-search></app-motel-search>
-          <!-- Search End -->
-
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ============================ Hero Banner End ================================== -->
-
-
-<!-- ============================ All Property ================================== -->
-<section class="bg-light">
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-lg-12 col-md-12">
-        <div class="item-shorting-box">
-          <div class="item-shorting clearfix">
-            <div class="left-column pull-left">
-              <h4 class="m-0">Hiển thị 1-{{ count - 1 }} trong số {{ count - 1}} kết quả</h4>
-            </div>
-          </div>
-          <div class="item-shorting-box-right">
-            <div class="shorting-by">
-              <select id="shorty" class="form-control">
-                <option value="">Sắp xếp</option>
-                <option value="1">Giá thấp - cao</option>
-                <option value="2">Giá cao - thấp</option>
-              </select>
-            </div>
-            <ul class="shorting-list">
-              <li><a class="active"><i class="ti-view-list"></i></a></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="row">
-
-      <div class="col-lg-12 col-sm-12 list-layout">
-        <div class="row">
-
-          <!-- Single Property Start -->
-          <div class="col-lg-6 col-md-12"
-            *ngFor="let item of rentalNews | paginate: { itemsPerPage: 6, currentPage: cp }">
-            <div class="property-listing property-1">
-
-              <div class="listing-img-wrapper">
-                <a routerLink="/thue-nha-dat/{{ item.slug }}">
-                  <img src="{{linkImg}}{{item.image[0]}}" class="img-fluid mx-auto" alt="" />
-                </a>
+<!-- Main wrapper - style you can find in pages.scss -->
+<!-- ============================================================== -->
+<div id="main-wrapper">
+  <!-- ============================ Hero Banner Start================================== -->
+  <div class="home-map-banner full-wrapious" style="height: 500px !important;">
+    <div class="hm-map-container">
+      <google-map [center]="center" width="100%" [zoom]="zoom">
+        <map-marker #marker="mapMarker" *ngFor="let markerRepartidor of markersRepartidores"
+          [position]="markerRepartidor.position" (mapClick)="openInfoWindow(marker)" [icon]="icon">
+          <map-info-window>
+            <div class="map-popup">
+              <div class="property-listing property-2" style="margin: 0 !important;">
+                <div class="listing-detail-wrapper">
+                  <h4 class="listing-name">
+                    {{markerRepartidor.title.address}}
+                    <i class="list-status ti-check"></i>
+                  </h4>
+                </div>
               </div>
+            </div>
+          </map-info-window>
+        </map-marker>
+      </google-map>
+      <div class="advance-search-container">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <button data-bs-toggle="collapse" data-bs-target="#ad-search" class="btn adv-btn">
+                Tìm kiếm
+              </button>
 
-              <div class="listing-content">
+              <div id="ad-search" class="collapse">
+                <div class="map-search-box">
 
-                <div class="listing-detail-wrapper-box">
-                  <div class="listing-detail-wrapper">
-                    <div class="listing-short-detail">
-                      <h4 class="listing-name"><a routerLink="/thue-nha-dat/{{ item.slug }}">{{ item.name }}</a></h4>
-                      <div class="fr-can-rating">
-                        <i class="fas fa-star filled"></i>
-                        <i class="fas fa-star filled"></i>
-                        <i class="fas fa-star filled"></i>
-                        <i class="fas fa-star filled"></i>
-                        <i class="fas fa-star"></i>
-                        <span class="reviews_text">(0 nhận xét)</span>
+                  <app-motel-search></app-motel-search>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <!-- ============================ Hero Banner End ================================== -->
+
+
+  <!-- ============================ All Property ================================== -->
+  <section class="bg-light">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-12 col-md-12">
+          <div class="item-shorting-box">
+            <div class="item-shorting clearfix">
+              <div class="left-column pull-left">
+                <h4 class="m-0">Hiển thị 1-{{ count }} trong số {{ count }} kết quả</h4>
+              </div>
+            </div>
+            <div class="item-shorting-box-right">
+              <div class="shorting-by">
+                <select id="shorty" class="form-control">
+                  <option value="">Sắp xếp</option>
+                  <option value="1">Giá thấp - cao</option>
+                  <option value="2">Giá cao - thấp</option>
+                </select>
+              </div>
+              <ul class="shorting-list">
+                <li><a class="active"><i class="ti-view-list"></i></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+
+        <div class="col-lg-12 col-sm-12 list-layout">
+          <div class="row">
+
+            <!-- Single Property Start -->
+            <div class="col-lg-6 col-md-12"
+              *ngFor="let item of rentalNews | paginate: { itemsPerPage: 6, currentPage: cp }">
+              <div class="property-listing property-1">
+
+                <div class="listing-img-wrapper">
+                  <a routerLink="/thue-nha-dat/{{ item.slug }}">
+                    <img src="{{linkImg}}{{item.image[0]}}" class="img-fluid mx-auto" alt="" />
+                  </a>
+                </div>
+
+                <div class="listing-content">
+
+                  <div class="listing-detail-wrapper-box">
+                    <div class="listing-detail-wrapper">
+                      <div class="listing-short-detail">
+                        <h4 class="listing-name"><a routerLink="/thue-nha-dat/{{ item.slug }}">{{
+                            item.name }}</a></h4>
+                        <div class="fr-can-rating">
+                          <i class="fas fa-star filled"></i>
+                          <i class="fas fa-star filled"></i>
+                          <i class="fas fa-star filled"></i>
+                          <i class="fas fa-star filled"></i>
+                          <i class="fas fa-star"></i>
+                          <span class="reviews_text">(0 nhận xét)</span>
+                        </div>
+                        <span *ngIf="item.type == 1" class="prt-types sale">Phòng trọ</span>
+                        <span *ngIf="item.type == 2" class="prt-types sale">Mặt bằng</span>
+                        <span *ngIf="item.type == 3" class="prt-types sale">Căn hộ</span>
                       </div>
-                      <span *ngIf="item.type == 1" class="prt-types sale">Phòng trọ</span>
-                      <span *ngIf="item.type == 2" class="prt-types sale">Mặt bằng</span>
-                      <span *ngIf="item.type == 3" class="prt-types sale">Căn hộ</span>
                     </div>
                   </div>
-                </div>
-                <div class="d-flex justify-content-between" style="padding-right: 1rem ">
-                  <h6 class="listing-card-info-price">
-                    {{item.price | number }} Vnđ
-                  </h6>
-                  <div class="prop-favorite" *ngIf="auth.isLoggedIn">
-                    <i *ngIf="item.wishlist == true" class="far fa-heart" (click)="handleRemoveFromWishlist(item.id)"
-                      style="color: palevioletred !important;">
-                    </i>
-                    <i *ngIf="item.wishlist == false" class="ti-heart" (click)="handleAddToWishlist(item.id)">
-                    </i>
-                  </div>
-                  <div class="prop-favorite" *ngIf="!auth.isLoggedIn">
-                    <a routerLink="/dang-nhap">
-                      <i class="ti-heart">
+                  <div class="d-flex justify-content-between" style="padding-right: 1rem ">
+                    <h6 class="listing-card-info-price">
+                      {{item.price | number }} Vnđ
+                    </h6>
+                    <div class="prop-favorite" *ngIf="auth.isLoggedIn">
+                      <i *ngIf="item.wishlist == true" class="far fa-heart" (click)="handleRemoveFromWishlist(item.id)"
+                        style="color: palevioletred !important;">
                       </i>
-                    </a>
+                      <i *ngIf="item.wishlist == false" class="ti-heart" (click)="handleAddToWishlist(item.id)">
+                      </i>
+                    </div>
+                    <div class="prop-favorite" *ngIf="!auth.isLoggedIn">
+                      <a routerLink="/dang-nhap">
+                        <i class="ti-heart">
+                        </i>
+                      </a>
+                    </div>
+
+                  </div>
+                  <!-- <div class="price-features-wrapper">
+                            <div class="list-fx-features">
+                              <div class="listing-card-info-icon">
+                                <div class="inc-fleat-icon"><img src="assets/img/bed.svg" width="13" alt="" /></div>1 phòng
+                              </div>
+                              <div class="listing-card-info-icon">
+                                <div class="inc-fleat-icon"><img src="assets/img/bathtub.svg" width="13" alt="" /></div>1 tolet
+                              </div>
+                              <div class="listing-card-info-icon">
+                                <div class="inc-fleat-icon"><img src="assets/img/move.svg" width="13" alt="" /></div>25 m &#178;
+                              </div>
+                            </div>
+                          </div> -->
+
+                  <div class="listing-footer-wrapper" style="padding: 0rem 1rem !important;">
+                    <div class="listing-locate">
+                      <span class="listing-location"><i class="ti-location-pin"></i>{{item.address |
+                        slice:0:45
+                        }}...</span>
+                    </div>
+                    <div class="listing-detail-btn" style="padding: 0.9rem 0rem !important;">
+                      <a routerLink="/thue-nha-dat/{{ item.slug }}" class="more-btn">Xem</a>
+                    </div>
                   </div>
 
-                </div>
-                <!-- <div class="price-features-wrapper">
-                        <div class="list-fx-features">
-                          <div class="listing-card-info-icon">
-                            <div class="inc-fleat-icon"><img src="assets/img/bed.svg" width="13" alt="" /></div>1 phòng
-                          </div>
-                          <div class="listing-card-info-icon">
-                            <div class="inc-fleat-icon"><img src="assets/img/bathtub.svg" width="13" alt="" /></div>1 tolet
-                          </div>
-                          <div class="listing-card-info-icon">
-                            <div class="inc-fleat-icon"><img src="assets/img/move.svg" width="13" alt="" /></div>25 m &#178;
-                          </div>
-                        </div>
-                      </div> -->
-
-                <div class="listing-footer-wrapper" style="padding: 0rem 1rem !important;">
-                  <div class="listing-locate">
-                    <span class="listing-location"><i class="ti-location-pin"></i>{{item.address | slice:0:45
-                      }}...</span>
-                  </div>
-                  <div class="listing-detail-btn" style="padding: 0.9rem 0rem !important;">
-                    <a routerLink="/thue-nha-dat/{{ item.slug }}" class="more-btn">Xem</a>
-                  </div>
                 </div>
 
               </div>
+            </div>
+            <!-- Single Property End -->
 
+          </div>
+
+          <!-- Pagination -->
+          <hr>
+
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+              <ul class="pagination p-center">
+                <pagination-controls (pageChange)="cp = $event" previousLabel="Trước" nextLabel="Sau">
+                </pagination-controls>
+              </ul>
             </div>
           </div>
-          <!-- Single Property End -->
-
         </div>
 
-        <!-- Pagination -->
-        <hr>
-
-        <div class="row">
-          <div class="col-lg-12 col-md-12 col-sm-12">
-            <ul class="pagination p-center">
-              <pagination-controls (pageChange)="cp = $event" previousLabel="Trước" nextLabel="Sau">
-              </pagination-controls>
-            </ul>
-          </div>
-        </div>
       </div>
-
     </div>
-  </div>
-</section>
-<!-- ============================ All Property ================================== -->
+  </section>
+  <!-- ============================ All Property ================================== -->
+</div>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-edit-rental',
   templateUrl: './edit-rental.component.html',
-  styleUrls: ['./edit-rental.component.css']
+  styleUrls: ['./edit-rental.component.css'],
 })
 export class EditRentalComponent implements OnInit {
   linkImg = environment.linkImg;
@@ -17,8 +17,52 @@ export class EditRentalComponent implements OnInit {
   submitted = false;
   result = false;
   multipleImages: File[] = [];
-  // multipleImagesCus : any[];
   selectedCheck!: boolean;
+
+  fullAddress: string = '';
+  streetNumber: string = '';
+  street: string = '';
+  district: string = '';
+  city: string = '';
+  Latitude: string = '';
+  Longitude: string = '';
+
+  public options: any = {
+    componentRestrictions: { country: 'vn' },
+  };
+
+  handleAddressChange(address: any) {
+    this.fullAddress = address.formatted_address;
+    this.Latitude = address.geometry.location.lat();
+    this.Longitude = address.geometry.location.lng();
+
+    for (const component of address.address_components) {
+      const componentType = component.types[0];
+
+      switch (componentType) {
+        case 'street_number': {
+          this.streetNumber = `${component.long_name}`;
+          break;
+        }
+
+        case 'route': {
+          this.street += component.short_name;
+          break;
+        }
+
+        case 'administrative_area_level_2': {
+          this.district = `${component.long_name}`;
+          break;
+        }
+
+        case 'administrative_area_level_1': {
+          this.city = `${component.long_name}`;
+          break;
+        }
+      }
+    }
+  }
+
   EditRentalForm = this.fb.group({
     name: [
       '',
@@ -52,7 +96,7 @@ export class EditRentalComponent implements OnInit {
   });
   RentalNewsService: any;
   flag = false;
-  arrDelete : any[] = (this.EditRentalForm.value['image'] = []);
+  arrDelete: any[] = (this.EditRentalForm.value['image'] = []);
   multipleImagesCus: any[] = (this.EditRentalForm.value['image'] = []);
 
   constructor(
@@ -61,8 +105,8 @@ export class EditRentalComponent implements OnInit {
     private _router: Router,
     private toastrService: ToastrService,
     private activatedRoute: ActivatedRoute,
-    private http: HttpClient,
-  ) { }
+    private http: HttpClient
+  ) {}
 
   ngOnInit(): void {
     this.id = this.activatedRoute.snapshot.params.id;
@@ -73,46 +117,49 @@ export class EditRentalComponent implements OnInit {
     return this.EditRentalForm.controls;
   }
   getData(id: any): void {
-    this.rentalServe.get(id)
-      .subscribe(
-        (data: any) => {
-          data.image = JSON.parse(data.image);
-          this.multipleImagesCus = data.image;
-          this.EditRentalForm = this.fb.group({
-            name: [
-              data.name,
-              Validators.compose([Validators.required, Validators.minLength(6)]),
-            ],
-            slug: [data.slug],
-            image: [data.image, Validators.compose([Validators.required])],
-            price: [
-              data.price,
-              Validators.compose([
-                Validators.required,
-                Validators.minLength(6),
-                Validators.pattern(/^\d+$/),
-              ]),
-            ],
-            quantity: [data.quantity, Validators.compose([Validators.required])],
-            type: [data.type, Validators.compose([Validators.required])],
-            area: [
-              data.area,
-              Validators.compose([Validators.required, Validators.pattern(/^\d+$/)]),
-            ],
-            address: [
-              data.address,
-              Validators.compose([Validators.required, Validators.minLength(9)]),
-            ],
-            description: [
-              data.description,
-              Validators.compose([Validators.required, Validators.minLength(6)]),
-            ],
-            status: [data.status],
-          });
-        },
-        (error: any) => {
-          console.log(error);
+    this.rentalServe.get(id).subscribe(
+      (data: any) => {
+        data.image = JSON.parse(data.image);
+        this.multipleImagesCus = data.image;
+        this.EditRentalForm = this.fb.group({
+          name: [
+            data.name,
+            Validators.compose([Validators.required, Validators.minLength(6)]),
+          ],
+          slug: [data.slug],
+          image: [data.image, Validators.compose([Validators.required])],
+          price: [
+            data.price,
+            Validators.compose([
+              Validators.required,
+              Validators.minLength(6),
+              Validators.pattern(/^\d+$/),
+            ]),
+          ],
+          quantity: [data.quantity, Validators.compose([Validators.required])],
+          type: [data.type, Validators.compose([Validators.required])],
+          area: [
+            data.area,
+            Validators.compose([
+              Validators.required,
+              Validators.pattern(/^\d+$/),
+            ]),
+          ],
+          address: [
+            data.address,
+            Validators.compose([Validators.required, Validators.minLength(9)]),
+          ],
+          description: [
+            data.description,
+            Validators.compose([Validators.required, Validators.minLength(6)]),
+          ],
+          status: [data.status],
         });
+      },
+      (error: any) => {
+        console.log(error);
+      }
+    );
   }
   // Create slug
   modelChangeFn(e: string) {
@@ -201,7 +248,7 @@ export class EditRentalComponent implements OnInit {
     this.multipleImages.splice(this.multipleImages.indexOf(event), 1);
   }
 
-  delete(img: any){
+  delete(img: any) {
     this.flag = true;
     this.arrDelete.push(img);
     this.multipleImagesCus.splice(this.multipleImagesCus.indexOf(img), 1);
@@ -214,11 +261,11 @@ export class EditRentalComponent implements OnInit {
     for (let img of this.multipleImages) {
       formData.append('files', img);
     }
+    // console.log(this.EditRentalForm.value);
     if (this.EditRentalForm.invalid) {
       return false;
     }
-
-    if(this.flag == true){
+    if (this.flag == true) {
       const options = {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
@@ -228,10 +275,9 @@ export class EditRentalComponent implements OnInit {
         },
       };
       this.http.delete(environment.apiDeleteMultipleImg, options).subscribe();
-
     }
 
-    if (this.multipleImages.length === 0){
+    if (this.multipleImages.length === 0) {
       const data = {
         image: JSON.stringify(this.multipleImagesCus),
         name: this.EditRentalForm.value['name'],
@@ -240,7 +286,13 @@ export class EditRentalComponent implements OnInit {
         quantity: this.EditRentalForm.value['quantity'],
         type: this.EditRentalForm.value['type'],
         area: this.EditRentalForm.value['area'],
-        address: this.EditRentalForm.value['address'],
+        address: this.fullAddress,
+        street_number: this.streetNumber,
+        street: this.street,
+        district: this.district,
+        city: this.city,
+        lat: this.Latitude,
+        lng: this.Longitude,
         description: this.EditRentalForm.value['description'],
         customerId: localStorage.getItem('currentUser'),
       };
@@ -253,38 +305,45 @@ export class EditRentalComponent implements OnInit {
           this.toastrService.error(error.message);
         }
       );
-    }else{
-      this.http.post(environment.apiPostImg, formData).toPromise().then((res: any) => {
-        this.result = true;
-        if (this.result == true) {
-          for (let img of res) {
-            this.multipleImagesCus.push(img.filename);
-          }
-          const data = {
-            image: JSON.stringify(this.multipleImagesCus),
-            name: this.EditRentalForm.value['name'],
-            slug: this.EditRentalForm.value['slug'],
-            price: this.EditRentalForm.value['price'],
-            quantity: this.EditRentalForm.value['quantity'],
-            type: this.EditRentalForm.value['type'],
-            area: this.EditRentalForm.value['area'],
-            address: this.EditRentalForm.value['address'],
-            description: this.EditRentalForm.value['description'],
-            customerId: localStorage.getItem('currentUser'),
-          };
-          this.rentalServe.update(this.id, data).subscribe(
-            (response: any) => {
-              this.multipleImages.length = 0;
-              this.toastrService.success(response.message);
-            },
-            (error) => {
-              this.toastrService.error(error.message);
+    } else {
+      this.http
+        .post(environment.apiPostImg, formData)
+        .toPromise()
+        .then((res: any) => {
+          this.result = true;
+          if (this.result == true) {
+            for (let img of res) {
+              this.multipleImagesCus.push(img.filename);
             }
-          );
-        }
-      });
+            const data = {
+              image: JSON.stringify(this.multipleImagesCus),
+              name: this.EditRentalForm.value['name'],
+              slug: this.EditRentalForm.value['slug'],
+              price: this.EditRentalForm.value['price'],
+              quantity: this.EditRentalForm.value['quantity'],
+              type: this.EditRentalForm.value['type'],
+              area: this.EditRentalForm.value['area'],
+              address: this.fullAddress,
+              street_number: this.streetNumber,
+              street: this.street,
+              district: this.district,
+              city: this.city,
+              lat: this.Latitude,
+              lng: this.Longitude,
+              description: this.EditRentalForm.value['description'],
+              customerId: localStorage.getItem('currentUser'),
+            };
+            this.rentalServe.update(this.id, data).subscribe(
+              (response: any) => {
+                this.multipleImages.length = 0;
+                this.toastrService.success(response.message);
+              },
+              (error) => {
+                this.toastrService.error(error.message);
+              }
+            );
+          }
+        });
     }
-
   }
-
 }

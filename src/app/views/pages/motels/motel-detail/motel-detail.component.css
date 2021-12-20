@@ -1,8 +1,8 @@
-.list-gallery-inline .img-fluid.mx-auto{
+.list-gallery-inline .img-fluid.mx-auto {
   width: 100%;
   height: 200px;
   object-fit: cover;
 }
-.sides_list_property_detail a{
+.sides_list_property_detail a {
   cursor: pointer;
 }

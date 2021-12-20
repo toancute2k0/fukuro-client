@@ -1,0 +1,8 @@
+.stat-static {
+  color: #fff;
+}
+
+.stat-static:hover {
+  color: #fff;
+  opacity: 0.7;
+}

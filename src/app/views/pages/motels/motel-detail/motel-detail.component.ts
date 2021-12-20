@@ -32,6 +32,10 @@ export class MotelDetailComponent implements OnInit {
   zoom = 17;
   latitude?: number;
   longitude?: number;
+  icon = {
+    url: 'assets/img/marker.png',
+    scaledSize: new google.maps.Size(40, 40), // scaled size
+  };
 
   constructor(
     private rentalNewsService: RentalNewsService,

@@ -35,65 +35,81 @@
 
       <div class="col-lg-9 col-md-12">
 
-        <div class="row">
+        <!-- <div class="row">
           <div class="col-lg-12 col-md-12 col-sm-12">
             <h4>Loại thành viên: <span class="pc-title theme-cl">Thành viên tiết kiệm</span></h4>
           </div>
-        </div>
+        </div> -->
 
         <div class="row">
 
           <div class="col-lg-4 col-md-6 col-sm-12">
             <div class="dashboard-stat widget-1">
-              <div class="dashboard-stat-content">
-                <h4>607</h4> <span>Listings Included</span>
-              </div>
-              <div class="dashboard-stat-icon"><i class="ti-location-pin"></i></div>
+              <a class="stat-static" routerLink="/my-account/renal-manage">
+                <div class="dashboard-stat-content">
+                  <h4>
+                    {{ rentalLength ? rentalLength : 0 }}
+                  </h4> <span>Tin cho thuê</span>
+                </div>
+                <div class="dashboard-stat-icon"><i class="ti-home"></i></div>
+              </a>
             </div>
           </div>
 
           <div class="col-lg-4 col-md-6 col-sm-12">
             <div class="dashboard-stat widget-2">
-              <div class="dashboard-stat-content">
-                <h4>102</h4> <span>Listings Remaining</span>
-              </div>
-              <div class="dashboard-stat-icon"><i class="ti-pie-chart"></i></div>
+              <a class="stat-static" routerLink="/my-account/order-history">
+                <div class="dashboard-stat-content">
+                  <h4>
+                    {{ premiumBill ? premiumBill : 0 }}
+                  </h4> <span>Đơn hàng</span>
+                </div>
+                <div class="dashboard-stat-icon"><i class="fa fa-money-bill"></i></div>
+              </a>
             </div>
           </div>
 
           <div class="col-lg-4 col-md-6 col-sm-12">
             <div class="dashboard-stat widget-3">
-              <div class="dashboard-stat-content">
-                <h4>70</h4> <span>Featured Included</span>
-              </div>
-              <div class="dashboard-stat-icon"><i class="ti-user"></i></div>
+              <a class="stat-static" routerLink="/my-account/bookmark">
+                <div class="dashboard-stat-content">
+                  <h4>
+                    {{ bookMarkLength ? bookMarkLength : 0 }}
+                  </h4> <span>Tin cho thuê đã lưu</span>
+                </div>
+                <div class="dashboard-stat-icon"><i class="ti-bookmark"></i></div>
+              </a>
             </div>
           </div>
 
           <div class="col-lg-4 col-md-6 col-sm-12">
             <div class="dashboard-stat widget-4">
-              <div class="dashboard-stat-content">
-                <h4>30</h4> <span>Featured Remaining</span>
-              </div>
-              <div class="dashboard-stat-icon"><i class="ti-location-pin"></i></div>
+              <a class="stat-static" routerLink="/my-account/notification">
+                <div class="dashboard-stat-content">
+                  <h4>0</h4> <span>Thông báo</span>
+                </div>
+                <div class="dashboard-stat-icon"><i class="ti-bell"></i></div>
+              </a>
             </div>
           </div>
 
-          <div class="col-lg-4 col-md-6 col-sm-12">
+          <!-- <div class="col-lg-4 col-md-6 col-sm-12">
             <div class="dashboard-stat widget-5">
               <div class="dashboard-stat-content">
                 <h4>Unlimited</h4> <span>Images / per listing</span>
               </div>
               <div class="dashboard-stat-icon"><i class="ti-pie-chart"></i></div>
             </div>
-          </div>
+          </div> -->
 
           <div class="col-lg-4 col-md-6 col-sm-12">
             <div class="dashboard-stat widget-6">
               <div class="dashboard-stat-content">
-                <h4>2021-02-26</h4> <span>Ends On</span>
+                <h4>
+                  {{ createCus | date: 'dd-MM-yyyy'}}
+                </h4> <span>Ngày đăng ký</span>
               </div>
-              <div class="dashboard-stat-icon"><i class="ti-user"></i></div>
+              <div class="dashboard-stat-icon"><i class="ti-calendar"></i></div>
             </div>
           </div>
 

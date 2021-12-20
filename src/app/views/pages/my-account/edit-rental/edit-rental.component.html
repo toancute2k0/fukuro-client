@@ -25,18 +25,21 @@
                                 <div class="row">
                                     <div class="form-group col-md-12">
                                         <label>Tiêu đề bài viết
-                        <span class="tip-topdata" data-tip="Property Title">
-                          <i class="ti-help"></i>
-                        </span>
-                      </label>
-                                        <input type="text" formControlName="name" id="name" class="form-control" (ngModelChange)="modelChangeFn($event)" />
+                                            <span class="tip-topdata" data-tip="Property Title">
+                                                <i class="ti-help"></i>
+                                            </span>
+                                        </label>
+                                        <input type="text" formControlName="name" id="name" class="form-control"
+                                            (ngModelChange)="modelChangeFn($event)" />
                                         <div *ngIf="submitted && f.name.errors">
-                                            <small *ngIf="f.name.errors.required" class="text-muted small-popup">Tiều đề bài đăng không được
-                          bỏ
-                          trống !</small>
-                                            <small *ngIf="f.name.errors.minlength" class="text-muted small-popup">Tiều đề bài đăng phải ít
-                          nhất
-                          6 kí tự !</small>
+                                            <small *ngIf="f.name.errors.required" class="text-muted small-popup">Tiều đề
+                                                bài đăng không được
+                                                bỏ
+                                                trống !</small>
+                                            <small *ngIf="f.name.errors.minlength" class="text-muted small-popup">Tiều
+                                                đề bài đăng phải ít
+                                                nhất
+                                                6 kí tự !</small>
                                         </div>
                                     </div>
 
@@ -46,23 +49,27 @@
 
                                     <div class="form-group col-md-6">
                                         <label>Giá cho thuê/tháng</label>
-                                        <input type="text" formControlName="price" id="price" class="form-control" placeholder="VNĐ" />
+                                        <input type="text" formControlName="price" id="price" class="form-control"
+                                            placeholder="VNĐ" />
                                         <div *ngIf="submitted && f.price.errors">
-                                            <small *ngIf="f.price.errors.required" class="text-muted small-popup"> Giá cho thuê không được
-                          trống !</small>
-                                            <small *ngIf="f.price.errors.minlength" class="text-muted small-popup">Ít nhất là 6 chữ
-                          số !</small>
-                                            <small *ngIf="f.price.errors.pattern" class="text-muted small-popup"> Giá cho thuê phải là kiểu
-                          số !</small>
+                                            <small *ngIf="f.price.errors.required" class="text-muted small-popup"> Giá
+                                                cho thuê không được
+                                                trống !</small>
+                                            <small *ngIf="f.price.errors.minlength" class="text-muted small-popup">Ít
+                                                nhất là 6 chữ
+                                                số !</small>
+                                            <small *ngIf="f.price.errors.pattern" class="text-muted small-popup"> Giá
+                                                cho thuê phải là kiểu
+                                                số !</small>
                                         </div>
                                     </div>
 
                                     <div class="form-group col-md-6">
                                         <label>Tình trạng</label>
                                         <select id="status" name="status" class="form-control" formControlName="status">
-                        <option value="1" [selected]="true">Còn phòng</option>
-                        <option value="0">Hết phòng</option>
-                      </select>
+                                            <option value="1" [selected]="true">Còn phòng</option>
+                                            <option value="0">Hết phòng</option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -74,13 +81,22 @@
                                 <div class="row">
                                     <div class="form-group col-md-12">
                                         <label>Địa chỉ<span class="tip-topdata" data-tip="Property Title"><i
-                            class="ti-help"></i></span></label>
-                                        <input type="text" formControlName="address" class="form-control" placeholder="VD: 334B/10, Đường Nguyễn Văn Linh, Phường An Khánh, Quận Ninh Kiều Thành Phố Cần Thơ" />
+                                                    class="ti-help"></i></span></label>
+                                        <input ngx-google-places-autocomplete type="text" formControlName="address"
+                                            class="form-control" [options]='options' #placesRef="ngx-places"
+                                            (onAddressChange)="handleAddressChange($event)" />
                                         <div *ngIf="submitted && f.address.errors">
-                                            <small *ngIf="f.address.errors.required" class="text-muted small-popup"> Địa chỉ không được
-                          trống !</small>
-                                            <small *ngIf="f.address.errors.minlength" class="text-muted small-popup">Phải ít nhất có 9
-                          tự !</small>
+                                            <small *ngIf="f.address.errors.required" class="text-muted small-popup"> Địa
+                                                chỉ không được
+                                                trống !</small>
+                                            <small *ngIf="f.address.errors.minlength && !fullAddress"
+                                                class="text-muted small-popup">Phải ít
+                                                nhất có 9
+                                                tự !</small>
+                                        </div>
+                                        <div *ngIf="submitted && !fullAddress">
+                                            <small class="text-muted small-popup">Vui lòng
+                                                chọn địa chỉ gợi ý !</small>
                                         </div>
                                     </div>
                                 </div>
@@ -92,12 +108,15 @@
                                 <div class="row">
                                     <div class="form-group col-md-6">
                                         <label>Diện tích sử dụng</label>
-                                        <input type="text" formControlName="area" class="form-control" placeholder="vd: 10m2" />
+                                        <input type="text" formControlName="area" class="form-control"
+                                            placeholder="vd: 10m2" />
                                         <div *ngIf="submitted && f.area.errors">
-                                            <small *ngIf="f.area.errors.required" class="text-muted small-popup"> Diện tích không được
-                          trống !</small>
-                                            <small *ngIf="f.area.errors.pattern" class="text-muted small-popup"> Diện tích phải là kiểu
-                          số !</small>
+                                            <small *ngIf="f.area.errors.required" class="text-muted small-popup"> Diện
+                                                tích không được
+                                                trống !</small>
+                                            <small *ngIf="f.area.errors.pattern" class="text-muted small-popup"> Diện
+                                                tích phải là kiểu
+                                                số !</small>
                                         </div>
                                     </div>
 
@@ -105,24 +124,26 @@
                                         <label>Số phòng ngủ</label>
                                         <input type="number" min="1" class="form-control" formControlName="quantity" />
                                         <div *ngIf="submitted && f.quantity.errors">
-                                            <small *ngIf="f.quantity.errors.required" class="text-muted small-popup"> Số phòng ngủ không được
-                          trống
-                          !</small>
+                                            <small *ngIf="f.quantity.errors.required" class="text-muted small-popup"> Số
+                                                phòng ngủ không được
+                                                trống
+                                                !</small>
                                         </div>
                                     </div>
 
                                     <div class="form-group col-md-12">
                                         <label>Loại hình cho thuê</label>
                                         <select id="type" class="form-control" formControlName="type">
-                        <option value="1">Phòng trọ</option>
-                        <option value="2">Mặt bằng</option>
-                        <option value="3">Căn hộ</option>
-                      </select>
+                                            <option value="1">Phòng trọ</option>
+                                            <option value="2">Mặt bằng</option>
+                                            <option value="3">Căn hộ</option>
+                                        </select>
                                         <div *ngIf="submitted && f.type.errors">
-                                            <small *ngIf="f.type.errors.required" class="text-muted small-popup"> Loại hình cho thuê không
-                          được
-                          trống
-                          !</small>
+                                            <small *ngIf="f.type.errors.required" class="text-muted small-popup"> Loại
+                                                hình cho thuê không
+                                                được
+                                                trống
+                                                !</small>
                                         </div>
                                     </div>
 
@@ -144,10 +165,12 @@
                                         <div [ngxSummernote]="config" formControlName="description"></div>
                                     </div>
                                     <div *ngIf="submitted && f.description.errors">
-                                        <small *ngIf="f.description.errors.required" class="text-muted small-popup">Mô tả không được bỏ
-                        trống !</small>
-                                        <small *ngIf="f.description.errors.minlength" class="text-muted small-popup">Mô tả phải có ít nhất 6
-                        kí tự !</small>
+                                        <small *ngIf="f.description.errors.required" class="text-muted small-popup">Mô
+                                            tả không được bỏ
+                                            trống !</small>
+                                        <small *ngIf="f.description.errors.minlength" class="text-muted small-popup">Mô
+                                            tả phải có ít nhất 6
+                                            kí tự !</small>
                                     </div>
                                 </div>
                             </div>
@@ -159,30 +182,40 @@
                             <div class="submit-section">
                                 <div class="row">
                                     <div class="form-group col-md-12">
+
                                         <label class="d-block">Bộ sưu tập ảnh tải lên</label>
                                         <div class="css-custom-list-image">
-                                          <div class="custom-box">
-                                            <div *ngFor="let item of multipleImagesCus" class="list-image">
-                                              <div class="list-image-div">
-                                                <img src="{{linkImg}}{{ item }}" class="img-fluid mx-auto" alt="" />
-                                                <i class="fa fa-times" aria-hidden="true" (click)="delete(item)"></i>
-                                              </div>
+                                            <div class="custom-box">
+                                                <div *ngFor="let item of multipleImagesCus" class="list-image">
+                                                    <div class="list-image-div">
+                                                        <img src="{{linkImg}}{{ item }}" class="img-fluid mx-auto"
+                                                            alt="" />
+                                                        <i class="fa fa-times" aria-hidden="true"
+                                                            (click)="delete(item)"></i>
+                                                    </div>
+                                                </div>
                                             </div>
-                                          </div>
-                                          <div class="custom-dropzone clearfix" ngx-dropzone [accept]="'image/*'" (change)="onSelect($event)">
-                                            <ngx-dropzone-label>
-                                              <div>
-                                                <i class="ti-gallery"></i>
-                                                <p>Kéo và thả hình ảnh</p>
-                                              </div>
-                                            </ngx-dropzone-label>
-                                            <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of multipleImages" [file]="f" [removable]="true" (removed)="onRemove(f)">
-                                            </ngx-dropzone-image-preview>
-                                          </div>
+                                            <div class="custom-dropzone clearfix" ngx-dropzone [accept]="'image/*'"
+                                                (change)="onSelect($event)">
+                                                <ngx-dropzone-label>
+
+                                                    <div>
+                                                        <i class="ti-gallery"></i>
+                                                        <p>Kéo và thả hình ảnh</p>
+                                                    </div>
+                                                </ngx-dropzone-label>
+                                                <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview"
+                                                    *ngFor="let f of multipleImages" [file]="f" [removable]="true"
+                                                    (removed)="onRemove(f)">
+                                                </ngx-dropzone-image-preview>
+                                            </div>
                                         </div>
                                     </div>
                                     <div *ngIf="submitted && f.image.errors">
-                                        <small *ngIf="f.image.errors.required" class="text-muted small-popup"> Hình ảnh cho thuê không được bỏ trống !</small>
+
+                                        <small *ngIf="f.image.errors.required" class="text-muted small-popup"> Hình
+                                            ảnh cho thuê không được bỏ
+                                            trống !</small>
                                     </div>
                                 </div>
                             </div>
@@ -200,8 +233,8 @@
               </div> -->
                         <div class="form-group col-lg-12 col-md-12 mt-2">
                             <button class="btn btn-theme-light-2 rounded" type="submit">
-                  Cập nhật bài viết
-                </button>
+                                Cập nhật bài viết
+                            </button>
                         </div>
                     </div>
                 </form>

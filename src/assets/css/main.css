@@ -6487,7 +6487,7 @@ span.tag_t {
   object-fit: cover;
 }
 .property-listing.property-2 .listing-detail-wrapper {
-  padding: 1rem 1.5rem;
+  /* padding: 1rem 1.5rem; */
   width: 100%;
   display: flex;
   vertical-align: middle;
