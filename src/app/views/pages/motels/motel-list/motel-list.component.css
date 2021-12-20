@@ -3,3 +3,9 @@
     min-height: 420px !important;
   }
 }
+
+.shorting-by .ti-angle-down {
+  position: relative;
+  left: -30px;
+  bottom: -20px;
+}

@@ -10,7 +10,7 @@
           <map-info-window>
             <div class="map-popup">
               <div class="property-listing property-2" style="margin: 0 !important;">
-                <div class="listing-detail-wrapper">
+                <div class="listing-detail-wrapper" style="padding: 0 !important;">
                   <h4 class="listing-name">
                     {{markerRepartidor.title.address}}
                     <i class="list-status ti-check"></i>
@@ -65,6 +65,7 @@
                   <option value="1">Giá thấp - cao</option>
                   <option value="2">Giá cao - thấp</option>
                 </select>
+                <i class="ti-angle-down"></i>
               </div>
               <ul class="shorting-list">
                 <li><a class="active"><i class="ti-view-list"></i></a></li>
@@ -95,9 +96,13 @@
                   <div class="listing-detail-wrapper-box">
                     <div class="listing-detail-wrapper">
                       <div class="listing-short-detail">
-                        <h4 class="listing-name"><a routerLink="/thue-nha-dat/{{ item.slug }}">{{
-                            item.name }}</a></h4>
-                        <div class="fr-can-rating">
+                        <h4 class="listing-name">
+                          <a routerLink="/thue-nha-dat/{{ item.slug }}">
+                            <span *ngIf="item.name.length > 110">{{ item.name | slice:0:110 }} ...</span>
+                            <span *ngIf="item.name.length < 110">{{ item.name }}.</span>
+                          </a>
+                        </h4>
+                        <div class="fr-can-rating" style="display: none;">
                           <i class="fas fa-star filled"></i>
                           <i class="fas fa-star filled"></i>
                           <i class="fas fa-star filled"></i>

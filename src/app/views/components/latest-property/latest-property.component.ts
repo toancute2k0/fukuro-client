@@ -113,11 +113,11 @@ export class LatestPropertyComponent implements OnInit {
       rental_news: id.toString(),
     };
     this.bookmarkSer.updateBookMark(this.id, data).subscribe((res: any) => {
-      if(res.message == 'empty'){
+      if (res.message == 'empty') {
         for (let item of this.rentalNews) {
           item.wishlist = false;
         }
-      }else{
+      } else {
         this.getWishlist();
       }
     });

@@ -28,8 +28,14 @@
                         <div class="listing-detail-wrapper-box">
                             <div class="listing-detail-wrapper">
                                 <div class="listing-short-detail">
-                                    <h4 class="listing-name"><a routerLink="/thue-nha-dat/{{ item.slug }}">{{ item.name }}</a></h4>
-                                    <div class="fr-can-rating">
+                                    <h4 class="listing-name">
+                                        <a routerLink="/thue-nha-dat/{{ item.slug }}">
+                                            <span *ngIf="item.name.length > 110">{{ item.name | slice:0:110 }}
+                                                ...</span>
+                                            <span *ngIf="item.name.length < 110">{{ item.name }}.</span>
+                                        </a>
+                                    </h4>
+                                    <div class="fr-can-rating" style="display: none;">
                                         <i class="fas fa-star filled"></i>
                                         <i class="fas fa-star filled"></i>
                                         <i class="fas fa-star filled"></i>
@@ -48,15 +54,18 @@
                                 {{item.price | number }} Vnđ
                             </h6>
                             <div class="prop-favorite" *ngIf="auth.isLoggedIn">
-                                <i *ngIf="item.wishlist == true" class="far fa-heart" (click)="handleRemoveFromWishlist(item.id)" style="color: palevioletred !important;">
-                </i>
-                                <i *ngIf="item.wishlist == false" class="ti-heart" (click)="handleAddToWishlist(item.id)">
-                </i>
+                                <i *ngIf="item.wishlist == true" class="far fa-heart"
+                                    (click)="handleRemoveFromWishlist(item.id)"
+                                    style="color: palevioletred !important;">
+                                </i>
+                                <i *ngIf="item.wishlist == false" class="ti-heart"
+                                    (click)="handleAddToWishlist(item.id)">
+                                </i>
                             </div>
                             <div class="prop-favorite" *ngIf="!auth.isLoggedIn">
                                 <a routerLink="dang-nhap">
                                     <i class="ti-heart">
-                  </i>
+                                    </i>
                                 </a>
                             </div>
 
@@ -77,7 +86,8 @@
 
                         <div class="listing-footer-wrapper" style="padding: 0rem 1rem !important;">
                             <div class="listing-locate">
-                                <span class="listing-location"><i class="ti-location-pin"></i>{{item.address | slice:0:45 }}...</span>
+                                <span class="listing-location"><i class="ti-location-pin"></i>{{item.address |
+                                    slice:0:45 }}...</span>
                             </div>
                             <div class="listing-detail-btn" style="padding: 0.9rem 0rem !important;">
                                 <a routerLink="/thue-nha-dat/{{ item.slug }}" class="more-btn">Xem</a>

@@ -39,7 +39,12 @@
                         <span *ngIf="item.type == 1" class="prt-types sale">Phòng trọ</span>
                         <span *ngIf="item.type == 2" class="prt-types sale">Mặt bằng</span>
                         <span *ngIf="item.type == 3" class="prt-types sale">Căn hộ</span>
-                        <h4 class="listing-name"><a routerLink="/thue-nha-dat/{{ item.slug }}">{{ item.name }}</a></h4>
+                        <h4 class="listing-name">
+                          <a routerLink="/thue-nha-dat/{{ item.slug }}">
+                            <span *ngIf="item.name.length > 75">{{ item.name | slice:0:75 }} ...</span>
+                            <span *ngIf="item.name.length < 75">{{ item.name }}.</span>
+                          </a>
+                        </h4>
                       </div>
                     </div>
                   </div>

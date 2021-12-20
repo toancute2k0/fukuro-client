@@ -82,7 +82,7 @@ export class MotelListComponent implements OnInit {
               name: data['rows'][i].name,
             },
           });
-          console.log(this.markersRepartidores);
+          // console.log(this.markersRepartidores);
 
           data['rows'][i].image = JSON.parse(data['rows'][i].image);
         }
