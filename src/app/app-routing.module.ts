@@ -100,7 +100,9 @@ const routes: Routes = [
     path: 'manage',
     component: ManageLayoutComponent,
     loadChildren: () =>
-      import('./views/pages/manage/manage.module').then((m) => m.ManageModule),
+      import('./views/pages/manage/manage.module').then(
+        (m) => m.ManageModule
+      ),
     canActivate: [AuthGuard],
   },
   { path: '**', component: NotFoundComponent },

@@ -12,11 +12,12 @@ import {RentalsService} from "../../../../../services/rentals.service";
 })
 export class RoomsManageEditComponent implements OnInit {
   submitted = false;
+  nameRoom: any;
   roomForm = this.fb.group({
     name: ['', Validators.compose([Validators.required])],
     price: ['', Validators.compose([Validators.required, Validators.pattern(/^\d+$/)])],
     area: ['', Validators.compose([Validators.required])],
-    numberPeople: ['', Validators.compose([Validators.required])],
+    numberPeople: ['', Validators.compose([Validators.required, Validators.pattern(/^\d+$/)])],
     vacancyDate: ['', Validators.compose([Validators.required])],
     note: [''],
     status: [1],
@@ -51,11 +52,12 @@ export class RoomsManageEditComponent implements OnInit {
     this.rentalRoomsService.get(id)
       .subscribe(
         (data: any) => {
+          this.nameRoom = data.name;
           this.roomForm = this.fb.group({
             name: [data.name, Validators.compose([Validators.required])],
             price: [data.price, Validators.compose([Validators.required, Validators.pattern(/^\d+$/)])],
             area: [data.area, Validators.compose([Validators.required])],
-            numberPeople: [data.numberPeople, Validators.compose([Validators.required])],
+            numberPeople: [data.numberPeople, Validators.compose([Validators.required, Validators.pattern(/^\d+$/)])],
             vacancyDate: [data.vacancyDate, Validators.compose([Validators.required])],
             note: [data.note],
             status: [data.status],
@@ -75,7 +77,12 @@ export class RoomsManageEditComponent implements OnInit {
           this.rentalsService.getFindByCustomerId(id, this.limit)
             .subscribe(
               (res: any) => {
-                this.rentals = res['rows'];
+                this.rentals = [];
+                for (let item of res['rows']) {
+                  if(item.type == 1){
+                    this.rentals.push(item);
+                  }
+                }
               });
         },
         error => {
@@ -101,6 +108,7 @@ export class RoomsManageEditComponent implements OnInit {
     };
     this.rentalRoomsService.update(this.id, data).subscribe(
       (res: any) => {
+        this.nameRoom = data.name;
         this.toastrService.success(res.message);
       },
       (error: any) => {

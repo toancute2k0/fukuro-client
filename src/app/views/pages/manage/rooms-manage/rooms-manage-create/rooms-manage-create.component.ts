@@ -5,6 +5,7 @@ import {Router} from "@angular/router";
 import {ToastrService} from "ngx-toastr";
 import {LocalDataSource} from "ng2-smart-table";
 import {RentalsService} from "../../../../../services/rentals.service";
+import {DatePipe} from "@angular/common";
 
 @Component({
   selector: 'app-rooms-manage-create',
@@ -17,7 +18,7 @@ export class RoomsManageCreateComponent implements OnInit {
     name: ['', Validators.compose([Validators.required])],
     price: ['', Validators.compose([Validators.required, Validators.pattern(/^\d+$/)])],
     area: ['', Validators.compose([Validators.required])],
-    numberPeople: ['', Validators.compose([Validators.required])],
+    numberPeople: ['', Validators.compose([Validators.required, Validators.pattern(/^\d+$/)])],
     vacancyDate: ['', Validators.compose([Validators.required])],
     note: [''],
     status: [0],
@@ -32,9 +33,9 @@ export class RoomsManageCreateComponent implements OnInit {
     private rentalRoomsService: RentalRoomsService,
     private _router: Router,
     private toastrService: ToastrService,
-    private rentalsService: RentalsService
+    private rentalsService: RentalsService,
+    private datePipe: DatePipe
   ) {
-
   }
   get f() {
     return this.roomForm.controls;
@@ -55,7 +56,12 @@ export class RoomsManageCreateComponent implements OnInit {
           this.rentalsService.getFindByCustomerId(id, this.limit)
             .subscribe(
               (res: any) => {
-                this.rentals = res['rows'];
+                this.rentals = [];
+                for (let item of res['rows']) {
+                  if(item.type == 1){
+                    this.rentals.push(item);
+                  }
+                }
               });
         },
         error => {
@@ -79,6 +85,16 @@ export class RoomsManageCreateComponent implements OnInit {
       status: this.roomForm.value['status'],
       rental_id: this.roomForm.value['rentalId'],
     };
+    if(data.rental_id != ''){
+      this.rentalsService.get(data.rental_id).subscribe((res: any) => {
+        if(res.type == 1){
+          res.quantity = res.quantity + 1;
+          const dataUpdate = {quantity: res.quantity};
+          this.rentalsService.update(data.rental_id, dataUpdate).subscribe((res) => {});
+        }
+      });
+    }
+
     this.rentalRoomsService.create(data).subscribe(
       (res) => {
         this.resetForm();

@@ -39,7 +39,7 @@ export class RentalBillsService {
     return this.http.get<RentalNews[]>(`${API_URL}/latest?limit=${limit}`);
   }
   getFindByCustomerId(id: any, limit: any): Observable<RentalNews> {
-    return this.http.get(`${API_URL}/customer/${id}?limit=${limit}`);
+    return this.http.get(`${API_URL}/customer/${id}?limit=${limit}&status=both`);
   }
   delete(id:any):Observable<RentalNews> {
     return this.http.delete(`${API_URL}/${id}`);

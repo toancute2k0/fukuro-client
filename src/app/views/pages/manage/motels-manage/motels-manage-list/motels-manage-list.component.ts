@@ -4,6 +4,7 @@ import {RentalsService} from "../../../../../services/rentals.service";
 import { LocalDataSource } from 'ng2-smart-table';
 import {CustomersService} from "../../../../../services/customers.service";
 import {ToastrService} from "ngx-toastr";
+import {RentalRoomsService} from "../../../../../services/rental-rooms.service";
 
 @Component({
   selector: 'app-motels-manage-list',
@@ -35,8 +36,15 @@ export class MotelsManageListComponent implements OnInit {
       quantity: {
         title: 'Số phòng'
       },
-      address: {
-        title: 'Địa chỉ'
+      price: {
+        title: 'Giá tiền',
+        valuePrepareFunction: (value: any) => {
+          var uy = new Intl.NumberFormat('en-US', {
+            style: 'currency',
+            currency: 'VND'
+          }).format(value);
+          return uy;
+        },
       },
       customerName: {
         title: 'Tên chủ trọ'
@@ -57,6 +65,7 @@ export class MotelsManageListComponent implements OnInit {
     private _router: Router,
     private customSer: CustomersService,
     private toastrService: ToastrService,
+    private rentalRoomsService: RentalRoomsService
   ) { }
 
   source: LocalDataSource = new LocalDataSource();
@@ -78,8 +87,8 @@ export class MotelsManageListComponent implements OnInit {
             .subscribe(
               (res: any) => {
                 this.getCustomer(this.id);
-                for (var i = 0; i < res['rows'].length; i++) {
-                  this.data.push(res['rows'][i]);
+                for (let item of res['rows']){
+                  this.data.push(item);
                 }
               });
         },

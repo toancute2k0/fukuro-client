@@ -6,11 +6,11 @@ export const environment = {
   production: false,
   title: 'Local Environment Heading',
   apiURL: 'http://localhost:8000/api',
-  apiPostOneImg: 'http://localhost:3000/file',
-  apiPostImg: 'http://localhost:3000/multipleFiles',
-  linkImg: 'http://localhost:3000/img/',
-  apiDeleteImg: 'http://localhost:3000/file/delete',
-  apiDeleteMultipleImg: 'http://localhost:3000/files/delete',
+  apiPostOneImg: 'http://upload.fukuro.website/file',
+  apiPostImg: 'http://upload.fukuro.website/multipleFiles',
+  linkImg: 'http://upload.fukuro.website/upload/',
+  apiDeleteImg: 'http://upload.fukuro.website/file/delete',
+  apiDeleteMultipleImg: 'http://upload.fukuro.website/files/delete',
   apiDetailURl:'http://localhost:4200/hoi-dap/chi-tiet'
 };
 

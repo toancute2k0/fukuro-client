@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { ManageRoutingModule } from './manage-routing.module';
 import { ManageComponent } from './manage.component';
+import { ManageDashboardComponent } from './manage-dashboard/manage-dashboard.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
@@ -11,6 +12,7 @@ import { ToastrModule } from 'ngx-toastr';
 @NgModule({
   declarations: [
     ManageComponent,
+    ManageDashboardComponent
   ],
 
   imports: [
