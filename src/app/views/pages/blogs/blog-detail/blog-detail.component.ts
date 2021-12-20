@@ -68,6 +68,7 @@ export class BlogDetailComponent implements OnInit {
           data['rows'][i].thumbnail = environment.linkImg+data['rows'][i].thumbnail;
         }
         this.blogs = data['rows'];
+        console.log(this.blogs);
       },
       (err) => {
         console.log(err);
