@@ -32,16 +32,42 @@ export class BillsManageListComponent implements OnInit {
         title: 'Tên hoá đơn'
       },
       price: {
-        title: 'Giá tiền phòng'
+        title: 'Giá tiền phòng',
+        valuePrepareFunction: (value: any) => {
+          var uy = new Intl.NumberFormat('en-US', {
+            style: 'currency',
+            currency: 'VND'
+          }).format(value);
+          return uy;
+        },
       },
       prepay: {
-        title: 'Trả trước'
+        title: 'Trả trước',
+        type: 'html',
+        valuePrepareFunction: (value: any) => {
+          var uy = new Intl.NumberFormat('en-US', {
+            style: 'currency',
+            currency: 'VND'
+          }).format(value);
+          return uy;
+        },
       },
       discountPrice: {
-        title: 'Giảm giá'
+        title: 'Giảm giá',
+        valuePrepareFunction: (value: any) => {
+          return value + '%';
+        },
       },
       totalPrice: {
-        title: 'Tổng tiền'
+        title: 'Tổng tiền',
+        type: 'html',
+        valuePrepareFunction: (value: any) => {
+          var uy = new Intl.NumberFormat('en-US', {
+            style: 'currency',
+            currency: 'VND'
+          }).format(value);
+          return uy;
+        },
       },
     },
   }
@@ -59,11 +85,11 @@ export class BillsManageListComponent implements OnInit {
     this.data = [];
     this.id = localStorage.getItem('currentUser');
     if (this.id) {
-      this.retrieverentalBillsByCustomerId(this.id);
+      this.retrieveRentalBillsByCustomerId(this.id);
     }
   }
 
-  retrieverentalBillsByCustomerId(id: any): void {
+  retrieveRentalBillsByCustomerId(id: any): void {
     this.rentalBillsService.getFindByCustomerId(id, this.limit)
       .subscribe(
         (data: any) => {
@@ -71,10 +97,10 @@ export class BillsManageListComponent implements OnInit {
           this.rentalBillsService.getFindByCustomerId(id, this.limit)
             .subscribe(
               (res: any) => {
-                for (var i = 0; i < res['rows'].length; i++) {
-                  this.data.push(res['rows'][i]);
-                }
-                this.source = this.data;
+                  for (let item of res['rows']) {
+                    this.data.push(item);
+                  }
+                  this.source = this.data;
               });
         },
         error => {
@@ -92,7 +118,7 @@ export class BillsManageListComponent implements OnInit {
           .subscribe(
             (response: any) => {
               this.data = [];
-              this.retrieverentalBillsByCustomerId(this.id);
+              this.retrieveRentalBillsByCustomerId(this.id);
               this.toastrService.success(response.message);
             },
             (error: any) => {

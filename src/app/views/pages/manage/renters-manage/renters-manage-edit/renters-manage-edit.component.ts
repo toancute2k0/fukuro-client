@@ -78,7 +78,14 @@ export class RentersManageEditComponent implements OnInit {
             rentalId: [data.rentalId, Validators.compose([Validators.required])],
             rentalRoomId: [data.rentalRoomId]
           });
-          this.retrieveRoomsByRentalId(data.rentalId);
+          this.rentalsService.get(data.rentalId)
+            .subscribe(
+              (data: any) => {
+                if(data.type == 1){
+                  this.isRoom = 1;
+                  this.retrieveRoomsByRentalId(data.rentalId);
+                }
+              });
         },
         (error: any) => {
           console.log(error);

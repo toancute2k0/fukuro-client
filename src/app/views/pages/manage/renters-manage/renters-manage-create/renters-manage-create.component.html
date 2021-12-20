@@ -60,7 +60,7 @@
                 <input type="text" class="form-control simple" formControlName="phone">
                 <div *ngIf="submitted && f.phone.errors">
                   <small *ngIf="f.phone.errors.required" class="text-muted small-popup">Số điện thoại không được bỏ trống!</small>
-                  <small *ngIf="f.phone.errors.pattern" class="text-muted small-popup">Số điện thoại phải là kiểu số!</small>
+                  <small *ngIf="f.phone.errors.pattern" class="text-muted small-popup">Số điện thoại chưa đúng!</small>
                 </div>
               </div>
             </div>
@@ -72,7 +72,7 @@
                 <input type="text" class="form-control simple" formControlName="idNumber">
                 <div *ngIf="submitted && f.idNumber.errors">
                   <small *ngIf="f.idNumber.errors.required" class="text-muted small-popup">Chứng minh nhân dân không được bỏ trống!</small>
-                  <small *ngIf="f.idNumber.errors.pattern" class="text-muted small-popup">Chứng minh nhân dân phải là kiểu số!</small>
+                  <small *ngIf="f.idNumber.errors.pattern" class="text-muted small-popup">Chứng minh nhân dân chưa đúng!</small>
                 </div>
               </div>
             </div>
@@ -82,6 +82,7 @@
                 <input type="text" class="form-control simple" formControlName="deposit">
                 <div *ngIf="submitted && f.deposit.errors">
                   <small *ngIf="f.deposit.errors.required" class="text-muted small-popup">Tiền cọc không được bỏ trống!</small>
+                  <small *ngIf="f.deposit.errors.pattern" class="text-muted small-popup">Tiền cọc phải là kiểu số!</small>
                 </div>
               </div>
             </div>
@@ -93,15 +94,16 @@
                 <input type="text" class="form-control simple" formControlName="period">
                 <div *ngIf="submitted && f.period.errors">
                   <small *ngIf="f.period.errors.required" class="text-muted small-popup">Chu kỳ không được bỏ trống!</small>
+                  <small *ngIf="f.period.errors.pattern" class="text-muted small-popup">Chu kỳ phải là kiểu số!</small>
                 </div>
               </div>
             </div>
             <div class="col-lg-6 col-md-6">
               <div class="form-group">
                 <label>Ngày chốt tiền phòng hàng tháng</label>
-                <input type="text" class="form-control simple" formControlName="paymentDate">
-                <div *ngIf="submitted && f.period.errors">
-                  <small *ngIf="f.period.errors.required" class="text-muted small-popup">Ngày chốt tiền phòng hàng tháng không được bỏ trống!</small>
+                <input type="number" class="form-control simple" formControlName="paymentDate">
+                <div *ngIf="submitted && f.paymentDate.errors">
+                  <small *ngIf="f.paymentDate.errors.required" class="text-muted small-popup">Ngày chốt tiền phòng hàng tháng không được bỏ trống!</small>
                 </div>
               </div>
             </div>

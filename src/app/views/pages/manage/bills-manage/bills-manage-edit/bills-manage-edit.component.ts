@@ -63,6 +63,7 @@ export class BillsManageEditComponent implements OnInit {
   }
   ngOnInit(): void {
     this.rooms = [];
+    this.rentals = [];
     this.currentUser = localStorage.getItem('currentUser');
     if (this.currentUser) {
       this.retrieveRentalsByCustomerId(this.currentUser);
@@ -95,6 +96,14 @@ export class BillsManageEditComponent implements OnInit {
             rentalId: [data.rentalId],
             rentalRoomId: [data.rentalRoomId],
           });
+          this.rentalsService.get(data.rentalId)
+            .subscribe(
+              (data: any) => {
+                if(data.type == 1){
+                  this.isRoom = 1;
+                  this.retrieveRoomsByRentalId(data.rentalId);
+                }
+              });
         },
         (error: any) => {
           console.log(error);
@@ -109,8 +118,11 @@ export class BillsManageEditComponent implements OnInit {
           this.rentalsService.getFindByCustomerId(id, this.limit)
             .subscribe(
               (res: any) => {
-                this.rentals = res['rows'];
-                this.retrieveRoomsByRentalId(this.billForm.value['rentalId']);
+                for (let item of res['rows']) {
+                  if(item.type != 1 || (item.type == 1 && item.quantity > 0)){
+                    this.rentals.push(item);
+                  }
+                }
               });
         },
         error => {
@@ -192,14 +204,20 @@ export class BillsManageEditComponent implements OnInit {
       rentalId: this.billForm.value['rentalId'],
       rentalRoomId: this.billForm.value['rentalRoomId'],
     }
-    this.rentalBillsService.update(this.id, data).subscribe(
-      (res: any) => {
-        this.toastrService.success(res.message);
-      },
-      (error: any) => {
-        this.toastrService.error(error.message);
-      }
-    );
-
+    this.rentalsService.get(data.rentalId)
+      .subscribe(
+        (res: any) => {
+          if (res.type != 1) {
+            data.rentalRoomId = null;
+          }
+          this.rentalBillsService.update(this.id, data).subscribe(
+            (res: any) => {
+              this.toastrService.success(res.message);
+            },
+            (error: any) => {
+              this.toastrService.error(error.message);
+            }
+          );
+        });
   }
 }

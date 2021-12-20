@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ManageComponent } from './manage.component';
+import {ManageDashboardComponent} from "./manage-dashboard/manage-dashboard.component";
 
 const routes: Routes = [
   {
@@ -34,6 +35,10 @@ const routes: Routes = [
           import('./bills-manage/bills-manage.module').then(
             (m) => m.BillsManageModule
           ),
+      },
+      {
+        path: '',
+        component: ManageDashboardComponent,
       },
     ],
   },

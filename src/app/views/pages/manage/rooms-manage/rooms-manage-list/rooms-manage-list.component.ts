@@ -36,7 +36,14 @@ export class RoomsManageListComponent implements OnInit {
         title: 'Tên phòng trọ'
       },
       price: {
-        title: 'Giá phòng'
+        title: 'Giá phòng',
+        valuePrepareFunction: (value: any) => {
+          var uy = new Intl.NumberFormat('en-US', {
+            style: 'currency',
+            currency: 'VND'
+          }).format(value);
+          return uy;
+        },
       },
       area: {
         title: 'Diện tích'
@@ -45,7 +52,7 @@ export class RoomsManageListComponent implements OnInit {
         title: 'Số người phù hợp'
       },
       vacancyDate: {
-        title: 'Ngày phòng sẽ trống'
+        title: 'Ngày sẽ trống'
       },
       status: {
         title: 'Trạng Thái',
@@ -133,18 +140,27 @@ export class RoomsManageListComponent implements OnInit {
     if(event.action == 'edit'){
       this._router.navigate(['/manage/rooms/edit/'+event.data['id']]);
     }
-    if(event.action == 'delete'){
+    if(event.action == 'delete') {
       if (window.confirm('Bạn có chắn chắn sẽ xoá không?')) {
-        this.rentalRoomsService.delete(event.data['id'])
-          .subscribe(
-            (response: any) => {
-              this.rentals = [];
-              this.retrieveRentalsByCustomerId(this.id);
-              this.toastrService.success(response.message);
-            },
-            (error: any) => {
-              this.toastrService.error(error.message);
-            });
+        this.rentalsService.get(event.data['rentalId']).subscribe(
+          (res: any) => {
+            if (res.type == 1) {
+              res.quantity = res.quantity - 1;
+              const dataUpdate = {quantity: res.quantity};
+              this.rentalsService.update(event.data['rentalId'], dataUpdate).subscribe((res) => {
+              });
+            }
+          });
+      this.rentalRoomsService.delete(event.data['id'])
+        .subscribe(
+          (response: any) => {
+            this.rentals = [];
+            this.retrieveRentalsByCustomerId(this.id);
+            this.toastrService.success(response.message);
+          },
+          (error: any) => {
+            this.toastrService.error(error.message);
+          });
       }
     }
   }

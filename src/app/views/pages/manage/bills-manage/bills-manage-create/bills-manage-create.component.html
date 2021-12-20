@@ -34,11 +34,12 @@
             </div>
             <div class="col-lg-6 col-md-6">
               <div class="form-group">
-                <label>Giá tiền phòng</label>
+                <label>Giá tiền thuê</label>
                 <input type="text" class="form-control simple" formControlName="price">
                 <div *ngIf="submitted && f.price.errors">
                   <small *ngIf="f.price.errors.required" class="text-muted small-popup">Giá tiền phòng không được bỏ trống !</small>
                   <small *ngIf="f.price.errors.pattern" class="text-muted small-popup">Giá tiền phòng phải là kiểu số!</small>
+                  <small *ngIf="f.price.errors.minlength" class="text-danger small-popup">Giá tiền phòng phải lớn hơn hoặc bằng 0!</small>
                 </div>
               </div>
             </div>
@@ -55,7 +56,8 @@
                 <label>Trả trước</label>
                 <input type="text" class="form-control simple" formControlName="prepay">
                 <div *ngIf="submitted && f.prepay.errors">
-                  <small *ngIf="f.prepay.errors.required" class="text-muted small-popup">Trả trước phải là kiểu số!</small>
+                  <small *ngIf="f.prepay.errors.required" class="text-muted small-popup">Tiền trả trước phải là kiểu số!</small>
+                  <small *ngIf="f.prepay.errors.minlength" class="text-danger small-popup">Tiền trả trước phải lớn hơn hoặc bằng 0!</small>
                 </div>
               </div>
             </div>
@@ -71,6 +73,7 @@
                 <div *ngIf="submitted && f.electricityStart.errors">
                   <small *ngIf="f.electricityStart.errors.required" class="text-muted small-popup">Chỉ số đầu không được bỏ trống !</small>
                   <small *ngIf="f.electricityStart.errors.pattern" class="text-muted small-popup">Chỉ số đầu phải là kiểu số!</small>
+                  <small *ngIf="f.electricityStart.errors.minlength" class="text-danger small-popup">Chỉ số đầu phải lớn hơn hoặc bằng 0!</small>
                 </div>
               </div>
             </div>
@@ -81,6 +84,10 @@
                 <div *ngIf="submitted && f.electricityEnd.errors">
                   <small *ngIf="f.electricityEnd.errors.required" class="text-muted small-popup">Chỉ số cuối không được bỏ trống !</small>
                   <small *ngIf="f.electricityEnd.errors.pattern" class="text-muted small-popup">Chỉ số cuối phải là kiểu số!</small>
+                  <small *ngIf="f.electricityEnd.errors.minlength" class="text-danger small-popup">Chỉ số cuối phải lớn hơn hoặc bằng 0!</small>
+                </div>
+                <div *ngIf="submitted && f.electricityStart.value > f.electricityEnd.value" >
+                  <small class="text-danger small-popup">Chỉ số cuối phải lớn hơn chỉ số đầu bắt đầu!</small>
                 </div>
               </div>
             </div>
@@ -91,6 +98,7 @@
                 <div *ngIf="submitted && f.electricityPrice.errors">
                   <small *ngIf="f.electricityPrice.errors.required" class="text-muted small-popup">Giá tiền điện không được bỏ trống !</small>
                   <small *ngIf="f.electricityPrice.errors.pattern" class="text-muted small-popup">Giá tiền điện phải là kiểu số!</small>
+                  <small *ngIf="f.electricityPrice.errors.minlength" class="text-danger small-popup">Giá tiền điện phải lớn hơn hoặc bằng 0!</small>
                 </div>
               </div>
             </div>
@@ -120,6 +128,7 @@
                 <div *ngIf="submitted && f.waterStart.errors">
                   <small *ngIf="f.waterStart.errors.required" class="text-muted small-popup">Chỉ số đầu không được bỏ trống !</small>
                   <small *ngIf="f.waterStart.errors.pattern" class="text-muted small-popup">Chỉ số đầu phải là kiểu số!</small>
+                  <small *ngIf="f.waterStart.errors.minlength" class="text-danger small-popup">Chỉ số đầu phải lớn hơn hoặc bằng 0!</small>
                 </div>
               </div>
             </div>
@@ -130,6 +139,10 @@
                 <div *ngIf="submitted && f.waterEnd.errors">
                   <small *ngIf="f.waterEnd.errors.required" class="text-muted small-popup">Chỉ số cuối không được bỏ trống !</small>
                   <small *ngIf="f.waterEnd.errors.pattern" class="text-muted small-popup">Chỉ số cuối phải là kiểu số!</small>
+                  <small *ngIf="f.waterEnd.errors.minlength" class="text-danger small-popup">Chỉ số cuối phải lớn hơn hoặc bằng 0!</small>
+                </div>
+                <div *ngIf="submitted && f.waterStart.value > f.waterEnd.value" >
+                  <small class="text-danger small-popup">Chỉ số cuối phải lớn hơn chỉ số đầu bắt đầu!</small>
                 </div>
               </div>
             </div>
@@ -140,6 +153,7 @@
                 <div *ngIf="submitted && f.waterPrice.errors">
                   <small *ngIf="f.waterPrice.errors.required" class="text-muted small-popup">Giá tiền điện không được bỏ trống !</small>
                   <small *ngIf="f.waterPrice.errors.pattern" class="text-muted small-popup">Giá tiền điện phải là kiểu số!</small>
+                  <small *ngIf="f.waterPrice.errors.minlength" class="text-danger small-popup">Giá tiền điện phải lớn hơn hoặc bằng 0!</small>
                 </div>
               </div>
             </div>
@@ -180,6 +194,7 @@
               <input type="text" class="form-control simple" formControlName="discountPrice">
               <div *ngIf="submitted && f.discountPrice.errors">
                 <small *ngIf="f.discountPrice.errors.pattern" class="text-muted small-popup">Giảm giá phải là kiểu số!</small>
+                <small *ngIf="f.discountPrice.errors.minlength" class="text-danger small-popup">Giảm giá phải lớn hơn hoặc bằng 0!</small>
               </div>
             </div>
           </div>

@@ -47,5 +47,8 @@ export class RentalRoomsService {
   delete(id:any):Observable<RentalNews> {
     return this.http.delete(`${API_URL}/${id}`);
   }
+  countRooms(data: any): Observable<any> {
+    return this.http.post(`${API_URL}/count-rooms`, data);
+  }
 
 }

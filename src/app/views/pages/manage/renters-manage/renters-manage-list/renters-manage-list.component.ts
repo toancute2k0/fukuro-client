@@ -41,9 +41,6 @@ export class RentersManageListComponent implements OnInit {
       },
       phone: {
         title: 'SĐT'
-      },
-      address: {
-        title: 'Địa chỉ'
       }
     },
   }

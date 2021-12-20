@@ -1,6 +1,88 @@
-
 <!-- ============================ Footer Start ================================== -->
 <footer class="dark-footer skin-dark-footer">
+  <div>
+    <div class="container">
+      <div class="row">
+
+        <div class="col-lg-3 col-md-4">
+          <div class="footer-widget">
+            <img src="assets/img/logofukuro_light.png" class="img-footer" alt="" />
+            <div class="footer-add">
+              <p>288, Nguyễn Văn Linh, An Khánh, Ninh Kiều, TP. Cần Thơ</p>
+              <p>+84 822 576 436</p>
+              <p>info@example.com</p>
+            </div>
+
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-4">
+          <div class="footer-widget">
+            <h4 class="widget-title">Liên kết nhanh</h4>
+            <ul class="footer-menu">
+              <li><a routerLink="/">Trang chủ</a></li>
+              <li><a routerLink="/thue-nha-dat">Tìm thuê</a></li>
+              <li><a routerLink="/hoi-dap/danh-sach">Hỏi đáp</a></li>
+              <li><a routerLink="/lien-he">Liên hệ</a></li>
+              <li><a routerLink="/bai-viet">Bài viết</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-lg-2 col-md-4">
+          <div class="footer-widget">
+            <h4 class="widget-title">Chuyên mục bài viết</h4>
+            <ul class="footer-menu">
+              <li *ngFor="let cn of cat">
+                <a href="/danh-muc-bai-viet/{{cn.slug}}">{{cn.name}}</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-lg-2 col-md-6">
+          <div class="footer-widget">
+            <h4 class="widget-title">Tài khoản của tôi</h4>
+            <ul class="footer-menu">
+              <li><a routerLink="/my-account">Quản lý tài khoản</a></li>
+              <li><a routerLink="/my-account/my-profile">Tài khoản của tôi</a></li>
+              <li><a routerLink="/my-account/renal-manage">Quản lý tin cho thuê</a></li>
+              <li><a routerLink="/my-account/bookmark">Tin đã lưu</a></li>
+              <li><a routerLink="/dang-bai">Đăng bài viết</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+          <div class="footer-widget">
+            <h4 class="widget-title">Tải xuống App</h4>
+            <a href="#" class="other-store-link">
+              <div class="other-store-app">
+                <div class="os-app-icon">
+                  <i class="lni-playstore theme-cl"></i>
+                </div>
+                <div class="os-app-caps">
+                  Google Play
+                  <span>Tải ngay</span>
+                </div>
+              </div>
+            </a>
+            <a href="#" class="other-store-link">
+              <div class="other-store-app">
+                <div class="os-app-icon">
+                  <i class="lni-apple theme-cl"></i>
+                </div>
+                <div class="os-app-caps">
+                  App Store
+                  <span>Tải ngay</span>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
 
   <div class="footer-bottom">
     <div class="container">

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, Validators} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators, AbstractControl, ValidationErrors } from "@angular/forms";
 import {RentalsService} from "../../../../../services/rentals.service";
 import {Router} from "@angular/router";
 import {ToastrService} from "ngx-toastr";
@@ -22,22 +22,22 @@ export class BillsManageCreateComponent implements OnInit {
   isRoom = 0;
   billForm = this.fb.group({
     name: ['', Validators.compose([Validators.required])],
-    price: ['', Validators.compose([Validators.required, Validators.pattern(/^\d+$/)])],
-    electricityStart: ['', Validators.compose([Validators.required, Validators.pattern(/^\d+$/)])],
-    electricityEnd: ['', Validators.compose([Validators.required, Validators.pattern(/^\d+$/)])],
+    price: ['', Validators.compose([Validators.required, Validators.minLength(0),Validators.pattern(/^\d+$/)])],
+    electricityStart: ['', Validators.compose([Validators.required, Validators.minLength(0),Validators.pattern(/^\d+$/)])],
+    electricityEnd: ['', Validators.compose([Validators.required, Validators.minLength(0),Validators.pattern(/^\d+$/)])],
     electricityQuantity: [''],
     electricityAmount: [''],
-    electricityPrice: ['', Validators.compose([Validators.required, Validators.pattern(/^\d+$/)])],
-    waterStart: ['', Validators.compose([Validators.required, Validators.pattern(/^\d+$/)])],
-    waterEnd: ['', Validators.compose([Validators.required, Validators.pattern(/^\d+$/)])],
+    electricityPrice: ['', Validators.compose([Validators.required, Validators.minLength(0),Validators.pattern(/^\d+$/)])],
+    waterStart: ['', Validators.compose([Validators.required, Validators.minLength(0),Validators.pattern(/^\d+$/)])],
+    waterEnd: ['', Validators.compose([Validators.required, Validators.minLength(0),Validators.pattern(/^\d+$/)])],
     waterQuantity: [''],
     waterAmount: [''],
-    waterPrice: ['', Validators.compose([Validators.required, Validators.pattern(/^\d+$/)])],
+    waterPrice: ['', Validators.compose([Validators.required, Validators.minLength(0),Validators.pattern(/^\d+$/)])],
     internetFee: [''],
     otherFee: [''],
     feeDesc: [''],
-    prepay: ['', Validators.compose([Validators.pattern(/^\d+$/)])],
-    discountPrice: ['', Validators.compose([Validators.pattern(/^\d+$/)])],
+    prepay: ['', Validators.compose([Validators.minLength(0),Validators.pattern(/^\d+$/)])],
+    discountPrice: ['', Validators.compose([Validators.minLength(0),Validators.pattern(/^\d+$/)])],
     totalPrice: [''],
     note: [''],
     status: ['', Validators.compose([Validators.required])],
@@ -60,6 +60,7 @@ export class BillsManageCreateComponent implements OnInit {
     return this.billForm.controls;
   }
   ngOnInit(): void {
+    this.rentals = [];
     this.rooms = [];
     this.id = localStorage.getItem('currentUser');
     if (this.id) {
@@ -71,12 +72,18 @@ export class BillsManageCreateComponent implements OnInit {
     this.rentalsService.getFindByCustomerId(id, this.limit)
       .subscribe(
         (data: any) => {
-          this.limit = data['count'];
-          this.rentalsService.getFindByCustomerId(id, this.limit)
-            .subscribe(
-              (res: any) => {
-                this.rentals = res['rows'];
-              });
+          if(data['count'] > 0){
+            this.limit = data['count'];
+            this.rentalsService.getFindByCustomerId(id, this.limit)
+              .subscribe(
+                (res: any) => {
+                  for (let item of res['rows']) {
+                    if(item.type != 1 || (item.type == 1 && item.quantity > 0)){
+                      this.rentals.push(item);
+                    }
+                  }
+                });
+          }
         },
         error => {
           console.log(error);
@@ -202,15 +209,23 @@ export class BillsManageCreateComponent implements OnInit {
       rental_room_id: this.billForm.value['rentalRoomId'],
       customer_id: localStorage.getItem('currentUser'),
     }
-    this.rentalBillsService.create(data).subscribe(
-      (res) => {
-        this.resetForm();
-        this.toastrService.success(res.message);
-      },
-      (error) => {
-        this.toastrService.error(error.message);
-      }
-    );
+    this.rentalsService.get(data.rental_id)
+      .subscribe(
+        (res: any) => {
+          if(res.type != 1){
+            data.rental_room_id = null;
+          }
+          this.rentalBillsService.create(data).subscribe(
+            (res) => {
+              // this.resetForm();
+              this._router.navigate(['/manage/bills/list']);
+              this.toastrService.success(res.message);
+            },
+            (error) => {
+              this.toastrService.error(error.message);
+            }
+          );
+        });
   }
   resetForm(): void {
     this.submitted = false;

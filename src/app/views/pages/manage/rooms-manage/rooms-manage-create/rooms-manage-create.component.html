@@ -48,7 +48,7 @@
             <div class="col-lg-6 col-md-6">
               <div class="form-group">
                 <label>Diện tích</label>
-                <input type="email" class="form-control simple" formControlName="area">
+                <input type="email" class="form-control simple" formControlName="area" placeholder="vd: 10m2">
                 <div *ngIf="submitted && f.price.errors">
                   <small *ngIf="f.price.errors.required" class="text-muted small-popup">Diện tích không được bỏ trống !</small>
                 </div>
@@ -60,6 +60,7 @@
                 <input type="text" class="form-control simple" formControlName="numberPeople">
                 <div *ngIf="submitted && f.numberPeople.errors">
                   <small *ngIf="f.numberPeople.errors.required" class="text-muted small-popup">Số người phù hợp không được bỏ trống !</small>
+                  <small *ngIf="f.numberPeople.errors.pattern" class="text-muted small-popup"> Số người phù hợp phải là kiểu số !</small>
                 </div>
               </div>
             </div>
@@ -72,6 +73,7 @@
                 <input type="date" class="form-control simple" formControlName="vacancyDate">
                 <div *ngIf="submitted && f.vacancyDate.errors">
                   <small *ngIf="f.vacancyDate.errors.required" class="text-muted small-popup">Ngày phòng sẽ trống không được bỏ trống !</small>
+                  <small *ngIf="roomForm.hasError('notValid')" class="text-danger small-popup">Ngày phòng sẽ trống không được nhỏ hơn ngày hiện tại!</small>
                 </div>
               </div>
             </div>
