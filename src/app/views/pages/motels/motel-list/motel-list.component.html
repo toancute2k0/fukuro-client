@@ -5,21 +5,47 @@
   <div class="home-map-banner full-wrapious" style="height: 500px !important;">
     <div class="hm-map-container">
       <google-map [center]="center" width="100%" [zoom]="zoom">
-        <map-marker #marker="mapMarker" *ngFor="let markerRepartidor of markersRepartidores"
-          [position]="markerRepartidor.position" (mapClick)="openInfoWindow(marker)" [icon]="icon">
-          <map-info-window>
+        <map-marker
+          #markerElem="mapMarker"
+          *ngFor="let marker of markersRepartidores"
+          [position]="marker.position"
+          [title]="marker.title"
+          [options]="marker.options"
+          (mapClick)="openInfo(markerElem, marker.data)"
+          [icon]="icon"
+        >
+        </map-marker>
+        <map-info-window>
+          <div class="map-popup-wrap">
             <div class="map-popup">
-              <div class="property-listing property-2" style="margin: 0 !important;">
+              <div class="property-listing property-2 m-0">
+                <div class="listing-img-wrapper" style="min-height: auto;">
+                  <div class="list-single-img">
+                    <a href="/thue-nha-dat/{{ infoSlug }}">
+                      <img src="{{ linkImg+infoImage }}" class="img-fluid mx-auto" alt="" style="height: 150px" />
+                    </a>
+                  </div>
+                  <span class="property-type mt-2 badge badge-primary">{{ infoType }}</span>
+                </div>
                 <div class="listing-detail-wrapper">
-                  <h4 class="listing-name">
-                    {{markerRepartidor.title.address}}
-                    <i class="list-status ti-check"></i>
-                  </h4>
+                  <div class="listing-short-detail">
+                    <h4 class="listing-name">
+                      <a href="/thue-nha-dat/{{ infoSlug }}">{{ infoName }}</a>
+                      <i class="list-status ti-check"></i>
+                    </h4>
+                  </div>
+                </div>
+                <div class="price-features-wrapper p-0">
+                  <div class="listing-price-fx">
+                    <h4>{{ infoPrice | currency: "VND" }}
+                      <span class="price-suffix">/ tháng</span>
+                    </h4>
+                  </div>
                 </div>
               </div>
             </div>
-          </map-info-window>
-        </map-marker>
+          </div>
+        </map-info-window>
       </google-map>
       <div class="advance-search-container">
         <div class="container">
