@@ -61,15 +61,13 @@
                     <li>
                         <a routerLink="my-account" class="add-listing2">
                             <div class="avatar avatar-md avatar-indicators avatar-online">
-                                <img *ngIf="currentUser.avatar && !currentUser.googleId" alt="avatar" src="{{ avatar }}"
+                                <img *ngIf="avatar && !currentUser.googleId" alt="avatar" src="{{ avatar }}"
                                     class="rounded-circle">
-                                <img *ngIf="currentUser.avatar && currentUser.googleId" alt="avatar"
-                                    src="{{currentUser.avatar}}" class="rounded-circle">
-                                <img *ngIf="!currentUser.avatar && !currentUser.googleId" alt="avatar"
+                                <img *ngIf="!avatar" alt="avatar"
                                     src="https://via.placeholder.com/40x40" class="rounded-circle">
                             </div>
-                            <span *ngIf="!currentUser.firstName" style="margin-left: 5px;">{{username }}</span>
-                            <span *ngIf="currentUser.firstName" style="margin-left: 5px;">{{name }}</span>
+                            <span *ngIf="!name" style="margin-left: 5px;">{{username }}</span>
+                            <span *ngIf="name" style="margin-left: 5px;">{{name }}</span>
                         </a>
                         <ul class="nav-dropdown nav-submenu">
                             <div class="">
