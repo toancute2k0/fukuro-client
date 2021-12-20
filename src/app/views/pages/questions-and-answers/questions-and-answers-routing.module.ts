@@ -18,7 +18,7 @@ const routes: Routes = [
         component: QuestionsAndAnswersDetailComponent,
       },
       {
-        path: 'chi-tiet/:customerId/:id/:slug',
+        path: 'chi-tiet/:slug',
         children:
           [
             { path: '', component: QuestionsAndAnswersDetailComponent, pathMatch: 'full'}

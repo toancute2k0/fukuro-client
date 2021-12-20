@@ -1,132 +1,130 @@
 <!-- ============================ Call To Action ================================== -->
 <section class="theme-bg call-to-act-wrap">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-12">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
 
-        <div class="call-to-act">
-          <div class="call-to-act-head">
-            <h3>Bạn muốn nhà trọ của bạn nhiều người biết tới?</h3>
-            <span>Chúng tôi sẽ giúp bạn có nhiều người biết đến và tìm thuê trọ của mình.</span>
-          </div>
-          <a routerLink="dang-ky" class="btn btn-call-to-act">Đăng Ký</a>
+                <div class="call-to-act">
+                    <div class="call-to-act-head">
+                        <h3>Bạn muốn nhà trọ của bạn nhiều người biết tới?</h3>
+                        <span>Chúng tôi sẽ giúp bạn có nhiều người biết đến và tìm thuê trọ của mình.</span>
+                    </div>
+                    <a routerLink="dang-ky" class="btn btn-call-to-act">Đăng Ký</a>
+                </div>
+
+            </div>
         </div>
-
-      </div>
     </div>
-  </div>
 </section>
 <!-- ============================ Call To Action End ================================== -->
 
 <!-- ============================ Footer Start ================================== -->
 <footer class="dark-footer skin-dark-footer">
-  <div>
-    <div class="container">
-      <div class="row">
+    <div>
+        <div class="container">
+            <div class="row">
 
-        <div class="col-lg-3 col-md-4">
-          <div class="footer-widget">
-            <img src="assets/img/logofukuro_light.png" class="img-footer" alt="" />
-            <div class="footer-add">
-              <p>288, Nguyễn Văn Linh, An Khánh, Ninh Kiều, TP. Cần Thơ</p>
-              <p>+84 822 576 436</p>
-              <p>info@example.com</p>
+                <div class="col-lg-3 col-md-4">
+                    <div class="footer-widget">
+                        <img src="assets/img/logofukuro_light.png" class="img-footer" alt="" />
+                        <div class="footer-add">
+                            <p>288, Nguyễn Văn Linh, An Khánh, Ninh Kiều, TP. Cần Thơ</p>
+                            <p>+84 822 576 436</p>
+                            <p>info@example.com</p>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4">
+                    <div class="footer-widget">
+                        <h4 class="widget-title">Liên kết nhanh</h4>
+                        <ul class="footer-menu">
+                            <li><a routerLink="/">Trang chủ</a></li>
+                            <li><a routerLink="/thue-nha-dat">Tìm thuê</a></li>
+                            <li><a routerLink="/hoi-dap/danh-sach">Hỏi đáp</a></li>
+                            <li><a routerLink="/lien-he">Liên hệ</a></li>
+                            <li><a routerLink="/bai-viet">Bài viết</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-lg-2 col-md-4">
+                    <div class="footer-widget">
+                        <h4 class="widget-title">Chuyên mục bài viết</h4>
+                        <ul class="footer-menu">
+                            <li *ngFor="let cn of cat">
+                                <a href="/danh-muc-bai-viet/{{cn.slug}}">{{cn.name}}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-lg-2 col-md-6">
+                    <div class="footer-widget">
+                        <h4 class="widget-title">Tài khoản của tôi</h4>
+                        <ul class="footer-menu">
+                            <li><a routerLink="/my-account">Quản lý tài khoản</a></li>
+                            <li><a routerLink="/my-account/my-profile">Tài khoản của tôi</a></li>
+                            <li><a routerLink="/my-account/renal-manage">Quản lý tin cho thuê</a></li>
+                            <li><a routerLink="/my-account/bookmark">Tin đã lưu</a></li>
+                            <li><a routerLink="/dang-bai">Đăng bài viết</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-widget">
+                        <h4 class="widget-title">Chuyên mục hỏi đáp</h4>
+                        <!-- <a href="#" class="other-store-link">
+                            <div class="other-store-app">
+                                <div class="os-app-icon">
+                                    <i class="lni-playstore theme-cl"></i>
+                                </div>
+                                <div class="os-app-caps">
+                                    Google Play
+                                    <span>Tải ngay</span>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="#" class="other-store-link">
+                            <div class="other-store-app">
+                                <div class="os-app-icon">
+                                    <i class="lni-apple theme-cl"></i>
+                                </div>
+                                <div class="os-app-caps">
+                                    App Store
+                                    <span>Tải ngay</span>
+                                </div>
+                            </div>
+                        </a> -->
+                    </div>
+                </div>
+
             </div>
-
-          </div>
         </div>
-        <div class="col-lg-2 col-md-4">
-          <div class="footer-widget">
-            <h4 class="widget-title">Điều hướng</h4>
-            <ul class="footer-menu">
-              <li><a href="about-us.html">Về chúng tôi</a></li>
-              <li><a href="faq.html">Trang câu hỏi thường gặp</a></li>
-              <li><a href="checkout.html">Thủ tục thanh toán</a></li>
-              <li><a href="contact.html">Liên hệ</a></li>
-              <li><a href="blog.html">Bài viết</a></li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="col-lg-2 col-md-4">
-          <div class="footer-widget">
-            <h4 class="widget-title">Điểm nổi bật</h4>
-            <ul class="footer-menu">
-              <li><a href="#">Chung cư</a></li>
-              <li><a href="#">Nhà của tôi</a></li>
-              <li><a href="#">Quán ăn</a></li>
-              <li><a href="#">Cuộc sống về đêm</a></li>
-              <li><a href="#">Biệt thự</a></li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="col-lg-2 col-md-6">
-          <div class="footer-widget">
-            <h4 class="widget-title">Tài khoản của tôi</h4>
-            <ul class="footer-menu">
-              <li><a href="#">Thông tin của tôi</a></li>
-              <li><a href="#">Tài khoản của tôi</a></li>
-              <li><a href="#">Tài sản của tôi</a></li>
-              <li><a href="#">Yêu thích</a></li>
-              <li><a href="#">Giỏ hàng</a></li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="col-lg-3 col-md-6">
-          <div class="footer-widget">
-            <h4 class="widget-title">Tải xuống App</h4>
-            <a href="#" class="other-store-link">
-              <div class="other-store-app">
-                <div class="os-app-icon">
-                  <i class="lni-playstore theme-cl"></i>
-                </div>
-                <div class="os-app-caps">
-                  Google Play
-                  <span>Tải ngay</span>
-                </div>
-              </div>
-            </a>
-            <a href="#" class="other-store-link">
-              <div class="other-store-app">
-                <div class="os-app-icon">
-                  <i class="lni-apple theme-cl"></i>
-                </div>
-                <div class="os-app-caps">
-                  App Store
-                  <span>Tải ngay</span>
-                </div>
-              </div>
-            </a>
-          </div>
-        </div>
-
-      </div>
     </div>
-  </div>
 
-  <div class="footer-bottom">
-    <div class="container">
-      <div class="row align-items-center">
+    <div class="footer-bottom">
+        <div class="container">
+            <div class="row align-items-center">
 
-        <div class="col-lg-6 col-md-6">
-          <p class="mb-0">© {{ currentYear }} Fukuro. Bản quyền thiết kế thuộc về Team Night Owls
-          </p>
+                <div class="col-lg-6 col-md-6">
+                    <p class="mb-0">© {{ currentYear }} Fukuro. Bản quyền thiết kế thuộc về Team Night Owls
+                    </p>
+                </div>
+
+                <div class="col-lg-6 col-md-6 text-right">
+                    <ul class="footer-bottom-social">
+                        <li><a href="#"><i class="ti-facebook"></i></a></li>
+                        <li><a href="#"><i class="ti-twitter"></i></a></li>
+                        <li><a href="#"><i class="ti-instagram"></i></a></li>
+                        <li><a href="#"><i class="ti-linkedin"></i></a></li>
+                    </ul>
+                </div>
+
+            </div>
         </div>
-
-        <div class="col-lg-6 col-md-6 text-right">
-          <ul class="footer-bottom-social">
-            <li><a href="#"><i class="ti-facebook"></i></a></li>
-            <li><a href="#"><i class="ti-twitter"></i></a></li>
-            <li><a href="#"><i class="ti-instagram"></i></a></li>
-            <li><a href="#"><i class="ti-linkedin"></i></a></li>
-          </ul>
-        </div>
-
-      </div>
     </div>
-  </div>
 </footer>
 <!-- ============================ Footer End ================================== -->
 
