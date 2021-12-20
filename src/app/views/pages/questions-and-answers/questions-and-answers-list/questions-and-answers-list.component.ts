@@ -6,9 +6,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Validators, FormBuilder } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import {QuestionService} from 'src/app/services/question.service';
-import { environment } from 'src/environments/environment';
 import { AnswersService } from 'src/app/services/answers.service';
 import { CustomersService } from 'src/app/services/customers.service';
+import { Customers } from 'src/app/models/customers.model';
+import {environment} from "../../../../../environments/environment";
 @Component({
   selector: 'app-questions-and-answers-list',
   templateUrl: './questions-and-answers-list.component.html',
@@ -17,6 +18,8 @@ import { CustomersService } from 'src/app/services/customers.service';
 })
 export class QuestionsAndAnswersListComponent implements OnInit {
   cp: number = 1;
+  avatar?:any;
+  name?:any
   cat?: BlogCategories[];
   submitted = false;
   countquestion:any|undefined;
@@ -66,7 +69,6 @@ export class QuestionsAndAnswersListComponent implements OnInit {
     this.questionService.getAll(this.page, this.count).subscribe(
       (data: any | undefined) => {
         this.count = data['count'];
-        this.getAllByIdQuestions(data.id)
         this.getQuestion(1, this.count);
       },
       (err) => {
@@ -109,6 +111,13 @@ export class QuestionsAndAnswersListComponent implements OnInit {
         console.log(err);
       }
     );
+    
+  }
+  getById(id: string): void {
+    this.customerService.get(id).subscribe((res) => {
+      this.avatar= environment.linkImg + res['avatar'];
+      this.name= res['firstName'] + ' ' + res['lastName'];
+    });
   }
    // Create slug
    modelChangeFn(e: string) {

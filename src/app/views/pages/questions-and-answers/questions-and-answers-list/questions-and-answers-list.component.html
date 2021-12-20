@@ -134,23 +134,21 @@
                             </div>
                         </div>
                         <div class="blog-details single-post-item format-standard">
-                            <div class="post-details" *ngFor="let questionList of questionList ">
+                            <div class="post-details" *ngFor="let qts of questionList | paginate: { itemsPerPage: 6, currentPage: cp } ">
 
-                                <a routerLink="/hoi-dap/chi-tiet/{{questionList.slug}}">
-                                    <h5>{{questionList.title}}
-                                    </h5>
+                                <a routerLink="/hoi-dap/chi-tiet/{{qts.slug}}">
+                                    <h5>{{qts.title}}</h5>
+                                    <p>{{qts.content | slice:0:120 }}...</p>
                                 </a>
-
-
-                                <div class="post-top-meta">
+                                <!-- <div class="post-top-meta">
                                     <ul class="meta-comment-tag questions-and-answers-comment">
                                         <li>
-                                            <a><span class="icons"><i class="ti-user"></i></span>{{questionList.customerId}}</a>
+                                            <a><span class="icons"><i class="ti-user"></i></span>Customer_binh</a>
                                         </li>
-                                        <li><a><span class="icons"><i class="ti-comment-alt"></i></span>0 câu trả lời</a>
+                                        <li><a><span class="icons"><i class="ti-comment-alt"></i></span>{{countanw}} câu trả lời</a>
                                         </li>
                                     </ul>
-                                </div>
+                                </div> -->
                                 <hr>
                             </div>
 

@@ -21,4 +21,7 @@ export class AnswersService {
       `${API_URL}?page=${page}&limit=${limit}`
     );
   }
+  updatelike(id: any, data: any): Observable<Answers[]> {
+    return this.http.put<Answers[]>(`${API_URL}/answers/${id}`, data);
+  }
 }

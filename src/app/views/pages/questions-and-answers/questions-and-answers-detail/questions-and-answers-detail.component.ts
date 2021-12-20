@@ -124,7 +124,7 @@ export class QuestionsAndAnswersDetailComponent implements OnInit {
         this.answersService.getAll(this.page, this.countquestion).subscribe(
           (data: any | undefined) => {
             this.countanw = data['count'];
-            this.countanwbyID= data['count'];
+            
           },
           (err) => {
             console.log(err);
@@ -143,16 +143,25 @@ export class QuestionsAndAnswersDetailComponent implements OnInit {
     });
   
   }
+  likeButtonclick(){
+    console.log('like');
+  }
+  disklikeButtonclick(){
+    console.log('disklike');
+  }
   getById(id: string): void {
     this.customSer.get(id).subscribe((res) => {
       this.avatar= environment.linkImg + res['avatar'];
       this.name= res['firstName'] + ' ' + res['lastName'];
+      
     });
   }
   getAllByIdQuestions(id: any): void {
     this.answersService.getAllByIdQuestions(id).subscribe(
       (data: any) => {
         this.anw = data;
+        this.countanwbyID= data.length;
+        console.log(this.countanwbyID);
       },
       (err) => {
         console.log(err);
@@ -162,9 +171,9 @@ export class QuestionsAndAnswersDetailComponent implements OnInit {
   getBySlug(slug: string): void {
     this.questionService.getBySlug(slug).subscribe(
       (data: any | undefined) => {
-        console.log(data);
         this.questions_details = data;
         this.anwID=[data.id]
+       
         this.getAllByIdQuestions(this.anwID);
         this.answers = this.fb.group({
           question_id: [data.id],
