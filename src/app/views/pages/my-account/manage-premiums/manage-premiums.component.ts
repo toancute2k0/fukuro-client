@@ -36,6 +36,7 @@ export class ManagePremiumsComponent implements OnInit {
         });
       }
       this.customerPremiumServices = data['rows'];
+      console.log(this.customerPremiumServices);
     });
   }
 

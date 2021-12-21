@@ -63,6 +63,7 @@ export class MotelDetailComponent implements OnInit {
     this.infoWindow.open(marker);
   }
 
+  data: any;
   contact = this.fb.group({
     firstName: ['', Validators.compose([Validators.required])],
     lastName: ['', Validators.compose([Validators.required])],
@@ -78,6 +79,7 @@ export class MotelDetailComponent implements OnInit {
   });
 
   ngOnInit(): void {
+    this.data = '';
     this.currentUser = [];
     const slug = this.route.snapshot.paramMap.get('slug');
     if (slug) {
@@ -94,7 +96,7 @@ export class MotelDetailComponent implements OnInit {
   }
 
   getLatestRentalNews(): void {
-    this.rentalNewsService.getAll(this.page, this.limit, this.orderby).subscribe(
+    this.rentalNewsService.getAll(this.page, this.limit, this.orderby, this.data).subscribe(
       (data: any | undefined) => {
         this.rentalNews = data['rows'];
         for (var i = 0; i < data['rows'].length; i++) {
