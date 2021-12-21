@@ -20,4 +20,7 @@ export class CustomerPremiumServicesService {
   getByCustomerId(id: any, limit: any): Observable<PremiumService> {
     return this.http.get(`${API_URL}/customer/${id}?limit=${limit}&status=both&orderby=desc`);
   }
+  checkPremiumByCustomerId(id: any): Observable<PremiumService> {
+    return this.http.get(`${API_URL}/check-premium/${id}`);
+  }
 }

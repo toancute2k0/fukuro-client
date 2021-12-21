@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Customers } from 'src/app/models/customers.model';
 import { CustomersService } from 'src/app/services/customers.service';
+import { CustomerPremiumServicesService } from 'src/app/services/customer-premium-services.service';
 import { AuthService } from 'src/app/services/auth.service';
 import {environment} from "../../../../../environments/environment";
 import { first } from 'rxjs/operators';
@@ -50,7 +51,8 @@ export class LoginComponent implements OnInit {
     private _router: Router,
     private toastrService: ToastrService,
     private auth: AuthService,
-    private socialAuthService: SocialAuthService
+    private socialAuthService: SocialAuthService,
+    private customerPremiumServicesService: CustomerPremiumServicesService
   ) {}
 
   ngOnInit(): void {
@@ -68,27 +70,6 @@ export class LoginComponent implements OnInit {
     if (this.login.invalid) {
       return false;
     }
-    // console.log(this.login.value);
-    // add custom_ser
-    // this.customSer.login(this.login.value).subscribe(
-    //   (res) => {
-    //     localStorage.setItem('token', res.token);
-    //     const time_to_login = Date.now() + 604800000; // one week
-    //     localStorage.setItem('timer', JSON.stringify(time_to_login));
-
-    //     localStorage.setItem('currentUser', JSON.stringify(res.data));
-
-    //     this.auth.loggedIn();
-    //     this._router.navigateByUrl(this.returnUrl);
-    //     // window.location.reload();
-    //     this.toastrService.success('Đăng nhập thành công!');
-    //   },
-    //   (error) => {
-    //     this.error = error.error.message;
-    //     this.toastrService.error(this.error);
-    //   }
-    // );
-
     this.customSer
       .login(this.f.username.value, this.f.password.value)
       .pipe(first())

@@ -596,32 +596,14 @@
                     <!-- Agent Detail -->
                   <div class="sides-widget">
                     <div class="sides-widget-header">
-                      <div class="agent-photo"
-                           *ngIf="rentalNewsDetail.Customer.avatar != null && rentalNewsDetail.Customer.google_id != null">
-                        <img src="{{ rentalNewsDetail.Customer.avatar }}" alt="" />
-                      </div>
-                      <div class="agent-photo"
-                           *ngIf="rentalNewsDetail.Customer.avatar != null && rentalNewsDetail.Customer.google_id == null">
-                        <img src="{{ linkImg+rentalNewsDetail.Customer.avatar }}" alt="" />
-                      </div>
-                      <div class="agent-photo" *ngIf="!rentalNewsDetail.Customer.avatar">
-                        <img src="https://via.placeholder.com/200x200" alt="" />
+                      <div class="agent-photo">
+                        <img src="{{ avatar }}" alt="" />
                       </div>
                       <div class="sides-widget-details">
-                        <h4 *ngIf="rentalNewsDetail.Customer.firstName">
-                          <a href="#">
-                            {{ rentalNewsDetail.Customer.firstName }} {{ rentalNewsDetail.Customer.lastName }}
-                          </a>
-                        </h4>
-                        <h4 *ngIf="!rentalNewsDetail.Customer.firstName">
-                          <a href="#">
-                            {{ rentalNewsDetail.Customer.username }}
-                          </a>
-                        </h4>
-                        <span *ngIf="rentalNewsDetail.Customer.phone">
-                                    <i class="lni-phone-handset"></i>
-                                  <a class="text-white" href="tel: {{ rentalNewsDetail.Customer.phone }}">
-                                    {{ rentalNewsDetail.Customer.phone }}</a>
+                        <h4><a href="#">{{ name }}</a></h4>
+                        <span><i class="lni-phone-handset"></i>
+                                  <a class="text-white" href="tel: {{ phone }}">
+                                    {{ phone }}</a>
                                 </span>
 
                           </div>
