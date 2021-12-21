@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-lg-12 col-md-12">
 
-                <h2 class="ipt-title">Trang hỏi đáp</h2>
+                <h2 class="ipt-title">Câu hỏi theo chuyên mục </h2>
                 <span class="ipn-subtitle">Giải đáp nhanh tất cả câu hỏi về tìm thuê vè đầu tư bất động sản</span>
 
             </div>
@@ -28,7 +28,7 @@
                         <div class="single-widgets widget_category">
                             <h4 class="title">Chuyên mục</h4>
                             <ul>
-                                <li *ngFor="let cn of cat">
+                                <li *ngFor="let cn of cat" [ngClass]="(cn.id==questionList.questionCategoryId)?'cat-active':''">
                                     <a routerLink="/hoi-dap/cau-hoi-theo-chuyen-muc/{{cn.id}}">{{cn.name}}</a>
                                 </li>
                             </ul>
@@ -38,59 +38,6 @@
 
                     <!-- Blog Detail -->
                     <div class="col-lg-6 col-md-12 col-sm-12 col-12 questions-and-answers">
-                        <ng-template #content let-c="close" let-d="dismiss">
-                            <form action="#" class="sidebar-search-form">
-                                <div class="modal-header">
-                                    <h4 class="modal-title" id="modal-basic-title">Thêm câu hỏi</h4>
-                                    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <form [formGroup]="question" (ngSubmit)="onSubmit()">
-                                    <div class="modal-body">
-                                        <input type="text" class="form-control" placeholder="Chủ đề cho câu hỏi" formControlName="title" (ngModelChange)="modelChangeFn($event)">
-                                        <div *ngIf="submitted && f.title.errors">
-                                            <small *ngIf="f.title.errors.required" class="text-danger small-popup">Chủ đề câu hỏi không được bỏ trống</small>
-                                        </div>
-                                        <br>
-                                        <textarea type="text" class="form-control" formControlName="content" placeholder="Nội dung câu hỏi"></textarea>
-                                        <div *ngIf="submitted && f.content.errors">
-                                            <small *ngIf="f.content.errors.required" class="text-danger small-popup">Nội dung trả lời không được bỏ trống!</small>
-                                        </div>
-                                        <br>
-                                        <label>Chọn chuyên mục</label>
-                                        <select name="status" class="form-control" formControlName="question_category_id">
-                
-                                        <option *ngFor="let cn of cat" value="{{cn.id}}">
-                                            <a href="/danh-muc-bai-viet/{{cn.slug}}">{{cn.name}}</a>
-                                        </option>
-                                    </select>
-                                        <div *ngIf="submitted && f.question_category_id.errors">
-                                            <small *ngIf="f.question_category_id.errors.required" class="text-danger small-popup">Vui lòng chọn chuyên mục hỏi đáp</small>
-                                        </div>
-                                        <br>
-                                        <div>
-                                            <!-- <button type="button" class="btn text-warning font-bold" (click)="c('Save click')">Huỷ</button> -->
-                                            <button type="submit" class="btn btn-qts rounded float-right" (click)="c('Save click')">Đăng câu hỏi</button>
-                                        </div>
-                                    </div>
-                                </form>
-                                <!--                <div class="modal-footer">-->
-                                <!--                  <button type="button" class="btn btn-outline-dark" (click)="c('Save click')">Save</button>-->
-                                <!--                </div>-->
-                            </form>
-                        </ng-template>
-                        <div class="blog-details single-post-item format-standard" (click)="open(content)">
-                            <div class="post-details">
-                                <div class="post-top-meta">
-                                    <ul class="meta-comment-tag">
-                                        <li><span class="icons text-blue"><i class="fa fa-user-circle"
-                                                    aria-hidden="true"></i></span></li>
-                                        <li><span>Câu hỏi của bạn là gì?</span></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
                         <div class="blog-details single-post-item format-standard" *ngFor="let qts of questionList | paginate: { itemsPerPage: 4, currentPage: cp } ">
                             <div class="post-details">
                                 <a routerLink="/hoi-dap/chi-tiet/{{qts.id}}">

@@ -80,15 +80,14 @@
     padding: 9px 25px;
 }
 
-.questions-and-answers .widget_tags ul li a:hover,
+
+/* .questions-and-answers .widget_tags ul li a:hover,
 .questions-and-answers .widget_tags ul li a:focus {
     color: #ffffff;
     background: #fd5332;
     border-color: #fd5332;
-}
+} */
 
 .cat-active {
-    color: #ffffff !important;
-    background: #a5a5a5;
-    border-color: #aaaaaa;
+    font-weight: 600;
 }

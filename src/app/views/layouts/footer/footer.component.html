@@ -75,28 +75,13 @@
                 <div class="col-lg-3 col-md-6">
                     <div class="footer-widget">
                         <h4 class="widget-title">Chuyên mục hỏi đáp</h4>
-                        <!-- <a href="#" class="other-store-link">
-                            <div class="other-store-app">
-                                <div class="os-app-icon">
-                                    <i class="lni-playstore theme-cl"></i>
-                                </div>
-                                <div class="os-app-caps">
-                                    Google Play
-                                    <span>Tải ngay</span>
-                                </div>
-                            </div>
-                        </a>
-                        <a href="#" class="other-store-link">
-                            <div class="other-store-app">
-                                <div class="os-app-icon">
-                                    <i class="lni-apple theme-cl"></i>
-                                </div>
-                                <div class="os-app-caps">
-                                    App Store
-                                    <span>Tải ngay</span>
-                                </div>
-                            </div>
-                        </a> -->
+                        <ul class="footer-menu">
+
+                            <li *ngFor="let cn of cat">
+                                <a routerLink="/hoi-dap/cau-hoi-theo-chuyen-muc/{{cn.id}}">{{cn.name}}</a>
+                            </li>
+
+                        </ul>
                     </div>
                 </div>
 
