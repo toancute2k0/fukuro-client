@@ -3,57 +3,10 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12 col-md-12">
-                <div class="full-search-2 eclip-search italian-search hero-search-radius shadow">
-                    <div class="hero-search-content">
 
-                        <div class="row">
+                <h2 class="ipt-title">Trang hỏi đáp</h2>
+                <span class="ipn-subtitle">Giải đáp nhanh tất cả câu hỏi về tìm thuê vè đầu tư bất động sản</span>
 
-                            <div class="col-lg-3 col-md-3 col-sm-12 b-r">
-                                <div class="form-group borders">
-                                    <div class="input-with-icon">
-                                        <input type="text" class="form-control" value="DANH SÁCH HỎI, ĐÁP" disabled>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-3 col-md-3 col-sm-12">
-                                <div class="form-group borders">
-                                    <div class="input-with-icon">
-                                        <input type="text" class="form-control" placeholder="Từ khoá...">
-                                        <i class="ti-search"></i>
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <div class="col-lg-3 col-md-3 col-sm-12">
-                                <div class="form-group borders">
-                                    <div class="input-with-icon b-l">
-                                        <select id="real-home" class="form-control" style="cursor: pointer;">
-                                            <option value="">Chuyên mục hỏi đáp</option>
-                                            <select name="status" class="form-control">
-                                                <option value="">Chọn chuyên mục</option>
-                                                <option *ngFor="let cn of cat"><a
-                                                        href="/danh-muc-bai-viet/{{cn.slug}}">{{cn.name}}</a></option>
-
-                                            </select>
-                                        </select>
-                                        <i class="ti-angle-down"></i>
-                                        <i class="ti-home"></i>
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <div class="col-lg-3 col-md-3 col-sm-12">
-                                <div class="form-group">
-                                    <a href="#" class="btn search-btn">Tìm Kiếm</a>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -78,7 +31,7 @@
                             <h4 class="title">Chuyên mục</h4>
                             <ul>
                                 <li *ngFor="let cn of cat" [ngClass]="(cn.id==questions_details.questionCategoryId)?'cat-active':''">
-                                    <a href="/danh-muc-bai-viet/{{cn.slug}}">{{cn.name}}</a>
+                                    <a routerLink="/hoi-dap/cau-hoi-theo-chuyen-muc/{{cn.id}}">{{cn.name}}</a>
                                 </li>
                             </ul>
                         </div>
@@ -157,8 +110,8 @@
 
                                     <div class="comment-area">
                                         <div class="all-comments">
-                                            <div class="comment-list" *ngIf="anw">
-                                                <ul *ngFor="let anw of anw | paginate: { itemsPerPage: 6, currentPage: cp }">
+                                            <div class="comment-list" *ngIf="anw.length>0">
+                                                <ul *ngFor="let anw of anw | paginate: { itemsPerPage: 4, currentPage: cp }">
                                                     <li class="single-comment">
                                                         <article>
                                                             <div class="comment-author">
@@ -181,13 +134,9 @@
                                                         <div class="post-top-meta">
                                                             <ul class="meta-comment-tag questions-and-answers-comment pl-0 ml-0">
                                                                 <li><span class="icons">
-                                                                            <i *ngIf="buttonlike == true" (click)="likeButtonclick(anw.id)"
+                                                                            <i  (click)="likeButtonclick(anw.id)"
                                                                                 class="far fa-thumbs-up"
                                                                                 style="color: rgb(7, 7, 7) !important;">
-                                                                            </i>
-                                                                            <i *ngIf="buttonlike == false" (click)="likeButtonclick(anw.id)"
-                                                                                class="far fa-thumbs-up"
-                                                                                style="color: rgb(177, 177, 177) !important;">
                                                                             </i>
 
                                                                         </span>{{anw.count_like}}</li>
@@ -236,7 +185,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div *ngIf="!anw">Chưa có câu trả lời cho câu hỏi này !!</div>
+                                            <div *ngIf="anw.length==0">Chưa có câu trả lời cho câu hỏi này !!</div>
                                         </div>
                                     </div>
                                 </div>
@@ -260,8 +209,8 @@
                                     <div>Trả lời</div>
                                 </li>
                                 <li class="topicItem">
-                                    <div>3</div>
-                                    <div>Trả lời hay</div>
+                                    <div>{{countcat}}</div>
+                                    <div>Số chuyên mục</div>
                                 </li>
                                 <li class="topicItem">
                                     <div>{{countuser}}</div>
