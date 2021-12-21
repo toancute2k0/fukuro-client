@@ -14,10 +14,12 @@ import { OrderHistoryComponent } from './order-history/order-history.component';
 import { OrderDetailsComponent } from './order-history/order-details/order-details.component';
 import { ManagePremiumsComponent } from './manage-premiums/manage-premiums.component';
 import { CustomerContactsComponent } from './customer-contacts/customer-contacts.component';
+import { CustomerFeedbackComponent } from './customer-contacts/customer-feedback/customer-feedback.component';
 import { CustomerContactDetailsComponent } from './customer-contacts/customer-contact-details/customer-contact-details.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
+import { NgxSummernoteModule } from 'ngx-summernote';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,8 @@ import { ToastrModule } from 'ngx-toastr';
     OrderDetailsComponent,
     ManagePremiumsComponent,
     CustomerContactsComponent,
-    CustomerContactDetailsComponent
+    CustomerContactDetailsComponent,
+    CustomerFeedbackComponent
   ],
 
   imports: [
@@ -46,6 +49,7 @@ import { ToastrModule } from 'ngx-toastr';
     }),
     HttpClientModule,
     ReactiveFormsModule,
+    NgxSummernoteModule
   ],
 })
 export class MyAccountModule {}

@@ -51,22 +51,24 @@
 
                         <div class="row sd-list-right" *ngFor="let item of customerContacts">
                             <div class="col-md-8">
-                                <h4 class="listing_dashboard_title">
-                                  <span>Họ tên khách hàng: </span>
-                                  <span class="text-primary">{{item.firstName }} {{item.lastName }}</span>
-                                </h4>
-                                <div class="user_dashboard_listed">
-                                  <span class="font-weight-bold">Email:</span> {{item.email }}
-                                </div>
-                                <div class="user_dashboard_listed">
-                                  <span class="font-weight-bold">Số điện thoại: </span> {{item.phone}}
-                                </div>
-
+                              <h4 class="listing_dashboard_title">
+                                <span>Họ tên khách hàng: </span>
+                                <span class="text-primary">{{item.firstName }} {{item.lastName }}</span>
+                              </h4>
+                              <div class="user_dashboard_listed">
+                                <span class="font-weight-bold">Email:</span> {{item.email }}
+                              </div>
+                              <div class="user_dashboard_listed">
+                                <span class="font-weight-bold">Số điện thoại: </span> {{item.phone}}
+                              </div>
                             </div>
                             <div class="col-md-4 action">
-                                <a routerLink="/my-account/customer-contacts/detail/{{ item.id }}" title="Chi tiết">
+                                <a routerLink="/my-account/customer-contacts/detail/{{ item.id }}"
+                                   title="Chi tiết">
                                     <i class="ti-eye"></i>
                                 </a>
+                              <span *ngIf="item.status == 0" class="badge badge-danger">Chưa liên hệ</span>
+                              <span *ngIf="item.status == 1" class="badge badge-success">Đã liên hệ</span>
                             </div>
                         </div>
 

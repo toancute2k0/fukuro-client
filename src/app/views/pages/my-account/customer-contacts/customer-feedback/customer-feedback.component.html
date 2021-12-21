@@ -1,0 +1,90 @@
+<!-- ============================ User Dashboard ================================== -->
+<section class="bg-light">
+	<div class="container-fluid">
+
+		<div class="row">
+			<div class="col-lg-12 col-md-12">
+				<div class="filter_search_opt">
+					<a href="javascript:void(0);" (click)="openFilterSearch()">Dashboard Menu<i
+							class="ml-2 ti-menu"></i></a>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+
+			<div class="col-lg-3 col-md-12">
+
+				<div class="simple-sidebar sm-sidebar" id="filter_search">
+
+					<div class="search-sidebar_header">
+						<h4 class="ssh_heading">Đóng</h4>
+						<button (click)="openFilterSearch()" class="w3-bar-item w3-button w3-large"><i
+								class="ti-close"></i></button>
+					</div>
+
+					<div class="sidebar-widgets">
+						<div class="dashboard-navbar">
+
+							<app-dashboard-navigation></app-dashboard-navigation>
+
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+			<div class="col-lg-9 col-md-12">
+				<div class="dashboard-wraper">
+
+					<div class="row">
+						<!-- /.col -->
+
+						<div class="text-95 col-sm-12 align-self-start justify-content-end">
+							<hr class="d-sm-none" />
+							<div class="text-grey-m2">
+								<div class="mt-1 mb-2 text-secondary-m1 text-600 text-125">
+									GỬI PHẢN HỒI ĐẾN KHÁCH HÀNG
+								</div>
+                <form [formGroup]="feedback" (ngSubmit)="onSubmit()">
+                  <div class="row">
+                    <div class="form-group col-md-12">
+                      <div>
+                        <label>Chủ đề</label>
+                        <input type="text" class="form-control simple" formControlName="subject">
+                        <div *ngIf="submitted && f.subject.errors">
+                          <small *ngIf="f.subject.errors.required" class="text-muted small-popup">Chủ đề không được
+                            bỏ
+                            trống !</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group col-md-12">
+                      <div>
+                        <label>Nội dung</label>
+                        <div [ngxSummernote]="config" formControlName="message"></div>
+                        <div *ngIf="submitted && f.message.errors">
+                          <small *ngIf="f.message.errors.required" class="text-muted small-popup">Nội dung không được
+                            bỏ
+                            trống !</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group col-md-12">
+                      <button type="submit" class="btn btn-theme-light rounded float-right">Gửi</button>
+                    </div>
+                  </div>
+                </form>
+							</div>
+						</div>
+						<!-- /.col -->
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+	</div>
+
+</section>
+<!-- ============================ User Dashboard End ================================== -->

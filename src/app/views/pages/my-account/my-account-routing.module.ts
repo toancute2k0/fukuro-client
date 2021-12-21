@@ -13,6 +13,7 @@ import { OrderDetailsComponent } from './order-history/order-details/order-detai
 import { ManagePremiumsComponent } from './manage-premiums/manage-premiums.component';
 import { CustomerContactsComponent } from './customer-contacts/customer-contacts.component';
 import { CustomerContactDetailsComponent } from './customer-contacts/customer-contact-details/customer-contact-details.component';
+import { CustomerFeedbackComponent } from './customer-contacts/customer-feedback/customer-feedback.component';
 
 const routes: Routes = [
   {
@@ -62,6 +63,10 @@ const routes: Routes = [
       {
         path: 'customer-contacts/detail/:id',
         component: CustomerContactDetailsComponent,
+      },
+      {
+        path: 'customer-feedback/:id',
+        component: CustomerFeedbackComponent,
       },
       {
         path: '',
