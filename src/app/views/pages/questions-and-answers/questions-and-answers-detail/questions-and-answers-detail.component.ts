@@ -38,6 +38,7 @@ export class QuestionsAndAnswersDetailComponent implements OnInit {
   nameRep: string | undefined;
   avatarRep: string | undefined;
   questions_details: any;
+  buttonlike?:any;
   public isCollapsed: any;
   public isCollapsed2: any;
   constructor(
@@ -107,9 +108,10 @@ export class QuestionsAndAnswersDetailComponent implements OnInit {
     if (id) {
       this.getById(id);
     }
-    const slug = this.route.snapshot.paramMap.get('slug');
-    if (slug) {
-      this.getBySlug(slug);
+    const id_qts = this.route.snapshot.paramMap.get('id');
+    if (id_qts) {
+      this.getQtsByID(id_qts);
+      // this.getAllByIdQuestions(id_qts)
     }
       (err:any) => {
         console.log(err);
@@ -143,37 +145,70 @@ export class QuestionsAndAnswersDetailComponent implements OnInit {
     });
   
   }
-  likeButtonclick(){
-    console.log('like');
-  }
-  disklikeButtonclick(){
-    console.log('disklike');
-  }
-  getById(id: string): void {
-    this.customSer.get(id).subscribe((res) => {
-      this.avatar= environment.linkImg + res['avatar'];
-      this.name= res['firstName'] + ' ' + res['lastName'];
+  likeButtonclick(id:any){
+    console.log('id: '+id);
+    const data={
+      customer_id:localStorage.getItem('currentUser')
       
-    });
-  }
-  getAllByIdQuestions(id: any): void {
-    this.answersService.getAllByIdQuestions(id).subscribe(
+    }
+    this.answersService.updatelike(id, data).subscribe(
       (data: any) => {
-        this.anw = data;
-        this.countanwbyID= data.length;
-        console.log(this.countanwbyID);
+        for (let item of this.anw) {
+          if(item.id == id){
+          item.count_like=data.count_like;
+          }
+        }
       },
       (err) => {
         console.log(err);
       }
     );
   }
-  getBySlug(slug: string): void {
-    this.questionService.getBySlug(slug).subscribe(
+  disklikeButtonclick(id:any){
+    const data={
+      customer_id:localStorage.getItem('currentUser')
+    }
+
+    this.answersService.updatedisklike(id, data).subscribe(
+      (data: any) => {
+        for (let item of this.anw) {
+          if(item.id == id){
+             item.count_dislike=data.count_dislike;
+          }
+          if(data.customer_id==item.id){
+           this.buttonlike=true;
+           console.log(this.buttonlike)
+          }
+        }
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+  }
+  getById(id: string): void {
+    this.customSer.get(id).subscribe((res) => {
+      this.avatar= environment.linkImg + res['avatar'];
+      this.name= res['firstName'] + ' ' + res['lastName'];
+    });
+  }
+  getAllByIdQuestions(id: any): void {
+    this.answersService.getAllByIdQuestions(id).subscribe(
+      (data: any) => {
+        this.anw = data['rows'];
+        this.countanwbyID= data['count'];
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+  }
+  getQtsByID(id_qts: string): void {
+    this.questionService.getQtsByID(id_qts).subscribe(
       (data: any | undefined) => {
         this.questions_details = data;
+        console.log(this.questions_details)
         this.anwID=[data.id]
-       
         this.getAllByIdQuestions(this.anwID);
         this.answers = this.fb.group({
           question_id: [data.id],
@@ -219,7 +254,6 @@ export class QuestionsAndAnswersDetailComponent implements OnInit {
   }
   onSubmit(): any {
     this.submitted = true;
-    console.log(this.answers.value)
     if (this.answers.invalid) {
       return false;
     }
@@ -230,7 +264,6 @@ export class QuestionsAndAnswersDetailComponent implements OnInit {
       status:this.answers.value['status'],
       detail_url:'duong-dan-thong-bao',
     };
-    console.log(data);
     this.answersService.create(data).subscribe(
       (response: any) => {
         this.resetForm();

@@ -62,7 +62,6 @@ export class QuestionsAndAnswersListComponent implements OnInit {
     this.modalService.open(content);
   }
   ngOnInit(): void {
-    const slug = this.route.snapshot.paramMap.get('slug');
     this.catQuestions.getAllCat().subscribe((res: any | undefined) => {
       this.cat = res['rows'];
     });
@@ -106,6 +105,7 @@ export class QuestionsAndAnswersListComponent implements OnInit {
     this.questionService.getAll(n, c).subscribe(
       (data: any) => {
         this.questionList = data['rows'];
+        console.log(this.questionList);
       },
       (err) => {
         console.log(err);
@@ -158,7 +158,6 @@ export class QuestionsAndAnswersListComponent implements OnInit {
   }
   onSubmit(): any {
     this.submitted = true;
-    console.log(this.question.value)
     if (this.question.invalid) {
       return false;
     }
@@ -170,7 +169,7 @@ export class QuestionsAndAnswersListComponent implements OnInit {
       slug:this.question.value['slug'],
       detail_url:'duong-dan-thong-bao',
     };
-    console.log(data);
+
     this.questionService.create(data).subscribe(
       (response: any) => {
         this.resetForm();

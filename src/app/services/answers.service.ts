@@ -22,6 +22,9 @@ export class AnswersService {
     );
   }
   updatelike(id: any, data: any): Observable<Answers[]> {
-    return this.http.put<Answers[]>(`${API_URL}/answers/${id}`, data);
+    return this.http.put<Answers[]>(`${API_URL}/${id}/like`, data);
+  }
+  updatedisklike(id: any, data: any): Observable<Answers[]> {
+    return this.http.put<Answers[]>(`${API_URL}/${id}/dislike`, data);
   }
 }
