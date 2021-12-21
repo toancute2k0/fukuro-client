@@ -27,7 +27,9 @@ export class BlogDetailComponent implements OnInit {
   count?: number;
   userCmt?: Customers | undefined;
   id_blog: any;
-
+  orderby = 'desc';
+  limit = 3;
+  page = 1;
   submitted = false;
 
   constructor(
@@ -62,7 +64,7 @@ export class BlogDetailComponent implements OnInit {
     return this.comment.controls;
   }
   getLatest(): void {
-    this.blogSer.getLatest().subscribe(
+    this.blogSer.getAll(this.page, this.limit, this.orderby).subscribe(
       (data: any | undefined) => {
         for (var i = 0; i < data['rows'].length; i++) {
           data['rows'][i].thumbnail = environment.linkImg+data['rows'][i].thumbnail;

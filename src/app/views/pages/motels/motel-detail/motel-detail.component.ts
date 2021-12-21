@@ -132,7 +132,7 @@ export class MotelDetailComponent implements OnInit {
       phone: this.contact.value['phone'],
       subject: this.contact.value['subject'],
       message: this.contact.value['message'],
-      status: '1',
+      status: 0,
       rental_news_id: JSON.stringify(this.rentalNewsDetail?.id),
       customer_id: this.rentalNewsDetail.Customer.id,
       detail_url: '/my-account/customer-contacts/detail/'

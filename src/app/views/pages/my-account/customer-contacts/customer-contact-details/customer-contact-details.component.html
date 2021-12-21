@@ -87,8 +87,8 @@
                     <a href="tel:{{ customerContact.phone }}" class="btn btn-theme-light-2 rounded">
                       <i class="lni-phone-handset"></i> Gọi điện</a>
                   </div>
-                  <div class="form-group col-lg-6 col-md-12">
-                    <a href="" class="btn btn-theme-light rounded float-right">
+                  <div class="form-group col-lg-6 col-md-12" *ngIf="customerContact.status == 0">
+                    <a href="/my-account/customer-feedback/{{customerContact.id}}" class="btn btn-theme-light rounded float-right">
                       <i class="ti-email"></i> Gửi phản hồi</a>
                   </div>
                 </div>

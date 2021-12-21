@@ -5,7 +5,7 @@ export class CustomerContacts {
     email?: string;
     phone?: string;
     message?: string;
-    status?:string;
+    status?:number;
     rentalNewsId?: string;
     customerId?: string;
 }

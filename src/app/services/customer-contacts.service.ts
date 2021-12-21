@@ -22,4 +22,7 @@ export class CustomerContactsService {
   get(id: any): Observable<BlogCategories> {
     return this.http.get(`${API_URL}/${id}`);
   }
+  requestContact(id: any, data: any): Observable<any> {
+    return this.http.post(`${API_URL}/request-contact/${id}`, data);
+  }
 }
