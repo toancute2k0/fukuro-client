@@ -20,6 +20,7 @@ export class QuestionByCatComponent implements OnInit {
   avatar?:any;
   name?:any
   cat?: BlogCategories[];
+  qtscat?:any;
   submitted = false;
   countquestion:any|undefined;
   countuser?:any;
@@ -64,6 +65,8 @@ export class QuestionByCatComponent implements OnInit {
   ngOnInit(): void {
     const id_cat = this.route.snapshot.paramMap.get('id');
     if(id_cat){
+      this.qtscat=id_cat;
+      console.log(id_cat)
       this.getAllByIdCat(id_cat);
     }
     this.catQuestions.getAllCat().subscribe((res: any | undefined) => {
@@ -72,9 +75,7 @@ export class QuestionByCatComponent implements OnInit {
     });
     this.questionService.getAll(this.page, this.count).subscribe(
       (data: any | undefined) => {
-        this.count = data['count'];
-        // this.getQuestion(1, this.count);
-        
+        this.count = data['count'];     
       },
       (err) => {
         console.log(err);
@@ -101,7 +102,6 @@ export class QuestionByCatComponent implements OnInit {
     this.questionService.getAllByIdCat(cat_id).subscribe(
       (data: any) => {
         this.questionList = data['rows'];
-        console.log(this.questionList);
       },
       (err) => {
         console.log(err);
@@ -119,6 +119,13 @@ export class QuestionByCatComponent implements OnInit {
   //     }
   //   );
   // }
+  click(){
+    const id_cat = this.route.snapshot.paramMap.get('id');
+    if(id_cat){
+      this.getAllByIdCat(id_cat);
+      window.location.reload();
+    }
+  }
   getById(id: string): void {
     this.customerService.get(id).subscribe((res) => {
       this.avatar= environment.linkImg + res['avatar'];
@@ -126,21 +133,6 @@ export class QuestionByCatComponent implements OnInit {
     });
   }
 
-  onSubmit(): any {
-    this.submitted = true;
-    if (this.question.invalid) {
-      return false;
-    }
-  }
-  resetForm(): void {
-    this.submitted = false;
-    this.question = this.fb.group({
-      content: [''],
-      question_category_id: [''],
-      title: [''],
-      slug:['']
-    });
-  }
 
 }
 

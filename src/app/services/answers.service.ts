@@ -13,7 +13,7 @@ export class AnswersService {
     return this.http.post(API_URL, data);
   }
   getAllByIdQuestions(question_id: string): Observable<Answers[]> {
-    return this.http.get<Answers[]>(`${API_URL}/question/${question_id}`);
+    return this.http.get<Answers[]>(`${API_URL}/question/${question_id}&orderby=desc`);
   }
   getAll(page: any, limit: any): Observable< Answers[]> {
     console.log(page,limit);
