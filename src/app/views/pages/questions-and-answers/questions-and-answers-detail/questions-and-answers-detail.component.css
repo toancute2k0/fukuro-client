@@ -91,3 +91,16 @@
 .cat-active {
     font-weight: 600;
 }
+
+.like-active {
+    color: rgb(0, 64, 160) !important;
+}
+
+.unlike {
+    color: rgb(92, 92, 92) !important;
+}
+
+.comment-area .all-comments article .comment-author img {
+    max-width: 65px !important;
+    border-radius: 50%;
+}
