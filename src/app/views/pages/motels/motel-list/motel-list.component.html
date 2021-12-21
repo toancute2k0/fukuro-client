@@ -104,7 +104,6 @@
   </div>
   <!-- ============================ Hero Banner End ================================== -->
 
-
   <!-- ============================ All Property ================================== -->
   <section class="bg-light">
     <div class="container">
@@ -113,7 +112,7 @@
           <div class="item-shorting-box">
             <div class="item-shorting clearfix">
               <div class="left-column pull-left">
-                <h4 class="m-0">Hiển thị 1-{{ count }} trong số {{ count }} kết quả</h4>
+                <h4 class="m-0">Hiển thị 1-{{ countRt ? countRt : count }} trong số {{ countRt }} kết quả</h4>
               </div>
             </div>
             <div class="item-shorting-box-right">
@@ -143,10 +142,9 @@
             <div class="col-lg-6 col-md-12"
               *ngFor="let item of rentalNews | paginate: { itemsPerPage: 6, currentPage: cp }">
               <div class="property-listing property-1">
-
                 <div class="listing-img-wrapper">
                   <a routerLink="/thue-nha-dat/{{ item.slug }}">
-                    <img src="{{linkImg}}{{item.image[0]}}" class="img-fluid mx-auto" alt="" />
+                    <img src="{{linkImg}}{{item.img}}" class="img-fluid mx-auto" alt="" />
                   </a>
                 </div>
 
@@ -167,7 +165,7 @@
                           <i class="fas fa-star filled"></i>
                           <i class="fas fa-star filled"></i>
                           <i class="fas fa-star"></i>
-                          <span class="reviews_text">(0 nhận xét)</span>
+                          <span class="reviews_text">(0 nhận xét) </span>
                         </div>
                         <span *ngIf="item.type == 1" class="prt-types sale">Phòng trọ</span>
                         <span *ngIf="item.type == 2" class="prt-types sale">Mặt bằng</span>

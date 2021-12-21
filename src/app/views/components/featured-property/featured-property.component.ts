@@ -18,6 +18,7 @@ export class FeaturedPropertyComponent implements OnInit {
   orderby = 'desc';
   limit = 6;
   page = 1;
+  data: any;
   constructor(
     private rentalNewsService: RentalNewsService,
     private bookmarkSer: BookmarksService,
@@ -26,6 +27,7 @@ export class FeaturedPropertyComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.data = '';
     const id = localStorage.getItem('currentUser');
     if (id) {
       this.getById(id);
@@ -53,8 +55,9 @@ export class FeaturedPropertyComponent implements OnInit {
       }
     );
   }
+
   getRentalNews() {
-    this.rentalNewsService.getAll(this.page, this.limit, this.orderby).subscribe(
+    this.rentalNewsService.getAll(this.page, this.limit, this.orderby, this.data).subscribe(
       (data: any | undefined) => {
         this.rentalNews = data['rows'];
         for (var i = 0; i < data['rows'].length; i++) {

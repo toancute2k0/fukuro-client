@@ -39,6 +39,7 @@ export class MotelListComponent implements OnInit {
   latitude?: number;
   longitude?: number;
   orderby = 'desc';
+  countRt = 0;
   icon = {
     url: 'assets/img/marker.png',
     scaledSize: new google.maps.Size(40, 40), // scaled size
@@ -57,9 +58,12 @@ export class MotelListComponent implements OnInit {
   ) {}
 
   search = this.fb.group({
-    address: ['', Validators.compose([Validators.required])],
+    address: [''],
   });
 
+  data = {
+    address: this.search.value['address']
+  };
   get f() {
     return this.search.controls;
   }
@@ -69,17 +73,10 @@ export class MotelListComponent implements OnInit {
     if (this.search.invalid) {
       return false;
     }
-    // this._router.navigate(['/thue-nha-dat']);
-    console.log(this.search.value);
-    this.rentalNewsService.getSearch(this.search.value.address).subscribe(
-      (data: any | undefined) => {
-        this.count = data;
-        console.log(this.count);
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
+    const data = {
+      address: this.search.value.address
+    };
+    this.getData(1, this.count, data);
   }
 
   openInfo(marker: MapMarker, content: any) {
@@ -98,23 +95,13 @@ export class MotelListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.rentalNews = [];
     const id = localStorage.getItem('currentUser');
     if (id) {
       this.getById(id);
     }
     this.customSer.profileId$.subscribe((profileId) => (this.id = profileId));
-    this.rentalNewsService
-      .getAll(this.page, this.count, this.orderby)
-      .subscribe(
-        (data: any | undefined) => {
-          this.count = data['count'];
-          this.getData(1, this.count);
-        },
-        (err) => {
-          console.log(err);
-        }
-      );
-
+    this.getData(1, this.count, this.data);
     window.onresize = () => (this.isMobile = window.innerWidth <= 768);
   }
 
@@ -153,47 +140,62 @@ export class MotelListComponent implements OnInit {
     return this.ProdData;
   }
 
-  getData(n: any, c: any): void {
-    this.rentalNewsService.getAll(n, c, this.orderby).subscribe(
+  getData(n: any, c: any, data: any): void {
+    this.rentalNewsService.getAll(n, c, this.orderby, data).subscribe(
       (data: any | undefined) => {
-        this.rentalNews = data['rows'];
-        console.log(this.rentalNews);
-
-        this.markersRepartidores = [];
-        for (let item of data['rows']) {
-          item.image = JSON.parse(item.image);
-          this.center = { lat: 10.0268531, lng: 105.7573112 };
-          this.markersRepartidores.push({
-            position: {
-              lat: parseFloat(item.lat),
-              lng: parseFloat(item.lng),
+        if(data['count'] > this.count){
+          this.rentalNewsService.getAll(n, data['count'], this.orderby, data).subscribe(
+            (res: any | undefined) => {
+              this.countRt = res['count'];
+              this.get(res['rows']);
             },
-            label: { color: 'red' },
-            title: item.name,
-            data: {
-              image: item.image[0],
-              name: item.name,
-              price: item.price,
-              slug: item.slug,
-              type: item.type,
-            },
-          });
-        }
-        if (this.wishlist) {
-          for (let item of this.rentalNews) {
-            item.wishlist = false;
-            for (var i = 0; i < this.wishlist.length; i++) {
-              if (item.id == this.wishlist[i]['id']) {
-                item.wishlist = true;
-              }
-            }
-          }
+            (error: any | undefined) => {
+              console.log(error);
+            })
+        }else{
+          this.countRt = data['count'];
+          this.get(data['rows']);
         }
       },
       (err) => {
         console.log(err);
       }
     );
+  }
+
+  get(arr: any){
+    this.rentalNews = arr;
+    this.markersRepartidores = [];
+    for (let item of this.rentalNews) {
+      item.image = JSON.parse(item.image);
+      item.img = item.image[0];
+      this.center = { lat: 10.0268531, lng: 105.7573112 };
+      this.markersRepartidores.push({
+        position: {
+          lat: parseFloat(item.lat),
+          lng: parseFloat(item.lng),
+        },
+        label: { color: 'red' },
+        title: item.name,
+        data: {
+          image: item.image[0],
+          name: item.name,
+          price: item.price,
+          slug: item.slug,
+          type: item.type,
+        },
+      });
+    }
+    if (this.wishlist) {
+      for (let item of this.rentalNews) {
+        item.wishlist = false;
+        for (var i = 0; i < this.wishlist.length; i++) {
+          if (item.id == this.wishlist[i]['id']) {
+            item.wishlist = true;
+          }
+        }
+      }
+    }
   }
 
   getById(id: string): void {
@@ -207,7 +209,7 @@ export class MotelListComponent implements OnInit {
     this.bookmarkSer.getAllCus(this.id).subscribe(
       (data: any) => {
         this.wishlist = data;
-        this.getData(1, this.count);
+        this.getData(1, this.count, this.data);
       },
       (err: any | undefined) => {
         console.log(err);
@@ -237,5 +239,9 @@ export class MotelListComponent implements OnInit {
         this.getWishlist();
       }
     });
+  }
+
+  pageChanged(event: any){
+    console.log(event);
   }
 }
