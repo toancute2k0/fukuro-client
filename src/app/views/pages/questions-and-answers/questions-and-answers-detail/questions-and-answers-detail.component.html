@@ -102,9 +102,13 @@
                                                 </a>
                                             </li>
                                             <li>
-                                                <a class="text-success">
+                                                <a class="text-success" *ngIf="anw">
                                                     <span class="icons"><i
                                                             class="ti-comment-alt"></i></span>{{countanwbyID}} câu trả lời
+                                                </a>
+                                                <a class="text-success" *ngIf="!anw">
+                                                    <span class="icons"><i
+                                                            class="ti-comment-alt"></i></span>0 câu trả lời
                                                 </a>
                                             </li>
                                         </ul>
@@ -158,14 +162,14 @@
                                                     <li class="single-comment">
                                                         <article>
                                                             <div class="comment-author">
-                                                                <img *ngIf="anw.customer_info.avatar" src="{{anw.customer_info.avatar}}" alt="">
-                                                                <img *ngIf="!anw.customer_info.avatar" src="https://via.placeholder.com/400x400" alt="">
+                                                                <img *ngIf="anw.Customer.avatar" src="{{anw.Customer.avatar}}" alt="">
+                                                                <img *ngIf="!anw.Customer.avatar" src="https://via.placeholder.com/400x400" alt="">
                                                             </div>
                                                             <div class="comment-details">
                                                                 <div class="comment-meta">
                                                                     <div class="comment-left-meta">
                                                                         <h4 class="author-name">
-                                                                            {{anw.customer_info.username}}</h4>
+                                                                            {{anw.Customer.username}}</h4>
                                                                         <div class="comment-date">{{anw.updatedAt | date: 'dd/MM/yyyy'}}</div>
                                                                     </div>
                                                                 </div>
@@ -177,26 +181,26 @@
                                                         <div class="post-top-meta">
                                                             <ul class="meta-comment-tag questions-and-answers-comment pl-0 ml-0">
                                                                 <li><span class="icons">
-                                                                            <i *ngIf="anw.like>=1" (click)="likeButtonclick()"
+                                                                            <i *ngIf="buttonlike == true" (click)="likeButtonclick(anw.id)"
                                                                                 class="far fa-thumbs-up"
                                                                                 style="color: rgb(7, 7, 7) !important;">
                                                                             </i>
-                                                                            <i *ngIf="anw.like==0" (click)="likeButtonclick()"
+                                                                            <i *ngIf="buttonlike == false" (click)="likeButtonclick(anw.id)"
                                                                                 class="far fa-thumbs-up"
                                                                                 style="color: rgb(177, 177, 177) !important;">
                                                                             </i>
 
-                                                                        </span>{{anw.like}}</li>
+                                                                        </span>{{anw.count_like}}</li>
                                                                 <li><span class="icons">
-                                                                    <i *ngIf="anw.dislike>=1" (click)="disklikeButtonclick()"
+                                                                    <i (click)="disklikeButtonclick(anw.id)"
                                                                         class="far fa-thumbs-down"
                                                                         style="color: rgb(7, 7, 7) !important;">
                                                                     </i>
-                                                                    <i *ngIf="anw.dislike==0" (click)="disklikeButtonclick()"
+                                                                    <!-- <i *ngIf="anw.dislike==0" (click)="disklikeButtonclick()"
                                                                         class="far fa-thumbs-down"
                                                                         style="color: rgb(177, 177, 177) !important;">
-                                                                    </i>
-                                                                        </span>{{anw.disklike}}</li>
+                                                                    </i> -->
+                                                                        </span>{{anw.count_dislike}}</li>
                                                                 <hr>
                                                                 <div #collapse2="ngbCollapse" [(ngbCollapse)]="isCollapsed2">
                                                                     <div class="blog-details single-post-item format-standard">
@@ -256,7 +260,7 @@
                                     <div>Trả lời</div>
                                 </li>
                                 <li class="topicItem">
-                                    <div>82</div>
+                                    <div>3</div>
                                     <div>Trả lời hay</div>
                                 </li>
                                 <li class="topicItem">

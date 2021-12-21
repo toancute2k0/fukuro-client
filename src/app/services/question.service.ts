@@ -14,13 +14,12 @@ const API_URL = `${env.apiURL}/questions`;
       return this.http.post(API_URL, data);
     }
     getAll(page: any, limit: any): Observable<Question[]> {
-      console.log(page,limit);
       return this.http.get<Question[]>(
         `${API_URL}?page=${page}&limit=${limit}`
       );
     }
-    getBySlug(slug: string): Observable<Question[]> {
-      return this.http.get<Question[]>(`${API_URL}/slug/${slug}`);
+    getQtsByID(id_qts: string): Observable<Question[]> {
+      return this.http.get<Question[]>(`${API_URL}/${id_qts}`);
     }
     getLatest(): Observable<Question[]> {
       return this.http.get<Question[]>(`${API_URL}/latest?limit=10`);
