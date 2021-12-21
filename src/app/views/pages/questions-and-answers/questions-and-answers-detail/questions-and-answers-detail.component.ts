@@ -26,6 +26,7 @@ export class QuestionsAndAnswersDetailComponent implements OnInit {
   anw?:any;
   anwID?:any;
   countanw?:any;
+  countcat?:any;
   page=1;
   countquestion:any|undefined;
   countanwbyID?:any;
@@ -142,6 +143,7 @@ export class QuestionsAndAnswersDetailComponent implements OnInit {
     this.isCollapsed2 = true;
     this.catQuestions.getAllCat().subscribe((res: any | undefined) => {
       this.cat = res['rows'];
+      this.countcat=res['rows'].length;
     });
   
   }
@@ -268,7 +270,7 @@ export class QuestionsAndAnswersDetailComponent implements OnInit {
       (response: any) => {
         this.resetForm();
         this.toastrService.success('Đăng câu trả lời thành công!');
-        window.location.reload();
+        // this.getAllByIdQuestions();
       },
       (error) => {
         this.toastrService.success('Đăng câu trả lời thất bại!');

@@ -10,12 +10,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSummernoteModule } from 'ngx-summernote';
+import { QuestionByCatComponent } from './question-by-cat/question-by-cat.component';
 
 @NgModule({
   declarations: [
     QuestionsAndAnswersComponent,
     QuestionsAndAnswersListComponent,
     QuestionsAndAnswersDetailComponent,
+    QuestionByCatComponent,
   ],
   imports: [
     NgxSummernoteModule,
