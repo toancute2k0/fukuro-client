@@ -28,7 +28,7 @@
                         <div class="single-widgets widget_category">
                             <h4 class="title">Chuyên mục</h4>
                             <ul>
-                                <li *ngFor="let cn of cat" [ngClass]="(cn.id==questionList.questionCategoryId)?'cat-active':''">
+                                <li *ngFor="let cn of cat" [ngClass]="(cn.id==qtscat)?'cat-active':''" (click)="click()">
                                     <a routerLink="/hoi-dap/cau-hoi-theo-chuyen-muc/{{cn.id}}">{{cn.name}}</a>
                                 </li>
                             </ul>

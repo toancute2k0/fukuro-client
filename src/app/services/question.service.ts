@@ -15,11 +15,11 @@ const API_URL = `${env.apiURL}/questions`;
     }
     getAll(page: any, limit: any): Observable<Question[]> {
       return this.http.get<Question[]>(
-        `${API_URL}?page=${page}&limit=${limit}`
+        `${API_URL}?page=${page}&limit=${limit}&orderby=desc`
       );
     }
     getQtsByID(id_qts: string): Observable<Question[]> {
-      return this.http.get<Question[]>(`${API_URL}/${id_qts}`);
+      return this.http.get<Question[]>(`${API_URL}/${id_qts}&orderby=desc`);
     }
     getLatest(): Observable<Question[]> {
       return this.http.get<Question[]>(`${API_URL}/latest?limit=10`);

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BlogCategories } from 'src/app/models/blog-categories.model';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { QuestionCategoriesService } from 'src/app/services/question-cate.service';
+import { QuestionCategories} from 'src/app/models/question-cat.model'
 import { ActivatedRoute, Router } from '@angular/router';
 import { Validators, FormBuilder } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
@@ -20,7 +21,7 @@ export class QuestionsAndAnswersListComponent implements OnInit {
   cp: number = 1;
   avatar?:any;
   name?:any
-  cat?: BlogCategories[];
+  cat?: QuestionCategories[];
   submitted = false;
   countquestion:any|undefined;
   countuser?:any;
@@ -115,6 +116,7 @@ export class QuestionsAndAnswersListComponent implements OnInit {
     );
     
   }
+  
   getById(id: string): void {
     this.customerService.get(id).subscribe((res) => {
       this.avatar= environment.linkImg + res['avatar'];
@@ -169,14 +171,14 @@ export class QuestionsAndAnswersListComponent implements OnInit {
       title:this.question.value['title'],
       customer_id: localStorage.getItem('currentUser'),
       slug:this.question.value['slug'],
-      detail_url:'duong-dan-thong-bao',
+      detail_url:'/hoi-dap/chi-tiet/',
     };
 
     this.questionService.create(data).subscribe(
       (response: any) => {
         this.resetForm();
         this.toastrService.success('Đăng câu hỏi thành công!');
-        window.location.reload();
+         this.getQuestion(1,this.count);
       },
       (error) => {
         this.toastrService.success('Đăng câu hỏi thất bại!');

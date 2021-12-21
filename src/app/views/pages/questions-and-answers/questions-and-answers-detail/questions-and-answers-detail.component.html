@@ -55,11 +55,11 @@
                                                 </a>
                                             </li>
                                             <li>
-                                                <a class="text-success" *ngIf="anw">
+                                                <a class="text-success" *ngIf="countanwbyID">
                                                     <span class="icons"><i
                                                             class="ti-comment-alt"></i></span>{{countanwbyID}} câu trả lời
                                                 </a>
-                                                <a class="text-success" *ngIf="!anw">
+                                                <a class="text-success" *ngIf="!countanwbyID">
                                                     <span class="icons"><i
                                                             class="ti-comment-alt"></i></span>0 câu trả lời
                                                 </a>
@@ -110,7 +110,7 @@
 
                                     <div class="comment-area">
                                         <div class="all-comments">
-                                            <div class="comment-list" *ngIf="anw.length>0">
+                                            <div class="comment-list" *ngIf="countanwbyID">
                                                 <ul *ngFor="let anw of anw | paginate: { itemsPerPage: 4, currentPage: cp }">
                                                     <li class="single-comment">
                                                         <article>
@@ -134,21 +134,16 @@
                                                         <div class="post-top-meta">
                                                             <ul class="meta-comment-tag questions-and-answers-comment pl-0 ml-0">
                                                                 <li><span class="icons">
-                                                                            <i  (click)="likeButtonclick(anw.id)"
+                                                                            <i [ngClass]="(anw.like==id_customer)?'like-active':'unlike'" (click)="likeButtonclick(anw.id)"
                                                                                 class="far fa-thumbs-up"
-                                                                                style="color: rgb(7, 7, 7) !important;">
+                                                                            >
                                                                             </i>
-
                                                                         </span>{{anw.count_like}}</li>
                                                                 <li><span class="icons">
                                                                     <i (click)="disklikeButtonclick(anw.id)"
                                                                         class="far fa-thumbs-down"
-                                                                        style="color: rgb(7, 7, 7) !important;">
+                                                                        [ngClass]="(anw.dislike==id_customer)?'like-active':'unlike'">
                                                                     </i>
-                                                                    <!-- <i *ngIf="anw.dislike==0" (click)="disklikeButtonclick()"
-                                                                        class="far fa-thumbs-down"
-                                                                        style="color: rgb(177, 177, 177) !important;">
-                                                                    </i> -->
                                                                         </span>{{anw.count_dislike}}</li>
                                                                 <hr>
                                                                 <div #collapse2="ngbCollapse" [(ngbCollapse)]="isCollapsed2">
@@ -185,7 +180,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div *ngIf="anw.length==0">Chưa có câu trả lời cho câu hỏi này !!</div>
+                                            <div *ngIf="!countanwbyID">Chưa có câu trả lời cho câu hỏi này !!</div>
                                         </div>
                                     </div>
                                 </div>

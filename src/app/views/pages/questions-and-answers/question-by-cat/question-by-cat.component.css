@@ -63,3 +63,7 @@
     background-color: #0d6efd !important;
     margin-bottom: 10px !important;
 }
+
+.cat-active {
+    font-weight: 600 !important;
+}
