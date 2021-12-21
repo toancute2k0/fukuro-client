@@ -12,9 +12,9 @@ const API_URL = `${env.apiURL}/blogs`;
 export class BlogsService {
   constructor(private http: HttpClient) {}
 
-  getAll(page: any, limit: any): Observable<Blogs[]> {
+  getAll(page: any, limit: any, orderBy: any): Observable<Blogs[]> {
     return this.http.get<Blogs[]>(
-      `${API_URL}?page=${page}&limit=${limit}`
+      `${API_URL}?page=${page}&limit=${limit}&orderby=${orderBy}`
     );
   }
 

@@ -62,56 +62,66 @@
 
         </ul>
         <ul class="nav-menu nav-menu-social align-to-right nav-res" [style.display]="auth.isLoggedIn ? 'block': 'none'">
+          <li class="add-listing add-bg1" style="background-color: #fff !important;">
+            <a routerLink="/my-account/notification" class="text-success" style="color: #0499a8 !important;vertical-align: sub;">
+              <p class="notification m-0">
+                <i class="ti-bell text-secondary" style="font-size: 20px;"></i>
+                <span class="badge badge-pill badge-danger">{{ countNewNotification }}</span>
+              </p>
+            </a>
+          </li>
           <li>
             <a routerLink="/my-account" class="add-listing2">
               <div class="avatar avatar-md avatar-indicators avatar-online">
-                <img *ngIf="avatar" alt="avatar" src="{{avatar}}" class="rounded-circle">
-                <img *ngIf="!avatar" alt="avatar" src="https://via.placeholder.com/40x40" class="rounded-circle">
+                <img alt="avatar" src="{{ avatar }}"
+                     class="rounded-circle">
               </div>
-              <span *ngIf="!name" style="margin-left: 5px;">{{username }}</span>
-              <span *ngIf="name" style="margin-left: 5px;">{{name }}</span>
+              <span style="margin-left: 5px;">{{ username }}</span>
             </a>
             <ul class="nav-dropdown nav-submenu">
               <div class="">
                 <ul class="list-unstyled">
                   <li class="dropdown-submenu">
-                    <a class="dropdown-item dropright-lg dropdown-list-group-item" routerLink="/my-account/renal-manage">
-                      <span class="mr-1">
-                        <i class="ti-home"></i>
-                      </span>
-                      Quản lí tin cho thuê
+                    <a class="dropdown-item dropright-lg dropdown-list-group-item"
+                       routerLink="/my-account/renal-manage">
+                        <span class="mr-1">
+                            <i class="ti-home"></i>
+                        </span> Quản lý tin cho thuê
                     </a>
                   </li>
                   <li>
                     <a class="dropdown-item dropright-lg" routerLink="/my-account/my-profile">
                       <span class="mr-1">
-                        <i class="ti-user"></i>
-                      </span>
-                      Thông tin tài khoản
+                          <i class="ti-user"></i>
+                      </span> Thông tin tài khoản
                     </a>
                   </li>
                   <li>
                     <a class="dropdown-item dropright-lg" routerLink="/my-account/order-history">
-                                            <span class="mr-1">
-                        <i class="fa fa-money-bill"></i>
-                      </span>
-                      Lịch sử đơn hàng
+                      <span class="mr-2">
+                          <i class="far fa-money-bill-alt"></i>
+                      </span> Lịch sử đơn hàng
                     </a>
                   </li>
                   <li>
-                    <a class="dropdown-item dropright-lg" routerLink="/my-account/notification">
+                    <a class="dropdown-item dropright-lg" routerLink="/my-account/manage-premiums">
                       <span class="mr-1">
-                        <i class="ti-bell"></i>
-                      </span>
-                      Thông báo
+                         <i class="ti-calendar"></i>
+                      </span> Quản lý Premiums
                     </a>
                   </li>
                   <li>
-                    <a class="dropdown-item dropright-lg" routerLink="/my-account/bookmark">
+                    <a class="dropdown-item dropright-lg" routerLink="/my-account/customer-contacts">
                       <span class="mr-1">
-                        <i class="ti-heart"></i>
-                      </span>
-                      Tin đã lưu
+                          <i class="ti-email"></i>
+                      </span> Quản lý liên hệ
+                    </a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item dropright-lg" routerLink="my-account/bookmark">
+                      <span class="mr-1">
+                          <i class="ti-heart"></i>
+                      </span> Tin đã lưu
                     </a>
                   </li>
                 </ul>

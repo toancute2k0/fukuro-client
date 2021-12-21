@@ -15,6 +15,9 @@ export class FeaturedPropertyComponent implements OnInit {
   id: any;
   linkImg = environment.linkImg;
   wishlist = [];
+  orderby = 'desc';
+  limit = 6;
+  page = 1;
   constructor(
     private rentalNewsService: RentalNewsService,
     private bookmarkSer: BookmarksService,
@@ -51,7 +54,7 @@ export class FeaturedPropertyComponent implements OnInit {
     );
   }
   getRentalNews() {
-    this.rentalNewsService.getLatest().subscribe(
+    this.rentalNewsService.getAll(this.page, this.limit, this.orderby).subscribe(
       (data: any | undefined) => {
         this.rentalNews = data['rows'];
         for (var i = 0; i < data['rows'].length; i++) {

@@ -1,8 +1,6 @@
 <div class="d-user-avater">
-  <img *ngIf="!currentUser?.avatar" src="https://via.placeholder.com/40x40" class="img-fluid avater" alt="">
-  <img *ngIf="currentUser?.avatar" src="{{avatar}}" class="img-fluid avater" alt="">
-  <h4 *ngIf="currentUser?.firstName && currentUser?.lastName"><span>{{name}}</span></h4>
-  <h4 *ngIf="!currentUser?.firstName && !currentUser?.lastName">{{username}}</h4>
+  <img src="{{avatar}}" class="img-fluid avater" alt="">
+  <h4>{{username}}</h4>
   <span>{{currentUser?.email}}</span>
 </div>
 
@@ -11,19 +9,7 @@
     <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
       <a routerLink="/my-account">
         <i class="ti-dashboard"></i>
-        Dashboard
-      </a>
-    </li>
-    <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
-      <a routerLink="/my-account/my-profile">
-        <i class="ti-user"></i>
-        Thông tin tài khoản
-      </a>
-    </li>
-    <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
-      <a routerLink="/my-account/renal-manage">
-        <i class="ti-home"></i>
-        Quản lí tin cho thuê
+        Tổng quan
       </a>
     </li>
     <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
@@ -33,9 +19,39 @@
       </a>
     </li>
     <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+      <a routerLink="/my-account/my-profile">
+        <i class="ti-user"></i>
+        Thông tin tài khoản
+      </a>
+    </li>
+    <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" *ngIf="manage == true">
+      <a routerLink="/manage">
+        <i class="far fa-star text-primary"></i>
+        Quản lý trọ thuê
+      </a>
+    </li>
+    <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+      <a routerLink="/my-account/renal-manage">
+        <i class="ti-home"></i>
+        Quản lý tin cho thuê
+      </a>
+    </li>
+    <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+      <a routerLink="/my-account/customer-contacts">
+        <i class="ti-email"></i>
+        Quản lý liên hệ
+      </a>
+    </li>
+    <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
       <a routerLink="/my-account/order-history">
-        <i class="fa fa-money-bill"></i>
+        <i class="far fa-money-bill-alt"></i>
         Lịch sử đơn hàng
+      </a>
+    </li>
+    <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+      <a routerLink="/my-account/manage-premiums">
+        <i class="ti-calendar"></i>
+        Quản lý Premiums
       </a>
     </li>
     <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">

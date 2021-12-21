@@ -37,6 +37,7 @@ export class MotelListComponent implements OnInit {
   zoom = 13;
   latitude?: number;
   longitude?: number;
+  orderby = 'desc';
   icon = {
     url: 'assets/img/marker.png',
     scaledSize: new google.maps.Size(40, 40), // scaled size
@@ -71,7 +72,7 @@ export class MotelListComponent implements OnInit {
       this.getById(id);
     }
     this.customSer.profileId$.subscribe((profileId) => (this.id = profileId));
-    this.rentalNewsService.getAll(this.page, this.count).subscribe(
+    this.rentalNewsService.getAll(this.page, this.count, this.orderby).subscribe(
       (data: any | undefined) => {
         this.count = data['count'];
         this.getData(1, this.count);
@@ -120,7 +121,7 @@ export class MotelListComponent implements OnInit {
   }
 
   getData(n: any, c: any): void {
-    this.rentalNewsService.getAll(n, c).subscribe(
+    this.rentalNewsService.getAll(n, c, this.orderby).subscribe(
       (data: any | undefined) => {
         this.rentalNews = data['rows'];
         console.log(this.rentalNews);

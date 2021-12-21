@@ -2,24 +2,22 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment as env } from '../../environments/environment';
-import {PremiumService} from "../models/premium-service.model";
-import {BlogCategories} from "../models/blog-categories.model";
+import { PremiumService } from '../models/premium-service.model';
 
-const API_URL = `${env.apiURL}/customer-contacts`;
+const API_URL = `${env.apiURL}/customer-premium-services`;
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-export class CustomerContactsService {
-
+export class CustomerPremiumServicesService {
   constructor(private http: HttpClient) {}
-  create(data: any): Observable<any> {
-    return this.http.post(API_URL, data);
+  getAll(limit: any): Observable<PremiumService[]> {
+    return this.http.get<PremiumService[]>(`${API_URL}?limit=${limit}`);
+  }
+  get(id: any): Observable<PremiumService> {
+    return this.http.get(`${API_URL}/${id}`);
   }
   getByCustomerId(id: any, limit: any): Observable<PremiumService> {
     return this.http.get(`${API_URL}/customer/${id}?limit=${limit}&status=both&orderby=desc`);
-  }
-  get(id: any): Observable<BlogCategories> {
-    return this.http.get(`${API_URL}/${id}`);
   }
 }

@@ -10,10 +10,13 @@ import { environment } from 'src/environments/environment';
 })
 export class LatestNewsComponent implements OnInit {
   blogs?: Blogs[];
+  orderby = 'desc';
+  page = 1;
+  count = 3;
   constructor(private blogSer: BlogsService) {}
 
   ngOnInit(): void {
-    this.blogSer.getLatest().subscribe(
+    this.blogSer.getAll(this.page, this.count, this.orderby).subscribe(
       (data: any | undefined) => {
         for (var i = 0; i < data['rows'].length; i++) {
           data['rows'][i].thumbnail = environment.linkImg+data['rows'][i].thumbnail;
