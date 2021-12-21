@@ -14,6 +14,7 @@ export class CustomersService {
   profileUsername$ = new Subject<string>();
   profileId$ = new Subject<number>();
   notifications$ = new Subject<string>();
+  checkPremium$ = new Subject<string>();
   constructor(private http: HttpClient) {}
 
   getAll(): Observable<Customers[]> {

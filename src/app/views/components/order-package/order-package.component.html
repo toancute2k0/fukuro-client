@@ -24,7 +24,9 @@
             <div [innerHTML]="item.description"></div>
           </div>
           <div class="pricing-bottom">
-            <a routerLink="/premium/thanh-toan/{{item.id}}" class="btn-pricing">Mua Ngay</a>
+            <a routerLink="/premium/thanh-toan/{{item.id}}" *ngIf="!item.registered || item.registered == 0 " class="btn-pricing">Mua Ngay</a>
+            <a routerLink="/premium/thanh-toan/{{item.id}}" *ngIf="item.registered == 2" class="btn-pricing">Gia Hạn</a>
+            <a routerLink="/my-account/manage-premiums" *ngIf="item.registered == 1" class="btn-pricing">Đã Đăng Ký</a>
           </div>
 
         </div>

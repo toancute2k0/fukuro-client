@@ -27,6 +27,7 @@ export class HeaderComponent implements OnInit {
   limit = 6;
   manage = false;
   countNewNotification: any;
+  premium: any;
   constructor(
     private catBlogs: BlogCategoriesService,
     public auth: AuthService,
@@ -69,16 +70,10 @@ export class HeaderComponent implements OnInit {
   }
 
   getData(): void {
-    this.customerPremiumServicesService.getByCustomerId(this.id, this.limit).subscribe((data: any | undefined) => {
-      if (data['count'] > this.limit) {
-        this.customerPremiumServicesService.getByCustomerId(this.id, data['count']).subscribe((res: any | undefined) => {
-          this.customerPremiumServices = res['rows'];
-        });
-      }
-      this.customerPremiumServices = data['rows'];
-      if(this.customerPremiumServices.length > 0){
-        this.customerPremiumServices = data['rows'];
-        for (let item of this.customerPremiumServices) {
+    this.customerPremiumServicesService.checkPremiumByCustomerId(this.id).subscribe((data: any | undefined) => {
+      // this.customerPremiumServices = data;
+      if(data.count > 0){
+        for (let item of data.rows) {
           if(item.PremiumService.type == 2){
             this.manage = true;
           }

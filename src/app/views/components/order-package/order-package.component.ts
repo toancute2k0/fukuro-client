@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { PremiumService } from 'src/app/models/premium-service.model';
+import { CustomersService } from 'src/app/services/customers.service';
 import { PremiumServiceService } from 'src/app/services/premium-service.service';
+import {CustomerPremiumServicesService} from "../../../services/customer-premium-services.service";
+import {map} from "rxjs/operators";
 
 @Component({
   selector: 'app-order-package',
@@ -8,17 +10,51 @@ import { PremiumServiceService } from 'src/app/services/premium-service.service'
   styleUrls: ['./order-package.component.css'],
 })
 export class OrderPackageComponent implements OnInit {
-  premium?: PremiumService[];
-  constructor(private premiumSer: PremiumServiceService) {}
+  premium: any;
+  id: any;
+  constructor(private premiumSer: PremiumServiceService,
+              private customerPremiumServicesService: CustomerPremiumServicesService,
+              private customersService: CustomersService){}
 
   ngOnInit(): void {
-    this.premiumSer.getAllLatest('3').subscribe(
-      (data: any | undefined) => {
-        this.premium = data['rows'];
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
+    this.id = localStorage.getItem('currentUser');
+    if(this.id != null){
+      this.premiumSer.getAll('3').subscribe(
+        (data: any | undefined) => {
+          this.premium = data['rows'];
+          this.customerPremiumServicesService.checkPremiumByCustomerId(this.id).subscribe(
+            (res: any | undefined) => {
+              for (let item of res.rows) {
+                for (let ite of this.premium) {
+                  if (item.premiumId == ite.id) {
+                    if(item.status == 1){
+                      ite.registered = 1;
+                    }
+                    if(item.status == 2){
+                      ite.registered = 2;
+                    }
+                    if(item.status == 0){
+                      ite.registered = 0;
+                    }
+                  }
+                }
+              }
+              console.log(this.premium);
+            });
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
+    }else{
+      this.premiumSer.getAll('3').subscribe(
+        (data: any | undefined) => {
+          this.premium = data['rows'];
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
+    }
   }
 }
