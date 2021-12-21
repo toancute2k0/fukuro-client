@@ -112,3 +112,19 @@ a {
   border: 2px solid #fff;
   display: table;
 }
+.notification {
+  color: white;
+  text-decoration: none;
+  position: relative;
+  display: inline-block;
+  border-radius: 2px;
+}
+
+.notification .badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  padding: 3px 6px;
+  border-radius: 50%;
+  font-size: 12px;
+}

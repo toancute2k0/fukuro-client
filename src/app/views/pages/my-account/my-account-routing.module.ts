@@ -10,6 +10,9 @@ import { RentalManageComponent } from './rental-manage/rental-manage.component';
 import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
 import { OrderHistoryComponent } from './order-history/order-history.component';
 import { OrderDetailsComponent } from './order-history/order-details/order-details.component';
+import { ManagePremiumsComponent } from './manage-premiums/manage-premiums.component';
+import { CustomerContactsComponent } from './customer-contacts/customer-contacts.component';
+import { CustomerContactDetailsComponent } from './customer-contacts/customer-contact-details/customer-contact-details.component';
 
 const routes: Routes = [
   {
@@ -47,6 +50,18 @@ const routes: Routes = [
       {
         path: 'chinh-sua-tin-cho-thue/:id',
         component: EditRentalComponent,
+      },
+      {
+        path: 'manage-premiums',
+        component: ManagePremiumsComponent,
+      },
+      {
+        path: 'customer-contacts',
+        component: CustomerContactsComponent,
+      },
+      {
+        path: 'customer-contacts/detail/:id',
+        component: CustomerContactDetailsComponent,
       },
       {
         path: '',

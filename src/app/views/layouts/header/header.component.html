@@ -6,7 +6,7 @@
     <div class="container">
         <nav id="navigation" class="navigation navigation-landscape">
             <div class="nav-header">
-                <a class="nav-brand" routerLink="">
+                <a class="nav-brand" routerLink="/">
                     <img src="assets/img/logofukuro.png" class="logo" alt="" />
                 </a>
                 <div class="nav-toggle" id="filter_search"></div>
@@ -15,12 +15,12 @@
                 <ul class="nav-menu">
 
                     <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"
-                        (click)="openFilterSearch()"><a routerLink="">Trang
+                        (click)="openFilterSearch()"><a routerLink="/">Trang
                             Chủ<span class="submenu-indicator"></span></a>
                     </li>
 
                     <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a
-                            routerLink="thue-nha-dat">Tìm
+                            routerLink="/thue-nha-dat">Tìm
                             Thuê<span class="submenu-indicator"></span></a>
                     </li>
 
@@ -30,7 +30,7 @@
                     </li>
 
                     <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a
-                            routerLink="bai-viet">Bài
+                            routerLink="/bai-viet">Bài
                             Viết<span class="submenu-indicator"></span></a>
                         <ul class="nav-dropdown nav-submenu">
                             <li *ngFor="let cat of cats">
@@ -40,7 +40,7 @@
                     </li>
 
                     <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a
-                            routerLink="lien-he">Liên
+                            routerLink="/lien-he">Liên
                             Hệ</a></li>
 
                 </ul>
@@ -48,72 +48,93 @@
                 <ul class="nav-menu nav-menu-social align-to-right nav-res"
                     [style.display]="!auth.isLoggedIn ? 'block': 'none'">
                     <li>
-                        <a routerLink="dang-ky" class="text-success">Đăng Ký</a>
+                        <a routerLink="/dang-ky" class="text-success">Đăng Ký</a>
                     </li>
                     <li class="add-listing" routerLinkActive="active">
-                        <a routerLink="dang-nhap"><img src="assets/img/user-light.svg" width="12" alt=""
+                        <a routerLink="/dang-nhap"><img src="assets/img/user-light.svg" width="12" alt=""
                                 class="mr-2" />Đăng Nhập
                         </a>
                     </li>
                 </ul>
                 <ul class="nav-menu nav-menu-social align-to-right nav-res"
                     [style.display]="auth.isLoggedIn ? 'block': 'none'">
+                  <li class="add-listing add-bg1" style="background-color: #fff !important;">
+                    <a routerLink="/my-account/notification" class="text-success" style="color: #0499a8 !important;vertical-align: sub;">
+                      <p class="notification m-0">
+                         <i class="ti-bell text-secondary" style="font-size: 20px;"></i>
+                        <span class="badge badge-pill badge-danger">{{ countNewNotification }}</span>
+                      </p>
+                    </a>
+                  </li>
                     <li>
-                        <a routerLink="my-account" class="add-listing2">
+                        <a routerLink="/my-account" class="add-listing2">
                             <div class="avatar avatar-md avatar-indicators avatar-online">
-                                <img *ngIf="avatar && !currentUser.googleId" alt="avatar" src="{{ avatar }}"
+                                <img alt="avatar" src="{{ avatar }}"
                                     class="rounded-circle">
-                                <img *ngIf="!avatar" alt="avatar"
-                                    src="https://via.placeholder.com/40x40" class="rounded-circle">
                             </div>
-                            <span *ngIf="!name" style="margin-left: 5px;">{{username }}</span>
-                            <span *ngIf="name" style="margin-left: 5px;">{{name }}</span>
+                            <span style="margin-left: 5px;">{{ username }}</span>
                         </a>
                         <ul class="nav-dropdown nav-submenu">
                             <div class="">
                                 <ul class="list-unstyled">
+                                  <li class="dropdown-submenu" *ngIf="manage == true">
+                                    <a class="dropdown-item dropright-lg dropdown-list-group-item"
+                                       routerLink="/manage">
+                                            <span class="mr-2">
+                                                <i class="far fa-star"></i>
+                                            </span> Quản lý trọ thuê
+                                    </a>
+                                  </li>
                                     <li class="dropdown-submenu">
                                         <a class="dropdown-item dropright-lg dropdown-list-group-item"
-                                            routerLink="my-account/renal-manage">
+                                            routerLink="/my-account/renal-manage">
                                             <span class="mr-1">
                                                 <i class="ti-home"></i>
-                                            </span> Quản lí tin cho thuê
+                                            </span> Quản lý tin cho thuê
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item dropright-lg" routerLink="my-account/my-profile">
+                                        <a class="dropdown-item dropright-lg" routerLink="/my-account/my-profile">
                                             <span class="mr-1">
                                                 <i class="ti-user"></i>
                                             </span> Thông tin tài khoản
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item dropright-lg" routerLink="my-account/order-history">
-                                            <span class="mr-1">
-                                                <i class="fa fa-money-bill"></i>
+                                        <a class="dropdown-item dropright-lg" routerLink="/my-account/order-history">
+                                            <span class="mr-2">
+                                                <i class="far fa-money-bill-alt"></i>
                                             </span> Lịch sử đơn hàng
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item dropright-lg" routerLink="my-account/notification">
+                                        <a class="dropdown-item dropright-lg" routerLink="/my-account/manage-premiums">
                                             <span class="mr-1">
-                                                <i class="ti-bell"></i>
-                                            </span> Thông báo
+                                               <i class="ti-calendar"></i>
+                                            </span> Quản lý Premiums
                                         </a>
                                     </li>
+                                  <li>
+                                    <a class="dropdown-item dropright-lg" routerLink="/my-account/customer-contacts">
+                                            <span class="mr-1">
+                                                <i class="ti-email"></i>
+                                            </span> Quản lý liên hệ
+                                    </a>
+                                  </li>
                                     <li>
-                                        <a class="dropdown-item dropright-lg" routerLink="my-account/bookmark">
+                                        <a class="dropdown-item dropright-lg" routerLink="/my-account/bookmark">
                                             <span class="mr-1">
                                                 <i class="ti-heart"></i>
                                             </span> Tin đã lưu
                                         </a>
                                     </li>
+
                                 </ul>
                             </div>
                             <div class="dropdown-divider"></div>
                             <ul class="list-unstyled">
                                 <li>
-                                    <a class="dropdown-item dropright-lg" routerLink="my-account/change-password">
+                                    <a class="dropdown-item dropright-lg" routerLink="/my-account/change-password">
                                         <span class="mr-1">
                                             <i class="ti-key"></i>
                                         </span> Đổi mật khẩu
@@ -135,7 +156,7 @@
                         </ul>
                     </li>
                     <li class="add-listing add-bg1">
-                        <a routerLink="dang-bai" class="text-success" style="color: #0499a8 !important;">Đăng
+                        <a routerLink="/dang-bai" class="text-success" style="color: #0499a8 !important;">Đăng
                             Bài</a>
                     </li>
                 </ul>

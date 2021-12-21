@@ -12,6 +12,9 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
 import { DashboardNavigationComponent } from './dashboard-navigation/dashboard-navigation.component';
 import { OrderHistoryComponent } from './order-history/order-history.component';
 import { OrderDetailsComponent } from './order-history/order-details/order-details.component';
+import { ManagePremiumsComponent } from './manage-premiums/manage-premiums.component';
+import { CustomerContactsComponent } from './customer-contacts/customer-contacts.component';
+import { CustomerContactDetailsComponent } from './customer-contacts/customer-contact-details/customer-contact-details.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
@@ -27,7 +30,10 @@ import { ToastrModule } from 'ngx-toastr';
     ChangePasswordComponent,
     DashboardNavigationComponent,
     OrderHistoryComponent,
-    OrderDetailsComponent
+    OrderDetailsComponent,
+    ManagePremiumsComponent,
+    CustomerContactsComponent,
+    CustomerContactDetailsComponent
   ],
 
   imports: [

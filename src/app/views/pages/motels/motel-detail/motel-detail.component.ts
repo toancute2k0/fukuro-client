@@ -9,7 +9,7 @@ import { CommentsService } from '../../../../services/comments.service';
 import { ToastrService } from 'ngx-toastr';
 import { RentalNews } from '../../../../models/rental-news.model';
 import { CustomersService } from '../../../../services/customers.service';
-import { AdminContactsService } from '../../../../services/customer-contacts.service';
+import { CustomerContactsService } from '../../../../services/customer-contacts.service';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 
@@ -21,10 +21,12 @@ import { HttpClient } from '@angular/common/http';
 export class MotelDetailComponent implements OnInit {
   linkImg = environment.linkImg;
   rentalNews: any | undefined;
-  rentalNewsDetail?: RentalNews | undefined;
+  // rentalNewsDetail?: RentalNews | undefined;
+  rentalNewsDetail: any = [];
   listImage = [];
-  currentUser?: any;
+  // currentUser: any;
   submitted = false;
+  currentUser: any = [];
 
   @ViewChild(MapInfoWindow) infoWindow!: MapInfoWindow;
   center: any;
@@ -32,6 +34,9 @@ export class MotelDetailComponent implements OnInit {
   zoom = 17;
   latitude?: number;
   longitude?: number;
+  orderby = 'desc';
+  limit = 3;
+  page = 1;
   icon = {
     url: 'assets/img/marker.png',
     scaledSize: new google.maps.Size(40, 40), // scaled size
@@ -46,7 +51,7 @@ export class MotelDetailComponent implements OnInit {
     private commentsService: CommentsService,
     private toastrService: ToastrService,
     private customSer: CustomersService,
-    private adminContactsService: AdminContactsService,
+    private customerContactsService: CustomerContactsService,
     private _router: Router,
     private httpClient: HttpClient
   ) {}
@@ -70,6 +75,7 @@ export class MotelDetailComponent implements OnInit {
   });
 
   ngOnInit(): void {
+    this.currentUser = [];
     const slug = this.route.snapshot.paramMap.get('slug');
     if (slug) {
       this.getRentalNews(slug);
@@ -85,7 +91,7 @@ export class MotelDetailComponent implements OnInit {
   }
 
   getLatestRentalNews(): void {
-    this.rentalNewsService.getLatestDetail(3).subscribe(
+    this.rentalNewsService.getAll(this.page, this.limit, this.orderby).subscribe(
       (data: any | undefined) => {
         this.rentalNews = data['rows'];
         for (var i = 0; i < data['rows'].length; i++) {
@@ -101,14 +107,12 @@ export class MotelDetailComponent implements OnInit {
     this.rentalNewsService.getBySlug(slug).subscribe(
       (data: any | undefined) => {
         this.rentalNewsDetail = data;
+        this.contact.patchValue({message: 'Tôi quan tâm tới '+ this.rentalNewsDetail.name +'. Làm ơn liên lạc lại với tôi, cảm ơn!'});
         this.latitude = parseFloat(data.lat);
         this.longitude = parseFloat(data.lng);
         this.center = { lat: this.latitude, lng: this.longitude };
         this.position = this.center;
         this.listImage = JSON.parse(data.image);
-        this.customSer.get(data.customerId).subscribe((res) => {
-          this.currentUser = res;
-        });
       },
       (err) => {
         console.log(err);
@@ -130,9 +134,10 @@ export class MotelDetailComponent implements OnInit {
       message: this.contact.value['message'],
       status: '1',
       rental_news_id: JSON.stringify(this.rentalNewsDetail?.id),
-      customer_id: localStorage.getItem('currentUser'),
+      customer_id: this.rentalNewsDetail.Customer.id,
+      detail_url: '/my-account/customer-contacts/detail/'
     };
-    this.adminContactsService.create(data).subscribe(
+    this.customerContactsService.create(data).subscribe(
       (res) => {
         this.resetForm();
         this.toastrService.success('Gửi liên hệ thành công!');

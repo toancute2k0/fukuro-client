@@ -95,8 +95,6 @@ export class PaymentComponent implements OnInit {
     this.customSer.update(this.id, dataUpdate).subscribe(
       (response) => {
         this.submitted = true;
-        const name = this.infoCus.value['firstName']+' '+this.infoCus.value['lastName'];
-        this.customSer.profileName$.next(name);
       },
       (error) => {
         this.toastrService.success(error.message);

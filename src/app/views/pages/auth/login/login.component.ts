@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Customers } from 'src/app/models/customers.model';
 import { CustomersService } from 'src/app/services/customers.service';
 import { AuthService } from 'src/app/services/auth.service';
+import {environment} from "../../../../../environments/environment";
 import { first } from 'rxjs/operators';
 
 import {
@@ -12,6 +13,7 @@ import {
   GoogleLoginProvider,
   SocialUser,
 } from 'angularx-social-login';
+
 
 @Component({
   selector: 'app-login',
@@ -23,6 +25,9 @@ export class LoginComponent implements OnInit {
   returnUrl: any;
   error = '';
   success = '';
+  avatar: any;
+  linkImg = environment.linkImg;
+  name: any;
   login = this.fb.group({
     username: [
       '',
@@ -89,16 +94,31 @@ export class LoginComponent implements OnInit {
       .pipe(first())
       .subscribe(
         (data) => {
+          if(data.data.avatar == null){
+            this.avatar = 'https://via.placeholder.com/200x200';
+          }
+          if(data.data.avatar != null && data.data.googleId != null){
+            this.avatar = data.data.avatar;
+          }
+          if(data.data.avatar != null && data.data.googleId == null){
+            this.avatar = this.linkImg + data.data.avatar;
+          }
+          if(data.data.firstName != null && data.data.lastName != null){
+            this.name = data.data.firstName + ' ' + data.data.lastName;
+          }
+          if(data.data.firstName != null && data.data.lastName != null){
+            this.name = data.data.firstName + ' ' + data.data.lastName;
+          }
+          if(data.data.firstName == null && data.data.lastName == null){
+            this.name = data.data.username;
+          }
+
           localStorage.setItem('token', data.token);
           const time_to_login = Date.now() + 604800000; // one week
           localStorage.setItem('timer', JSON.stringify(time_to_login));
-
           this.auth.loggedIn();
-
-          let name = data.data.firstName + ' ' + data.data.lastName;
-          this.customSer.profileImageUpdate$.next(data.data.avatar);
-          this.customSer.profileName$.next(name);
-          this.customSer.profileUsername$.next(data.data.username);
+          this.customSer.profileImageUpdate$.next(this.avatar);
+          this.customSer.profileUsername$.next(this.name);
           this.customSer.profileId$.next(data.data.id);
           this._router.navigate(['/']);
           this.toastrService.success(data.message);
@@ -130,6 +150,27 @@ export class LoginComponent implements OnInit {
 
         this.customSer.loginWithGoogle(data).subscribe(
           (res) => {
+            if(res.data.avatar == null){
+              this.avatar = 'https://via.placeholder.com/200x200';
+            }
+            if(res.data.avatar != null && res.data.googleId != null){
+              this.avatar = res.data.avatar;
+            }
+            if(res.data.avatar != null && res.data.googleId == null){
+              this.avatar = this.linkImg + res.data.avatar;
+            }
+            if(res.data.firstName != null && res.data.lastName != null){
+              this.name = res.data.firstName + ' ' + res.data.lastName;
+            }
+            if(res.data.firstName != null && res.data.lastName != null){
+              this.name = res.data.firstName + ' ' + res.data.lastName;
+            }
+            if(res.data.firstName == null && res.data.lastName == null){
+              this.name = res.data.username;
+            }
+            this.customSer.profileImageUpdate$.next(this.avatar);
+            this.customSer.profileUsername$.next(this.name);
+            this.customSer.profileId$.next(res.data.id);
             localStorage.setItem('token', res.token);
             const time_to_login = Date.now() + 604800000;
             localStorage.setItem('timer', JSON.stringify(time_to_login));

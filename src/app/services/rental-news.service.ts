@@ -18,24 +18,19 @@ export class RentalNewsService {
   get(id: any): Observable<RentalNews> {
     return this.http.get(`${API_URL}/${id}`);
   }
-  update(id: any, data: any): Observable<RentalNews[]> {
+  update(id:any,data:any): Observable<RentalNews[]> {
     return this.http.put<RentalNews[]>(`${API_URL}/${id}`, data);
   }
   getBySlug(slug: string): Observable<RentalNews[]> {
     return this.http.get<RentalNews[]>(`${API_URL}/slug/${slug}`);
   }
-  getAll(page: any, limit: any): Observable<RentalNews[]> {
+  getAll(page: any, limit: any, orderBy: any): Observable<RentalNews[]> {
     return this.http.get<RentalNews[]>(
-      `${API_URL}?page=${page}&limit=${limit}&orderby=desc`
-      // `${API_URL}?page=${page}&limit=${limit}&orderby=${by}&status=both`
+      `${API_URL}?page=${page}&limit=${limit}&orderby=${orderBy}`
     );
   }
   getPriority(limit: number): Observable<RentalNews[]> {
     return this.http.get<RentalNews[]>(`${API_URL}/priority?limit=${limit}`);
-  }
-
-  getLatest(): Observable<Blogs> {
-    return this.http.get(`${API_URL}/latest`);
   }
 
   getLatestDetail(limit: number): Observable<RentalNews[]> {
@@ -44,7 +39,8 @@ export class RentalNewsService {
   getfindByCustomerId(id: any): Observable<RentalNews> {
     return this.http.get(`${API_URL}/customer/${id}`);
   }
-  delete(id: any): Observable<RentalNews> {
+  delete(id:any):Observable<RentalNews> {
     return this.http.delete(`${API_URL}/${id}`);
   }
+
 }

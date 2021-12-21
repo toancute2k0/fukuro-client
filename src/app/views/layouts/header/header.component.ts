@@ -7,6 +7,8 @@ import { BlogsService } from 'src/app/services/blogs.service';
 import { CustomersService } from 'src/app/services/customers.service';
 import { Router } from '@angular/router';
 import { environment } from '../../../../environments/environment';
+import {CustomerPremiumServicesService} from "../../../services/customer-premium-services.service";
+import {NotificationService} from "../../../services/notification.service";
 
 @Component({
   selector: 'app-header',
@@ -20,19 +22,25 @@ export class HeaderComponent implements OnInit {
   username: string | undefined;
   cats?: BlogCategories[];
   currentUser?: any;
+  id: any;
+  customerPremiumServices: any = [];
+  limit = 6;
+  manage = false;
+  countNewNotification: any;
   constructor(
     private catBlogs: BlogCategoriesService,
     public auth: AuthService,
     private customSer: CustomersService,
     private _router: Router,
-    private blogsService: BlogsService
+    private blogsService: BlogsService,
+    private customerPremiumServicesService: CustomerPremiumServicesService,
+    private notificationService: NotificationService,
   ) {}
 
   ngOnInit(): void {
-    const id = localStorage.getItem('currentUser');
-
-    if (id) {
-      this.getById(id);
+    this.id = localStorage.getItem('currentUser');
+    if (this.id) {
+      this.getById(this.id);
     }
     this.catBlogs.getAllCat().subscribe((res: any | undefined) => {
       this.cats = res['rows'];
@@ -40,23 +48,60 @@ export class HeaderComponent implements OnInit {
     this.customSer.profileImageUpdate$.subscribe(
       (profileImage) => (this.avatar = profileImage)
     );
-    this.customSer.profileName$.subscribe(
-      (profileName) => (this.name = profileName)
-    );
     this.customSer.profileUsername$.subscribe(
       (profileUsername) => (this.username = profileUsername)
     );
+    this.customSer.notifications$.subscribe((notifications) => this.countNewNotification = notifications);
+    this.getData();
+    this.countNew();
+  }
+
+  countNew(){
+    this.notificationService.getByCustomerId(this.id, this.limit, 0).subscribe((res: any | undefined) => {
+      if (res['count'] > this.limit) {
+        this.notificationService.getByCustomerId(this.id, this.limit, 0).subscribe((data: any | undefined) => {
+          this.customSer.notifications$.next(res['count']);
+        });
+      } else {
+        this.customSer.notifications$.next(res['count']);
+      }
+    });
+  }
+
+  getData(): void {
+    this.customerPremiumServicesService.getByCustomerId(this.id, this.limit).subscribe((data: any | undefined) => {
+      if (data['count'] > this.limit) {
+        this.customerPremiumServicesService.getByCustomerId(this.id, data['count']).subscribe((res: any | undefined) => {
+          this.customerPremiumServices = res['rows'];
+        });
+      }
+      this.customerPremiumServices = data['rows'];
+      if(this.customerPremiumServices.length > 0){
+        this.customerPremiumServices = data['rows'];
+        for (let item of this.customerPremiumServices) {
+          if(item.PremiumService.type == 2){
+            this.manage = true;
+          }
+        }
+      }
+    });
   }
 
   getById(id: string): void {
     this.customSer.get(id).subscribe((res) => {
-      if(res.googleId != null){
-        this.avatar = res['avatar'];
-      }else{
-        this.avatar = this.linkImg + res['avatar'];
+      if(res.avatar == null){
+        this.avatar = 'https://via.placeholder.com/200x200';
+        this.customSer.profileImageUpdate$.next(this.avatar);
       }
-      this.name = res['firstName'] + ' ' + res['lastName'];
-      this.username = res['username'];
+      if(res.avatar != null  && res.googleId != null){
+        this.avatar = res['avatar'];
+        this.customSer.profileImageUpdate$.next(this.avatar);
+      }
+      if(res.avatar != null  && res.googleId == null){
+        this.avatar = this.linkImg + res['avatar'];
+        this.customSer.profileImageUpdate$.next(this.avatar);
+      }
+      this.username = res.username;
       this.currentUser = res;
     });
   }

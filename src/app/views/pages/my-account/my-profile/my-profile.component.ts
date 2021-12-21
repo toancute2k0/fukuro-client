@@ -12,11 +12,14 @@ import {environment} from '../../../../../environments/environment';
   styleUrls: ['./my-profile.component.css'],
 })
 export class MyProfileComponent implements OnInit {
+  linkImg = environment.linkImg;
   submitted = false;
   dynamicVariable = true;
   images : any;
   id : any;
   result = false;
+  imgCus: any;
+  ggLogin = false;
   updateCus = this.fb.group({
     username: [
       { value: '', disabled: true },
@@ -41,6 +44,19 @@ export class MyProfileComponent implements OnInit {
     this.id = localStorage.getItem('currentUser');
     this.customSer.get(this.id).subscribe((res) => {
       let user = res;
+      if(user.avatar == null){
+        this.imgCus = 'https://via.placeholder.com/200x200';
+      }
+      if(user.avatar != null  && user.googleId != null){
+        this.imgCus = user['avatar'];
+      }
+      if(user.avatar != null  && user.googleId == null){
+        this.imgCus = this.linkImg + user['avatar'];
+      }
+      if(user.googleId != null){
+        this.ggLogin = true;
+      }
+      // if(user.googleId )
       this.updateCus = this.fb.group({
         id: [user.id],
         username: [
@@ -54,7 +70,7 @@ export class MyProfileComponent implements OnInit {
         firstName: [user.firstName, Validators.compose([Validators.required])],
         lastName: [user.lastName, Validators.compose([Validators.required])],
         phone: [user.phone, Validators.compose([Validators.required])],
-        avatar: [environment.linkImg+user.avatar],
+        avatar: [this.imgCus],
         avatarCus: [user.avatar],
       });
     });
@@ -120,9 +136,9 @@ export class MyProfileComponent implements OnInit {
       this.customSer.update(this.id, data).subscribe(
         (response) => {
           this.submitted = true;
-          const name = this.updateCus.value['firstName']+' '+this.updateCus.value['lastName'];
+          const name = this.updateCus.value['firstName'] + ' ' + this.updateCus.value['lastName'];
           this.customSer.profileImageUpdate$.next(this.updateCus.value['avatar']);
-          this.customSer.profileName$.next(name);
+          this.customSer.profileUsername$.next(name);
           this.toastrService.success(response.message);
         },
         (error) => {
@@ -158,7 +174,6 @@ export class MyProfileComponent implements OnInit {
               this.submitted = true;
               const name = this.updateCus.value['firstName']+' '+this.updateCus.value['lastName'];
               this.customSer.profileImageUpdate$.next(environment.linkImg+res['filename']);
-              this.customSer.profileName$.next(name);
               this.toastrService.success(response.message);
             },
             (error) => {

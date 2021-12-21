@@ -1,0 +1,96 @@
+<!-- ============================ User Dashboard ================================== -->
+<section class="bg-light">
+  <div class="container-fluid">
+
+    <div class="row">
+      <div class="col-lg-12 col-md-12">
+        <div class="filter_search_opt">
+          <a href="javascript:void(0);" (click)="openFilterSearch()">Dashboard Menu<i
+            class="ml-2 ti-menu"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+
+      <div class="col-lg-3 col-md-12">
+
+        <div class="simple-sidebar sm-sidebar" id="filter_search">
+
+          <div class="search-sidebar_header">
+            <h4 class="ssh_heading">Đóng</h4>
+            <button (click)="openFilterSearch()" class="w3-bar-item w3-button w3-large"><i
+              class="ti-close"></i></button>
+          </div>
+
+          <div class="sidebar-widgets">
+            <div class="dashboard-navbar">
+
+              <app-dashboard-navigation></app-dashboard-navigation>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="col-lg-9 col-md-12" >
+        <div class="dashboard-wraper mb-3" *ngFor="let item of customerPremiumServices">
+
+          <div class="row">
+            <!-- /.col -->
+
+            <div class="text-95 col-sm-12 align-self-start justify-content-end">
+              <hr class="d-sm-none" />
+              <div class="text-grey-m2">
+                <div class="row mt-3">
+                  <div class="col-12 col-sm-6">
+                    <div class="mt-1 mb-2 text-secondary-m1 text-600 text-125">
+                      DỊCH VỤ:
+                      <span *ngIf="item.PremiumService.type == 1" class="text-uppercase text-success">Đăng tin</span>
+                      <span *ngIf="item.PremiumService.type == 2" class="text-uppercase text-success">Quản lý</span>
+                      <span *ngIf="item.PremiumService.type == 3" class="text-uppercase text-success">Đăng tin và quản lý</span>
+                    </div>
+                  </div>
+                  <div class="col-12 col-sm-6 text-grey text-90 order-first order-sm-last text-right" *ngIf="item.status == 2">
+                    <a routerLink="/premium/thanh-toan/{{item.PremiumService.id}}" class="badge badge-info">Gia hạn</a>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <!-- /.col -->
+          </div>
+          <div class="table-responsive-sm">
+            <table class="table">
+              <thead class="mt-4">
+              <tr class="row text-600 text-white bgc-default-tp1 py-25">
+                <th class="col-3">Tên gói premium</th>
+                <th class="col-3 text-center">Ngày đăng ký</th>
+                <th class="col-3 text-center">Đơn giá</th>
+                <th class="col-3 text-right">Trạng thái</th>
+              </tr>
+              </thead>
+              <tbody class="text-95 text-secondary-d3">
+              <tr class="row mb-2 mb-sm-0 py-25">
+                <td class="col-3">{{ item.PremiumService.name }}</td>
+                <td class="col-3 text-center">{{ item.startDate | date: 'dd/MM/yyyy' }}</td>
+                <td class="col-3 text-center">{{ item.PremiumService.price | currency: "VND" }}</td>
+                <td class="col-3 text-95 text-right">
+                  <span *ngIf="item.status == 0" class="badge badge-pill badge-secondary">Hết hạn</span>
+                  <span *ngIf="item.status == 1" class="badge badge-pill badge-success">Còn hạn</span>
+                  <span *ngIf="item.status == 2" class="badge badge-pill badge-warning">Sắp hết hạn</span>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+</section>
+<!-- ============================ User Dashboard End ================================== -->

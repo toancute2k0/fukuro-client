@@ -13,12 +13,19 @@ export class BlogListComponent implements OnInit {
   page = 1;
   count = 6;
   blogs: any | undefined;
+  orderby = 'desc';
+  limit = 6;
   constructor(private blogSer: BlogsService) {}
   ngOnInit(): void {
-    this.blogSer.getAll(this.page, this.count).subscribe(
+    this.blogSer.getAll(this.page, this.limit, this.orderby).subscribe(
       (data: any | undefined) => {
-        this.count = data['count'];
-        this.getBlogs(1, this.count);
+        if(data['count'] > this.limit){
+          this.getBlogs(1, data['count']);
+        }else{
+          this.blogs = data['rows'];
+        }
+        this.limit = data['count'];
+
       },
       (err) => {
         console.log(err);
@@ -26,11 +33,11 @@ export class BlogListComponent implements OnInit {
   }
 
   getBlogs(n: any, c: any): void {
-    this.blogSer.getAll(n, c).subscribe(
+    this.blogSer.getAll(n, c, this.orderby).subscribe(
       (data: any) => {
-        for (var i = 0; i < data['rows'].length; i++) {
-          data['rows'][i].thumbnail = environment.linkImg+data['rows'][i].thumbnail;
-        }
+          for (let item of data['rows']) {
+              item.thumbnail = environment.linkImg+item.thumbnail;
+          }
         this.blogs = data['rows'];
       },
       (err) => {

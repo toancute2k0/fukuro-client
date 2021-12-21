@@ -38,20 +38,15 @@
           <!-- Basic Information -->
           <form [formGroup]="updateCus" (ngSubmit)="onSubmit()">
             <div class="form-submit">
-              <h4>Thông tin tài khoản</h4>
+              <h4 class="mb-3">Thông tin tài khoản</h4>
               <div class="submit-section">
                 <div class="row">
-                  <div class="form-group form-group-avatar">
+                  <div class="form-group form-group-avatar" *ngIf="ggLogin == false">
                     <!-- Image Preview -->
-                    <div class="imagePreview" *ngIf="updateCus.value['avatar']" >
+                    <div class="imagePreview">
                       <img [src]="updateCus.value['avatar']">
                     </div>
-
-                    <!-- Select File -->
                     <input type="file" nbInput fullWidth accept="image/*" (change)="showPreview($event)" />
-                    <div *ngIf="submitted && f.avatar.errors">
-                      <small *ngIf="f.avatar.errors.required" class="text-danger small-popup">Ảnh đại diện không được bỏ trống!</small>
-                    </div>
                   </div>
                   <div class="form-group col-md-12">
                     <div>
@@ -63,7 +58,7 @@
                   <div class="form-group col-md-12">
                     <div>
                       <label>Email</label>
-                      <input type="email" class="form-control" formControlName="email">
+                      <input type="email" class="form-control" formControlName="email" readonly>
                     </div>
                     <div *ngIf="submitted && f.email.errors">
                       <small *ngIf="f.email.errors.required" class="text-muted small-popup">Email không được bỏ
@@ -75,11 +70,11 @@
                   <div class="form-group col-md-6">
                     <div>
                       <label>Họ</label>
-                      <input type="text" class="form-control" formControlName="firstName">
+                      <input type="text" class="form-control" formControlName="lastName">
                     </div>
-                    <div *ngIf="submitted && f.firstName.errors">
-                      <small *ngIf="f.firstName.errors.required" class="text-muted small-popup">
-                        Tên không được bỏ trống!
+                    <div *ngIf="submitted && f.lastName.errors">
+                      <small *ngIf="f.lastName.errors.required" class="text-muted small-popup">
+                        Họ không được bỏ trống!
                       </small>
                     </div>
                   </div>
@@ -87,11 +82,11 @@
                   <div class="form-group col-md-6">
                     <div>
                       <label>Tên</label>
-                      <input type="text" class="form-control" formControlName="lastName">
+                      <input type="text" class="form-control" formControlName="firstName">
                     </div>
-                    <div *ngIf="submitted && f.lastName.errors">
-                      <small *ngIf="f.lastName.errors.required" class="text-muted small-popup">
-                        Họ không được bỏ trống!
+                    <div *ngIf="submitted && f.firstName.errors">
+                      <small *ngIf="f.firstName.errors.required" class="text-muted small-popup">
+                        Tên không được bỏ trống!
                       </small>
                     </div>
                   </div>

@@ -594,36 +594,39 @@
 
                 <div class="details-sidebar">
                     <!-- Agent Detail -->
-                    <div class="sides-widget">
-                        <div class="sides-widget-header">
-                            <div class="agent-photo" *ngIf="currentUser?.avatar">
-                                <img src="{{ currentUser?.avatar }}" alt="" />
-                            </div>
-                            <div class="agent-photo" *ngIf="!currentUser?.avatar">
-                                <img src="https://via.placeholder.com/40x40" alt="" />
-                            </div>
-                            <div class="sides-widget-details">
-                                <h4 *ngIf="currentUser?.firstName">
-                                    <a href="#">
-                                        {{ currentUser?.firstName }} {{ currentUser?.lastName }}
-                                    </a>
-                                </h4>
-                                <h4 *ngIf="!currentUser?.firstName">
-                                    <a href="#">
-                                        {{ currentUser?.username }}
-                                    </a>
-                                </h4>
-                                <span *ngIf="currentUser?.phone">
+                  <div class="sides-widget">
+                    <div class="sides-widget-header">
+                      <div class="agent-photo"
+                           *ngIf="rentalNewsDetail.Customer.avatar != null && rentalNewsDetail.Customer.google_id != null">
+                        <img src="{{ rentalNewsDetail.Customer.avatar }}" alt="" />
+                      </div>
+                      <div class="agent-photo"
+                           *ngIf="rentalNewsDetail.Customer.avatar != null && rentalNewsDetail.Customer.google_id == null">
+                        <img src="{{ linkImg+rentalNewsDetail.Customer.avatar }}" alt="" />
+                      </div>
+                      <div class="agent-photo" *ngIf="!rentalNewsDetail.Customer.avatar">
+                        <img src="https://via.placeholder.com/200x200" alt="" />
+                      </div>
+                      <div class="sides-widget-details">
+                        <h4 *ngIf="rentalNewsDetail.Customer.firstName">
+                          <a href="#">
+                            {{ rentalNewsDetail.Customer.firstName }} {{ rentalNewsDetail.Customer.lastName }}
+                          </a>
+                        </h4>
+                        <h4 *ngIf="!rentalNewsDetail.Customer.firstName">
+                          <a href="#">
+                            {{ rentalNewsDetail.Customer.username }}
+                          </a>
+                        </h4>
+                        <span *ngIf="rentalNewsDetail.Customer.phone">
                                     <i class="lni-phone-handset"></i>
-                                    {{ currentUser?.phone }}
+                                  <a class="text-white" href="tel: {{ rentalNewsDetail.Customer.phone }}">
+                                    {{ rentalNewsDetail.Customer.phone }}</a>
                                 </span>
-                                <span *ngIf="!currentUser?.phone">
-                                    <i class="lni-phone-handset"></i>
-                                    0822576436
-                                </span>
-                            </div>
-                            <div class="clearfix"></div>
-                        </div>
+
+                          </div>
+                      <div class="clearfix"></div>
+                    </div>
 
                         <form [formGroup]="contact" (ngSubmit)="onSubmit()" class="sides-widget-body simple-form">
                             <div class="row">

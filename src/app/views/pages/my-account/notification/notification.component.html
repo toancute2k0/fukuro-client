@@ -36,21 +36,44 @@
       <div class="col-lg-9 col-md-12">
 
         <div class="dashboard-wraper">
-
-          <!-- Bookmark Property -->
-          <!-- <div class="form-submit">
-                              <h4>Bài đăng của bạn</h4>
-                          </div> -->
-
           <div class="row">
 
             <!-- Single Property -->
             <div class="form-submit">
-              <h4>Thông báo</h4>
+              <h4>{{ count }} Thông báo</h4>
             </div>
+            <table class="property-table-wrap responsive-table bkmark">
 
+              <tbody>
+              <tr>
+                <th>
+                  <span>Danh sách</span>
+                </th>
+                <th class="clean_all">
+                  <a class="d-flex flex-row-reverse text-white" (click)="deleteAllCusById()" style="cursor: pointer">
+                    Xoá tất cả
+                    <i class="ti-trash"></i>
+                  </a>
+                </th>
+              </tr>
 
-
+              <!-- Item #1 -->
+              <tr *ngFor="let noti of notification">
+                <td class="property-container">
+                  <a class="delete btn btn-outline-primary mr-2 p-2" (click)="delete(noti.id)" style="cursor: pointer;">
+                    <i class="ti-trash"></i>
+                  </a>
+                  <div class="title">
+                    <h4><a (click)="update(noti)" style="cursor: pointer">{{noti.message}}</a></h4>
+                  </div>
+                </td>
+                <td class="action text-right">
+                  <span *ngIf="noti.status == 0" class="badge badge-danger">Mới</span>
+                  <span *ngIf="noti.status == 1" class="badge badge-success">Đã xem</span>
+                </td>
+              </tr>
+              </tbody>
+            </table>
           </div>
         </div>
 

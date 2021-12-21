@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { BlogCategoriesService } from 'src/app/services/blog-categories.service';
 import { BlogsService } from 'src/app/services/blogs.service';
 import { RouterModule, Router } from '@angular/router';
+import {environment} from "../../../../../environments/environment";
 
 @Component({
   selector: 'app-blog-category',
@@ -17,6 +18,7 @@ export class BlogCategoryComponent implements OnInit {
   count = 6;
   cp = 1;
   flag = false;
+  orderby = 'desc';
   constructor(
     private blogSer: BlogsService,
     private _route: ActivatedRoute,
@@ -36,8 +38,14 @@ export class BlogCategoryComponent implements OnInit {
         this.cat = data.id;
         this.blogSer.getByCatId(this.cat, this.page, this.count).subscribe(
           (data: any | undefined) => {
-            this.count = data['count'];
-            this.getBlogByCatId(1, this.count);
+            for (let item of data['rows']) {
+              item.thumbnail = environment.linkImg+item.thumbnail;
+            }
+            if(data['count'] > this.count){
+              this.getBlogByCatId(this.cat, data['count']);
+            }else{
+              this.blogs_cat = data['rows'];
+            }
           },
           (err) => {
             console.log(err);
@@ -50,7 +58,7 @@ export class BlogCategoryComponent implements OnInit {
     );
   }
   getBlogByCatId(n: any, c: any): void {
-    this.blogSer.getAll(n, c).subscribe(
+    this.blogSer.getByCatId(n, this.page, c).subscribe(
       (data: any) => {
         this.blogs_cat = data['rows'];
       },

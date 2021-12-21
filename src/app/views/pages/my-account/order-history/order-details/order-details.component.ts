@@ -9,7 +9,7 @@ import { PremiumServiceService } from 'src/app/services/premium-service.service'
   templateUrl: './order-details.component.html',
   styleUrls: ['./order-details.component.css'],
 })
-export class OrderDetailsComponent implements OnInit {
+  export class OrderDetailsComponent implements OnInit {
   premiumBill: any = [];
   customer: any = [];
   premium?: string;
