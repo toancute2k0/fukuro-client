@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment';
 import { BookmarksService } from 'src/app/services/bookmarks.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { CustomersService } from 'src/app/services/customers.service';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-motel-list',
@@ -44,12 +45,42 @@ export class MotelListComponent implements OnInit {
   };
   markersRepartidores: any = [];
 
+  submitted = false;
+  searchKey = '';
+
   constructor(
     private rentalNewsService: RentalNewsService,
     private bookmarkSer: BookmarksService,
+    private fb: FormBuilder,
     public auth: AuthService,
     private customSer: CustomersService
   ) {}
+
+  search = this.fb.group({
+    address: ['', Validators.compose([Validators.required])],
+  });
+
+  get f() {
+    return this.search.controls;
+  }
+
+  onSearch(): any {
+    this.submitted = true;
+    if (this.search.invalid) {
+      return false;
+    }
+    // this._router.navigate(['/thue-nha-dat']);
+    console.log(this.search.value);
+    this.rentalNewsService.getSearch(this.search.value.address).subscribe(
+      (data: any | undefined) => {
+        this.count = data;
+        console.log(this.count);
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+  }
 
   openInfo(marker: MapMarker, content: any) {
     this.infoName = content.name;
@@ -72,15 +103,17 @@ export class MotelListComponent implements OnInit {
       this.getById(id);
     }
     this.customSer.profileId$.subscribe((profileId) => (this.id = profileId));
-    this.rentalNewsService.getAll(this.page, this.count, this.orderby).subscribe(
-      (data: any | undefined) => {
-        this.count = data['count'];
-        this.getData(1, this.count);
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
+    this.rentalNewsService
+      .getAll(this.page, this.count, this.orderby)
+      .subscribe(
+        (data: any | undefined) => {
+          this.count = data['count'];
+          this.getData(1, this.count);
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
 
     window.onresize = () => (this.isMobile = window.innerWidth <= 768);
   }
