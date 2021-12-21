@@ -37,6 +37,9 @@ export class MotelDetailComponent implements OnInit {
   orderby = 'desc';
   limit = 3;
   page = 1;
+  avatar: any;
+  name: any;
+  phone:any;
   icon = {
     url: 'assets/img/marker.png',
     scaledSize: new google.maps.Size(40, 40), // scaled size
@@ -113,6 +116,29 @@ export class MotelDetailComponent implements OnInit {
         this.center = { lat: this.latitude, lng: this.longitude };
         this.position = this.center;
         this.listImage = JSON.parse(data.image);
+        if(this.rentalNewsDetail.Customer.avatar == null){
+          this.avatar = 'https://via.placeholder.com/200x200';
+        }
+        if(this.rentalNewsDetail.Customer.avatar != null && this.rentalNewsDetail.Customer.googleId != null){
+          this.avatar = data.data.avatar;
+        }
+        if(this.rentalNewsDetail.Customer.avatar != null && this.rentalNewsDetail.Customer.googleId == null){
+          this.avatar = this.linkImg + data.data.avatar;
+        }
+        if(this.rentalNewsDetail.Customer.firstName != null && this.rentalNewsDetail.Customer.lastName != null){
+          this.name = this.rentalNewsDetail.Customer.firstName + ' ' + this.rentalNewsDetail.Customer.lastName;
+        }
+        if(this.rentalNewsDetail.Customer.firstName != null && this.rentalNewsDetail.Customer.lastName != null){
+          this.name = this.rentalNewsDetail.Customer.firstName + ' ' + this.rentalNewsDetail.Customer.lastName;
+        }
+        if(this.rentalNewsDetail.Customer.firstName == null && this.rentalNewsDetail.Customer.lastName == null){
+          this.name = this.rentalNewsDetail.Customer.username;
+        }
+        if(this.rentalNewsDetail.Customer.phone != null){
+          this.phone = this.rentalNewsDetail.Customer.phone;
+        }else{
+          this.phone = '';
+        }
       },
       (err) => {
         console.log(err);
