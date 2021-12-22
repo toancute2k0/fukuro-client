@@ -107,24 +107,28 @@ export class MotelListComponent implements OnInit {
   ngOnInit(): void {
     this.rentalNews = [];
     const id = localStorage.getItem('currentUser');
-    if (id) {
-      this.getById(id);
-    }
     this.customSer.profileId$.subscribe((profileId) => (this.id = profileId));
     window.onresize = () => (this.isMobile = window.innerWidth <= 768);
 
     this.route.queryParams.subscribe((params) => {
-      this.capital = params['search'];
+      if(JSON.stringify(params) == '{}'){
+        if(id != null){
+          this.getById(id);
+        }else{
+          this.getData(1, this.count, this.data);
+        }
+      }else{
+        this.search.patchValue({search: params['search']});
+        if(id != null){
+          this.getById(id);
+        }else{
+          this.data = {
+            search: this.search.value['search'],
+          };
+          this.getData(1, this.count, this.data);
+        }
+      }
     });
-
-    if (this.capital) {
-      const data = {
-        search: this.capital,
-      };
-      this.getData(1, this.count, data);
-    } else {
-      this.getData(1, this.count, this.data);
-    }
   }
 
   sort(event: any) {
@@ -165,6 +169,7 @@ export class MotelListComponent implements OnInit {
   getData(n: any, c: any, data: any): void {
     this.rentalNewsService.getAll(n, c, this.orderby, data).subscribe(
       (data: any | undefined) => {
+        console.log(data);
         if (data['count'] > this.count) {
           this.rentalNewsService
             .getAll(n, data['count'], this.orderby, data)
@@ -234,6 +239,9 @@ export class MotelListComponent implements OnInit {
     this.bookmarkSer.getAllCus(this.id).subscribe(
       (data: any) => {
         this.wishlist = data;
+        this.data = {
+          search: this.search.value['search'],
+        };
         this.getData(1, this.count, this.data);
       },
       (err: any | undefined) => {

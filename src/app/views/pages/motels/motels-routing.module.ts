@@ -14,6 +14,10 @@ const routes: Routes = [
         component: MotelListComponent,
       },
       {
+        path: 'tim-kiem',
+        component: MotelListComponent,
+      },
+      {
         path: ':slug',
         component: MotelDetailComponent,
       },

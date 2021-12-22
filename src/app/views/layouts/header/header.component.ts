@@ -5,7 +5,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { BlogCategoriesService } from 'src/app/services/blog-categories.service';
 import { BlogsService } from 'src/app/services/blogs.service';
 import { CustomersService } from 'src/app/services/customers.service';
-import { Router } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import { environment } from '../../../../environments/environment';
 import {CustomerPremiumServicesService} from "../../../services/customer-premium-services.service";
 import {NotificationService} from "../../../services/notification.service";
@@ -37,6 +37,7 @@ export class HeaderComponent implements OnInit {
     private blogsService: BlogsService,
     private customerPremiumServicesService: CustomerPremiumServicesService,
     private notificationService: NotificationService,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
@@ -102,6 +103,22 @@ export class HeaderComponent implements OnInit {
       this.currentUser = res;
     });
   }
+
+  // redirectFind(){
+  //   this.route.queryParams.subscribe((params) => {
+  //     // if(JSON.stringify(params) != '{}'){
+  //     //   this._router.navigate([`/thue-nha-dat`]);
+  //     // }else{
+  //     //   console.log(params);
+  //     // }
+  //     this._router
+  //       .navigateByUrl('/thue-nha-dat', {skipLocationChange: true})
+  //       .then(() => {
+  //         this._router.navigate([`/thue-nha-dat/`]);
+  //       });
+  //
+  //   });
+  // }
 
   redirect(slug: any) {
     this._router
