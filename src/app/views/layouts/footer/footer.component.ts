@@ -25,6 +25,7 @@ export class FooterComponent implements OnInit {
     this.catQuestions.getAllCat().subscribe((data: any | undefined) => {
       this.catqts = data['rows'];
     });
+
   }
 
 }

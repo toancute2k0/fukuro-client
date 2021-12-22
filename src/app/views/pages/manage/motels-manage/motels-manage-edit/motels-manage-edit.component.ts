@@ -12,10 +12,11 @@ import {ToastrService} from "ngx-toastr";
 export class MotelsManageEditComponent implements OnInit {
   id: any;
   submitted = false;
+  isRentals = false;
   rentalForm = this.fb.group({
     name: ['', Validators.compose([Validators.required])],
-    price: ['', Validators.compose([Validators.required])],
-    quantity: [0],
+    price: ['', Validators.compose([Validators.pattern(/^\d+$/)])],
+    quantity: [''],
     type: ['', Validators.compose([Validators.required])],
     address: ['', Validators.compose([Validators.required])],
     note: [''],
@@ -37,11 +38,22 @@ export class MotelsManageEditComponent implements OnInit {
     this.id = this.activatedRoute.snapshot.params.id;
     this.getData(this.id);
   }
+  change(event: any){
+    if(event.target.value == 1){
+      this.isRentals = true;
+      this.rentalForm.value['price'] = 0;
+    }else{
+      this.isRentals = false;
+    }
+  }
 
   getData(id: any): void {
     this.rentalsService.get(id)
       .subscribe(
         (data: any) => {
+          if(data.price == 0){
+            this.isRentals = true;
+          }
           this.rentalForm = this.fb.group({
             name: [data.name, Validators.compose([Validators.required]),],
             price: [data.price, Validators.compose([Validators.required, Validators.pattern(/^\d+$/)])],

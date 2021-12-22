@@ -69,6 +69,17 @@ export class BillsManageListComponent implements OnInit {
           return uy;
         },
       },
+      status: {
+        title: 'Trạng thái',
+        type: 'html',
+        valuePrepareFunction: (value: any) => {
+          if(value == 0){
+            return 'Chưa thanh toán';
+          }else{
+            return 'Đã thanh toán';
+          }
+        },
+      },
     },
   }
   limit = 6;

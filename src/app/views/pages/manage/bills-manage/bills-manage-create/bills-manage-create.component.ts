@@ -95,9 +95,11 @@ export class BillsManageCreateComponent implements OnInit {
       for (let item of this.rentals) {
         if(item.id == event.target.value && item.type == 1){
           this.isRoom = 1;
+          this.billForm.patchValue({price: item.price});
           this.retrieveRoomsByRentalId(item.id);
         }
         if(item.id == event.target.value && item.type > 1){
+          this.billForm.patchValue({price: item.price});
           this.billForm.value['rentalRoomId'] = '';
           this.isRoom = 0;
         }
@@ -219,10 +221,10 @@ export class BillsManageCreateComponent implements OnInit {
             (res) => {
               // this.resetForm();
               this._router.navigate(['/manage/bills/list']);
-              this.toastrService.success(res.message);
+              this.toastrService.success('Thêm mới thành công!');
             },
             (error) => {
-              this.toastrService.error(error.message);
+              this.toastrService.error('Thêm mới thất bại!');
             }
           );
         });

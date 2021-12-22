@@ -42,7 +42,7 @@ export class BillsManageEditComponent implements OnInit {
     totalPrice: [''],
     note: [''],
     status: ['', Validators.compose([Validators.required])],
-    rentalId: [''],
+    rentalId: ['', Validators.compose([Validators.required])],
     rentalRoomId: [''],
     customerId: [''],
   });
@@ -93,7 +93,7 @@ export class BillsManageEditComponent implements OnInit {
             totalPrice: [data.totalPrice],
             note: [data.note],
             status: [data.status, Validators.compose([Validators.required])],
-            rentalId: [data.rentalId],
+            rentalId: [data.rentalId, Validators.compose([Validators.required])],
             rentalRoomId: [data.rentalRoomId],
           });
           this.rentalsService.get(data.rentalId)
@@ -135,14 +135,18 @@ export class BillsManageEditComponent implements OnInit {
       for (let item of this.rentals) {
         if(item.id == event.target.value && item.type == 1){
           this.isRoom = 1;
+          this.billForm.patchValue({price: item.price});
           this.retrieveRoomsByRentalId(item.id);
         }
         if(item.id == event.target.value && item.type > 1){
+          this.billForm.patchValue({price: item.price});
           this.billForm.value['rentalRoomId'] = '';
           this.isRoom = 0;
         }
       }
     }else{
+      this.billForm.patchValue({price: ''});
+      this.billForm.value['rentalRoomId'] = '';
       this.isRoom = 0;
     }
   }
@@ -204,6 +208,7 @@ export class BillsManageEditComponent implements OnInit {
       rentalId: this.billForm.value['rentalId'],
       rentalRoomId: this.billForm.value['rentalRoomId'],
     }
+    console.log(data);
     this.rentalsService.get(data.rentalId)
       .subscribe(
         (res: any) => {

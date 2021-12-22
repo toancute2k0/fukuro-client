@@ -34,11 +34,10 @@
             </div>
             <div class="col-lg-6 col-md-6">
               <div class="form-group">
-                <label>Giá tiền phòng</label>
-                <input type="text" class="form-control simple" formControlName="price">
-                <div *ngIf="submitted && f.price.errors">
-                  <small *ngIf="f.price.errors.required" class="text-muted small-popup">Giá tiền phòng không được bỏ trống !</small>
-                  <small *ngIf="f.price.errors.pattern" class="text-muted small-popup">Giá tiền phòng phải là kiểu số!</small>
+                <label>Trả trước</label>
+                <input type="text" class="form-control simple" formControlName="prepay">
+                <div *ngIf="submitted && f.prepay.errors">
+                  <small *ngIf="f.prepay.errors.required" class="text-muted small-popup">Trả trước phải là kiểu số!</small>
                 </div>
               </div>
             </div>
@@ -46,17 +45,22 @@
           <div class="row">
             <div class="col-lg-6 col-md-6">
               <div class="form-group">
-                <label>Tiền Internet</label>
-                <input type="text" class="form-control simple" formControlName="internetFee">
+                <label>Nhà trọ</label>
+                <select id="status" name="status" class="form-control simple" formControlName="rentalId" (click)="change($event)">
+                  <option value="">Chọn trọ thuê</option>
+                  <option *ngFor="let item of rentals" [value]="item.id">{{ item.name }}</option>
+                </select>
+                <div *ngIf="submitted && f.rentalId.errors">
+                  <small *ngIf="f.rentalId.errors.required" class="text-muted small-popup">Vui lòng chọn trọ thuê!</small>
+                </div>
               </div>
             </div>
-            <div class="col-lg-6 col-md-6">
+            <div class="col-lg-6 col-md-6" *ngIf="isRoom == 1">
               <div class="form-group">
-                <label>Trả trước</label>
-                <input type="text" class="form-control simple" formControlName="prepay">
-                <div *ngIf="submitted && f.prepay.errors">
-                  <small *ngIf="f.prepay.errors.required" class="text-muted small-popup">Trả trước phải là kiểu số!</small>
-                </div>
+                <label>Phòng trọ</label>
+                <select class="form-control simple" formControlName="rentalRoomId">
+                  <option *ngFor="let rm of rooms" [value]="rm.id">{{ rm.name }}</option>
+                </select>
               </div>
             </div>
           </div>
@@ -108,13 +112,19 @@
           </div>
         </div>
         <div class="row mt-5">
-          <div class="col-lg-6 col-md-6">
+          <div class="col-lg-4 col-md-4">
+            <div class="form-group">
+              <label>Tiền Internet</label>
+              <input type="text" class="form-control simple" formControlName="internetFee">
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-4">
             <div class="form-group">
               <label>Phí phát sinh (nếu có)</label>
               <input type="text" class="form-control simple" formControlName="otherFee">
             </div>
           </div>
-          <div class="col-lg-6 col-md-6">
+          <div class="col-lg-4 col-md-4">
             <div class="form-group">
               <label>Mô tả phí phát sinh</label>
               <input type="text" class="form-control simple" formControlName="feeDesc">
@@ -122,7 +132,13 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-lg-6 col-md-6">
+          <div class="col-lg-4 col-md-4">
+            <div class="form-group">
+              <label>Giá tiền thuê</label>
+              <input type="text" class="form-control simple" formControlName="price" readonly>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-4">
             <div class="form-group">
               <label>Giảm giá %</label>
               <input type="text" class="form-control simple" formControlName="discountPrice">
@@ -131,7 +147,7 @@
               </div>
             </div>
           </div>
-          <div class="col-lg-6 col-md-6">
+          <div class="col-lg-4 col-md-4">
             <div class="form-group">
               <label>Trạng thái thanh toán</label>
               <select class="form-control simple" formControlName="status">
@@ -142,28 +158,6 @@
               <div *ngIf="submitted && f.status.errors">
                 <small *ngIf="f.status.errors.required" class="text-muted small-popup">Vui lòng chọn trạng thái thanh toán!</small>
               </div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-6 col-md-6">
-            <div class="form-group">
-              <label>Nhà trọ</label>
-              <select id="status" name="status" class="form-control simple" formControlName="rentalId" (click)="change($event)">
-                <option value="">Chọn trọ thuê</option>
-                <option *ngFor="let item of rentals" [value]="item.id">{{ item.name }}</option>
-              </select>
-              <div *ngIf="submitted && f.rentalId.errors">
-                <small *ngIf="f.rentalId.errors.required" class="text-muted small-popup">Vui lòng chọn trọ thuê!</small>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-6 col-md-6" *ngIf="isRoom == 1">
-            <div class="form-group">
-              <label>Phòng trọ</label>
-              <select class="form-control simple" formControlName="rentalRoomId">
-                <option *ngFor="let rm of rooms" [value]="rm.id">{{ rm.name }}</option>
-              </select>
             </div>
           </div>
         </div>

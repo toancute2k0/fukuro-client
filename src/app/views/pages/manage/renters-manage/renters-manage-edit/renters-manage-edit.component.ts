@@ -52,6 +52,7 @@ export class RentersManageEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.rooms = [];
+    this.rentals = [];
     this.currentUser = localStorage.getItem('currentUser');
     if (this.currentUser) {
       this.retrieveRentalsByCustomerId(this.currentUser);
@@ -100,7 +101,11 @@ export class RentersManageEditComponent implements OnInit {
           this.rentalsService.getFindByCustomerId(id, this.limit)
             .subscribe(
               (res: any) => {
-                this.rentals = res['rows'];
+                for (let item of res['rows']) {
+                  if(item.type != 1 || (item.type == 1 && item.quantity > 0)){
+                    this.rentals.push(item);
+                  }
+                }
               });
         },
         error => {

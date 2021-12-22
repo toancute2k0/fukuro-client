@@ -11,9 +11,10 @@ import {ToastrService} from "ngx-toastr";
 })
 export class MotelsManageCreateComponent implements OnInit {
   submitted = false;
+  isRentals = false;
   rentalForm = this.fb.group({
     name: ['', Validators.compose([Validators.required])],
-    price: ['', Validators.compose([Validators.required, Validators.pattern(/^\d+$/)])],
+    price: ['', Validators.compose([Validators.pattern(/^\d+$/)])],
     quantity: [0],
     type: ['', Validators.compose([Validators.required])],
     address: ['', Validators.compose([Validators.required])],
@@ -52,13 +53,22 @@ export class MotelsManageCreateComponent implements OnInit {
     this.rentalsService.create(data).subscribe(
       (res) => {
         this.resetForm();
-        this.toastrService.success(res.message);
+        this.toastrService.success('Thêm mới thành công!');
       },
       (error) => {
-        this.toastrService.error(error.message);
+        this.toastrService.error('Thêm mới thất bại!');
       }
     );
   }
+  change(event: any){
+    if(event.target.value == 1){
+      this.isRentals = true;
+      this.rentalForm.value['price'] = 0;
+    }else{
+      this.isRentals = false;
+    }
+  }
+
   resetForm(): void {
     this.submitted = false;
     this.rentalForm = this.fb.group({
