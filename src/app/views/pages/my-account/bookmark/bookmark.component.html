@@ -57,11 +57,11 @@
               <!-- Item #1 -->
               <tr *ngFor="let wish of bookMark">
                 <td class="property-container">
-                  <a routerLink="/thue-nha-dat/{{ wish.id }}">
+                  <a routerLink="/thue-nha-dat/{{ wish.slug }}">
                     <img src="{{linkImg}}{{wish.image[0]}}" alt="">
                   </a>
                   <div class="title">
-                    <h4><a routerLink="/thue-nha-dat/{{ wish.id }}">{{wish.name}}</a></h4>
+                    <h4><a routerLink="/thue-nha-dat/{{ wish.slug }}">{{wish.name}}</a></h4>
                     <span>{{wish.address}}</span>
                     <span class="table-property-price">
                       <i>{{wish.price | number }} Vnđ<sub>/tháng</sub></i>
