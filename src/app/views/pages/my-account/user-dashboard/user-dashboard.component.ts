@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { BookmarksService } from 'src/app/services/bookmarks.service';
 import { CustomersService } from 'src/app/services/customers.service';
 import { PremiumBillsService } from 'src/app/services/premium-bills.service';
 import { RentalNewsService } from 'src/app/services/rental-news.service';
-import {NotificationService} from "../../../../services/notification.service";
+import { NotificationService } from '../../../../services/notification.service';
 
 @Component({
   selector: 'app-user-dashboard',
@@ -26,7 +27,10 @@ export class UserDashboardComponent implements OnInit {
     private rentalNewsService: RentalNewsService,
     private preService: PremiumBillsService,
     private notificationService: NotificationService,
-  ) {}
+    private titleService: Title
+  ) {
+    this.titleService.setTitle('Quản tài khoản');
+  }
 
   ngOnInit(): void {
     this.id = localStorage.getItem('currentUser');
@@ -37,19 +41,25 @@ export class UserDashboardComponent implements OnInit {
       this.countNew();
     }
     this.customSer.profileId$.subscribe((profileId) => (this.id = profileId));
-    this.customSer.notifications$.subscribe((notifications) => this.countNewNotification = notifications);
+    this.customSer.notifications$.subscribe(
+      (notifications) => (this.countNewNotification = notifications)
+    );
   }
 
   countNew(): void {
-    this.notificationService.getByCustomerId(this.id, this.limit, this.status).subscribe((res: any | undefined) => {
-      if (res['count'] > this.limit) {
-        this.notificationService.getByCustomerId(this.id, this.limit, this.status).subscribe((data: any | undefined) => {
-          this.countNewNotification = data['count'];
-        });
-      } else {
-        this.countNewNotification = res['count'];
-      }
-    });
+    this.notificationService
+      .getByCustomerId(this.id, this.limit, this.status)
+      .subscribe((res: any | undefined) => {
+        if (res['count'] > this.limit) {
+          this.notificationService
+            .getByCustomerId(this.id, this.limit, this.status)
+            .subscribe((data: any | undefined) => {
+              this.countNewNotification = data['count'];
+            });
+        } else {
+          this.countNewNotification = res['count'];
+        }
+      });
   }
 
   openFilterSearch() {

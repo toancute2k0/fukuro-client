@@ -11,6 +11,7 @@ import { AnswersService } from 'src/app/services/answers.service';
 import { CustomersService } from 'src/app/services/customers.service';
 import { Customers } from 'src/app/models/customers.model';
 import { environment } from '../../../../../environments/environment';
+import { Title } from '@angular/platform-browser';
 @Component({
   selector: 'app-questions-and-answers-list',
   templateUrl: './questions-and-answers-list.component.html',
@@ -40,11 +41,13 @@ export class QuestionsAndAnswersListComponent implements OnInit {
     private toastrService: ToastrService,
     private questionService: QuestionService,
     private answersService: AnswersService,
+    private titleService: Title,
     private customerService: CustomersService
   ) {
     // customize default values of modals used by this component tree
     config.backdrop = 'static';
     config.keyboard = false;
+    this.titleService.setTitle('Hỏi đáp');
   }
   question = this.fb.group({
     content: ['', Validators.compose([Validators.required])],

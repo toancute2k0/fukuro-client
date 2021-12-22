@@ -11,6 +11,7 @@ import {
   GoogleLoginProvider,
   SocialUser,
 } from 'angularx-social-login';
+import { Title } from '@angular/platform-browser';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -55,10 +56,12 @@ export class RegisterComponent implements OnInit {
     private customSer: CustomersService,
     private _router: Router,
     private toastrService: ToastrService,
-
+    private titleService: Title,
     private auth: AuthService,
     private socialAuthService: SocialAuthService
-  ) {}
+  ) {
+    this.titleService.setTitle('Đăng ký');
+  }
 
   loginWithGoogle(): void {
     this.socialAuthService

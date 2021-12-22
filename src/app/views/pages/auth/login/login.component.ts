@@ -15,6 +15,7 @@ import {
   SocialUser,
 } from 'angularx-social-login';
 import { NotificationService } from '../../../../services/notification.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-login',
@@ -55,8 +56,11 @@ export class LoginComponent implements OnInit {
     private auth: AuthService,
     private socialAuthService: SocialAuthService,
     private customerPremiumServicesService: CustomerPremiumServicesService,
-    private notificationService: NotificationService
-  ) {}
+    private notificationService: NotificationService,
+    private titleService: Title
+  ) {
+    this.titleService.setTitle('Đăng nhập');
+  }
 
   ngOnInit(): void {
     // get return url from route parameters or default to '/'

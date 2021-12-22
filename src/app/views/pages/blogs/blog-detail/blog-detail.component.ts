@@ -11,7 +11,8 @@ import { ToastrService } from 'ngx-toastr';
 import { Comments } from 'src/app/models/comments.model';
 import { CustomersService } from 'src/app/services/customers.service';
 import { Customers } from 'src/app/models/customers.model';
-import {environment} from "../../../../../environments/environment";
+import { environment } from '../../../../../environments/environment';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-blog-detail',
@@ -41,13 +42,10 @@ export class BlogDetailComponent implements OnInit {
     private commentsService: CommentsService,
     private customerSer: CustomersService,
     private toastrService: ToastrService,
-    private _router: Router,
+    private _router: Router
   ) {}
   comment = this.fb.group({
-    content: [
-      '',
-      Validators.compose([Validators.required]),
-    ],
+    content: ['', Validators.compose([Validators.required])],
   });
   ngOnInit(): void {
     const slug = this.route.snapshot.paramMap.get('slug');
@@ -66,7 +64,8 @@ export class BlogDetailComponent implements OnInit {
     this.blogSer.getAll(this.page, this.limit, this.orderby).subscribe(
       (data: any | undefined) => {
         for (var i = 0; i < data['rows'].length; i++) {
-          data['rows'][i].thumbnail = environment.linkImg+data['rows'][i].thumbnail;
+          data['rows'][i].thumbnail =
+            environment.linkImg + data['rows'][i].thumbnail;
         }
         this.blogs = data['rows'];
       },
@@ -79,7 +78,7 @@ export class BlogDetailComponent implements OnInit {
   getBySlug(slug: string): void {
     this.blogSer.getBySlug(slug).subscribe(
       (data: any | undefined) => {
-        data.thumbnail = environment.linkImg+data.thumbnail;
+        data.thumbnail = environment.linkImg + data.thumbnail;
         this.blog_details = data;
         this.id_blog = data.id;
         this.tag = JSON.parse(data.tag);
@@ -91,7 +90,7 @@ export class BlogDetailComponent implements OnInit {
     );
   }
 
-  redirect(slug: any){
+  redirect(slug: any) {
     this.getBySlug(slug);
     this._router.navigate([`/bai-viet/${slug}`]);
   }
@@ -102,13 +101,14 @@ export class BlogDetailComponent implements OnInit {
         this.cmt = data['rows'];
         this.count = data['count'];
         for (let item of data['rows']) {
-          if(item.Customer.avatar == null){
+          if (item.Customer.avatar == null) {
             item.Customer.avatarCus = 'https://via.placeholder.com/400x400';
           }
-          if(item.Customer.avatar != null && item.Customer.google_id == null){
-            item.Customer.avatarCus = environment.linkImg+item.Customer.avatar;
+          if (item.Customer.avatar != null && item.Customer.google_id == null) {
+            item.Customer.avatarCus =
+              environment.linkImg + item.Customer.avatar;
           }
-          if(item.Customer.avatar != null && item.Customer.google_id != null){
+          if (item.Customer.avatar != null && item.Customer.google_id != null) {
             item.Customer.avatarCus = item.Customer.avatar;
           }
         }
@@ -130,7 +130,7 @@ export class BlogDetailComponent implements OnInit {
       content: this.comment.value['content'],
       customer_id: localStorage.getItem('currentUser'),
       blog_id: this.blog_details?.id,
-      status: 1
+      status: 1,
     };
     this.commentsService.create(data).subscribe(
       (response: any) => {

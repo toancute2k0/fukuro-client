@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { RentalNews } from 'src/app/models/rental-news.model';
@@ -109,8 +110,11 @@ export class RentalNewsComponent implements OnInit {
     private toastrService: ToastrService,
     private http: HttpClient,
     private customerPremiumServicesService: CustomerPremiumServicesService,
-    private rentalNewsService: RentalNewsService
-  ) {}
+    private rentalNewsService: RentalNewsService,
+    private titleService: Title
+  ) {
+    this.titleService.setTitle('Đăng tin cho thuê');
+  }
 
   ngOnInit(): void {
     this.expireCus = [];

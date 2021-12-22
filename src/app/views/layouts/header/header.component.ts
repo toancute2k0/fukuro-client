@@ -5,10 +5,10 @@ import { AuthService } from 'src/app/services/auth.service';
 import { BlogCategoriesService } from 'src/app/services/blog-categories.service';
 import { BlogsService } from 'src/app/services/blogs.service';
 import { CustomersService } from 'src/app/services/customers.service';
-import {ActivatedRoute, Router} from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from '../../../../environments/environment';
-import {CustomerPremiumServicesService} from "../../../services/customer-premium-services.service";
-import {NotificationService} from "../../../services/notification.service";
+import { CustomerPremiumServicesService } from '../../../services/customer-premium-services.service';
+import { NotificationService } from '../../../services/notification.service';
 
 @Component({
   selector: 'app-header',
@@ -57,45 +57,58 @@ export class HeaderComponent implements OnInit {
     this.customSer.profileUsername$.subscribe(
       (profileUsername) => (this.username = profileUsername)
     );
-    this.customSer.notifications$.subscribe((notifications) => this.countNewNotification = notifications);
-    this.customSer.checkPremium$.subscribe((checkPremium) => this.manage = checkPremium);
+    this.customSer.notifications$.subscribe(
+      (notifications) => (this.countNewNotification = notifications)
+    );
+    this.customSer.checkPremium$.subscribe(
+      (checkPremium) => (this.manage = checkPremium)
+    );
   }
 
   countNoti(): void {
-    this.notificationService.getByCustomerId(this.id, this.limit, this.status).subscribe((res: any | undefined) => {
-      if (res['count'] > this.limit) {
-        this.notificationService.getByCustomerId(this.id, this.limit, this.status).subscribe((data: any | undefined) => {
-          this.countNewNotification = data['count'];
-        });
-      } else {
-        this.countNewNotification = res['count'];
-      }
-    });
+    this.notificationService
+      .getByCustomerId(this.id, this.limit, this.status)
+      .subscribe((res: any | undefined) => {
+        if (res['count'] > this.limit) {
+          this.notificationService
+            .getByCustomerId(this.id, this.limit, this.status)
+            .subscribe((data: any | undefined) => {
+              this.countNewNotification = data['count'];
+            });
+        } else {
+          this.countNewNotification = res['count'];
+        }
+      });
   }
 
   getData(): void {
-    this.customerPremiumServicesService.checkPremiumByCustomerId(this.id).subscribe((data: any | undefined) => {
-      if(data.count > 0){
-        for (let item of data.rows) {
-          if(item.PremiumService.type == 2 || item.PremiumService.type == 3){
-            this.manage = 'registered';
+    this.customerPremiumServicesService
+      .checkPremiumByCustomerId(this.id)
+      .subscribe((data: any | undefined) => {
+        if (data.count > 0) {
+          for (let item of data.rows) {
+            if (
+              item.PremiumService.type == 2 ||
+              item.PremiumService.type == 3
+            ) {
+              this.manage = 'registered';
+            }
           }
         }
-      }
-    });
+      });
   }
 
   getById(id: string): void {
     this.customSer.get(id).subscribe((res) => {
-      if(res.avatar == null){
+      if (res.avatar == null) {
         this.avatar = 'https://via.placeholder.com/200x200';
         this.customSer.profileImageUpdate$.next(this.avatar);
       }
-      if(res.avatar != null  && res.googleId != null){
+      if (res.avatar != null && res.googleId != null) {
         this.avatar = res['avatar'];
         this.customSer.profileImageUpdate$.next(this.avatar);
       }
-      if(res.avatar != null  && res.googleId == null){
+      if (res.avatar != null && res.googleId == null) {
         this.avatar = this.linkImg + res['avatar'];
         this.customSer.profileImageUpdate$.next(this.avatar);
       }

@@ -6,6 +6,7 @@ import { Customers } from 'src/app/models/customers.model';
 import { CustomersService } from 'src/app/services/customers.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { first } from 'rxjs/operators';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-forgot-password',
@@ -31,8 +32,11 @@ export class ForgotPasswordComponent implements OnInit {
     private route: ActivatedRoute,
     private _router: Router,
     private toastrService: ToastrService,
-    private auth: AuthService
-  ) {}
+    private auth: AuthService,
+    private titleService: Title
+  ) {
+    this.titleService.setTitle('Quên mật khẩu');
+  }
 
   ngOnInit(): void {}
 

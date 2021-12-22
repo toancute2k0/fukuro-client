@@ -8,6 +8,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { CustomersService } from 'src/app/services/customers.service';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-motel-list',
@@ -56,8 +57,11 @@ export class MotelListComponent implements OnInit {
     public auth: AuthService,
     private customSer: CustomersService,
     private route: ActivatedRoute,
-    private _router: Router
-  ) {}
+    private _router: Router,
+    private titleService: Title
+  ) {
+    this.titleService.setTitle('Tìm thuê');
+  }
 
   search = this.fb.group({
     search: [''],
