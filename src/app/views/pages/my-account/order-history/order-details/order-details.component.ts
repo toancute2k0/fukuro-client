@@ -36,7 +36,7 @@ import { PremiumServiceService } from 'src/app/services/premium-service.service'
       this.premiumServiceService
         .get(res.premiumId)
         .subscribe((data: any | undefined) => {
-          this.premium = data.name;
+          this.premium = data['rows'][0].name;
         });
     });
   }
