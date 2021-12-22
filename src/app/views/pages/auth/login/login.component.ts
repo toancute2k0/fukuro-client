@@ -6,7 +6,7 @@ import { Customers } from 'src/app/models/customers.model';
 import { CustomersService } from 'src/app/services/customers.service';
 import { CustomerPremiumServicesService } from 'src/app/services/customer-premium-services.service';
 import { AuthService } from 'src/app/services/auth.service';
-import {environment} from "../../../../../environments/environment";
+import { environment } from '../../../../../environments/environment';
 import { first } from 'rxjs/operators';
 
 import {
@@ -14,8 +14,7 @@ import {
   GoogleLoginProvider,
   SocialUser,
 } from 'angularx-social-login';
-import {NotificationService} from "../../../../services/notification.service";
-
+import { NotificationService } from '../../../../services/notification.service';
 
 @Component({
   selector: 'app-login',
@@ -56,7 +55,7 @@ export class LoginComponent implements OnInit {
     private auth: AuthService,
     private socialAuthService: SocialAuthService,
     private customerPremiumServicesService: CustomerPremiumServicesService,
-    private notificationService: NotificationService,
+    private notificationService: NotificationService
   ) {}
 
   ngOnInit(): void {
@@ -79,42 +78,48 @@ export class LoginComponent implements OnInit {
       .pipe(first())
       .subscribe(
         (data) => {
-          if(data.data.avatar == null){
+          if (data.data.avatar == null) {
             this.avatar = 'https://via.placeholder.com/200x200';
           }
-          if(data.data.avatar != null && data.data.googleId != null){
+          if (data.data.avatar != null && data.data.googleId != null) {
             this.avatar = data.data.avatar;
           }
-          if(data.data.avatar != null && data.data.googleId == null){
+          if (data.data.avatar != null && data.data.googleId == null) {
             this.avatar = this.linkImg + data.data.avatar;
           }
-          if(data.data.firstName != null && data.data.lastName != null){
+          if (data.data.firstName != null && data.data.lastName != null) {
             this.name = data.data.firstName + ' ' + data.data.lastName;
           }
-          if(data.data.firstName != null && data.data.lastName != null){
+          if (data.data.firstName != null && data.data.lastName != null) {
             this.name = data.data.firstName + ' ' + data.data.lastName;
           }
-          if(data.data.firstName == null && data.data.lastName == null){
+          if (data.data.firstName == null && data.data.lastName == null) {
             this.name = data.data.username;
           }
-          this.notificationService.getByCustomerId(data.data.id, this.limit, this.status).subscribe((res: any | undefined) => {
-            if (res['count'] > this.limit) {
-              this.notificationService.getByCustomerId(data.data.id, this.limit, this.status).subscribe((data: any | undefined) => {
-                this.customSer.notifications$.next(data['count']);
-              });
-            } else {
-              this.customSer.notifications$.next(res['count']);
-            }
-          });
-          this.customerPremiumServicesService.checkPremiumByCustomerId(data.data.id).subscribe((data: any | undefined) => {
-            if(data.count > 0){
-              for (let item of data.rows) {
-                if(item.PremiumService.type == 2){
-                  this.customSer.checkPremium$.next('registered');
+          this.notificationService
+            .getByCustomerId(data.data.id, this.limit, this.status)
+            .subscribe((res: any | undefined) => {
+              if (res['count'] > this.limit) {
+                this.notificationService
+                  .getByCustomerId(data.data.id, this.limit, this.status)
+                  .subscribe((data: any | undefined) => {
+                    this.customSer.notifications$.next(data['count']);
+                  });
+              } else {
+                this.customSer.notifications$.next(res['count']);
+              }
+            });
+          this.customerPremiumServicesService
+            .checkPremiumByCustomerId(data.data.id)
+            .subscribe((data: any | undefined) => {
+              if (data.count > 0) {
+                for (let item of data.rows) {
+                  if (item.PremiumService.type == 2) {
+                    this.customSer.checkPremium$.next('registered');
+                  }
                 }
               }
-            }
-          });
+            });
           localStorage.setItem('token', data.token);
           const time_to_login = Date.now() + 604800000; // one week
           localStorage.setItem('timer', JSON.stringify(time_to_login));
@@ -148,26 +153,26 @@ export class LoginComponent implements OnInit {
         };
 
         this.submitted = true;
-        console.log(res.idToken);
+        // console.log(res.idToken);
 
         this.customSer.loginWithGoogle(data).subscribe(
           (res) => {
-            if(res.data.avatar == null){
+            if (res.data.avatar == null) {
               this.avatar = 'https://via.placeholder.com/200x200';
             }
-            if(res.data.avatar != null && res.data.googleId != null){
+            if (res.data.avatar != null && res.data.googleId != null) {
               this.avatar = res.data.avatar;
             }
-            if(res.data.avatar != null && res.data.googleId == null){
+            if (res.data.avatar != null && res.data.googleId == null) {
               this.avatar = this.linkImg + res.data.avatar;
             }
-            if(res.data.firstName != null && res.data.lastName != null){
+            if (res.data.firstName != null && res.data.lastName != null) {
               this.name = res.data.firstName + ' ' + res.data.lastName;
             }
-            if(res.data.firstName != null && res.data.lastName != null){
+            if (res.data.firstName != null && res.data.lastName != null) {
               this.name = res.data.firstName + ' ' + res.data.lastName;
             }
-            if(res.data.firstName == null && res.data.lastName == null){
+            if (res.data.firstName == null && res.data.lastName == null) {
               this.name = res.data.username;
             }
             this.customSer.profileImageUpdate$.next(this.avatar);

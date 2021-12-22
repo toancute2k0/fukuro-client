@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, Validators} from "@angular/forms";
-import {RentalsService} from "../../../../../services/rentals.service";
-import {ActivatedRoute, Router} from "@angular/router";
-import {ToastrService} from "ngx-toastr";
-import {RentalRoomsService} from "../../../../../services/rental-rooms.service";
-import {RentersService} from "../../../../../services/renters.service";
-import {RentalBillsService} from "../../../../../services/rental-bills.service";
+import { FormBuilder, Validators } from '@angular/forms';
+import { RentalsService } from '../../../../../services/rentals.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { RentalRoomsService } from '../../../../../services/rental-rooms.service';
+import { RentersService } from '../../../../../services/renters.service';
+import { RentalBillsService } from '../../../../../services/rental-bills.service';
 
 @Component({
   selector: 'app-bills-manage-edit',
@@ -23,17 +23,38 @@ export class BillsManageEditComponent implements OnInit {
   isRoom = 0;
   billForm = this.fb.group({
     name: ['', Validators.compose([Validators.required])],
-    price: ['', Validators.compose([Validators.required, Validators.pattern(/^\d+$/)])],
-    electricityStart: ['', Validators.compose([Validators.required, Validators.pattern(/^\d+$/)])],
-    electricityEnd: ['', Validators.compose([Validators.required, Validators.pattern(/^\d+$/)])],
+    price: [
+      '',
+      Validators.compose([Validators.required, Validators.pattern(/^\d+$/)]),
+    ],
+    electricityStart: [
+      '',
+      Validators.compose([Validators.required, Validators.pattern(/^\d+$/)]),
+    ],
+    electricityEnd: [
+      '',
+      Validators.compose([Validators.required, Validators.pattern(/^\d+$/)]),
+    ],
     electricityQuantity: [''],
     electricityAmount: [''],
-    electricityPrice: ['', Validators.compose([Validators.required, Validators.pattern(/^\d+$/)])],
-    waterStart: ['', Validators.compose([Validators.required, Validators.pattern(/^\d+$/)])],
-    waterEnd: ['', Validators.compose([Validators.required, Validators.pattern(/^\d+$/)])],
+    electricityPrice: [
+      '',
+      Validators.compose([Validators.required, Validators.pattern(/^\d+$/)]),
+    ],
+    waterStart: [
+      '',
+      Validators.compose([Validators.required, Validators.pattern(/^\d+$/)]),
+    ],
+    waterEnd: [
+      '',
+      Validators.compose([Validators.required, Validators.pattern(/^\d+$/)]),
+    ],
     waterQuantity: [''],
     waterAmount: [''],
-    waterPrice: ['', Validators.compose([Validators.required, Validators.pattern(/^\d+$/)])],
+    waterPrice: [
+      '',
+      Validators.compose([Validators.required, Validators.pattern(/^\d+$/)]),
+    ],
     internetFee: [''],
     otherFee: [''],
     feeDesc: [''],
@@ -55,7 +76,7 @@ export class BillsManageEditComponent implements OnInit {
     private rentalRoomsService: RentalRoomsService,
     private rentersService: RentersService,
     private rentalBillsService: RentalBillsService,
-    private activatedRoute: ActivatedRoute,
+    private activatedRoute: ActivatedRoute
   ) {}
 
   get f() {
@@ -73,98 +94,120 @@ export class BillsManageEditComponent implements OnInit {
   }
 
   getData(id: any): void {
-    this.rentalBillsService.get(id)
-      .subscribe(
-        (data: any) => {
-          this.billForm = this.fb.group({
-            name: [data.name, Validators.compose([Validators.required])],
-            price: [data.price, Validators.compose([Validators.required, Validators.pattern(/^\d+$/)])],
-            electricityQuantity: [data.electricityQuantity],
-            electricityAmount: [data.electricityQuantity * data.electricityPrice],
-            electricityPrice: [data.electricityPrice, Validators.compose([Validators.required, Validators.pattern(/^\d+$/)])],
-            waterQuantity: [data.waterQuantity],
-            waterAmount: [data.waterQuantity * data.waterPrice],
-            waterPrice: [data.waterPrice, Validators.compose([Validators.required, Validators.pattern(/^\d+$/)])],
-            internetFee: [data.internetFee],
-            otherFee: [data.otherFee],
-            feeDesc: [data.feeDesc],
-            prepay: [data.prepay, Validators.compose([Validators.pattern(/^\d+$/)])],
-            discountPrice: [data.discountPrice, Validators.compose([Validators.pattern(/^\d+$/)])],
-            totalPrice: [data.totalPrice],
-            note: [data.note],
-            status: [data.status, Validators.compose([Validators.required])],
-            rentalId: [data.rentalId, Validators.compose([Validators.required])],
-            rentalRoomId: [data.rentalRoomId],
-          });
-          this.rentalsService.get(data.rentalId)
-            .subscribe(
-              (data: any) => {
-                if(data.type == 1){
-                  this.isRoom = 1;
-                  this.retrieveRoomsByRentalId(data.rentalId);
-                }
-              });
-        },
-        (error: any) => {
-          console.log(error);
+    this.rentalBillsService.get(id).subscribe(
+      (data: any) => {
+        this.billForm = this.fb.group({
+          name: [data.name, Validators.compose([Validators.required])],
+          price: [
+            data.price,
+            Validators.compose([
+              Validators.required,
+              Validators.pattern(/^\d+$/),
+            ]),
+          ],
+          electricityQuantity: [data.electricityQuantity],
+          electricityAmount: [data.electricityQuantity * data.electricityPrice],
+          electricityPrice: [
+            data.electricityPrice,
+            Validators.compose([
+              Validators.required,
+              Validators.pattern(/^\d+$/),
+            ]),
+          ],
+          waterQuantity: [data.waterQuantity],
+          waterAmount: [data.waterQuantity * data.waterPrice],
+          waterPrice: [
+            data.waterPrice,
+            Validators.compose([
+              Validators.required,
+              Validators.pattern(/^\d+$/),
+            ]),
+          ],
+          internetFee: [data.internetFee],
+          otherFee: [data.otherFee],
+          feeDesc: [data.feeDesc],
+          prepay: [
+            data.prepay,
+            Validators.compose([Validators.pattern(/^\d+$/)]),
+          ],
+          discountPrice: [
+            data.discountPrice,
+            Validators.compose([Validators.pattern(/^\d+$/)]),
+          ],
+          totalPrice: [data.totalPrice],
+          note: [data.note],
+          status: [data.status, Validators.compose([Validators.required])],
+          rentalId: [data.rentalId, Validators.compose([Validators.required])],
+          rentalRoomId: [data.rentalRoomId],
         });
+        this.rentalsService.get(data.rentalId).subscribe((data: any) => {
+          if (data.type == 1) {
+            this.isRoom = 1;
+            this.retrieveRoomsByRentalId(data.rentalId);
+          }
+        });
+      },
+      (error: any) => {
+        console.log(error);
+      }
+    );
   }
 
   retrieveRentalsByCustomerId(id: any): void {
-    this.rentalsService.getFindByCustomerId(id, this.limit)
-      .subscribe(
-        (data: any) => {
-          this.limit = data['count'];
-          this.rentalsService.getFindByCustomerId(id, this.limit)
-            .subscribe(
-              (res: any) => {
-                for (let item of res['rows']) {
-                  if(item.type != 1 || (item.type == 1 && item.quantity > 0)){
-                    this.rentals.push(item);
-                  }
-                }
-              });
-        },
-        error => {
-          console.log(error);
-        });
+    this.rentalsService.getFindByCustomerId(id, this.limit).subscribe(
+      (data: any) => {
+        this.limit = data['count'];
+        this.rentalsService
+          .getFindByCustomerId(id, this.limit)
+          .subscribe((res: any) => {
+            for (let item of res['rows']) {
+              if (item.type != 1 || (item.type == 1 && item.quantity > 0)) {
+                this.rentals.push(item);
+              }
+            }
+          });
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
-  change(event: any){
-    if(event.target.value != ''){
+  change(event: any) {
+    if (event.target.value != '') {
       for (let item of this.rentals) {
-        if(item.id == event.target.value && item.type == 1){
+        if (item.id == event.target.value && item.type == 1) {
           this.isRoom = 1;
-          this.billForm.patchValue({price: item.price});
+          this.billForm.patchValue({ price: item.price });
           this.retrieveRoomsByRentalId(item.id);
         }
-        if(item.id == event.target.value && item.type > 1){
-          this.billForm.patchValue({price: item.price});
+        if (item.id == event.target.value && item.type > 1) {
+          this.billForm.patchValue({ price: item.price });
           this.billForm.value['rentalRoomId'] = '';
           this.isRoom = 0;
         }
       }
-    }else{
-      this.billForm.patchValue({price: ''});
+    } else {
+      this.billForm.patchValue({ price: '' });
       this.billForm.value['rentalRoomId'] = '';
       this.isRoom = 0;
     }
   }
 
   retrieveRoomsByRentalId(id: any): void {
-    this.rentalRoomsService.getFindByRentalId(id, this.limit2)
-      .subscribe(
-        (data: any) => {
-          this.limit2 = data['count'];
-          this.rentalRoomsService.getFindByRentalId(id, this.limit2)
-            .subscribe(
-              (res: any) => {
-                this.rooms = res['rows'];
-              });
-        },
-        error => {
-          console.log(error);
-        });
+    this.rentalRoomsService.getFindByRentalId(id, this.limit2).subscribe(
+      (data: any) => {
+        this.limit2 = data['count'];
+        this.rentalRoomsService
+          .getFindByRentalId(id, this.limit2)
+          .subscribe((res: any) => {
+            this.rooms = res['rows'];
+          });
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
   onSubmit(): any {
@@ -174,24 +217,34 @@ export class BillsManageEditComponent implements OnInit {
       return false;
     }
 
-    this.billForm.value['totalPrice']= Number(this.billForm.value['totalPrice']);
+    this.billForm.value['totalPrice'] = Number(
+      this.billForm.value['totalPrice']
+    );
     this.billForm.value['totalPrice'] =
-      (
-        Number(this.billForm.value['price']) +
-        Number(this.billForm.value['electricityAmount']) +
-        Number(this.billForm.value['waterAmount'] )
+      Number(this.billForm.value['price']) +
+      Number(this.billForm.value['electricityAmount']) +
+      Number(this.billForm.value['waterAmount']);
+    if (this.billForm.value['internetFee'] != '') {
+      this.billForm.value['totalPrice'] += Number(
+        this.billForm.value['internetFee']
       );
-    if(this.billForm.value['internetFee'] != '' ){
-      this.billForm.value['totalPrice'] += Number(this.billForm.value['internetFee']);
     }
-    if(this.billForm.value['otherFee'] != '' ){
-      this.billForm.value['totalPrice'] += Number(this.billForm.value['otherFee']);
+    if (this.billForm.value['otherFee'] != '') {
+      this.billForm.value['totalPrice'] += Number(
+        this.billForm.value['otherFee']
+      );
     }
-    if(this.billForm.value['prepay'] != '' ){
-      this.billForm.value['totalPrice'] -= Number(this.billForm.value['prepay']);
+    if (this.billForm.value['prepay'] != '') {
+      this.billForm.value['totalPrice'] -= Number(
+        this.billForm.value['prepay']
+      );
     }
-    if(this.billForm.value['discountPrice'] != '' ){
-      this.billForm.value['totalPrice'] = this.billForm.value['totalPrice'] - (this.billForm.value['totalPrice'] * Number(this.billForm.value['discountPrice']) / 100);
+    if (this.billForm.value['discountPrice'] != '') {
+      this.billForm.value['totalPrice'] =
+        this.billForm.value['totalPrice'] -
+        (this.billForm.value['totalPrice'] *
+          Number(this.billForm.value['discountPrice'])) /
+          100;
     }
 
     const data = {
@@ -207,22 +260,20 @@ export class BillsManageEditComponent implements OnInit {
       status: this.billForm.value['status'],
       rentalId: this.billForm.value['rentalId'],
       rentalRoomId: this.billForm.value['rentalRoomId'],
-    }
-    console.log(data);
-    this.rentalsService.get(data.rentalId)
-      .subscribe(
+    };
+    // console.log(data);
+    this.rentalsService.get(data.rentalId).subscribe((res: any) => {
+      if (res.type != 1) {
+        data.rentalRoomId = null;
+      }
+      this.rentalBillsService.update(this.id, data).subscribe(
         (res: any) => {
-          if (res.type != 1) {
-            data.rentalRoomId = null;
-          }
-          this.rentalBillsService.update(this.id, data).subscribe(
-            (res: any) => {
-              this.toastrService.success(res.message);
-            },
-            (error: any) => {
-              this.toastrService.error(error.message);
-            }
-          );
-        });
+          this.toastrService.success(res.message);
+        },
+        (error: any) => {
+          this.toastrService.error(error.message);
+        }
+      );
+    });
   }
 }

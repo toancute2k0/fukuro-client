@@ -108,7 +108,7 @@ export class RegisterComponent implements OnInit {
     this.customSer.create(this.register.value).subscribe(
       (res) => {
         // console.log(res);
-        console.log(res.message);
+        // console.log(res.message);
         if (res.message) {
           this.error = res.message;
           this.toastrService.error(this.error);

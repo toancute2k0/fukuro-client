@@ -26,7 +26,7 @@ export class MotelSearchComponent implements OnInit {
   ngOnInit(): void {
     this.rentalSer.getAllDistrict().subscribe((res: any | undefined) => {
       this.district = res['rows'];
-      console.log(res['rows']);
+      // console.log(res['rows']);
     });
   }
 
@@ -36,7 +36,7 @@ export class MotelSearchComponent implements OnInit {
       this.router.navigate(['/thue-nha-dat/tim-kiem'], {
         queryParams: { search: res['rows'][event.target.value].district },
       });
-      console.log(res['rows'][event.target.value].district);
+      // console.log(res['rows'][event.target.value].district);
     });
   }
 }

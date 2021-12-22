@@ -22,12 +22,7 @@ export class ForgotPasswordComponent implements OnInit {
       '',
       Validators.compose([Validators.required, Validators.minLength(6)]),
     ],
-    email: [
-      '',
-      Validators.compose([
-        Validators.required,
-        Validators.email]),
-    ],
+    email: ['', Validators.compose([Validators.required, Validators.email])],
   });
 
   constructor(
@@ -36,7 +31,7 @@ export class ForgotPasswordComponent implements OnInit {
     private route: ActivatedRoute,
     private _router: Router,
     private toastrService: ToastrService,
-    private auth: AuthService,
+    private auth: AuthService
   ) {}
 
   ngOnInit(): void {}
@@ -53,17 +48,19 @@ export class ForgotPasswordComponent implements OnInit {
     }
     this.customSer.forgotPassword(this.forgotPassword.value).subscribe(
       (response) => {
-        console.log(response);
+        // console.log(response);
       },
       (error) => {
-        if(error.error.text == "Success"){
+        if (error.error.text == 'Success') {
           this.done = true;
-          this.toastrService.success('Gửi yêu cầu thành công! Vui lòng kiểm tra email!!');
-        }
-        else {
+          this.toastrService.success(
+            'Gửi yêu cầu thành công! Vui lòng kiểm tra email!!'
+          );
+        } else {
           this.done = false;
           this.toastrService.error(error.error.text);
         }
-      });
+      }
+    );
   }
 }

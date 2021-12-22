@@ -6,7 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { RentalNews } from 'src/app/models/rental-news.model';
 import { RentalNewsService } from 'src/app/services/rental-news.service';
 import { environment } from 'src/environments/environment';
-import {CustomerPremiumServicesService} from "../../../services/customer-premium-services.service";
+import { CustomerPremiumServicesService } from '../../../services/customer-premium-services.service';
 
 @Component({
   selector: 'app-rental-news',
@@ -45,25 +45,25 @@ export class RentalNewsComponent implements OnInit {
       switch (componentType) {
         case 'street_number': {
           this.streetNumber = `${component.long_name}`;
-          console.log(this.streetNumber);
+          // console.log(this.streetNumber);
           break;
         }
 
         case 'route': {
           this.street += component.short_name;
-          console.log(this.street);
+          // console.log(this.street);
           break;
         }
 
         case 'administrative_area_level_2': {
           this.district = `${component.long_name}`;
-          console.log(this.district);
+          // console.log(this.district);
           break;
         }
 
         case 'administrative_area_level_1': {
           this.city = `${component.long_name}`;
-          console.log(this.city);
+          // console.log(this.city);
           break;
         }
       }
@@ -109,7 +109,7 @@ export class RentalNewsComponent implements OnInit {
     private toastrService: ToastrService,
     private http: HttpClient,
     private customerPremiumServicesService: CustomerPremiumServicesService,
-    private rentalNewsService: RentalNewsService,
+    private rentalNewsService: RentalNewsService
   ) {}
 
   ngOnInit(): void {
@@ -206,27 +206,30 @@ export class RentalNewsComponent implements OnInit {
   }
 
   getData(): void {
-    this.customerPremiumServicesService.checkPremiumByCustomerId(this.id).subscribe((data: any | undefined) => {
-      if(data['count'] == 0){
-        this.rentalNewsService.getfindByCustomerId(this.id).subscribe(
-          (res: any | undefined) => {
-            if(res['count'] >= 3){
-              this.expire = true;
+    this.customerPremiumServicesService
+      .checkPremiumByCustomerId(this.id)
+      .subscribe((data: any | undefined) => {
+        if (data['count'] == 0) {
+          this.rentalNewsService
+            .getfindByCustomerId(this.id)
+            .subscribe((res: any | undefined) => {
+              if (res['count'] >= 3) {
+                this.expire = true;
+              }
+            });
+        } else {
+          for (let item of data['rows']) {
+            if (item.PremiumService.type == 1) {
+              this.expire = false;
             }
-          });
-      }else{
-        for (let item of data['rows']) {
-          if(item.PremiumService.type == 1){
-            this.expire = false;
           }
         }
-      }
-    });
+      });
   }
 
   onRemove(event: any) {
-    console.log(event);
-    console.log(this.multipleImages);
+    // console.log(event);
+    // console.log(this.multipleImages);
     this.multipleImages.splice(this.multipleImages.indexOf(event), 1);
   }
 

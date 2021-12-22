@@ -9,16 +9,16 @@ import { QuestionService } from 'src/app/services/question.service';
 import { AnswersService } from 'src/app/services/answers.service';
 import { CustomersService } from 'src/app/services/customers.service';
 import { Customers } from 'src/app/models/customers.model';
-import { environment } from "../../../../../environments/environment";
+import { environment } from '../../../../../environments/environment';
 @Component({
   selector: 'app-question-by-cat',
   templateUrl: './question-by-cat.component.html',
-  styleUrls: ['./question-by-cat.component.css']
+  styleUrls: ['./question-by-cat.component.css'],
 })
 export class QuestionByCatComponent implements OnInit {
   cp: number = 1;
   avatar?: any;
-  name?: any
+  name?: any;
   cat?: BlogCategories[];
   qtscat?: any;
   submitted = false;
@@ -40,24 +40,16 @@ export class QuestionByCatComponent implements OnInit {
     private toastrService: ToastrService,
     private questionService: QuestionService,
     private answersService: AnswersService,
-    private customerService: CustomersService,
+    private customerService: CustomersService
   ) {
     // customize default values of modals used by this component tree
     config.backdrop = 'static';
     config.keyboard = false;
-
   }
   question = this.fb.group({
-
     content: ['', Validators.compose([Validators.required])],
-    question_category_id: [
-      '',
-      Validators.compose([Validators.required]),
-    ],
-    title: [
-      '',
-      Validators.compose([Validators.required]),
-    ],
+    question_category_id: ['', Validators.compose([Validators.required])],
+    title: ['', Validators.compose([Validators.required])],
     slug: [''],
   });
   open(content: any) {
@@ -67,7 +59,7 @@ export class QuestionByCatComponent implements OnInit {
     const id_cat = this.route.snapshot.paramMap.get('id');
     if (id_cat) {
       this.qtscat = id_cat;
-      console.log(id_cat)
+      // console.log(id_cat)
       this.getAllByIdCat(id_cat);
     }
     this.catQuestions.getAllCat().subscribe((res: any | undefined) => {
@@ -80,21 +72,24 @@ export class QuestionByCatComponent implements OnInit {
       },
       (err) => {
         console.log(err);
-      });
+      }
+    );
     this.answersService.getAll(this.page, this.countquestion).subscribe(
       (data: any | undefined) => {
         this.countanw = data['count'];
       },
       (err) => {
         console.log(err);
-      });
+      }
+    );
     this.customerService.getAll().subscribe(
       (data: any | undefined) => {
         this.countuser = data['count'];
       },
       (err) => {
         console.log(err);
-      });
+      }
+    );
   }
   get f() {
     return this.question.controls;
@@ -103,7 +98,7 @@ export class QuestionByCatComponent implements OnInit {
     this.questionService.getAllByIdCat(cat_id).subscribe(
       (data: any) => {
         this.questionList = data['rows'];
-        console.log(this.questionList);
+        // console.log(this.questionList);
       },
       (err) => {
         console.log(err);
@@ -115,8 +110,8 @@ export class QuestionByCatComponent implements OnInit {
     this.catQuestions.getAllCat().subscribe((res: any | undefined) => {
       this.cat = res['rows'];
     });
-      this.getAllByIdCat(id);
-      this.qtscat=id;
+    this.getAllByIdCat(id);
+    this.qtscat = id;
   }
   getById(id: string): void {
     this.customerService.get(id).subscribe((res) => {
@@ -197,8 +192,7 @@ export class QuestionByCatComponent implements OnInit {
       content: [''],
       question_category_id: [''],
       title: [''],
-      slug: ['']
+      slug: [''],
     });
   }
-
 }
