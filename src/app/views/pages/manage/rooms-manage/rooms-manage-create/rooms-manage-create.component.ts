@@ -98,10 +98,10 @@ export class RoomsManageCreateComponent implements OnInit {
     this.rentalRoomsService.create(data).subscribe(
       (res) => {
         this.resetForm();
-        this.toastrService.success(res.message);
+        this.toastrService.success('Thêm mới thành công!');
       },
       (error) => {
-        this.toastrService.error(error.message);
+        this.toastrService.error('Thêm mới thất bại!');
       }
     );
   }

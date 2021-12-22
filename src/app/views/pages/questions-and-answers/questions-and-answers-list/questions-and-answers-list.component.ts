@@ -63,6 +63,9 @@ export class QuestionsAndAnswersListComponent implements OnInit {
   open(content:any) {
     this.modalService.open(content);
   }
+  close(content:any){
+    this.modalService.dismissAll(content);
+  }
   ngOnInit(): void {
     this.catQuestions.getAllCat().subscribe((res: any | undefined) => {
       this.cat = res['rows'];
@@ -178,8 +181,10 @@ export class QuestionsAndAnswersListComponent implements OnInit {
       (response: any) => {
         this.resetForm();
         this.toastrService.success('Đăng câu hỏi thành công!');
-         this.getQuestion(1,this.count);
+        this.getQuestion(1, this.count);
+        this.modalService.dismissAll();
       },
+      
       (error) => {
         this.toastrService.success('Đăng câu hỏi thất bại!');
       }

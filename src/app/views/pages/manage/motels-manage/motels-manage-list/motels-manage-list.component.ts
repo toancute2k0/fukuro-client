@@ -39,11 +39,16 @@ export class MotelsManageListComponent implements OnInit {
       price: {
         title: 'Giá tiền',
         valuePrepareFunction: (value: any) => {
-          var uy = new Intl.NumberFormat('en-US', {
-            style: 'currency',
-            currency: 'VND'
-          }).format(value);
-          return uy;
+          if(value == 0){
+            var uy = '?/phòng';
+            return uy;
+          }else{
+            var uy = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'VND'
+            }).format(value);
+            return uy;
+          }
         },
       },
       customerName: {
