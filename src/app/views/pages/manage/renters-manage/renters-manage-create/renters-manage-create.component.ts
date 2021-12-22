@@ -25,7 +25,7 @@ export class RentersManageCreateComponent implements OnInit {
     email: ['', Validators.compose([Validators.required, Validators.email])],
     phone: ['', Validators.compose([Validators.required, Validators.pattern('[0-9 ]{10}')])],
     birth: ['', Validators.compose([Validators.required])],
-    idNumber: ['', Validators.compose([Validators.required, Validators.pattern('[0-9 ]{9}')])],
+    idNumber: ['', Validators.compose([Validators.required])],
     deposit: ['', Validators.compose([Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)])],
     period: ['', Validators.compose([Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)])],
     paymentDate: ['', Validators.compose([Validators.required])],
@@ -49,6 +49,7 @@ export class RentersManageCreateComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.rentals= [];
     this.rooms = [];
     this.id = localStorage.getItem('currentUser');
     if (this.id) {
@@ -64,7 +65,11 @@ export class RentersManageCreateComponent implements OnInit {
           this.rentalsService.getFindByCustomerId(id, this.limit)
             .subscribe(
               (res: any) => {
-                this.rentals = res['rows'];
+                for (let item of res['rows']) {
+                  if(item.type != 1 || (item.type == 1 && item.quantity > 0)){
+                    this.rentals.push(item);
+                  }
+                }
               });
         },
         error => {
@@ -123,7 +128,8 @@ export class RentersManageCreateComponent implements OnInit {
         payment_date: this.renterForm.value['paymentDate'],
         note: this.renterForm.value['note'],
         status: this.renterForm.value['status'],
-        rental_id: this.renterForm.value['rentalId']
+        rental_id: this.renterForm.value['rentalId'],
+        customer_id: localStorage.getItem('currentUser'),
       };
     }else{
       this.data = {
@@ -139,15 +145,16 @@ export class RentersManageCreateComponent implements OnInit {
         status: this.renterForm.value['status'],
         rental_id: this.renterForm.value['rentalId'],
         rental_room_id: this.renterForm.value['rentalRoomId'],
+        customer_id: localStorage.getItem('currentUser'),
       };
     }
     this.rentersService.create(this.data).subscribe(
       (res) => {
         this.resetForm();
-        this.toastrService.success(res.message);
+        this.toastrService.success('Thêm mới thành công!');
       },
       (error) => {
-        this.toastrService.error(error.message);
+        this.toastrService.error('Thêm mới thất bại!');
       }
     );
   }
