@@ -77,7 +77,7 @@ export class HeaderComponent implements OnInit {
     this.customerPremiumServicesService.checkPremiumByCustomerId(this.id).subscribe((data: any | undefined) => {
       if(data.count > 0){
         for (let item of data.rows) {
-          if(item.PremiumService.type == 2){
+          if(item.PremiumService.type == 2 || item.PremiumService.type == 3){
             this.manage = 'registered';
           }
         }
@@ -103,22 +103,6 @@ export class HeaderComponent implements OnInit {
       this.currentUser = res;
     });
   }
-
-  // redirectFind(){
-  //   this.route.queryParams.subscribe((params) => {
-  //     // if(JSON.stringify(params) != '{}'){
-  //     //   this._router.navigate([`/thue-nha-dat`]);
-  //     // }else{
-  //     //   console.log(params);
-  //     // }
-  //     this._router
-  //       .navigateByUrl('/thue-nha-dat', {skipLocationChange: true})
-  //       .then(() => {
-  //         this._router.navigate([`/thue-nha-dat/`]);
-  //       });
-  //
-  //   });
-  // }
 
   redirect(slug: any) {
     this._router

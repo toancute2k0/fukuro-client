@@ -59,19 +59,19 @@ export class ResultComponent implements OnInit {
     if (JSON.stringify(this.bill) != '{}') {
       this.dateNow = this.datePipe.transform(new Date(), "dd-MM-yyyy");
       this.premiumSer.get(this.bill.premium_id).subscribe(
-        (res) => {
-          this.namePremium = res.name;
+        (res:any) => {
+          this.namePremium = res['rows'][0].name;
           if(this.vnp_TransactionStatus == 1){
             this.paymentStatus = 'Đã thanh toán';
           }
           let createBill = {
             name: 'Hóa đơn thanh toán dịch vụ Premium',
-            price: res.price,
+            price: res['rows'][0].price,
             expire: this.bill.expire,
-            total_price: this.bill.expire * Number(res.price),
+            total_price: this.bill.expire * Number(res['rows'][0].price),
             payment_status: this.vnp_TransactionStatus,
             transaction_code: this.transactionCode,
-            status: 0,
+            status: 1,
             customer_id: this.currentUser,
             premium_id: this.bill.premium_id,
           }
