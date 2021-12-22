@@ -62,7 +62,8 @@
                     <div class="form-group col-md-12">
                       <div>
                         <label>Nội dung</label>
-                        <div [ngxSummernote]="config" formControlName="message"></div>
+                        <textarea class="form-control simple" cols="30" rows="6" formControlName="message"></textarea>
+<!--                        <div [ngxSummernote]="config" formControlName="message"></div>-->
                         <div *ngIf="submitted && f.message.errors">
                           <small *ngIf="f.message.errors.required" class="text-muted small-popup">Nội dung không được
                             bỏ
