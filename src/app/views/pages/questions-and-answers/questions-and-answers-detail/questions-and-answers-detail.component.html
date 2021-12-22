@@ -135,16 +135,16 @@
                                                             <ul class="meta-comment-tag questions-and-answers-comment pl-0 ml-0">
                                                                 <li><span class="icons">
                                                                             <i [ngClass]="(anw.like==id_customer)?'like-active':'unlike'" (click)="likeButtonclick(anw.id)"
-                                                                                class="far fa-thumbs-up"
+                                                                                class="fas fa-thumbs-up"
                                                                             >
                                                                             </i>
-                                                                        </span>{{anw.count_like}}</li>
+                                                                        </span> {{anw.count_like}}</li>
                                                                 <li><span class="icons">
                                                                     <i (click)="disklikeButtonclick(anw.id)"
-                                                                        class="far fa-thumbs-down"
+                                                                        class="fas fa-thumbs-down"
                                                                         [ngClass]="(anw.dislike==id_customer)?'like-active':'unlike'">
                                                                     </i>
-                                                                        </span>{{anw.count_dislike}}</li>
+                                                                        </span> {{anw.count_dislike}}</li>
                                                                 <hr>
                                                                 <div #collapse2="ngbCollapse" [(ngbCollapse)]="isCollapsed2">
                                                                     <div class="blog-details single-post-item format-standard">
