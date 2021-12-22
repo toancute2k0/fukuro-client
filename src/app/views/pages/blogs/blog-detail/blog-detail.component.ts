@@ -54,7 +54,6 @@ export class BlogDetailComponent implements OnInit {
     if (slug) {
       this.getBySlug(slug);
     }
-
     this.getLatest();
     this.catBlogs.getAllCat().subscribe((res: any | undefined) => {
       this.cat = res['rows'];
@@ -70,7 +69,6 @@ export class BlogDetailComponent implements OnInit {
           data['rows'][i].thumbnail = environment.linkImg+data['rows'][i].thumbnail;
         }
         this.blogs = data['rows'];
-        console.log(this.blogs);
       },
       (err) => {
         console.log(err);
@@ -101,9 +99,19 @@ export class BlogDetailComponent implements OnInit {
   getAllCmt(id: string): void {
     this.commentsService.getAllByIdBlog(id).subscribe(
       (data: any) => {
-        this.cmt = data;
-        this.count = data.length;
-        console.log(data);
+        this.cmt = data['rows'];
+        this.count = data['count'];
+        for (let item of data['rows']) {
+          if(item.Customer.avatar == null){
+            item.Customer.avatarCus = 'https://via.placeholder.com/400x400';
+          }
+          if(item.Customer.avatar != null && item.Customer.google_id == null){
+            item.Customer.avatarCus = environment.linkImg+item.Customer.avatar;
+          }
+          if(item.Customer.avatar != null && item.Customer.google_id != null){
+            item.Customer.avatarCus = item.Customer.avatar;
+          }
+        }
       },
       (err) => {
         console.log(err);
@@ -122,8 +130,8 @@ export class BlogDetailComponent implements OnInit {
       content: this.comment.value['content'],
       customer_id: localStorage.getItem('currentUser'),
       blog_id: this.blog_details?.id,
+      status: 1
     };
-
     this.commentsService.create(data).subscribe(
       (response: any) => {
         const slug = this.route.snapshot.paramMap.get('slug');

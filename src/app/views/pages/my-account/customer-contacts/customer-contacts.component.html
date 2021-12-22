@@ -63,8 +63,8 @@
                               </div>
                             </div>
                             <div class="col-md-4 action">
-                                <a routerLink="/my-account/customer-contacts/detail/{{ item.id }}"
-                                   title="Chi tiết">
+                                <a (click)="redirect(item)"
+                                   title="Chi tiết" style="cursor: pointer">
                                     <i class="ti-eye"></i>
                                 </a>
                               <span *ngIf="item.status == 0" class="badge badge-danger">Chưa liên hệ</span>

@@ -25,9 +25,10 @@ export class HeaderComponent implements OnInit {
   id: any;
   customerPremiumServices: any = [];
   limit = 6;
-  manage = false;
   countNewNotification: any;
   premium: any;
+  status = 0;
+  manage: any;
   constructor(
     private catBlogs: BlogCategoriesService,
     public auth: AuthService,
@@ -39,9 +40,12 @@ export class HeaderComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.manage = '';
     this.id = localStorage.getItem('currentUser');
     if (this.id) {
       this.getById(this.id);
+      this.getData();
+      this.countNoti();
     }
     this.catBlogs.getAllCat().subscribe((res: any | undefined) => {
       this.cats = res['rows'];
@@ -53,29 +57,27 @@ export class HeaderComponent implements OnInit {
       (profileUsername) => (this.username = profileUsername)
     );
     this.customSer.notifications$.subscribe((notifications) => this.countNewNotification = notifications);
-    this.getData();
-    this.countNew();
+    this.customSer.checkPremium$.subscribe((checkPremium) => this.manage = checkPremium);
   }
 
-  countNew(){
-    this.notificationService.getByCustomerId(this.id, this.limit, 0).subscribe((res: any | undefined) => {
+  countNoti(): void {
+    this.notificationService.getByCustomerId(this.id, this.limit, this.status).subscribe((res: any | undefined) => {
       if (res['count'] > this.limit) {
-        this.notificationService.getByCustomerId(this.id, this.limit, 0).subscribe((data: any | undefined) => {
-          this.customSer.notifications$.next(res['count']);
+        this.notificationService.getByCustomerId(this.id, this.limit, this.status).subscribe((data: any | undefined) => {
+          this.countNewNotification = data['count'];
         });
       } else {
-        this.customSer.notifications$.next(res['count']);
+        this.countNewNotification = res['count'];
       }
     });
   }
 
   getData(): void {
     this.customerPremiumServicesService.checkPremiumByCustomerId(this.id).subscribe((data: any | undefined) => {
-      // this.customerPremiumServices = data;
       if(data.count > 0){
         for (let item of data.rows) {
           if(item.PremiumService.type == 2){
-            this.manage = true;
+            this.manage = 'registered';
           }
         }
       }

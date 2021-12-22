@@ -95,28 +95,23 @@
                                     </h3>
                                     <div class="comment-list">
                                         <ul>
-                                            <li class="single-comment" *ngFor="let cmts of cmt; let i = index">
+                                            <li class="single-comment" *ngFor="let itemcm of cmt; let i = index">
                                                 <article>
                                                     <div class="comment-author">
-                                                        <img *ngIf="cmts.customer_info.avatar" src="{{cmts.customer_info.avatar}}" alt="">
-                                                        <img *ngIf="!cmts.customer_info.avatar" src="https://via.placeholder.com/400x400" alt="">
+                                                        <img src="{{itemcm.Customer.avatarCus}}" alt="">
                                                     </div>
                                                     <div class="comment-details">
                                                         <div class="comment-meta">
                                                             <div class="comment-left-meta">
                                                                 <h4 class="author-name">
-                                                                    {{ cmts.customer_info.username }}
+                                                                    {{ itemcm.Customer.username }}
                                                                 </h4>
-                                                                <div class="comment-date">{{cmts.createdAt | date: 'dd/MM/yyyy'}}
+                                                                <div class="comment-date">{{itemcm.createdAt | date: 'dd/MM/yyyy'}}
                                                                 </div>
                                                             </div>
-                                                            <!-- <div class="comment-reply">
-                                  <a href="#" class="reply"><span class="icons"><i class="ti-back-left"></i></span>
-                                    Reply</a>
-                                </div> -->
                                                         </div>
                                                         <div class="comment-text">
-                                                            <p>{{ cmts.content }}</p>
+                                                            <p>{{ itemcm.content }}</p>
                                                         </div>
                                                     </div>
                                                 </article>
