@@ -17,7 +17,7 @@
     <div class="row">
       <!-- Submit Form -->
       <div class="col-lg-12 col-md-12">
-        <form [formGroup]="rentalForm" (ngSubmit)="onSubmit()">
+        <form [formGroup]="rentalForm" (ngSubmit)="onSubmit()" *ngIf="expire == false">
           <div class="submit-page">
             <!-- Basic Information -->
             <div class="form-submit">
@@ -206,6 +206,12 @@
             </div>
           </div>
         </form>
+        <b class="text-warning" *ngIf="expire == true">
+          <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+          Để sử dụng dịch vụ đăng tin không giới hạn.
+          Vui lòng đăng ký gói dịch vụ tại
+          <a class="text-danger" href="{{ linkClient }}/premium/thanh-toan/1">đây</a>
+        </b>
       </div>
     </div>
   </div>

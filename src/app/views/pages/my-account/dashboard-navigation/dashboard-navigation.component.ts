@@ -36,16 +36,16 @@ export class DashboardNavigationComponent implements OnInit {
     this.customSer.profileUsername$.subscribe(
       (profileUsername) => (this.username = profileUsername)
     );
+    this.customSer.checkPremium$.subscribe((checkPremium) => this.manage = checkPremium);
     this.getData();
   }
 
   getData(): void {
     this.customerPremiumServicesService.checkPremiumByCustomerId(this.id).subscribe((data: any | undefined) => {
-        // this.customerPremiumServices = data;
         if(data.count > 0){
           for (let item of data.rows) {
-            if(item.PremiumService.type == 2){
-              this.manage = true;
+            if(item.PremiumService.type == 2 || item.PremiumService.type == 3){
+              this.manage = 'registered';
             }
           }
         }

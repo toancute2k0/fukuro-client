@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   title: 'Local Environment Heading',
+  url: 'http://localhost:4200/',
   apiURL: 'http://localhost:8000/api',
   apiPostOneImg: 'http://upload.fukuro.website/file',
   apiPostImg: 'http://upload.fukuro.website/multipleFiles',

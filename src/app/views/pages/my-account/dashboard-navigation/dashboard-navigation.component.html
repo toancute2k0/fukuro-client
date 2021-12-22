@@ -24,7 +24,7 @@
         Thông tin tài khoản
       </a>
     </li>
-    <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" *ngIf="manage == true">
+    <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" *ngIf="manage == 'registered'">
       <a routerLink="/manage">
         <i class="far fa-star text-primary"></i>
         Quản lý trọ thuê
