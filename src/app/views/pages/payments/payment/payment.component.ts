@@ -61,10 +61,10 @@ export class PaymentComponent implements OnInit {
 
     this.premiumSer.get(this.idPremium).subscribe(
       (data: any) => {
-        this.premium = data;
-        this.name = data.name;
-        this.price = data.price;
-        this.priceCus = data.price;
+        this.premium = data['rows'][0];
+        this.name = data['rows'][0].name;
+        this.price = data['rows'][0].price;
+        this.priceCus = data['rows'][0].price;
       },
       (err) => {
         console.log(err);

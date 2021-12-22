@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { RentalNews } from 'src/app/models/rental-news.model';
 import { RentalNewsService } from 'src/app/services/rental-news.service';
 import { environment } from 'src/environments/environment';
+import {CustomerPremiumServicesService} from "../../../services/customer-premium-services.service";
 
 @Component({
   selector: 'app-rental-news',
@@ -17,7 +18,7 @@ export class RentalNewsComponent implements OnInit {
   result = false;
   multipleImages: File[] = [];
   selectedCheck!: boolean;
-
+  id: any;
   fullAddress: string = '';
   streetNumber: string = '';
   street: string = '';
@@ -25,6 +26,9 @@ export class RentalNewsComponent implements OnInit {
   city: string = '';
   Latitude: string = '';
   Longitude: string = '';
+  expire = true;
+  expireCus: any;
+  linkClient = environment.url;
 
   public options: any = {
     componentRestrictions: { country: 'vn' },
@@ -34,10 +38,6 @@ export class RentalNewsComponent implements OnInit {
     this.fullAddress = address.formatted_address;
     this.Latitude = address.geometry.location.lat();
     this.Longitude = address.geometry.location.lng();
-    console.log(address.name);
-    console.log(this.fullAddress);
-    console.log(this.Latitude);
-    console.log(this.Longitude);
 
     for (const component of address.address_components) {
       const componentType = component.types[0];
@@ -107,10 +107,16 @@ export class RentalNewsComponent implements OnInit {
     private rentalServe: RentalNewsService,
     private _router: Router,
     private toastrService: ToastrService,
-    private http: HttpClient
+    private http: HttpClient,
+    private customerPremiumServicesService: CustomerPremiumServicesService,
+    private rentalNewsService: RentalNewsService,
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.expireCus = [];
+    this.id = localStorage.getItem('currentUser');
+    this.getData();
+  }
 
   get f() {
     return this.rentalForm.controls;
@@ -196,6 +202,25 @@ export class RentalNewsComponent implements OnInit {
     }
     this.rentalForm.patchValue({
       image: this.multipleImages,
+    });
+  }
+
+  getData(): void {
+    this.customerPremiumServicesService.checkPremiumByCustomerId(this.id).subscribe((data: any | undefined) => {
+      if(data['count'] == 0){
+        this.rentalNewsService.getfindByCustomerId(this.id).subscribe(
+          (res: any | undefined) => {
+            if(res['count'] >= 3){
+              this.expire = true;
+            }
+          });
+      }else{
+        for (let item of data['rows']) {
+          if(item.PremiumService.type == 1){
+            this.expire = false;
+          }
+        }
+      }
     });
   }
 
