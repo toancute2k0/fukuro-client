@@ -161,6 +161,7 @@ export class QuestionsAndAnswersDetailComponent implements OnInit {
       (data: any) => {
         for (let item of this.anw) {
           if(item.id == id){
+            console.log('id: '+ data);
           item.count_like=data.count_like;
           }
         }
