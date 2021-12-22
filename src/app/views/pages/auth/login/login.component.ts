@@ -14,6 +14,7 @@ import {
   GoogleLoginProvider,
   SocialUser,
 } from 'angularx-social-login';
+import {NotificationService} from "../../../../services/notification.service";
 
 
 @Component({
@@ -29,6 +30,8 @@ export class LoginComponent implements OnInit {
   avatar: any;
   linkImg = environment.linkImg;
   name: any;
+  limit = 6;
+  status = 0;
   login = this.fb.group({
     username: [
       '',
@@ -52,7 +55,8 @@ export class LoginComponent implements OnInit {
     private toastrService: ToastrService,
     private auth: AuthService,
     private socialAuthService: SocialAuthService,
-    private customerPremiumServicesService: CustomerPremiumServicesService
+    private customerPremiumServicesService: CustomerPremiumServicesService,
+    private notificationService: NotificationService,
   ) {}
 
   ngOnInit(): void {
@@ -93,7 +97,24 @@ export class LoginComponent implements OnInit {
           if(data.data.firstName == null && data.data.lastName == null){
             this.name = data.data.username;
           }
-
+          this.notificationService.getByCustomerId(data.data.id, this.limit, this.status).subscribe((res: any | undefined) => {
+            if (res['count'] > this.limit) {
+              this.notificationService.getByCustomerId(data.data.id, this.limit, this.status).subscribe((data: any | undefined) => {
+                this.customSer.notifications$.next(data['count']);
+              });
+            } else {
+              this.customSer.notifications$.next(res['count']);
+            }
+          });
+          this.customerPremiumServicesService.checkPremiumByCustomerId(data.data.id).subscribe((data: any | undefined) => {
+            if(data.count > 0){
+              for (let item of data.rows) {
+                if(item.PremiumService.type == 2){
+                  this.customSer.checkPremium$.next('registered');
+                }
+              }
+            }
+          });
           localStorage.setItem('token', data.token);
           const time_to_login = Date.now() + 604800000; // one week
           localStorage.setItem('timer', JSON.stringify(time_to_login));

@@ -3,6 +3,7 @@ import { BookmarksService } from 'src/app/services/bookmarks.service';
 import { CustomersService } from 'src/app/services/customers.service';
 import { PremiumBillsService } from 'src/app/services/premium-bills.service';
 import { RentalNewsService } from 'src/app/services/rental-news.service';
+import {NotificationService} from "../../../../services/notification.service";
 
 @Component({
   selector: 'app-user-dashboard',
@@ -14,23 +15,41 @@ export class UserDashboardComponent implements OnInit {
   rentalLength?: number;
   createCus?: string;
   premiumBill?: number;
+  countNewNotification: any;
   id: any;
+  limit = 6;
+  status = 'both';
 
   constructor(
     private bookMarkSer: BookmarksService,
     private customSer: CustomersService,
     private rentalNewsService: RentalNewsService,
-    private preService: PremiumBillsService
+    private preService: PremiumBillsService,
+    private notificationService: NotificationService,
   ) {}
 
   ngOnInit(): void {
-    const id = localStorage.getItem('currentUser');
-    if (id) {
-      this.getById(id);
-      this.getAllBookMark(id);
-      this.getPremiumBill(id);
+    this.id = localStorage.getItem('currentUser');
+    if (this.id) {
+      this.getById(this.id);
+      this.getAllBookMark(this.id);
+      this.getPremiumBill(this.id);
+      this.countNew();
     }
     this.customSer.profileId$.subscribe((profileId) => (this.id = profileId));
+    this.customSer.notifications$.subscribe((notifications) => this.countNewNotification = notifications);
+  }
+
+  countNew(): void {
+    this.notificationService.getByCustomerId(this.id, this.limit, this.status).subscribe((res: any | undefined) => {
+      if (res['count'] > this.limit) {
+        this.notificationService.getByCustomerId(this.id, this.limit, this.status).subscribe((data: any | undefined) => {
+          this.countNewNotification = data['count'];
+        });
+      } else {
+        this.countNewNotification = res['count'];
+      }
+    });
   }
 
   openFilterSearch() {

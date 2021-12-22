@@ -122,10 +122,10 @@ export class MotelDetailComponent implements OnInit {
           this.avatar = 'https://via.placeholder.com/200x200';
         }
         if(this.rentalNewsDetail.Customer.avatar != null && this.rentalNewsDetail.Customer.googleId != null){
-          this.avatar = data.data.avatar;
+          this.avatar = this.rentalNewsDetail.Customer.avatar;
         }
         if(this.rentalNewsDetail.Customer.avatar != null && this.rentalNewsDetail.Customer.googleId == null){
-          this.avatar = this.linkImg + data.data.avatar;
+          this.avatar = this.linkImg + this.rentalNewsDetail.Customer.avatar;
         }
         if(this.rentalNewsDetail.Customer.firstName != null && this.rentalNewsDetail.Customer.lastName != null){
           this.name = this.rentalNewsDetail.Customer.firstName + ' ' + this.rentalNewsDetail.Customer.lastName;

@@ -18,12 +18,13 @@ export class DashboardNavigationComponent implements OnInit {
   customerPremiumServices: any = [];
   limit = 6;
   id: any;
-  manage = false;
+  manage: any;
   constructor(public auth: AuthService,
               private customSer: CustomersService,
               private customerPremiumServicesService: CustomerPremiumServicesService) {}
 
   ngOnInit(): void {
+    this.manage = 0;
     this.id = localStorage.getItem('currentUser');
 
     if (this.id) {

@@ -39,7 +39,6 @@ export class OrderPackageComponent implements OnInit {
                   }
                 }
               }
-              console.log(this.premium);
             });
         },
         (err) => {
