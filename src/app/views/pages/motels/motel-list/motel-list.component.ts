@@ -7,6 +7,7 @@ import { BookmarksService } from 'src/app/services/bookmarks.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { CustomersService } from 'src/app/services/customers.service';
 import { FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-motel-list',
@@ -48,35 +49,44 @@ export class MotelListComponent implements OnInit {
 
   submitted = false;
   searchKey = '';
+  capital?: string;
 
   constructor(
     private rentalNewsService: RentalNewsService,
     private bookmarkSer: BookmarksService,
     private fb: FormBuilder,
     public auth: AuthService,
-    private customSer: CustomersService
+    private customSer: CustomersService,
+    private route: ActivatedRoute
   ) {}
 
   search = this.fb.group({
-    address: [''],
+    search: [''],
   });
 
   data = {
-    address: this.search.value['address']
+    search: this.search.value['search'],
   };
   get f() {
     return this.search.controls;
   }
 
   onSearch(): any {
-    this.submitted = true;
+    // this.submitted = true;
     if (this.search.invalid) {
       return false;
     }
-    const data = {
-      address: this.search.value.address
-    };
-    this.getData(1, this.count, data);
+    if (this.capital) {
+      const data = {
+        search: this.capital,
+      };
+      this.getData(1, this.count, data);
+    } else {
+      const data = {
+        search: this.search.value.search,
+      };
+      this.getData(1, this.count, data);
+    }
   }
 
   openInfo(marker: MapMarker, content: any) {
@@ -101,8 +111,20 @@ export class MotelListComponent implements OnInit {
       this.getById(id);
     }
     this.customSer.profileId$.subscribe((profileId) => (this.id = profileId));
-    this.getData(1, this.count, this.data);
     window.onresize = () => (this.isMobile = window.innerWidth <= 768);
+
+    this.route.queryParams.subscribe((params) => {
+      this.capital = params['search'];
+    });
+
+    if (this.capital) {
+      const data = {
+        search: this.capital,
+      };
+      this.getData(1, this.count, data);
+    } else {
+      this.getData(1, this.count, this.data);
+    }
   }
 
   sort(event: any) {
@@ -143,16 +165,19 @@ export class MotelListComponent implements OnInit {
   getData(n: any, c: any, data: any): void {
     this.rentalNewsService.getAll(n, c, this.orderby, data).subscribe(
       (data: any | undefined) => {
-        if(data['count'] > this.count){
-          this.rentalNewsService.getAll(n, data['count'], this.orderby, data).subscribe(
-            (res: any | undefined) => {
-              this.countRt = res['count'];
-              this.get(res['rows']);
-            },
-            (error: any | undefined) => {
-              console.log(error);
-            })
-        }else{
+        if (data['count'] > this.count) {
+          this.rentalNewsService
+            .getAll(n, data['count'], this.orderby, data)
+            .subscribe(
+              (res: any | undefined) => {
+                this.countRt = res['count'];
+                this.get(res['rows']);
+              },
+              (error: any | undefined) => {
+                console.log(error);
+              }
+            );
+        } else {
           this.countRt = data['count'];
           this.get(data['rows']);
         }
@@ -163,7 +188,7 @@ export class MotelListComponent implements OnInit {
     );
   }
 
-  get(arr: any){
+  get(arr: any) {
     this.rentalNews = arr;
     this.markersRepartidores = [];
     for (let item of this.rentalNews) {
@@ -241,7 +266,7 @@ export class MotelListComponent implements OnInit {
     });
   }
 
-  pageChanged(event: any){
+  pageChanged(event: any) {
     console.log(event);
   }
 }

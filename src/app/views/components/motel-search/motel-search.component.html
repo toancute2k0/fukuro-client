@@ -6,7 +6,8 @@
       <div class="col-lg-5 col-md-5 col-sm-12 b-r">
         <div class="form-group borders">
           <div class="input-with-icon">
-            <input type="text" class="form-control" placeholder="Từ khoá, đường, quận,..." formControlName="address">
+            <input #title type="text" class="form-control" placeholder="Từ khoá, đường, quận,..."
+              formControlName="address">
             <i class="ti-search"></i>
           </div>
         </div>
@@ -59,7 +60,11 @@
 
       <div class="col-lg-2 col-md-2 col-sm-12">
         <div class="form-group">
-          <button class="btn search-btn" type="submit">Tìm Kiếm</button>
+          <!-- <a [routerLink]="['thue-nha-dat']" class="btn search-btn">Tìm Kiếm</a> -->
+          <a [routerLink]="['/thue-nha-dat']" class="btn search-btn" [queryParams]="{search: title.value}">
+            Tìm Kiếm
+          </a>
+          <!-- <button class="btn search-btn" type="submit">Tìm Kiếm</button> -->
         </div>
       </div>
 
