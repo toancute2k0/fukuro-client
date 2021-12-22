@@ -25,6 +25,6 @@ const API_URL = `${env.apiURL}/questions`;
       return this.http.get<Question[]>(`${API_URL}/latest?limit=10`);
     }
     getAllByIdCat(cat_id: string): Observable<Answers[]> {
-      return this.http.get<Answers[]>(`${API_URL}/category/${cat_id}`);
+      return this.http.get<Answers[]>(`${API_URL}/category/${cat_id}&orderby=desc`);
     }
   }

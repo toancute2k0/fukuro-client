@@ -278,8 +278,8 @@ export class QuestionsAndAnswersDetailComponent implements OnInit {
         const id_qts = this.route.snapshot.paramMap.get('id');
         if (id_qts) {
           this.getQtsByID(id_qts);
-          // this.getAllByIdQuestions(id_qts)
         }
+        this.modalService.dismissAll();
       },
       (error) => {
         this.toastrService.success('Đăng câu trả lời thất bại!');

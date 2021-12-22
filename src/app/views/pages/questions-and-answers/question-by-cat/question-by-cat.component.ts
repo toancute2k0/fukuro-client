@@ -103,6 +103,7 @@ export class QuestionByCatComponent implements OnInit {
     this.questionService.getAllByIdCat(cat_id).subscribe(
       (data: any) => {
         this.questionList = data['rows'];
+        console.log(this.questionList);
       },
       (err) => {
         console.log(err);
@@ -110,9 +111,12 @@ export class QuestionByCatComponent implements OnInit {
     );
   }
   redirect(id: any) {
-    console.log(id)
-    this.getAllByIdCat(id);
     this._router.navigate([`hoi-dap/cau-hoi-theo-chuyen-muc/${id}`]);
+    this.catQuestions.getAllCat().subscribe((res: any | undefined) => {
+      this.cat = res['rows'];
+    });
+      this.getAllByIdCat(id);
+      this.qtscat=id;
   }
   getById(id: string): void {
     this.customerService.get(id).subscribe((res) => {
@@ -175,10 +179,10 @@ export class QuestionByCatComponent implements OnInit {
       (response: any) => {
         this.resetForm();
         this.toastrService.success('Đăng câu hỏi thành công!');
+        this.modalService.dismissAll();
         const id_cat = this.route.snapshot.paramMap.get('id');
         if (id_cat) {
           this.qtscat = id_cat;
-          console.log(id_cat)
           this.getAllByIdCat(id_cat);
         }
       },
