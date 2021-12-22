@@ -1,73 +1,77 @@
-<div class="full-search-2 eclip-search italian-search hero-search-radius shadow">
-  <form class="hero-search-content" [formGroup]="search" (ngSubmit)="onSearch()">
+<div class="row justify-content-center">
+  <div class="col-lg-10 col-md-11 col-sm-12">
+    <div class="full-search-2 eclip-search italian-search hero-search-radius shadow">
+      <form class="hero-search-content" [formGroup]="search">
 
-    <div class="row">
+        <div class="row">
 
-      <div class="col-lg-5 col-md-5 col-sm-12 b-r">
-        <div class="form-group borders">
-          <div class="input-with-icon">
-            <input #title type="text" class="form-control" placeholder="Từ khoá, đường, quận,..."
-              formControlName="address">
-            <i class="ti-search"></i>
+          <div class="col-lg-5 col-md-5 col-sm-12 b-r">
+            <div class="form-group borders">
+              <div class="input-with-icon">
+                <input #title type="text" class="form-control" placeholder="Từ khoá, đường, quận,..."
+                  formControlName="address">
+                <i class="ti-search"></i>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
 
 
-      <div class="col-lg-5 col-md-5 col-sm-12">
-        <div class="form-group borders">
-          <div class="input-with-icon">
-            <select id="location" class="form-control" style="cursor: pointer;">
-              <!--              <option value="">Toàn quốc</option>-->
-              <option value="1">Quận Ninh Kiều</option>
-              <!--              <option value="2">Hồ Chí Minh</option>-->
-            </select>
-            <i class="ti-angle-down"></i>
-            <i class="ti-home"></i>
+          <div class="col-lg-5 col-md-5 col-sm-12">
+            <div class="form-group borders">
+              <div class="input-with-icon">
+                <select id="location" class="form-control" style="cursor: pointer;" (change)="searchOnchange($event)">
+                  <option selected value="undefined">Cần Thơ</option>
+                  <option *ngFor="let item of district; let i = index" value="{{i}}">{{ item.district }}</option>
+                </select>
+                <i class="ti-angle-down"></i>
+                <i class="ti-home"></i>
+              </div>
+            </div>
           </div>
+
+
+          <!--      <div class="col-lg-3 col-md-3 col-sm-12">-->
+          <!--        <div class="form-group borders">-->
+          <!--          <div class="input-with-icon b-l">-->
+          <!--            <select id="real-home" class="form-control" style="cursor: pointer;">-->
+          <!--              <option value="">Loại hình cho thuê</option>-->
+          <!--              <option value="1">Phòng trọ</option>-->
+          <!--              <option value="2">Nhà nguyên căn</option>-->
+          <!--            </select>-->
+          <!--            <i class="ti-angle-down"></i>-->
+          <!--            <i class="ti-home"></i>-->
+          <!--          </div>-->
+          <!--        </div>-->
+          <!--      </div>-->
+
+          <!--      <div class="col-lg-2 col-md-2 col-sm-12">-->
+          <!--        <div class="form-group borders">-->
+          <!--          <div class="input-with-icon b-l">-->
+          <!--            <select id="price-home" class="form-control" style="cursor: pointer;">-->
+          <!--              <option value="">Giá thành</option>-->
+          <!--              <option value="1">1.500.000đ</option>-->
+          <!--              <option value="2">2.000.000đ</option>-->
+          <!--              <option value="3">2.500.000đ</option>-->
+          <!--            </select>-->
+          <!--            <i class="ti-angle-down"></i>-->
+          <!--            <i class="ti-money"></i>-->
+          <!--          </div>-->
+          <!--        </div>-->
+          <!--      </div>-->
+
+          <div class="col-lg-2 col-md-2 col-sm-12">
+            <div class="form-group">
+              <!-- <a [routerLink]="['thue-nha-dat']" class="btn search-btn">Tìm Kiếm</a> -->
+              <a [routerLink]="['/thue-nha-dat/tim-kiem']" class="btn search-btn" [queryParams]="{search: title.value}">
+                Tìm Kiếm
+              </a>
+              <!-- <button class="btn search-btn" type="submit">Tìm Kiếm</button> -->
+            </div>
+          </div>
+
         </div>
-      </div>
-
-
-      <!--      <div class="col-lg-3 col-md-3 col-sm-12">-->
-      <!--        <div class="form-group borders">-->
-      <!--          <div class="input-with-icon b-l">-->
-      <!--            <select id="real-home" class="form-control" style="cursor: pointer;">-->
-      <!--              <option value="">Loại hình cho thuê</option>-->
-      <!--              <option value="1">Phòng trọ</option>-->
-      <!--              <option value="2">Nhà nguyên căn</option>-->
-      <!--            </select>-->
-      <!--            <i class="ti-angle-down"></i>-->
-      <!--            <i class="ti-home"></i>-->
-      <!--          </div>-->
-      <!--        </div>-->
-      <!--      </div>-->
-
-      <!--      <div class="col-lg-2 col-md-2 col-sm-12">-->
-      <!--        <div class="form-group borders">-->
-      <!--          <div class="input-with-icon b-l">-->
-      <!--            <select id="price-home" class="form-control" style="cursor: pointer;">-->
-      <!--              <option value="">Giá thành</option>-->
-      <!--              <option value="1">1.500.000đ</option>-->
-      <!--              <option value="2">2.000.000đ</option>-->
-      <!--              <option value="3">2.500.000đ</option>-->
-      <!--            </select>-->
-      <!--            <i class="ti-angle-down"></i>-->
-      <!--            <i class="ti-money"></i>-->
-      <!--          </div>-->
-      <!--        </div>-->
-      <!--      </div>-->
-
-      <div class="col-lg-2 col-md-2 col-sm-12">
-        <div class="form-group">
-          <!-- <a [routerLink]="['thue-nha-dat']" class="btn search-btn">Tìm Kiếm</a> -->
-          <a [routerLink]="['/thue-nha-dat/tim-kiem']" class="btn search-btn" [queryParams]="{search: title.value}">
-            Tìm Kiếm
-          </a>
-          <!-- <button class="btn search-btn" type="submit">Tìm Kiếm</button> -->
-        </div>
-      </div>
-
+      </form>
     </div>
-  </form>
+
+  </div>
 </div>

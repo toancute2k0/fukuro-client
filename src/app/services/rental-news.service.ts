@@ -24,7 +24,12 @@ export class RentalNewsService {
   getBySlug(slug: string): Observable<RentalNews[]> {
     return this.http.get<RentalNews[]>(`${API_URL}/slug/${slug}`);
   }
-  getAll(page: any, limit: any, orderBy: any, search_key: any): Observable<RentalNews[]> {
+  getAll(
+    page: any,
+    limit: any,
+    orderBy: any,
+    search_key: any
+  ): Observable<RentalNews[]> {
     let url = `${API_URL}`;
     if (search_key != null) {
       url += `/search?page=${page}&limit=${limit}&orderby=${orderBy}`;
@@ -35,6 +40,10 @@ export class RentalNewsService {
     }
     // url += `?page=${page}&limit=${limit}&orderby=${orderBy}`;
     // return this.http.get<Array<RentalNews>>(url);
+  }
+
+  getAllDistrict(): Observable<RentalNews[]> {
+    return this.http.get<RentalNews[]>(`${API_URL}/district`);
   }
 
   // getSearch(key: any): Observable<RentalNews[]> {

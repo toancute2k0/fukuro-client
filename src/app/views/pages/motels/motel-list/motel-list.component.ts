@@ -7,7 +7,7 @@ import { BookmarksService } from 'src/app/services/bookmarks.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { CustomersService } from 'src/app/services/customers.service';
 import { FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-motel-list',
@@ -46,10 +46,8 @@ export class MotelListComponent implements OnInit {
     scaledSize: new google.maps.Size(40, 40), // scaled size
   };
   markersRepartidores: any = [];
-
+  district?: any;
   submitted = false;
-  searchKey = '';
-  capital?: string;
 
   constructor(
     private rentalNewsService: RentalNewsService,
@@ -57,7 +55,8 @@ export class MotelListComponent implements OnInit {
     private fb: FormBuilder,
     public auth: AuthService,
     private customSer: CustomersService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private _router: Router
   ) {}
 
   search = this.fb.group({
@@ -69,24 +68,6 @@ export class MotelListComponent implements OnInit {
   };
   get f() {
     return this.search.controls;
-  }
-
-  onSearch(): any {
-    // this.submitted = true;
-    if (this.search.invalid) {
-      return false;
-    }
-    if (this.capital) {
-      const data = {
-        search: this.capital,
-      };
-      this.getData(1, this.count, data);
-    } else {
-      const data = {
-        search: this.search.value.search,
-      };
-      this.getData(1, this.count, data);
-    }
   }
 
   openInfo(marker: MapMarker, content: any) {
@@ -110,18 +91,25 @@ export class MotelListComponent implements OnInit {
     this.customSer.profileId$.subscribe((profileId) => (this.id = profileId));
     window.onresize = () => (this.isMobile = window.innerWidth <= 768);
 
+    this.rentalNewsService
+      .getAllDistrict()
+      .subscribe((res: any | undefined) => {
+        this.district = res['rows'];
+        // console.log(res['rows']);
+      });
+
     this.route.queryParams.subscribe((params) => {
-      if(JSON.stringify(params) == '{}'){
-        if(id != null){
+      if (JSON.stringify(params) == '{}') {
+        if (id != null) {
           this.getById(id);
-        }else{
+        } else {
           this.getData(1, this.count, this.data);
         }
-      }else{
-        this.search.patchValue({search: params['search']});
-        if(id != null){
+      } else {
+        this.search.patchValue({ search: params['search'] });
+        if (id != null) {
           this.getById(id);
-        }else{
+        } else {
           this.data = {
             search: this.search.value['search'],
           };
@@ -129,6 +117,18 @@ export class MotelListComponent implements OnInit {
         }
       }
     });
+  }
+
+  searchOnchange(event: any) {
+    this.rentalNewsService
+      .getAllDistrict()
+      .subscribe((res: any | undefined) => {
+        this.district = res['rows'];
+        this._router.navigate(['/thue-nha-dat/tim-kiem'], {
+          queryParams: { search: res['rows'][event.target.value].district },
+        });
+        // console.log(res['rows'][event.target.value].district);
+      });
   }
 
   sort(event: any) {
@@ -169,7 +169,7 @@ export class MotelListComponent implements OnInit {
   getData(n: any, c: any, data: any): void {
     this.rentalNewsService.getAll(n, c, this.orderby, data).subscribe(
       (data: any | undefined) => {
-        console.log(data);
+        // console.log(data);
         if (data['count'] > this.count) {
           this.rentalNewsService
             .getAll(n, data['count'], this.orderby, data)
@@ -275,6 +275,6 @@ export class MotelListComponent implements OnInit {
   }
 
   pageChanged(event: any) {
-    console.log(event);
+    console.log('pageChanged');
   }
 }

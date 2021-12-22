@@ -53,14 +53,14 @@
                 <div class="map-search-box">
 
                   <div class="full-search-2 eclip-search italian-search hero-search-radius shadow">
-                    <form class="hero-search-content" [formGroup]="search" (ngSubmit)="onSearch()">
+                    <form class="hero-search-content" [formGroup]="search">
 
                       <div class="row">
 
                         <div class="col-lg-5 col-md-5 col-sm-12 b-r">
                           <div class="form-group borders">
                             <div class="input-with-icon">
-                              <input type="text" class="form-control" placeholder="Từ khoá, đường, quận,..."
+                              <input #title type="text" class="form-control" placeholder="Từ khoá, đường, quận,..."
                                 formControlName="search">
                               <i class="ti-search"></i>
                             </div>
@@ -71,10 +71,11 @@
                         <div class="col-lg-5 col-md-5 col-sm-12">
                           <div class="form-group borders">
                             <div class="input-with-icon">
-                              <select id="location" class="form-control" style="cursor: pointer;">
-                                <!--              <option value="">Toàn quốc</option>-->
-                                <option value="1">Quận Ninh Kiều</option>
-                                <!--              <option value="2">Hồ Chí Minh</option>-->
+                              <select id="location" class="form-control" style="cursor: pointer;"
+                                (change)="searchOnchange($event)">
+                                <option selected value="undefined">Cần Thơ</option>
+                                <option *ngFor="let item of district; let i = index" value="{{i}}">{{ item.district }}
+                                </option>
                               </select>
                               <i class="ti-angle-down"></i>
                               <i class="ti-home"></i>
@@ -84,7 +85,11 @@
 
                         <div class="col-lg-2 col-md-2 col-sm-12">
                           <div class="form-group">
-                            <button class="btn search-btn" type="submit">Tìm Kiếm</button>
+                            <!-- <button class="btn search-btn" type="submit">Tìm Kiếm</button> -->
+                            <a [routerLink]="['/thue-nha-dat/tim-kiem']" class="btn search-btn"
+                              [queryParams]="{search: title.value}">
+                              Tìm Kiếm
+                            </a>
                           </div>
                         </div>
 
@@ -140,7 +145,8 @@
 
             <!-- Single Property Start -->
             <div class="col-lg-6 col-md-12"
-              *ngFor="let item of rentalNews | paginate: { itemsPerPage: 6, currentPage: cp }">
+              *ngFor="let item of rentalNews | paginate: { itemsPerPage: 6, currentPage: cp };let i = index">
+              <!-- <td>{{ (cp - 1) * (4 + i +1) }}</td> -->
               <div class="property-listing property-1">
                 <div class="listing-img-wrapper">
                   <a routerLink="/thue-nha-dat/{{ item.slug }}">

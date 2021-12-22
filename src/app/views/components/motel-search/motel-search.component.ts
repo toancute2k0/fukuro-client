@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { AdminContactsService } from '../../../services/admin-contacts.service';
 import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
+import { RentalNewsService } from 'src/app/services/rental-news.service';
 
 @Component({
   selector: 'app-motel-search',
@@ -12,27 +11,32 @@ import { ToastrService } from 'ngx-toastr';
 export class MotelSearchComponent implements OnInit {
   declare window: any;
 
-  submitted = false;
+  district?: any;
   constructor(
     private fb: FormBuilder,
-    private adminContactsService: AdminContactsService,
-    private _router: Router,
-    private toastrService: ToastrService
+    private rentalSer: RentalNewsService,
+    private router: Router
   ) {}
   search = this.fb.group({
-    address: ['', Validators.compose([Validators.required])],
+    address: [''],
   });
   get f() {
     return this.search.controls;
   }
-  ngOnInit(): void {}
-  onSearch(): any {
-    this.submitted = true;
-    if (this.search.invalid) {
-      return false;
-    }
+  ngOnInit(): void {
+    this.rentalSer.getAllDistrict().subscribe((res: any | undefined) => {
+      this.district = res['rows'];
+      console.log(res['rows']);
+    });
+  }
 
-    // this._router.navigate(['/thue-nha-dat']);
-    // console.log(this.search.value);
+  searchOnchange(event: any) {
+    this.rentalSer.getAllDistrict().subscribe((res: any | undefined) => {
+      this.district = res['rows'];
+      this.router.navigate(['/thue-nha-dat/tim-kiem'], {
+        queryParams: { search: res['rows'][event.target.value].district },
+      });
+      console.log(res['rows'][event.target.value].district);
+    });
   }
 }
