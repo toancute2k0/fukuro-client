@@ -193,6 +193,9 @@ export class LoginComponent implements OnInit {
           (error) => {
             this.error = error.error.message;
             this.toastrService.error(this.error);
+            // this.toastrService.error(error.error);
+            // console.log(error);
+            
           }
         );
 
