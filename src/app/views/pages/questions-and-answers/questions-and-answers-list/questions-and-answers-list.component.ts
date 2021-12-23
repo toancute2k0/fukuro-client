@@ -26,12 +26,13 @@ export class QuestionsAndAnswersListComponent implements OnInit {
   submitted = false;
   countquestion: any | undefined;
   countuser?: any;
-  count = 6;
+  count = 0;
   page = 1;
   questionList: any | undefined;
   countanw?: any;
   countanwbyID?: any;
   countcat?: any;
+  id_customer?:any;
   constructor(
     config: NgbModalConfig,
     private modalService: NgbModal,
@@ -62,6 +63,7 @@ export class QuestionsAndAnswersListComponent implements OnInit {
     this.modalService.dismissAll(content);
   }
   ngOnInit(): void {
+    this.id_customer=localStorage.getItem('currentUser');
     this.catQuestions.getAllCat().subscribe((res: any | undefined) => {
       this.cat = res['rows'];
       this.countcat = res['rows'].length;
@@ -109,7 +111,7 @@ export class QuestionsAndAnswersListComponent implements OnInit {
     this.questionService.getAll(n, c).subscribe(
       (data: any) => {
         this.questionList = data['rows'];
-        // console.log(this.questionList);
+        this.count = data['count'];
       },
       (err) => {
         console.log(err);
@@ -174,18 +176,24 @@ export class QuestionsAndAnswersListComponent implements OnInit {
       detail_url: '/hoi-dap/chi-tiet/',
     };
 
-    this.questionService.create(data).subscribe(
-      (response: any) => {
-        this.resetForm();
-        this.toastrService.success('Đăng câu hỏi thành công!');
-        this.getQuestion(1, this.count);
-        this.modalService.dismissAll();
-      },
-
-      (error) => {
-        this.toastrService.success('Đăng câu hỏi thất bại!');
-      }
-    );
+    if(!this.id_customer){
+      this.toastrService.error('Yêu cầu đăng nhập tài khoản!');
+    }else{
+      this.questionService.create(data).subscribe(
+        (response: any) => {
+          this.getQuestion(1, this.count);
+          this.resetForm();
+          this.toastrService.success('Đăng câu hỏi thành công!');
+          this.modalService.dismissAll();
+        },
+  
+        (error) => {
+          this.toastrService.error('Đăng câu hỏi thất bại!');
+          this.modalService.dismissAll();
+        }
+      );
+    }
+ 
   }
   resetForm(): void {
     this.submitted = false;
