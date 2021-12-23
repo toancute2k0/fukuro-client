@@ -2,7 +2,7 @@ export const environment = {
   production: true,
   title: 'Local Environment Heading',
   url: 'http://fukuro.website/',
-  apiURL: 'http://api.fukuro.website/api',
+  apiURL: 'http://server.fukuro.website/api',
   apiPostOneImg: 'http://upload.fukuro.website/file',
   apiPostImg: 'http://upload.fukuro.website/multipleFiles',
   linkImg: 'http://upload.fukuro.website/upload/',
