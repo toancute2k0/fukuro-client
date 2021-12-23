@@ -276,6 +276,14 @@ export class QuestionsAndAnswersDetailComponent implements OnInit {
       (response: any) => {
         this.resetForm();
         this.toastrService.success('Đăng câu trả lời thành công!');
+        this.answersService.getAll(this.page, this.countquestion).subscribe(
+          (data: any | undefined) => {
+            this.countanw = data['count'];
+          },
+          (err) => {
+            console.log(err);
+          }
+        );
         const id_qts = this.route.snapshot.paramMap.get('id');
         if (id_qts) {
           this.getQtsByID(id_qts);
@@ -284,7 +292,6 @@ export class QuestionsAndAnswersDetailComponent implements OnInit {
         this.questionService.getAll(this.page, this.countquestion).subscribe(
           (data: any | undefined) => {
             this.countquestion = data['count'];
-            console.log(  this.countquestion);
           },
           (err) => {
             console.log(err);
