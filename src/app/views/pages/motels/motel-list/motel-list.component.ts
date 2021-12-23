@@ -249,7 +249,8 @@ export class MotelListComponent implements OnInit {
         this.getData(1, this.count, this.data);
       },
       (err: any | undefined) => {
-        console.log(err);
+        this.getData(1, this.count, this.data);
+        // console.log(err);
       }
     );
   }

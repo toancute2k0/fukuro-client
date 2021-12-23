@@ -119,7 +119,6 @@ export class RentalNewsComponent implements OnInit {
   ngOnInit(): void {
     this.expireCus = [];
     this.id = localStorage.getItem('currentUser');
-    this.getData();
   }
 
   get f() {
@@ -209,27 +208,27 @@ export class RentalNewsComponent implements OnInit {
     });
   }
 
-  getData(): void {
-    this.customerPremiumServicesService
-      .checkPremiumByCustomerId(this.id)
-      .subscribe((data: any | undefined) => {
-        if (data['count'] == 0) {
-          this.rentalNewsService
-            .getfindByCustomerId(this.id)
-            .subscribe((res: any | undefined) => {
-              if (res['count'] >= 3) {
-                this.expire = true;
-              }
-            });
-        } else {
-          for (let item of data['rows']) {
-            if (item.PremiumService.type == 1) {
-              this.expire = false;
-            }
-          }
-        }
-      });
-  }
+  // getData(): void {
+  //   this.customerPremiumServicesService
+  //     .checkPremiumByCustomerId(this.id)
+  //     .subscribe((data: any | undefined) => {
+  //       if (data['count'] == 0) {
+  //         this.rentalNewsService
+  //           .getfindByCustomerId(this.id)
+  //           .subscribe((res: any | undefined) => {
+  //             if (res['count'] >= 3) {
+  //               this.expire = true;
+  //             }
+  //           });
+  //       } else {
+  //         for (let item of data['rows']) {
+  //           if (item.PremiumService.type == 1) {
+  //             this.expire = false;
+  //           }
+  //         }
+  //       }
+  //     });
+  // }
 
   onRemove(event: any) {
     // console.log(event);
@@ -284,7 +283,7 @@ export class RentalNewsComponent implements OnInit {
               this.toastrService.success('Thêm mới thành công!');
             },
             (error) => {
-              this.toastrService.error('Thêm mới thất bại!');
+              this.toastrService.error(error.error.message);
             }
           );
         }
