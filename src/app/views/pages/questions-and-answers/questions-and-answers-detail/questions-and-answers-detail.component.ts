@@ -147,8 +147,8 @@ export class QuestionsAndAnswersDetailComponent implements OnInit {
     this.isCollapsed = true;
     this.isCollapsed2 = true;
     this.catQuestions.getAllCat().subscribe((res: any | undefined) => {
-      this.cat = res['rows'];
-      this.countcat = res['rows'].length;
+    this.cat = res['rows'];
+    this.countcat = res['rows'].length;
     });
   }
   likeButtonclick(id: any) {
@@ -169,7 +169,7 @@ export class QuestionsAndAnswersDetailComponent implements OnInit {
         }
       },
       (err) => {
-        console.log(err);
+        this.toastrService.error(err.error.message);
       }
     );
   }
@@ -281,6 +281,16 @@ export class QuestionsAndAnswersDetailComponent implements OnInit {
           this.getQtsByID(id_qts);
         }
         this.modalService.dismissAll();
+        this.questionService.getAll(this.page, this.countquestion).subscribe(
+          (data: any | undefined) => {
+            this.countquestion = data['count'];
+            console.log(  this.countquestion);
+          },
+          (err) => {
+            console.log(err);
+          }
+        );
+        
       },
       (error) => {
         this.toastrService.success('Đăng câu trả lời thất bại!');
